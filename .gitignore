@@ -1,1 +1,6 @@
 .DS_Store
+report.log
+
+report.out
+
+report.synctex.gz

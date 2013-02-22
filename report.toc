@@ -1,0 +1,21 @@
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Context}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}Problem}{4}{section.1.2}
+\contentsline {section}{\numberline {1.3}Related Work}{4}{section.1.3}
+\contentsline {section}{\numberline {1.4}Approach}{4}{section.1.4}
+\contentsline {chapter}{\numberline {2}Design}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}System}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Interface Component}{5}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Abstraction Component}{5}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Storage Component}{5}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Request Flow}{5}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Collaboration Structure}{5}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Communication Protocol}{5}{subsection.2.2.1}
+\contentsline {chapter}{\numberline {3}Implementation}{6}{chapter.3}
+\contentsline {chapter}{\numberline {4}Evaluation}{7}{chapter.4}
+\contentsline {chapter}{\numberline {5}Discussion}{8}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusion}{9}{chapter.6}
+\contentsline {chapter}{References}{9}{chapter.6}
+\contentsline {chapter}{\numberline {A}Interviews}{10}{appendix.A}
+\contentsline {section}{\numberline {A.1}Interview: Joss Whedon}{10}{section.A.1}
+\contentsline {section}{\numberline {A.2}Interview: Summer Glau}{10}{section.A.2}
