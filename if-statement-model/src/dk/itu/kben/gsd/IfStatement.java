@@ -6,6 +6,7 @@ public class IfStatement implements Statement {
 	
 	ArrayList<Expression> conditionalExpressions = new ArrayList<Expression>();
 	ArrayList<Statement> thenStatements = new ArrayList<Statement>();
+	ArrayList<Statement> elseStatements = new ArrayList<Statement>();
 	
 	public void addExpression(Expression expression) {
 		conditionalExpressions.add(expression);
@@ -14,7 +15,11 @@ public class IfStatement implements Statement {
 	public void addThenStatement(Statement statement) {
 		thenStatements.add(statement);
 	}
-	
+
+	public void addElseStatement(Statement statement) {
+		elseStatements.add(statement);
+	}
+
 	public void execute() {
 		boolean fail = false;
 		
@@ -28,6 +33,11 @@ public class IfStatement implements Statement {
 		
 		if (!fail) {
 			for (Statement statement : thenStatements) {
+				statement.execute();
+			}
+		}
+		else {
+			for (Statement statement : elseStatements) {
 				statement.execute();
 			}
 		}
