@@ -83,4 +83,8 @@ public class Expression {
 		
 		return false;
 	}
+	
+	public String getSensorId() {
+		return sensorId;
+	}
 }
