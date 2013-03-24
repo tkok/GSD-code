@@ -1,3 +1,0 @@
-INDEX VERSION 1.126
-C:\Users\Nicolas\Workspaces\Spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1708648961.index
-\PolicyEngine\src\main\java
