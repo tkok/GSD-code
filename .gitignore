@@ -1,10 +1,5 @@
 .DS_Store
-report.log
-
-report.out
-
-report.synctex.gz
-
-report.pdf
 
 *.class
+
+if-statement-model/bin/*
