@@ -34,6 +34,7 @@ public class IfStamenet_toJSONByGSON_Test {
 		Gson gson = new Gson();
 		
 		String json = gson.toJson(ifStatement);
-		Assert.assertEquals("{\"conditionalExpressions\":[{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM1.TEMPERATURE\"},{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM2.TEMPERATURE\"}],\"thenStatements\":[{\"aValue\":{\"theValue\":false},\"sensorID\":\"WING1.HEATER\"}]}", json);
+		
+		Assert.assertEquals("{\"conditionalExpressions\":[{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM1.TEMPERATURE\"},{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM2.TEMPERATURE\"}],\"thenStatements\":[{\"aValue\":{\"theValue\":false},\"sensorID\":\"WING1.HEATER\"}],\"elseStatements\":[]}", json);
 	}
 }
