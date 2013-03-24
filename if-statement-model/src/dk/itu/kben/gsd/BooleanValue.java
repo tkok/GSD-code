@@ -4,6 +4,9 @@ public class BooleanValue implements Value {
 	
 	Boolean theValue;
 	
+	public BooleanValue() {
+	}
+	
 	public BooleanValue(boolean aValue) {
 		theValue = new Boolean(aValue);
 	}

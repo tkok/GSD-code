@@ -4,6 +4,9 @@ public class IntValue implements Value {
 	
 	Integer theValue;
 	
+	public IntValue() {
+	}
+	
 	public IntValue(int value) {
 		theValue = new Integer(value);
 	}

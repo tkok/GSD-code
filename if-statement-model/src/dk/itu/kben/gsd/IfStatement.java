@@ -8,6 +8,9 @@ public class IfStatement implements Statement {
 	ArrayList<Statement> thenStatements = new ArrayList<Statement>();
 	ArrayList<Statement> elseStatements = new ArrayList<Statement>();
 	
+	public IfStatement() {
+	}
+	
 	public void addExpression(Expression expression) {
 		conditionalExpressions.add(expression);
 	}

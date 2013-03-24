@@ -6,6 +6,9 @@ public class SetStatement implements Statement {
 	
 	String sensorID = "";
 	
+	public SetStatement() {
+	}
+	
 	public SetStatement(String sensorId, Value aValue) {
 		this.sensorID = sensorId;
 		this.aValue = aValue;

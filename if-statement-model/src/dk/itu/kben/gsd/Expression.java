@@ -1,6 +1,8 @@
 package dk.itu.kben.gsd;
 
-public class Expression {
+import java.io.Serializable;
+
+public class Expression implements Serializable {
 	
 	// Default should be AND
 	LogicalOperator prefixOperator = LogicalOperator.AND;
@@ -10,6 +12,9 @@ public class Expression {
 	Operator operator = null;
 	
 	String sensorId = null;
+	
+	public Expression() {
+	}
 	
 	public Expression(String sensorId, Operator operator, Value someValue) {
 		this.sensorId = sensorId;
