@@ -12,8 +12,4 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
-  <servlet-mapping>
-    <servlet-name>PolicyEngineServlet</servlet-name>
-    <url-pattern>*.json</url-pattern>
-  </servlet-mapping>
 </web-app>   
