@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="IfStatement_Else_Test" project="PolicyEngine" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="dk.itu.policyengine.models.IfStatement_Else_Test" time="0.004">
+    <testcase name="simpleEqual_Execute" classname="dk.itu.policyengine.models.IfStatement_Else_Test" time="0.004"/>
+  </testsuite>
+</testrun>
