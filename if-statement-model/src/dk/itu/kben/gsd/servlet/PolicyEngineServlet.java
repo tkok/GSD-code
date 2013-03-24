@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 public class PolicyEngineServlet extends HttpServlet {
 	
 	Thread thread = null;
+	static boolean shouldRun = true;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -27,13 +28,14 @@ public class PolicyEngineServlet extends HttpServlet {
 			
 			@Override
 			public void run() {
-				while (true) {
+				while (shouldRun) {
 				
 					Date nextTime = getNext();
 					
 					while (new Date().getTime() < nextTime.getTime()) {
 						try {
-							Thread.sleep(500);
+							if (!shouldRun) break;
+							Thread.sleep(1);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -41,6 +43,10 @@ public class PolicyEngineServlet extends HttpServlet {
 		
 					System.out.println("3 seconds passed.");
 				}
+				
+				System.out.println("PolicyEngineServlet is stopping...");
+				System.out.println("PolicyEngineServlet was stopped.");
+				
 			}
 		});
 		
@@ -48,4 +54,11 @@ public class PolicyEngineServlet extends HttpServlet {
 		thread.start();
 		System.out.println("PolicyEngineServlet was started.");
 	}
+	
+	@Override
+	public void destroy() {
+		shouldRun = false;
+		
+		super.destroy();
+	}	
 }
