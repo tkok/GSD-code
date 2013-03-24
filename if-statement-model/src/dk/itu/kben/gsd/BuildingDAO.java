@@ -16,7 +16,7 @@ public class BuildingDAO {
 		hashtable.put(name, value);
 	}
 	
-	public static void FillTable()
+	public static void fillTable()
 	{
 		Hashtable<String, Value> lol = BuildingDAL.GetHashtableWithStringValueFromDB("repo_measurement");
 		hashtable.putAll(lol);

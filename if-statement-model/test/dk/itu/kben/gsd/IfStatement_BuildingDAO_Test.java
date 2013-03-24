@@ -9,7 +9,7 @@ public class IfStatement_BuildingDAO_Test
 	@Before
 	public void setupDatabase() 
 	{
-		BuildingDAO.FillTable();
+		BuildingDAO.fillTable();
 	}
 
 	@Test
