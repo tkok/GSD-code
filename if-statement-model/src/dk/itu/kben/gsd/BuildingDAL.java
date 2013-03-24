@@ -154,7 +154,7 @@ public class BuildingDAL {
 			
 			System.out.println("Milliseconds: " + milliseconds); 
 			
-			preparedStatement = connection.prepareStatement("SELECT * FROM policy WHERE fromTime <= ? AND toTime >= ?");// AND active = TRUE");
+			preparedStatement = connection.prepareStatement("SELECT * FROM policy WHERE fromTime <= ? AND toTime >= ? AND active = TRUE");
 			preparedStatement.setTime(1, time);
 			preparedStatement.setTime(2, time);
 			
