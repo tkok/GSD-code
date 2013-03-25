@@ -2,4 +2,4 @@
 
 *.class
 
-PolicyEngine/PolicyEngine/target/*
+/PolicyEngine/PolicyEngine/target/*
