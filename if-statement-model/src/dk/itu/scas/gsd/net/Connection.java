@@ -80,8 +80,8 @@ public class Connection {
 	 * @throws Exception
 	 */
 	public static Object querySimulator(String query) throws Exception{
-		//String data = connect(query);
-		String data = readFromFile();
+		String data = connect(query);
+		//String data = readFromFile("query_sensor.json");
 		Object object = new Object();
 		JSONObject jsonObject = new JSONObject(data);
 		JSONArray objects = jsonObject.getJSONArray("objects");
@@ -90,24 +90,26 @@ public class Connection {
 			//System.out.println(jsonobject.getInt("bid"));
 			if(jsonobject.getInt("bid")==0){
 				object = jsonobject.get("val");
-				System.out.println("sensor "+query+" had value "+object.toString()+" at "+jsonobject.getString("timestamp"));
+				//System.out.println("sensor "+query+" had value "+object.toString()+" at "+jsonobject.getString("timestamp"));
 				break;
 			}
 		}
 		return object;
 		
 	}
-	public static String readFromFile() throws IOException{
+	/**
+	 * Read from file. Just for testing purposes when the simulator's server is not working. 
+	 * @return Returns a String in which there is a JSON.
+	 * @throws IOException
+	 */
+	public static String readFromFile(String filename) throws IOException{
 		StringBuffer buffer = new StringBuffer();
 		String line;
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("query_sensor.json")));
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
 		while((line=br.readLine())!=null){
 			buffer.append(line);
 		}
 		br.close();
 		return buffer.toString();
-	}
-	public static void main(String [] args) throws Exception{
-		querySimulator("");
 	}
 }
