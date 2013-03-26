@@ -1,11 +1,5 @@
 package dk.itu.kben.gsd.servlet;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -15,9 +9,6 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import org.apache.jasper.tagplugins.jstl.core.Url;
-
-import dk.itu.kben.gsd.BuildingDAO;
 import dk.itu.scas.gsd.net.Connection;
 
 public class PolicyEngineServlet extends HttpServlet {
@@ -27,7 +18,7 @@ public class PolicyEngineServlet extends HttpServlet {
 	static boolean wasStopped = false;
 	private final static String QUERY_STRING = "http://gsd.itu.dk/api/user/measurement/?uuid=";
 	private final static String QUERY_ARGUMENTS = "&limit=1&order_by=-timestamp&format=json";
-	static int HEARTBEAT_TIMER_SECONDS = 3; 
+	static int HEARTBEAT_TIMER_SECONDS = 10; 
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -73,6 +64,8 @@ public class PolicyEngineServlet extends HttpServlet {
 
 								// fetch the value of sensorId and put it into BuildingDAO's hashtable
 								Object object = Connection.querySimulator(QUERY_STRING+"sensorId"+QUERY_ARGUMENTS);
+								
+								System.out.println(object);
 								
 								
 							}

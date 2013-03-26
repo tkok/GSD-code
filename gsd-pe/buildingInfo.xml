@@ -1,0 +1,2226 @@
+<?xml version='1.0' encoding='utf-8'?>
+<object>
+	<query>description</query>
+	<value type="hash">
+		<rooms type="hash">
+			<floor-0-room-2 type="hash">
+				<heaters type="hash">
+					<room-2-heater-2 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-2-heater-2</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-2-heater-2>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-2-ac-2 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-2-ac-2</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-2-ac-2>
+				</acs>
+				<lights type="hash">
+					<room-2-light-4 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-2-light-4</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-2-light-4>
+					<room-2-light-5 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-2-light-5</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-2-light-5>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-2-blind-5 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-2-blind-5</ID>
+						<size type="integer">5</size>
+					</room-2-blind-5>
+					<room-2-blind-4 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-2-blind-4</ID>
+						<size type="integer">5</size>
+					</room-2-blind-4>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-0-room-2</ID>
+			</floor-0-room-2>
+			<floor-0-room-3 type="hash">
+				<heaters type="hash">
+					<room-3-heater-3 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-3-heater-3</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-3-heater-3>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-3-ac-3 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-3-ac-3</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-3-ac-3>
+				</acs>
+				<lights type="hash">
+					<room-3-light-7 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-3-light-7</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-3-light-7>
+					<room-3-light-6 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-3-light-6</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-3-light-6>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-3-blind-6 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-3-blind-6</ID>
+						<size type="integer">5</size>
+					</room-3-blind-6>
+					<room-3-blind-7 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-3-blind-7</ID>
+						<size type="integer">5</size>
+					</room-3-blind-7>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-0-room-3</ID>
+			</floor-0-room-3>
+			<floor-0-room-0 type="hash">
+				<heaters type="hash">
+					<room-0-heater-0 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-0-heater-0</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-0-heater-0>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-0-ac-0 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-0-ac-0</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-0-ac-0>
+				</acs>
+				<lights type="hash">
+					<room-0-light-0 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-0-light-0</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-0-light-0>
+					<room-0-light-1 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-0-light-1</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-0-light-1>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-0-blind-1 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-0-blind-1</ID>
+						<size type="integer">5</size>
+					</room-0-blind-1>
+					<room-0-blind-0 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-0-blind-0</ID>
+						<size type="integer">5</size>
+					</room-0-blind-0>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-0-room-0</ID>
+			</floor-0-room-0>
+			<floor-0-room-1 type="hash">
+				<heaters type="hash">
+					<room-1-heater-1 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-1-heater-1</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-1-heater-1>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-1-ac-1 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-1-ac-1</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-1-ac-1>
+				</acs>
+				<lights type="hash">
+					<room-1-light-3 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-1-light-3</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-1-light-3>
+					<room-1-light-2 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-1-light-2</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-1-light-2>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-1-blind-2 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-1-blind-2</ID>
+						<size type="integer">5</size>
+					</room-1-blind-2>
+					<room-1-blind-3 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-1-blind-3</ID>
+						<size type="integer">5</size>
+					</room-1-blind-3>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-0-room-1</ID>
+			</floor-0-room-1>
+			<floor-0-room-6 type="hash">
+				<heaters type="hash">
+					<room-6-heater-6 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-heater-6</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-6-heater-6>
+					<room-6-heater-5 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-heater-5</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-6-heater-5>
+				</heaters>
+				<numBlinds type="integer">0</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">5</numLights>
+				<acs type="hash">
+					<room-6-ac-5 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-ac-5</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-6-ac-5>
+					<room-6-ac-6 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-ac-6</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-6-ac-6>
+				</acs>
+				<lights type="hash">
+					<room-6-light-14 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-light-14</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-6-light-14>
+					<room-6-light-15 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-light-15</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-6-light-15>
+					<room-6-light-16 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-light-16</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-6-light-16>
+					<room-6-light-12 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-light-12</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-6-light-12>
+					<room-6-light-13 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-6-light-13</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-6-light-13>
+				</lights>
+				<numAC type="integer">2</numAC>
+				<blinds type="hash" />
+				<numHeaters type="integer">2</numHeaters>
+				<ID>floor-0-room-6</ID>
+			</floor-0-room-6>
+			<floor-0-room-4 type="hash">
+				<heaters type="hash">
+					<room-4-heater-4 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-4-heater-4</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-4-heater-4>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-4-ac-4 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-4-ac-4</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-4-ac-4>
+				</acs>
+				<lights type="hash">
+					<room-4-light-8 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-4-light-8</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-4-light-8>
+					<room-4-light-9 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-4-light-9</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-4-light-9>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-4-blind-9 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-4-blind-9</ID>
+						<size type="integer">5</size>
+					</room-4-blind-9>
+					<room-4-blind-8 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-4-blind-8</ID>
+						<size type="integer">5</size>
+					</room-4-blind-8>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-0-room-4</ID>
+			</floor-0-room-4>
+			<floor-0-room-5 type="hash">
+				<heaters type="hash" />
+				<numBlinds type="integer">0</numBlinds>
+				<waters type="hash">
+					<room-5-waterap-0 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a water access point</efficiency>
+							<flow>Maximum amount of water per unit of time</flow>
+							<gain>Scale (0-1) in which a water access point operates</gain>
+						</input>
+						<flow type="integer">0</flow>
+						<ID>room-5-waterap-0</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of water liberated by a water access point
+							</production>
+							<gain>Scale (0-1) in which a water access point operates</gain>
+						</output>
+					</room-5-waterap-0>
+				</waters>
+				<numWater type="integer">1</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash" />
+				<lights type="hash">
+					<room-5-light-11 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-5-light-11</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-5-light-11>
+					<room-5-light-10 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-5-light-10</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-5-light-10>
+				</lights>
+				<numAC type="integer">0</numAC>
+				<blinds type="hash" />
+				<numHeaters type="integer">0</numHeaters>
+				<ID>floor-0-room-5</ID>
+			</floor-0-room-5>
+			<floor-2-room-19 type="hash">
+				<heaters type="hash" />
+				<numBlinds type="integer">0</numBlinds>
+				<waters type="hash">
+					<room-19-waterap-2 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a water access point</efficiency>
+							<flow>Maximum amount of water per unit of time</flow>
+							<gain>Scale (0-1) in which a water access point operates</gain>
+						</input>
+						<flow type="integer">0</flow>
+						<ID>room-19-waterap-2</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of water liberated by a water access point
+							</production>
+							<gain>Scale (0-1) in which a water access point operates</gain>
+						</output>
+					</room-19-waterap-2>
+				</waters>
+				<numWater type="integer">1</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash" />
+				<lights type="hash">
+					<room-19-light-44 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-19-light-44</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-19-light-44>
+					<room-19-light-45 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-19-light-45</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-19-light-45>
+				</lights>
+				<numAC type="integer">0</numAC>
+				<blinds type="hash" />
+				<numHeaters type="integer">0</numHeaters>
+				<ID>floor-2-room-19</ID>
+			</floor-2-room-19>
+			<floor-1-room-9 type="hash">
+				<heaters type="hash">
+					<room-9-heater-9 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-9-heater-9</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-9-heater-9>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-9-ac-9 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-9-ac-9</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-9-ac-9>
+				</acs>
+				<lights type="hash">
+					<room-9-light-21 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-9-light-21</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-9-light-21>
+					<room-9-light-22 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-9-light-22</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-9-light-22>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-9-blind-14 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-9-blind-14</ID>
+						<size type="integer">5</size>
+					</room-9-blind-14>
+					<room-9-blind-15 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-9-blind-15</ID>
+						<size type="integer">5</size>
+					</room-9-blind-15>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-1-room-9</ID>
+			</floor-1-room-9>
+			<floor-1-room-8 type="hash">
+				<heaters type="hash">
+					<room-8-heater-8 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-8-heater-8</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-8-heater-8>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-8-ac-8 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-8-ac-8</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-8-ac-8>
+				</acs>
+				<lights type="hash">
+					<room-8-light-20 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-8-light-20</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-8-light-20>
+					<room-8-light-19 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-8-light-19</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-8-light-19>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-8-blind-13 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-8-blind-13</ID>
+						<size type="integer">5</size>
+					</room-8-blind-13>
+					<room-8-blind-12 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-8-blind-12</ID>
+						<size type="integer">5</size>
+					</room-8-blind-12>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-1-room-8</ID>
+			</floor-1-room-8>
+			<floor-2-room-17 type="hash">
+				<heaters type="hash">
+					<room-17-heater-17 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-17-heater-17</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-17-heater-17>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-17-ac-17 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-17-ac-17</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-17-ac-17>
+				</acs>
+				<lights type="hash">
+					<room-17-light-40 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-17-light-40</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-17-light-40>
+					<room-17-light-41 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-17-light-41</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-17-light-41>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-17-blind-27 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-17-blind-27</ID>
+						<size type="integer">5</size>
+					</room-17-blind-27>
+					<room-17-blind-26 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-17-blind-26</ID>
+						<size type="integer">5</size>
+					</room-17-blind-26>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-2-room-17</ID>
+			</floor-2-room-17>
+			<floor-2-room-16 type="hash">
+				<heaters type="hash">
+					<room-16-heater-16 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-16-heater-16</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-16-heater-16>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-16-ac-16 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-16-ac-16</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-16-ac-16>
+				</acs>
+				<lights type="hash">
+					<room-16-light-38 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-16-light-38</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-16-light-38>
+					<room-16-light-39 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-16-light-39</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-16-light-39>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-16-blind-24 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-16-blind-24</ID>
+						<size type="integer">5</size>
+					</room-16-blind-24>
+					<room-16-blind-25 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-16-blind-25</ID>
+						<size type="integer">5</size>
+					</room-16-blind-25>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-2-room-16</ID>
+			</floor-2-room-16>
+			<floor-1-room-7 type="hash">
+				<heaters type="hash">
+					<room-7-heater-7 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-7-heater-7</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-7-heater-7>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-7-ac-7 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-7-ac-7</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-7-ac-7>
+				</acs>
+				<lights type="hash">
+					<room-7-light-18 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-7-light-18</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-7-light-18>
+					<room-7-light-17 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-7-light-17</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-7-light-17>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-7-blind-10 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-7-blind-10</ID>
+						<size type="integer">5</size>
+					</room-7-blind-10>
+					<room-7-blind-11 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-7-blind-11</ID>
+						<size type="integer">5</size>
+					</room-7-blind-11>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-1-room-7</ID>
+			</floor-1-room-7>
+			<floor-2-room-14 type="hash">
+				<heaters type="hash">
+					<room-14-heater-14 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-14-heater-14</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-14-heater-14>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-14-ac-14 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-14-ac-14</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-14-ac-14>
+				</acs>
+				<lights type="hash">
+					<room-14-light-34 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-14-light-34</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-14-light-34>
+					<room-14-light-35 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-14-light-35</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-14-light-35>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-14-blind-20 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-14-blind-20</ID>
+						<size type="integer">5</size>
+					</room-14-blind-20>
+					<room-14-blind-21 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-14-blind-21</ID>
+						<size type="integer">5</size>
+					</room-14-blind-21>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-2-room-14</ID>
+			</floor-2-room-14>
+			<floor-2-room-15 type="hash">
+				<heaters type="hash">
+					<room-15-heater-15 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-15-heater-15</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-15-heater-15>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-15-ac-15 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-15-ac-15</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-15-ac-15>
+				</acs>
+				<lights type="hash">
+					<room-15-light-37 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-15-light-37</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-15-light-37>
+					<room-15-light-36 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-15-light-36</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-15-light-36>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-15-blind-23 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-15-blind-23</ID>
+						<size type="integer">5</size>
+					</room-15-blind-23>
+					<room-15-blind-22 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-15-blind-22</ID>
+						<size type="integer">5</size>
+					</room-15-blind-22>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-2-room-15</ID>
+			</floor-2-room-15>
+			<floor-2-room-18 type="hash">
+				<heaters type="hash">
+					<room-18-heater-18 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-18-heater-18</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-18-heater-18>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-18-ac-18 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-18-ac-18</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-18-ac-18>
+				</acs>
+				<lights type="hash">
+					<room-18-light-43 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-18-light-43</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-18-light-43>
+					<room-18-light-42 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-18-light-42</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-18-light-42>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-18-blind-28 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-18-blind-28</ID>
+						<size type="integer">5</size>
+					</room-18-blind-28>
+					<room-18-blind-29 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-18-blind-29</ID>
+						<size type="integer">5</size>
+					</room-18-blind-29>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-2-room-18</ID>
+			</floor-2-room-18>
+			<floor-2-room-20 type="hash">
+				<heaters type="hash">
+					<room-20-heater-19 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-heater-19</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-20-heater-19>
+					<room-20-heater-20 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-heater-20</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-20-heater-20>
+				</heaters>
+				<numBlinds type="integer">0</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">5</numLights>
+				<acs type="hash">
+					<room-20-ac-19 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-ac-19</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-20-ac-19>
+					<room-20-ac-20 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-ac-20</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-20-ac-20>
+				</acs>
+				<lights type="hash">
+					<room-20-light-48 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-light-48</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-20-light-48>
+					<room-20-light-49 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-light-49</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-20-light-49>
+					<room-20-light-50 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-light-50</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-20-light-50>
+					<room-20-light-46 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-light-46</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-20-light-46>
+					<room-20-light-47 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-20-light-47</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-20-light-47>
+				</lights>
+				<numAC type="integer">2</numAC>
+				<blinds type="hash" />
+				<numHeaters type="integer">2</numHeaters>
+				<ID>floor-2-room-20</ID>
+			</floor-2-room-20>
+			<floor-1-room-11 type="hash">
+				<heaters type="hash">
+					<room-11-heater-11 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-11-heater-11</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-11-heater-11>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-11-ac-11 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-11-ac-11</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-11-ac-11>
+				</acs>
+				<lights type="hash">
+					<room-11-light-26 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-11-light-26</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-11-light-26>
+					<room-11-light-25 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-11-light-25</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-11-light-25>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-11-blind-18 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-11-blind-18</ID>
+						<size type="integer">5</size>
+					</room-11-blind-18>
+					<room-11-blind-19 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-11-blind-19</ID>
+						<size type="integer">5</size>
+					</room-11-blind-19>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-1-room-11</ID>
+			</floor-1-room-11>
+			<floor-1-room-10 type="hash">
+				<heaters type="hash">
+					<room-10-heater-10 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-10-heater-10</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-10-heater-10>
+				</heaters>
+				<numBlinds type="integer">2</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash">
+					<room-10-ac-10 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-10-ac-10</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-10-ac-10>
+				</acs>
+				<lights type="hash">
+					<room-10-light-23 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-10-light-23</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-10-light-23>
+					<room-10-light-24 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-10-light-24</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-10-light-24>
+				</lights>
+				<numAC type="integer">1</numAC>
+				<blinds type="hash">
+					<room-10-blind-17 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-10-blind-17</ID>
+						<size type="integer">5</size>
+					</room-10-blind-17>
+					<room-10-blind-16 type="hash">
+						<input type="hash">
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+							<speed>Speed at which the window can go up and down</speed>
+							<size>Window/Blinder size</size>
+						</input>
+						<output type="hash">
+							<state>Continuous value between Up and Down. Scale [0,1]</state>
+							<setpoint>Requested state of the blind. Scale [0,1]</setpoint>
+						</output>
+						<speed type="integer">0</speed>
+						<ID>room-10-blind-16</ID>
+						<size type="integer">5</size>
+					</room-10-blind-16>
+				</blinds>
+				<numHeaters type="integer">1</numHeaters>
+				<ID>floor-1-room-10</ID>
+			</floor-1-room-10>
+			<floor-1-room-13 type="hash">
+				<heaters type="hash">
+					<room-13-heater-13 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-heater-13</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-13-heater-13>
+					<room-13-heater-12 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a heater</efficiency>
+							<wattage>Electric power of a heater measured in Watts</wattage>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-heater-12</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by a heater</production>
+							<gain>Scale (0-1) in which a heater operates</gain>
+						</output>
+					</room-13-heater-12>
+				</heaters>
+				<numBlinds type="integer">0</numBlinds>
+				<waters type="hash" />
+				<numWater type="integer">0</numWater>
+				<numLights type="integer">5</numLights>
+				<acs type="hash">
+					<room-13-ac-12 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-ac-12</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-13-ac-12>
+					<room-13-ac-13 type="hash">
+						<input type="hash">
+							<efficiency>Performance of an ac</efficiency>
+							<wattage>Electric power of an ac measured in Watts</wattage>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-ac-13</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of heating produced by an ac</production>
+							<gain>Scale (0-1) in which an ac operates</gain>
+						</output>
+					</room-13-ac-13>
+				</acs>
+				<lights type="hash">
+					<room-13-light-33 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-light-33</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-13-light-33>
+					<room-13-light-29 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-light-29</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-13-light-29>
+					<room-13-light-31 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-light-31</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-13-light-31>
+					<room-13-light-30 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-light-30</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-13-light-30>
+					<room-13-light-32 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-13-light-32</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-13-light-32>
+				</lights>
+				<numAC type="integer">2</numAC>
+				<blinds type="hash" />
+				<numHeaters type="integer">2</numHeaters>
+				<ID>floor-1-room-13</ID>
+			</floor-1-room-13>
+			<floor-1-room-12 type="hash">
+				<heaters type="hash" />
+				<numBlinds type="integer">0</numBlinds>
+				<waters type="hash">
+					<room-12-waterap-1 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a water access point</efficiency>
+							<flow>Maximum amount of water per unit of time</flow>
+							<gain>Scale (0-1) in which a water access point operates</gain>
+						</input>
+						<flow type="integer">0</flow>
+						<ID>room-12-waterap-1</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of water liberated by a water access point
+							</production>
+							<gain>Scale (0-1) in which a water access point operates</gain>
+						</output>
+					</room-12-waterap-1>
+				</waters>
+				<numWater type="integer">1</numWater>
+				<numLights type="integer">2</numLights>
+				<acs type="hash" />
+				<lights type="hash">
+					<room-12-light-27 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-12-light-27</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-12-light-27>
+					<room-12-light-28 type="hash">
+						<input type="hash">
+							<efficiency>Performance of a lamp</efficiency>
+							<wattage>Electric power of a lamp measured in Watts</wattage>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+							<luminosity>Maximum amount of luminosity that a lamp can produce
+							</luminosity>
+						</input>
+						<wattage type="float">60.0</wattage>
+						<ID>room-12-light-28</ID>
+						<output type="hash">
+							<state>On/Off</state>
+							<production>Amount of luminosity produced by a lamp</production>
+							<gain>Scale (0-1) in which a lamp operates</gain>
+						</output>
+					</room-12-light-28>
+				</lights>
+				<numAC type="integer">0</numAC>
+				<blinds type="hash" />
+				<numHeaters type="integer">0</numHeaters>
+				<ID>floor-1-room-12</ID>
+			</floor-1-room-12>
+		</rooms>
+	</value>
+	<resource_uri></resource_uri>
+</object>
