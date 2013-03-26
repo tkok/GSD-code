@@ -18,13 +18,15 @@ import javax.servlet.http.HttpServlet;
 import org.apache.jasper.tagplugins.jstl.core.Url;
 
 import dk.itu.kben.gsd.BuildingDAO;
+import dk.itu.scas.gsd.net.Connection;
 
 public class PolicyEngineServlet extends HttpServlet {
 	
 	Thread thread = null;
 	static boolean shouldRun = true;
 	static boolean wasStopped = false;
-	private final static String BUILDING_INFO = "gsd.itu.dk/api/user/building/description/0/?format=json";
+	private final static String QUERY_STRING = "http://gsd.itu.dk/api/user/measurement/?uuid=";
+	private final static String QUERY_ARGUMENTS = "&limit=1&order_by=-timestamp&format=json";
 	static int HEARTBEAT_TIMER_SECONDS = 3; 
 
 	@Override
@@ -50,22 +52,7 @@ public class PolicyEngineServlet extends HttpServlet {
 						try {
 							if (!shouldRun) break;
 							Thread.sleep(1);
-							
-							List<String> sensors = new ArrayList<String>();
-							try {
-								URL url = new URL(BUILDING_INFO);
-								URLConnection urlConnection = url.openConnection();
-								BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-								StringBuffer bufferString = null;
-								String line;
-								while((line = bufferedReader.readLine()) !=null){
-									bufferString.append(line);
-								}
-								bufferedReader.close();
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+							List<String> sensors = dk.itu.scas.gsd.net.Connection.getSensorIds();
 							// select all policies WHERE policy.activationFromTime >= currentTime AND policy.activationToTime <= currentTime AND policy.active = TRUE ORDER BY timestamp DESC LIMIT 1
 							
 							// for each policy
@@ -85,7 +72,7 @@ public class PolicyEngineServlet extends HttpServlet {
 							for (String sensorId : sensors) {
 
 								// fetch the value of sensorId and put it into BuildingDAO's hashtable
-								
+								Object object = Connection.querySimulator(QUERY_STRING+"sensorId"+QUERY_ARGUMENTS);
 								
 								
 							}
@@ -101,6 +88,9 @@ public class PolicyEngineServlet extends HttpServlet {
 							// end for
 						
 						} catch (InterruptedException e) {
+							e.printStackTrace();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
