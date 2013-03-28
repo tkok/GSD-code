@@ -63,7 +63,7 @@ public class PolicyEngineServlet extends HttpServlet {
 							for (String sensorId : sensors) {
 
 								// fetch the value of sensorId and put it into BuildingDAO's hashtable
-								Object object = Connection.querySimulator(QUERY_STRING+"sensorId"+QUERY_ARGUMENTS);
+								Object object = Connection.getSensorValue(QUERY_STRING+"sensorId"+QUERY_ARGUMENTS);
 								
 								System.out.println(object);
 								

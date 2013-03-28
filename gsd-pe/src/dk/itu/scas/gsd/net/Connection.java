@@ -21,7 +21,9 @@ public class Connection {
 	// variables
 	private static String [] services = {"lights", "acs", "heaters", "blinds", "waters"};
 	private static final String BUILDING_INFO = "http://gsd.itu.dk/api/user/building/entry/description/1/?format=json";
+	private static final String BUILDING_INFO_LOCAL = "http://127.0.0.1:8000/api/user/building/entry/description/1/?format=json";
 	private static final String SET_SENSOR_VALUE = "http://gsd.itu.dk/api/user/building/entry/set/1/";
+	private static final String SET_SENSOR_VALUE_LOCAL= "http://127.0.0.1:8000/api/user/building/entry/set/1/";
 	private static final String file = "sensor.json";
 	
 	/**
@@ -31,7 +33,7 @@ public class Connection {
 	public static List<String> getSensorIds(){
 		List<String> sensors = new ArrayList<String>();
 		try {
-			String data = connect(BUILDING_INFO);
+			String data = connect(BUILDING_INFO_LOCAL);
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
@@ -80,7 +82,7 @@ public class Connection {
 	 * @return Returns an Object - this should actually be the value of the sensor's property
 	 * @throws Exception
 	 */
-	public static Object querySimulator(String query) throws Exception{
+	public static Object getSensorValue(String query) throws Exception{
 		String data = connect(query);
 		//String data = readFromFile("query_sensor.json");
 		Object object = new Object();
@@ -89,7 +91,7 @@ public class Connection {
 		for(int i=0;i<objects.length();i++){
 			JSONObject jsonobject = objects.getJSONObject(i);
 			//System.out.println(jsonobject.getInt("bid"));
-			if(jsonobject.getInt("bid")==0){
+			if(jsonobject.getInt("bid")==1){
 				object = jsonobject.get("val");
 				//System.out.println("sensor "+query+" had value "+object.toString()+" at "+jsonobject.getString("timestamp"));
 				break;
@@ -113,12 +115,39 @@ public class Connection {
 		br.close();
 		return buffer.toString();
 	}
+	/**
+	 * Set a sensor value by using the sensor's Id.
+	 * @param sensorId
+	 * @param value
+	 * @return
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
 	public static String setSensorValue(String sensorId, int value) throws MalformedURLException, IOException{
-		String data = connect(SET_SENSOR_VALUE+sensorId+"/"+value+"/?format=json");
+		String data = connect(SET_SENSOR_VALUE_LOCAL+sensorId+"/"+value+"/?format=json");
 		JSONObject jsonObject = new JSONObject(data);
-		if(jsonObject.getJSONObject("values").get("value")=="true")
+		Object response = jsonObject.getJSONObject("value").get("returnvalue");
+		if(jsonObject.getJSONObject("value").get("returnvalue").toString().equals("true"))
 			return "Value changed.";
 		else
 			return "Error occured";
+		
+	}
+	/**
+	 * Get a list of sensors ids by the room id.
+	 * @param roomId
+	 * @return A list with the sensors ids.
+	 */
+	public static List<String> getSensorListByRoomId(String roomId){
+		List<String> sensors = getSensorIds();
+		List<String> sensorList = new ArrayList<String>();
+		Iterator iterator = sensors.iterator();
+		while(iterator.hasNext()){
+			String id = (String) iterator.next();
+			if(id.contains(roomId)){
+				sensorList.add(id);
+			}
+		}
+		return sensorList;
 	}
 }
