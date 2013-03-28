@@ -17,7 +17,7 @@ public class Testing {
 		System.out.println(data.toString());
 		System.out.println(Connection.setSensorValue(sensorId, 1));
 		System.out.println(Connection.getSensorValue(query).toString());
-		List<String> sensors = Connection.getSensorListByRoomId("room-6-");
+		List<String> sensors = Connection.getSensorListByRoomId("room-12");
 		Iterator iterator = sensors.iterator();
 		while(iterator.hasNext()){
 			System.out.println((String) iterator.next());
