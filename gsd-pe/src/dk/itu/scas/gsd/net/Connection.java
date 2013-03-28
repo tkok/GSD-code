@@ -144,7 +144,7 @@ public class Connection {
 		Iterator iterator = sensors.iterator();
 		while(iterator.hasNext()){
 			String id = (String) iterator.next();
-			if(id.contains(roomId)){
+			if(id.contains(roomId+"-")){
 				sensorList.add(id);
 			}
 		}
