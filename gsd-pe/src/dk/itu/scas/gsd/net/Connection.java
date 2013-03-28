@@ -21,6 +21,7 @@ public class Connection {
 	// variables
 	private static String [] services = {"lights", "acs", "heaters", "blinds", "waters"};
 	private static final String BUILDING_INFO = "http://gsd.itu.dk/api/user/building/entry/description/1/?format=json";
+	private static final String SET_SENSOR_VALUE = "http://gsd.itu.dk/api/user/building/entry/set/1/";
 	private static final String file = "sensor.json";
 	
 	/**
@@ -111,5 +112,13 @@ public class Connection {
 		}
 		br.close();
 		return buffer.toString();
+	}
+	public static String setSensorValue(String sensorId, int value) throws MalformedURLException, IOException{
+		String data = connect(SET_SENSOR_VALUE+sensorId+"/"+value+"/?format=json");
+		JSONObject jsonObject = new JSONObject(data);
+		if(jsonObject.getJSONObject("values").get("value")=="true")
+			return "Value changed.";
+		else
+			return "Error occured";
 	}
 }
