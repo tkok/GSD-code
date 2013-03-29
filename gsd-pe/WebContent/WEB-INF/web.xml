@@ -9,6 +9,26 @@
   <servlet>
     <servlet-name>PolicyEngineServlet</servlet-name>
     <servlet-class>dk.itu.kben.gsd.servlet.PolicyEngineServlet</servlet-class>
+    <init-param>
+    	<param-name>server</param-name>
+    	<param-value>http://gsd.itu.dk/</param-value>
+    	<description>Server address</description>
+    </init-param>
+    <init-param>
+    	<param-name>building</param-name>
+    	<param-value>api/user/building/entry/description/1/?format=</param-value>
+    	<description>Query url for building info</description>
+    </init-param>
+    <init-param>
+    	<param-name>setvalue</param-name>
+    	<param-value>api/user/building/entry/set/1/</param-value>
+    	<description>Query url for setting a value</description>
+    </init-param>
+    <init-param>
+    	<param-name>format</param-name>
+    	<param-value>json</param-value>
+    	<description>Json/xml return when querying</description>
+    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
 

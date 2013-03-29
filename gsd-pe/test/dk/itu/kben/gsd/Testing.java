@@ -11,7 +11,7 @@ public class Testing {
 	 * @throws Exception
 	 */
 	public static void main(String [] args) throws Exception{
-		String sensorId = "room-2-light-5-state";
+		/*String sensorId = "room-2-light-5-state";
 		String query = "http://127.0.0.1:8000/api/user/measurement/?uuid="+sensorId+"&bid=1&limit=2&format=json";
 		Object data = Connection.getSensorValue(query);
 		System.out.println(data.toString());
@@ -22,5 +22,8 @@ public class Testing {
 		while(iterator.hasNext()){
 			System.out.println((String) iterator.next());
 		}
+		*/
+		List<String> sensors = Connection.getSensorIds();
+		
 	}
 } 

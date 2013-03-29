@@ -1,29 +1,35 @@
 package dk.itu.kben.gsd.servlet;
 
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import dk.itu.scas.gsd.net.Connection;
+import dk.itu.scas.gsd.net.ServiceProperties;
 
 public class PolicyEngineServlet extends HttpServlet {
 	
 	Thread thread = null;
 	static boolean shouldRun = true;
 	static boolean wasStopped = false;
-	private final static String QUERY_STRING = "http://gsd.itu.dk/api/user/measurement/?uuid=";
-	private final static String QUERY_ARGUMENTS = "&limit=1&order_by=-timestamp&format=json";
 	static int HEARTBEAT_TIMER_SECONDS = 10; 
-
+	private final static String QUERY_ARGUMENTS = "&limit=1&order_by=-timestamp&format=json";
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		
+		System.out.println(config.getInitParameter("server"));
+		Connection.setServer(config.getInitParameter("server"));
+		Connection.setBuilding(config.getInitParameter("building"));
+		Connection.setFormat(config.getInitParameter("format"));
+		Connection.setSetvalue(config.getInitParameter("setvalue"));
+		final List<String> sensors = dk.itu.scas.gsd.net.Connection.getSensorIds();
 		thread = new Thread(new Runnable() {
 			Date getNext() {
 				Calendar calendar = new GregorianCalendar();
@@ -43,7 +49,7 @@ public class PolicyEngineServlet extends HttpServlet {
 						try {
 							if (!shouldRun) break;
 							Thread.sleep(1);
-							List<String> sensors = dk.itu.scas.gsd.net.Connection.getSensorIds();
+							
 							// select all policies WHERE policy.activationFromTime >= currentTime AND policy.activationToTime <= currentTime AND policy.active = TRUE ORDER BY timestamp DESC LIMIT 1
 							
 							// for each policy
@@ -63,9 +69,7 @@ public class PolicyEngineServlet extends HttpServlet {
 							for (String sensorId : sensors) {
 
 								// fetch the value of sensorId and put it into BuildingDAO's hashtable
-								Object object = Connection.getSensorValue(QUERY_STRING+"sensorId"+QUERY_ARGUMENTS);
-								
-								System.out.println(object);
+								//System.out.println(sensorId);
 								
 								
 							}

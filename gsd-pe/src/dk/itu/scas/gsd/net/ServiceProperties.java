@@ -1,6 +1,7 @@
 package dk.itu.scas.gsd.net;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ServiceProperties {
@@ -11,6 +12,46 @@ public class ServiceProperties {
 	private final static String [] WATER = {"efficiency","gain_input","flow","production","state","gain_output"};
 	private final static String [] BLINDS = {"speed","size","setpoint"}; 
 	
+	/**
+	 * Return a list with each sensor's properties, given as input a list of sensor's id. 
+	 * @param sensorIds
+	 * @return
+	 */
+	public static List<String> allSensorsWithProperties(List<String> sensorIds){
+		List<String> list = new ArrayList<String>();
+		Iterator<String> iterator = sensorIds.iterator();
+		while(iterator.hasNext()){
+			String id = iterator.next();
+			if(id.contains("light")){
+				for(String s: LIGHT){
+					list.add(id+"-"+s);
+				}
+			}
+			else if(id.contains("ac")){
+				for(String s: AC){
+					list.add(id+"-"+s);
+				}
+			}
+			else if(id.contains("heater")){
+				for(String s: HEATER){
+					list.add(id+"-"+s);
+				}
+			}
+			else if(id.contains("water")){
+				for(String s: WATER){
+					list.add(id+"-"+s);
+				}
+				
+			}
+			else if(id.contains("blind")){
+				for(String s: BLINDS){
+					list.add(id+"-"+s);
+				}
+			}
+		}
+		
+		return list;
+	}
 	public List<String> getLightProperties(){
 		List<String> list = new ArrayList<String>();
 		for(String s : LIGHT )
