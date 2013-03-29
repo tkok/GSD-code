@@ -52,6 +52,39 @@ public class ServiceProperties {
 		
 		return list;
 	}
+	public static List<String> allSensorsWithProperties(String id){
+		List<String> list = new ArrayList<String>();
+		
+			if(id.contains("light")){
+				for(String s: LIGHT){
+					list.add(id+"-"+s);
+				}
+			}
+			else if(id.contains("ac")){
+				for(String s: AC){
+					list.add(id+"-"+s);
+				}
+			}
+			else if(id.contains("heater")){
+				for(String s: HEATER){
+					list.add(id+"-"+s);
+				}
+			}
+			else if(id.contains("water")){
+				for(String s: WATER){
+					list.add(id+"-"+s);
+				}
+				
+			}
+			else if(id.contains("blind")){
+				for(String s: BLINDS){
+					list.add(id+"-"+s);
+				}
+			}
+		
+		
+		return list;
+	}
 	public List<String> getLightProperties(){
 		List<String> list = new ArrayList<String>();
 		for(String s : LIGHT )

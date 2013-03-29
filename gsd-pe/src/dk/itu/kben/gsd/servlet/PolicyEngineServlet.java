@@ -7,9 +7,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
 
 import dk.itu.scas.gsd.net.Connection;
 import dk.itu.scas.gsd.net.ServiceProperties;
@@ -21,6 +21,7 @@ public class PolicyEngineServlet extends HttpServlet {
 	static boolean wasStopped = false;
 	static int HEARTBEAT_TIMER_SECONDS = 10; 
 	private final static String QUERY_ARGUMENTS = "&limit=1&order_by=-timestamp&format=json";
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -30,6 +31,7 @@ public class PolicyEngineServlet extends HttpServlet {
 		Connection.setFormat(config.getInitParameter("format"));
 		Connection.setSetvalue(config.getInitParameter("setvalue"));
 		final List<String> sensors = dk.itu.scas.gsd.net.Connection.getSensorIds();
+		
 		thread = new Thread(new Runnable() {
 			Date getNext() {
 				Calendar calendar = new GregorianCalendar();
@@ -124,6 +126,27 @@ public class PolicyEngineServlet extends HttpServlet {
 		
 		
 		super.destroy();
-	}	
-	
+	}
+	@Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException{
+        doPost(request,response);
+    }
+	 public void doPost(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException{
+	        response.setContentType("text/html");
+	        PrintWriter out = response.getWriter();
+	        String userPath = request.getServletPath();
+	        HttpSession session = request.getSession();
+	        if(userPath.equals("/ListSensors")){
+	        	List<String> sensors = Connection.getSensorIds();
+	        	session.setAttribute("sensors", (List<String>) sensors);
+	        }
+	        if(userPath.equals("/ListProperties")){
+	        	String id = request.getParameter("element");
+	        	out.println("<br>id = "+id);
+	        	//session.setAttribute("sensorProperties", ServiceProperties.allSensorsWithProperties(id));
+	        	List<String> sens = ServiceProperties.allSensorsWithProperties(id);
+	        	for(String s : sens)
+	        		out.println("<br>"+s);	        
+	        	}
+	 }	
 }

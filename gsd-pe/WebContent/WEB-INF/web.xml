@@ -5,10 +5,11 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-
+   
   <servlet>
     <servlet-name>PolicyEngineServlet</servlet-name>
     <servlet-class>dk.itu.kben.gsd.servlet.PolicyEngineServlet</servlet-class>
+    <!-- INITIAL PARAMETERS -->
     <init-param>
     	<param-name>server</param-name>
     	<param-value>http://gsd.itu.dk/</param-value>
@@ -30,6 +31,15 @@
     	<description>Json/xml return when querying</description>
     </init-param>
     <load-on-startup>1</load-on-startup>
+    
   </servlet>
-
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/ListSensors</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/ListProperties</url-pattern>
+	</servlet-mapping>
+	
 </web-app>   
