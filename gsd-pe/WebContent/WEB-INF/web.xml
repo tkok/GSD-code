@@ -30,6 +30,11 @@
     	<param-value>json</param-value>
     	<description>Json/xml return when querying</description>
     </init-param>
+    <init-param>
+    	<param-name>activationInterval</param-name>
+    	<param-value>10</param-value>
+    	<description>The number of seconds in between the servlet's internal running thread</description>
+    </init-param>
     <load-on-startup>1</load-on-startup>
     
   </servlet>

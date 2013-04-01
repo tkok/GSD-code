@@ -17,6 +17,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import dk.itu.kben.gsd.servlet.Configuration;
+
 public class Connection {
 	// variables
 	private static String [] services = {"lights", "acs", "heaters", "blinds", "waters"};
@@ -25,31 +27,7 @@ public class Connection {
 	//private static final String SET_SENSOR_VALUE = "api/user/building/entry/set/1/";
 	//private static final String SET_SENSOR_VALUE_LOCAL= "http://127.0.0.1:8000/api/user/building/entry/set/1/";
 	private static final String file = "sensor.json";
-	private static String server;
-	private static String building;
-	private static String setvalue;
-	private static String format;
-	public static String getBuilding() {
-		return building;
-	}
-	public static void setBuilding(String building) {
-		Connection.building = building;
-	}
-	public static String getSetvalue() {
-		return setvalue;
-	}
-	public static void setSetvalue(String setvalue) {
-		Connection.setvalue = setvalue;
-	}
-	public static String getFormat() {
-		return format;
-	}
-	public static void setFormat(String format) {
-		Connection.format = format;
-	}
-	public static void setServer(String server){
-		Connection.server = server;
-	}
+	
 	/**
 	 * Get list of sensors. Return a list of sensors id's
 	 * @return List<String> sensor id's
@@ -58,7 +36,7 @@ public class Connection {
 	public static List<String> getSensorIds(){ 
 		List<String> sensors = new ArrayList<String>();
 		try {
-			String data = connect(server+building+format);
+			String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
@@ -149,7 +127,7 @@ public class Connection {
 	 * @throws IOException
 	 */
 	public static String setSensorValue(String sensorId, int value) throws MalformedURLException, IOException{
-		String data = connect(server+setvalue+sensorId+"/"+value+"/?format="+format);
+		String data = connect(Configuration.getServer() + Configuration.getSetvalue() + sensorId+"/"+value+"/?format="+Configuration.getFormat());
 		JSONObject jsonObject = new JSONObject(data);
 		Object response = jsonObject.getJSONObject("value").get("returnvalue");
 		if(jsonObject.getJSONObject("value").get("returnvalue").toString().equals("true"))

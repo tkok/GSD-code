@@ -1,42 +1,45 @@
 package dk.itu.kben.gsd.servlet;
 
-import java.io.InputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dk.itu.scas.gsd.net.Connection;
 import dk.itu.scas.gsd.net.ServiceProperties;
 
+@SuppressWarnings("serial")
 public class PolicyEngineServlet extends HttpServlet {
 	
 	Thread thread = null;
 	static boolean shouldRun = true;
 	static boolean wasStopped = false;
-	static int HEARTBEAT_TIMER_SECONDS = 10; 
-	private final static String QUERY_ARGUMENTS = "&limit=1&order_by=-timestamp&format=json";
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		System.out.println(config.getInitParameter("server"));
-		Connection.setServer(config.getInitParameter("server"));
-		Connection.setBuilding(config.getInitParameter("building"));
-		Connection.setFormat(config.getInitParameter("format"));
-		Connection.setSetvalue(config.getInitParameter("setvalue"));
+
+		// Initializes the Configuration class based on the current ServletConfig 
+		Configuration.setConfiguration(config);
+		
+		System.out.println("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
+		
 		final List<String> sensors = dk.itu.scas.gsd.net.Connection.getSensorIds();
 		
 		thread = new Thread(new Runnable() {
 			Date getNext() {
 				Calendar calendar = new GregorianCalendar();
 				
-				calendar.add(Calendar.SECOND, HEARTBEAT_TIMER_SECONDS);
+				calendar.add(Calendar.SECOND, Configuration.getActivationInterval());
 				
 				return calendar.getTime();
 			}
