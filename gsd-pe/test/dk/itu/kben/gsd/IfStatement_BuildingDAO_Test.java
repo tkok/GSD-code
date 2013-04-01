@@ -1,8 +1,11 @@
 package dk.itu.kben.gsd;
 
 import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import dk.itu.kben.gsd.persistence.BuildingDAO;
 
 public class IfStatement_BuildingDAO_Test 
 {
@@ -15,6 +18,6 @@ public class IfStatement_BuildingDAO_Test
 	@Test
 	public void PrintHashtableFromDB() 
 	{
-		Assert.assertNotNull(BuildingDAO.hashtable);
+		Assert.assertNotNull(BuildingDAO.isEmpty());
 	}
 }

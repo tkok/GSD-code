@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +12,12 @@ import java.util.GregorianCalendar;
 import java.util.Hashtable;
 
 import com.google.gson.Gson;
+
+import dk.itu.kben.gsd.domain.GsonFactory;
+import dk.itu.kben.gsd.domain.IntValue;
+import dk.itu.kben.gsd.domain.Policy;
+import dk.itu.kben.gsd.domain.PolicyEntity;
+import dk.itu.kben.gsd.domain.Value;
 
 public class BuildingDAL {
 	
@@ -117,9 +123,9 @@ public class BuildingDAL {
 			else {
 				preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)");
 				
-				preparedStatement.setTime(1, policyEntity.fromTime);
-				preparedStatement.setTime(2, policyEntity.toTime);
-				preparedStatement.setBoolean(3, policyEntity.active);
+				preparedStatement.setTime(1, policyEntity.getFromTime());
+				preparedStatement.setTime(2, policyEntity.getToTime());
+				preparedStatement.setBoolean(3, policyEntity.isActive());
 				preparedStatement.setString(4,  policyEntity.getPolicy().getJSON());
 				
 				preparedStatement.execute();

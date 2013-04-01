@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.domain;
 
 import java.util.ArrayList;
 

@@ -6,6 +6,18 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import dk.itu.kben.gsd.domain.BooleanValue;
+import dk.itu.kben.gsd.domain.Expression;
+import dk.itu.kben.gsd.domain.IfStatement;
+import dk.itu.kben.gsd.domain.IntValue;
+import dk.itu.kben.gsd.domain.Operator;
+import dk.itu.kben.gsd.domain.Policy;
+import dk.itu.kben.gsd.domain.PolicyEntity;
+import dk.itu.kben.gsd.domain.SetStatement;
+import dk.itu.kben.gsd.domain.Statement;
+import dk.itu.kben.gsd.persistence.BuildingDAL;
+import dk.itu.kben.gsd.persistence.BuildingDAO;
+
 public class Policy_Persistence_Test {
 	
 	private static String ROOM1_TEMPERATURE = "ROOM1.TEMPERATURE";

@@ -1,4 +1,6 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.domain;
+
+import dk.itu.kben.gsd.persistence.BuildingDAO;
 
 public class SetStatement implements Statement {
 	

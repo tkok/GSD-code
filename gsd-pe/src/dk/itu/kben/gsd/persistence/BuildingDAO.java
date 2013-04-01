@@ -1,6 +1,8 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.persistence;
 
 import java.util.Hashtable;
+
+import dk.itu.kben.gsd.domain.Value;
 
 public class BuildingDAO {
 
@@ -20,6 +22,14 @@ public class BuildingDAO {
 	{
 		Hashtable<String, Value> lol = BuildingDAL.GetHashtableWithStringValueFromDB("repo_measurement");
 		hashtable.putAll(lol);
+	}
+	
+	public static boolean isEmpty() {
+		return (hashtable.size() == 0);
+	}
+	
+	public String toString() {
+		return hashtable.toString();
 	}
 	
 	

@@ -7,6 +7,15 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import dk.itu.kben.gsd.domain.BooleanValue;
+import dk.itu.kben.gsd.domain.Expression;
+import dk.itu.kben.gsd.domain.IfStatement;
+import dk.itu.kben.gsd.domain.IntValue;
+import dk.itu.kben.gsd.domain.Operator;
+import dk.itu.kben.gsd.domain.SetStatement;
+import dk.itu.kben.gsd.domain.Statement;
+import dk.itu.kben.gsd.persistence.BuildingDAO;
+
 public class IfStamenet_toJSONByGSON_Test {
 	
 	private static String ROOM1_TEMPERATURE = "ROOM1.TEMPERATURE";
@@ -34,6 +43,6 @@ public class IfStamenet_toJSONByGSON_Test {
 		Gson gson = new Gson();
 		
 		String json = gson.toJson(ifStatement);
-		Assert.assertEquals("{\"conditionalExpressions\":[{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM1.TEMPERATURE\"},{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM2.TEMPERATURE\"}],\"thenStatements\":[{\"aValue\":{\"theValue\":false},\"sensorID\":\"WING1.HEATER\"}]}", json);
+		Assert.assertEquals("{\"conditionalExpressions\":[{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM1.TEMPERATURE\"},{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM2.TEMPERATURE\"}],\"thenStatements\":[{\"aValue\":{\"theValue\":false},\"sensorID\":\"WING1.HEATER\"}],\"elseStatements\":[]}", json);
 	}
 }

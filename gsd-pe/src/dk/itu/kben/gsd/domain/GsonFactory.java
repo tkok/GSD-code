@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.domain;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

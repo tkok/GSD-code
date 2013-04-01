@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.domain;
 
 public class IntValue implements Value {
 	

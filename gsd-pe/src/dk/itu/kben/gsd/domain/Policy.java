@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Policy implements Serializable {
 		}
 	}
 	
-	String getJSON() {
+	public String getJSON() {
 		Gson gson = GsonFactory.getInstance();
 		
 		return gson.toJson(this);

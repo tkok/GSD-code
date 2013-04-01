@@ -1,6 +1,8 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.domain;
 
 import java.io.Serializable;
+
+import dk.itu.kben.gsd.persistence.BuildingDAO;
 
 public class Expression implements Serializable {
 	
