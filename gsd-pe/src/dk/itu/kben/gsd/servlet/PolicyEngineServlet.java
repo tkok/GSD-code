@@ -2,6 +2,7 @@ package dk.itu.kben.gsd.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dk.itu.kben.gsd.domain.PolicyEntities;
+import dk.itu.kben.gsd.domain.PolicyEntity;
+import dk.itu.kben.gsd.persistence.BuildingDAL;
 import dk.itu.scas.gsd.net.Connection;
 import dk.itu.scas.gsd.net.ServiceProperties;
 
@@ -46,6 +50,8 @@ public class PolicyEngineServlet extends HttpServlet {
 			
 			@Override
 			public void run() {
+				int secondsPassed = Configuration.getActivationInterval();
+				
 				while (shouldRun) {
 				
 					Date nextTime = getNext();
@@ -97,7 +103,7 @@ public class PolicyEngineServlet extends HttpServlet {
 						}
 					}
 		
-					System.out.println("3 seconds passed.");
+					System.out.println(secondsPassed + " seconds passed.");
 				}
 				
 				System.out.println("PolicyEngineServlet is stopping...");
@@ -143,13 +149,26 @@ public class PolicyEngineServlet extends HttpServlet {
 	        	List<String> sensors = Connection.getSensorIds();
 	        	session.setAttribute("sensors", (List<String>) sensors);
 	        }
-	        if(userPath.equals("/ListProperties")){
-	        	String id = request.getParameter("element");
-	        	out.println("<br>id = "+id);
-	        	//session.setAttribute("sensorProperties", ServiceProperties.allSensorsWithProperties(id));
-	        	List<String> sens = ServiceProperties.allSensorsWithProperties(id);
-	        	for(String s : sens)
-	        		out.println("<br>"+s);	        
-	        	}
+	        else {
+		        if(userPath.equals("/ListProperties")){
+		        	String id = request.getParameter("element");
+		        	out.println("<br>id = "+id);
+		        	//session.setAttribute("sensorProperties", ServiceProperties.allSensorsWithProperties(id));
+		        	List<String> sens = ServiceProperties.allSensorsWithProperties(id);
+		        	for(String s : sens)
+		        		out.println("<br>"+s);	        
+		        }
+		        else {
+			        if(userPath.equals("/GetAllPolicies")){
+			    		PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
+			    		
+			    		response.setContentType("application/json");
+			    		String json = policyEntities.toJSON();
+			    		System.out.println(json);
+			    		
+			    		out.print(json);
+			        }
+		        }
+	        }
 	 }	
 }

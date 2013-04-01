@@ -1,7 +1,6 @@
 package dk.itu.kben.gsd;
 
 import java.sql.Time;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +11,7 @@ import dk.itu.kben.gsd.domain.IfStatement;
 import dk.itu.kben.gsd.domain.IntValue;
 import dk.itu.kben.gsd.domain.Operator;
 import dk.itu.kben.gsd.domain.Policy;
+import dk.itu.kben.gsd.domain.PolicyEntities;
 import dk.itu.kben.gsd.domain.PolicyEntity;
 import dk.itu.kben.gsd.domain.SetStatement;
 import dk.itu.kben.gsd.domain.Statement;
@@ -60,8 +60,8 @@ public class Policy_Persistence_Test {
 		
 		BuildingDAL.store(policyEntity);
 		
-		ArrayList<PolicyEntity> policies = BuildingDAL.getActivePolicies();
+		PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
 		
-		System.out.println("There is " + policies.size() + " active policies.");
+		System.out.println("There is " + policyEntities.getSize() + " active policies.");
 	}
 }

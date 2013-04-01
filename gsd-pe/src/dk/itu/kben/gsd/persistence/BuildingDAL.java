@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import dk.itu.kben.gsd.domain.GsonFactory;
 import dk.itu.kben.gsd.domain.IntValue;
 import dk.itu.kben.gsd.domain.Policy;
+import dk.itu.kben.gsd.domain.PolicyEntities;
 import dk.itu.kben.gsd.domain.PolicyEntity;
 import dk.itu.kben.gsd.domain.Value;
 
@@ -110,10 +111,11 @@ public class BuildingDAL {
 		}
 	}
 
-	public static ArrayList<PolicyEntity> getActivePolicies() {
+	public static PolicyEntities getActivePolicies() {
 		connection = CreateConn();
 
-		ArrayList<PolicyEntity> policies = new ArrayList<PolicyEntity>();
+		//ArrayList<PolicyEntity> policies = new ArrayList<PolicyEntity>();
+		PolicyEntities policyEntities = new PolicyEntities();
 
 		try {
 			Calendar calendar = new GregorianCalendar();
@@ -138,6 +140,7 @@ public class BuildingDAL {
 			while (rs.next()) {
 				PolicyEntity policyEntity = new PolicyEntity();
 
+				policyEntity.setId(rs.getLong("id"));
 				policyEntity.setFromTime(rs.getTime("fromTime"));
 				policyEntity.setToTime(rs.getTime("toTime"));
 				policyEntity.setActive(true);
@@ -148,12 +151,15 @@ public class BuildingDAL {
 				Policy policy = null;
 				policy = gson.fromJson(json, Policy.class);
 
+				/*
 				String s = gson.toJson(policy);
 				System.out.println(s);
+				*/
 
 				policyEntity.setPolicy(policy);
 
-				policies.add(policyEntity);
+				policyEntities.add(policyEntity);
+				//policies.add(policyEntity);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -162,6 +168,6 @@ public class BuildingDAL {
 			System.out.println("Close DB connection \n");
 		}
 
-		return policies;
+		return policyEntities;
 	}
 }

@@ -40,11 +40,14 @@
   </servlet>
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/GetAllPolicies</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/ListSensors</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/ListProperties</url-pattern>
 	</servlet-mapping>
-	
 </web-app>   
