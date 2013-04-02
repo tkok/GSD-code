@@ -1,6 +1,9 @@
 package dk.itu.kben.gsd;
 
 import java.sql.Time;
+import java.util.ArrayList;
+
+import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +38,9 @@ public class Policy_Persistence_Test {
 	}
 
 	@Test
-	public void simpleEqual_Execute() {
+	public void persistNewIfStatement() {
+		BuildingDAL.deleteAll();
+		
 		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new IntValue(10));
 		Statement thenStatement = new SetStatement(ROOM1_HEATER, new BooleanValue(true));
 		Statement elseStatement = new SetStatement(ROOM1_BLINDS, new BooleanValue(true));
@@ -58,10 +63,37 @@ public class Policy_Persistence_Test {
 		policyEntity.setToTime(toTime);
 		policyEntity.setActive(true);
 		
-		BuildingDAL.store(policyEntity);
+		policyEntity = BuildingDAL.persist(policyEntity);
+	}
+	
+	//@Test
+	public void notWorkingYet() {
+		PolicyEntities policyEntities = BuildingDAL.getActivePolicies(); 
 		
-		PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
+		Assert.assertEquals(1, policyEntities.getSize());
 		
-		System.out.println("There is " + policyEntities.getSize() + " active policies.");
+		for (Statement statement: policyEntities.getPolicyEntities().get(0).getPolicy().getStatements()) {
+			if (statement instanceof IfStatement) {
+				IfStatement theIfStatement = (IfStatement) statement;
+				
+				Assert.assertEquals(1,  theIfStatement.getElseStatements().size());
+				
+				// Delete the ElseStatement
+				theIfStatement.setElseStatements(new ArrayList<Statement>());
+			}
+		}
+		
+		PolicyEntity policyEntity = BuildingDAL.persist(policyEntities.getPolicyEntities().get(0));
+		
+		policyEntities = BuildingDAL.getActivePolicies();
+		Assert.assertEquals(1, policyEntities.getSize());
+
+		for (Statement statement: policyEntities.getPolicyEntities().get(0).getPolicy().getStatements()) {
+			if (statement instanceof IfStatement) {
+				IfStatement theIfStatement = (IfStatement) statement;
+				
+				Assert.assertEquals(0,  theIfStatement.getElseStatements().size());
+			}
+		}
 	}
 }

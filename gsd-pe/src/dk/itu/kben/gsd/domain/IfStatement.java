@@ -22,6 +22,14 @@ public class IfStatement implements Statement {
 	public void addElseStatement(Statement statement) {
 		elseStatements.add(statement);
 	}
+	
+	public ArrayList<Statement> getElseStatements() {
+		return elseStatements;
+	}
+	
+	public void setElseStatements(ArrayList<Statement> elseStatements) {
+		this.elseStatements = elseStatements;
+	}
 
 	public void execute() {
 		boolean fail = false;

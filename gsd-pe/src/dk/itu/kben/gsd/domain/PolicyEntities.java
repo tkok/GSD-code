@@ -21,6 +21,10 @@ public class PolicyEntities {
 		return policyEntities.size();
 	}
 	
+	public List<PolicyEntity> getPolicyEntities() {
+		return policyEntities;
+	}
+	
 	public String toJSON() {
 		Gson gson = GsonFactory.getInstance();
 		

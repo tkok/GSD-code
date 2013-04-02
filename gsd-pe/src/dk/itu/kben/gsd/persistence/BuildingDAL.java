@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
@@ -86,23 +86,12 @@ public class BuildingDAL {
 		return null;
 	}
 
-	public static void store(PolicyEntity policyEntity) {
+	public static void deleteAll() {
 		connection = CreateConn();
-
 		try {
-			if (policyEntity.getId() != -1) {
-				// TODO Update statement
-				throw new RuntimeException("Not yet implemented");
-			} else {
-				preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)");
-
-				preparedStatement.setTime(1, policyEntity.getFromTime());
-				preparedStatement.setTime(2, policyEntity.getToTime());
-				preparedStatement.setBoolean(3, policyEntity.isActive());
-				preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
-
-				preparedStatement.execute();
-			}
+			preparedStatement = connection.prepareStatement("DELETE FROM policy");
+			
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -110,11 +99,48 @@ public class BuildingDAL {
 			System.out.println("Close DB connection \n");
 		}
 	}
+	
+	public static PolicyEntity persist(PolicyEntity policyEntity) {
+		connection = CreateConn();
+
+		try {
+			if (policyEntity.getId() != -1) {
+				System.out.println("UPDATING!");
+				
+				preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ? AND toTime = ? AND active = ? AND policy = ? WHERE ID = ?");
+				
+				preparedStatement.setLong(5, policyEntity.getId()); 
+			} else {
+				preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+				System.out.println("INSERTING!");
+			}
+
+			preparedStatement.setTime(1, policyEntity.getFromTime());
+			preparedStatement.setTime(2, policyEntity.getToTime());
+			preparedStatement.setBoolean(3, policyEntity.isActive());
+			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
+
+			preparedStatement.executeUpdate();
+			ResultSet rs = preparedStatement.getGeneratedKeys();
+			if (rs.next()) {
+				long id = rs.getLong(1);
+				policyEntity.setId(id);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseConn();
+			System.out.println("Close DB connection \n");
+		}
+		
+		return policyEntity;
+	}
 
 	public static PolicyEntities getActivePolicies() {
 		connection = CreateConn();
 
-		//ArrayList<PolicyEntity> policies = new ArrayList<PolicyEntity>();
+		// ArrayList<PolicyEntity> policies = new ArrayList<PolicyEntity>();
 		PolicyEntities policyEntities = new PolicyEntities();
 
 		try {
@@ -152,14 +178,13 @@ public class BuildingDAL {
 				policy = gson.fromJson(json, Policy.class);
 
 				/*
-				String s = gson.toJson(policy);
-				System.out.println(s);
-				*/
+				 * String s = gson.toJson(policy); System.out.println(s);
+				 */
 
 				policyEntity.setPolicy(policy);
 
 				policyEntities.add(policyEntity);
-				//policies.add(policyEntity);
+				// policies.add(policyEntity);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

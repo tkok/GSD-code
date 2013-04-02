@@ -27,4 +27,8 @@ public class Policy implements Serializable {
 		
 		return gson.toJson(this);
 	}
+	
+	public ArrayList<Statement> getStatements() {
+		return statements;
+	}
 }
