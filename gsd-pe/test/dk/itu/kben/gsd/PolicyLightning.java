@@ -62,7 +62,7 @@ public class PolicyLightning {
 		/**
 		 * 
 		 */
-		BuildingDAL.store(entity);
+		entity = BuildingDAL.persist(entity);
 		
 		PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
 		System.out.println("There is " + policyEntities.getSize() + " active policies.");
