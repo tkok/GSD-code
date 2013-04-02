@@ -32,7 +32,7 @@
 				<input id = "element" name="element" value="" type = "hidden" />
 				<input type="submit" value="Show properties" title="Show properties">
 			</form>
-			
+			</div>
 			
 </body>
 </html>
