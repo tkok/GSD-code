@@ -1,3 +1,10 @@
+<%@page import="dk.itu.scas.gsd.net.*"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% Connection connection = new Connection(); %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta charset="utf-8">
@@ -11,7 +18,7 @@
             jQuery(function(){
                 jQuery('a.add-link').click(function(event){
                     event.preventDefault();
-                    var $new_tr = jQuery('<tr style="display: none;"><td><input type="checkbox" name="check"></td><td><button type="delete-button">Delete</button></td><td>FOR</td><td><select><option value="all-floors">* (all)</option><option value="floor-0">Floor 0</option><option value="floor-1">Floor 1</option><option value="floor-2">floor 2</option><option value="floor-3">Floor 3</option></select></td><td><select><option value="all-rooms">* (all)</option><option value="room-0">Room 0</option><option value="room-1">Room 1</option><option value="room-2">Room 2</option><option value="room-3">Room 3</option></select></td><td>IF</td><td><select><option value="temp">Temp</option><option value="weather">Whether</option></select> IS <select><option value="greater-than">&gt;</option><option value="less-than">&lt;</option><option value="equal-to">&#61;</option><option value="not-equal-to">!&#61;</option></select> <input type="text" class="if-is-input" name="if-is-value"></td><td>THEN SET</td><td><select><option value="ac">Aircondition</option><option value="heator">Blind</option><option value="ac">Heator</option><option value="heator">Light</option></select></td><td>&#61;</td><td><select><option value="on">ON</option><option value="off">OFF</option></select></td><td><button type="change-button">Change</button></td></tr>'); 
+                    var $new_tr = jQuery('<tr style="display: none;"><td><input type="checkbox" name="check"></td><td><button type="delete-button">Delete</button></td><td>-</td><td><select><option value="all-floors">* (all)</option><option value="floor-0">Floor 0</option><option value="floor-1">Floor 1</option><option value="floor-2">floor 2</option><option value="floor-3">Floor 3</option></select></td><td><select><option value="all-rooms">* (all)</option><option value="room-0">Room 0</option><option value="room-1">Room 1</option><option value="room-2">Room 2</option><option value="room-3">Room 3</option></select></td><td>IF</td><td><select><option value="temp">Temp</option><option value="weather">Whether</option></select> IS <select><option value="greater-than">&gt;</option><option value="less-than">&lt;</option><option value="equal-to">&#61;</option><option value="not-equal-to">!&#61;</option></select> <input type="text" class="if-is-input" name="if-is-value"></td><td>THEN SET</td><td><select><option value="ac">Aircondition</option><option value="heator">Blind</option><option value="ac">Heator</option><option value="heator">Light</option></select></td><td>&#61;</td><td><select><option value="on">ON</option><option value="off">OFF</option></select></td><td><button type="change-button">Change</button></td></tr>'); 
                     //jQuery('table.policy-list').append($newRow);
                     jQuery('#policies').append($new_tr);
                     jQuery($new_tr.show('fast'));
@@ -22,7 +29,7 @@
             jQuery(function(){
                 jQuery('a.add-more-services-link').click(function(event){
                     event.preventDefault();
-                    var $new_service = jQuery('<div class="service" style="display: none;"><select><option value="temp">Temp</option><option value="weather">Whether</option></select> IS <select><option value="greater-than">&gt;</option><option value="less-than">&lt;</option><option value="equal-to">&#61;</option><option value="not-equal-to">!&#61;</option></select> <input type="text" class="if-is-input" name="if-is-value"></div>'); 
+                    var $new_service = jQuery('<div class="service" style="display: none;">AND <br /><select><option value="temp">Temp</option><option value="weather">Whether</option></select> IS <select><option value="greater-than">&gt;</option><option value="less-than">&lt;</option><option value="equal-to">&#61;</option><option value="not-equal-to">!&#61;</option></select> <input type="text" class="if-is-input" name="if-is-value"></div>'); 
                     //jQuery('table.policy-list').append($newRow);
                     jQuery('.services').append($new_service);
                     jQuery($new_service.show('fast'));
@@ -43,14 +50,19 @@
                 <tr id="new">
                     <td><input type="checkbox" class="check-input" name="check"></td>
                     <td><button type="delete-button">Delete</button></td>
-                    <td>FOR</td>
+                    <td>-</td>
                     <td>
                         <select>
-                            <option value="all-floors">* (all)</option>
+                        	<% List<String> floors = connection.getFloorIds(); 
+								for(String floor: floors){
+									out.println("<option value="+floor+">"+floor+"</option>");
+								}
+							%>
+                            <!-- <option value="all-floors">* (all)</option>
                             <option value="floor-0">Floor 0</option>
                             <option value="floor-1">Floor 1</option>
                             <option value="floor-2">floor 2</option>
-                            <option value="floor-3">Floor 3</option>
+                            <option value="floor-3">Floor 3</option> -->
                         </select>
                     </td>
                     <td>
