@@ -9,6 +9,7 @@ public class Configuration {
 	private static String setvalue;
 	private static String format;
 	private static int activationInterval;
+	private static int timeout;
 	
 	public static void setConfiguration(ServletConfig servletConfig) {
 		server = servletConfig.getInitParameter("server");
@@ -16,6 +17,7 @@ public class Configuration {
 		format = servletConfig.getInitParameter("format");
 		setvalue = servletConfig.getInitParameter("setvalue");
 		activationInterval = new Integer(servletConfig.getInitParameter("activationInterval")).intValue();
+		timeout = new Integer(servletConfig.getInitParameter("timeout")).intValue();
 	}
 
 	public static String getServer() {
@@ -36,5 +38,8 @@ public class Configuration {
 	
 	public static int getActivationInterval() {
 		return activationInterval;
+	}
+	public static int getTimeout(){
+		return timeout;
 	}
 }

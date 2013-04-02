@@ -27,7 +27,7 @@ public class PolicyEngineServlet extends HttpServlet {
 	Thread thread = null;
 	static boolean shouldRun = true;
 	static boolean wasStopped = false;
-	
+	Connection connection;
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
@@ -36,8 +36,8 @@ public class PolicyEngineServlet extends HttpServlet {
 		Configuration.setConfiguration(config);
 		
 		System.out.println("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
-		
-		final List<String> sensors = dk.itu.scas.gsd.net.Connection.getSensorIds();
+		connection = new Connection();
+		final List<String> sensors = connection.getSensorIds();
 		
 		thread = new Thread(new Runnable() {
 			Date getNext() {
@@ -146,29 +146,26 @@ public class PolicyEngineServlet extends HttpServlet {
 	        String userPath = request.getServletPath();
 	        HttpSession session = request.getSession();
 	        if(userPath.equals("/ListSensors")){
-	        	List<String> sensors = Connection.getSensorIds();
+	        	List<String> sensors = connection.getSensorIds();
 	        	session.setAttribute("sensors", (List<String>) sensors);
+	        	out.println(sensors.size());
 	        }
-	        else {
-		        if(userPath.equals("/ListProperties")){
-		        	String id = request.getParameter("element");
-		        	out.println("<br>id = "+id);
-		        	//session.setAttribute("sensorProperties", ServiceProperties.allSensorsWithProperties(id));
-		        	List<String> sens = ServiceProperties.allSensorsWithProperties(id);
-		        	for(String s : sens)
-		        		out.println("<br>"+s);	        
-		        }
-		        else {
-			        if(userPath.equals("/GetAllPolicies")){
-			    		PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
-			    		
-			    		response.setContentType("application/json");
-			    		String json = policyEntities.toJSON();
-			    		System.out.println(json);
-			    		
-			    		out.print(json);
-			        }
-		        }
-	        }
+	        else if(userPath.equals("/ListProperties")){
+		        String id = request.getParameter("element");
+		        out.println("<br>id = "+id);
+		        //session.setAttribute("sensorProperties", ServiceProperties.allSensorsWithProperties(id));
+		        List<String> sens = ServiceProperties.allSensorsWithProperties(id);
+		        for(String s : sens)
+		        	out.println("<br>"+s);	        
+		    }
+		    else if(userPath.equals("/GetAllPolicies")){
+			   	PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
+			   	response.setContentType("application/json");
+			   	String json = policyEntities.toJSON();
+			   	System.out.println(json);
+			   	out.print(json);
+			}
+	   }
+	        
 	 }	
 }

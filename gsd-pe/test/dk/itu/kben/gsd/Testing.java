@@ -1,5 +1,9 @@
 package dk.itu.kben.gsd;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,7 +27,9 @@ public class Testing {
 			System.out.println((String) iterator.next());
 		}
 		*/
-		List<String> sensors = Connection.getSensorIds();
+		String s = "http://gsd.itu.dk/api/user/measurement/?bid=1&uuid=room-0-light-0-state&limit=1&format=json";
+		Connection connect = new Connection();
+		System.out.println(connect.connect(s));
 		
 	}
 } 

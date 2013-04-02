@@ -35,6 +35,11 @@
     	<param-value>10</param-value>
     	<description>The number of seconds in between the servlet's internal running thread</description>
     </init-param>
+    <init-param>
+    	<param-name>timeout</param-name>
+    	<param-value>6000</param-value>
+    	<description>Timeout interval for the connection with the GSD server</description>
+    </init-param>
     <load-on-startup>1</load-on-startup>
     
   </servlet>

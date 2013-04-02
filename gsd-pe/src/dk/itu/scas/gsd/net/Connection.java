@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import dk.itu.kben.gsd.servlet.Configuration;
 
 public class Connection {
 	// variables
-	private static String [] services = {"lights", "acs", "heaters", "blinds", "waters"};
+	private String [] services = {"lights", "acs", "heaters", "blinds", "waters"};
 	//private static final String BUILDING_INFO = "api/user/building/entry/description/1/?format=json";
 	//private static final String BUILDING_INFO_LOCAL = "http://127.0.0.1:8000/api/user/building/entry/description/1/?format=json";
 	//private static final String SET_SENSOR_VALUE = "api/user/building/entry/set/1/";
@@ -32,8 +34,10 @@ public class Connection {
 	 * Get list of sensors. Return a list of sensors id's
 	 * @return List<String> sensor id's
 	 */
-	
-	public static List<String> getSensorIds(){ 
+	public Connection(){
+		
+	}
+	public List<String> getSensorIds(){ 
 		List<String> sensors = new ArrayList<String>();
 		try {
 			String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
@@ -66,10 +70,12 @@ public class Connection {
 	 * @return Returns a JSON object as a String
 	 * @throws MalformedURLException
 	 * @throws IOException
+	 * @throws URISyntaxException 
 	 */
-	public static String connect(String url) throws MalformedURLException, IOException {
+	public String connect(String url) throws MalformedURLException, IOException, URISyntaxException {
 		URL _url = new URL(url);
 		URLConnection urlConnection = _url.openConnection();
+		urlConnection.setReadTimeout(Configuration.getTimeout());
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		StringBuffer bufferString = new StringBuffer();
 		String line;
@@ -85,7 +91,7 @@ public class Connection {
 	 * @return Returns an Object - this should actually be the value of the sensor's property
 	 * @throws Exception
 	 */
-	public static Object getSensorValue(String query) throws Exception{
+	public Object getSensorValue(String query) throws Exception{
 		String data = connect(query);
 		//String data = readFromFile("query_sensor.json");
 		Object object = new Object();
@@ -108,7 +114,7 @@ public class Connection {
 	 * @return Returns a String in which there is a JSON.
 	 * @throws IOException
 	 */
-	public static String readFromFile(String filename) throws IOException{
+	public String readFromFile(String filename) throws IOException{
 		StringBuffer buffer = new StringBuffer();
 		String line;
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
@@ -125,8 +131,9 @@ public class Connection {
 	 * @return
 	 * @throws MalformedURLException
 	 * @throws IOException
+	 * @throws URISyntaxException 
 	 */
-	public static String setSensorValue(String sensorId, int value) throws MalformedURLException, IOException{
+	public String setSensorValue(String sensorId, int value) throws MalformedURLException, IOException, URISyntaxException{
 		String data = connect(Configuration.getServer() + Configuration.getSetvalue() + sensorId+"/"+value+"/?format="+Configuration.getFormat());
 		JSONObject jsonObject = new JSONObject(data);
 		Object response = jsonObject.getJSONObject("value").get("returnvalue");
@@ -141,7 +148,7 @@ public class Connection {
 	 * @param roomId
 	 * @return A list with the sensors ids.
 	 */
-	public static List<String> getSensorListByRoomId(String roomId){
+	public List<String> getSensorListByRoomId(String roomId){
 		List<String> sensors = getSensorIds();
 		List<String> sensorList = new ArrayList<String>();
 		Iterator iterator = sensors.iterator();
