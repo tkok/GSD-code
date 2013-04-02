@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -159,5 +160,38 @@ public class Connection {
 			}
 		}
 		return sensorList;
+	}
+	public List<String> getRoomListByFloor(String floor) throws MalformedURLException, IOException, URISyntaxException{
+		List<String> roomList = new ArrayList<String>();
+		String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+		JSONObject jsonObject = new JSONObject(data);
+		JSONObject value = jsonObject.getJSONObject("value");
+		JSONObject rooms = value.getJSONObject("rooms");
+		Iterator<String> iterator = rooms.keys();
+		while(iterator.hasNext()){
+			String s =(String) iterator.next();
+			if(s.contains(floor))
+				roomList.add(s);
+		}
+		return roomList;
+	}
+	
+	public List<String> getFloorIds() throws MalformedURLException, IOException, URISyntaxException{
+		HashSet<String> hashSet = new HashSet<String>();
+		List<String> floors = new ArrayList<String>();
+		String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+		JSONObject jsonObject = new JSONObject(data);
+		JSONObject value = jsonObject.getJSONObject("value");
+		JSONObject rooms = value.getJSONObject("rooms");
+		Iterator<String> iterator = rooms.keys();
+		while(iterator.hasNext()){
+			String s = iterator.next().replaceFirst("-", " ");
+			hashSet.add(s.split("-")[0]);
+		}
+		iterator = hashSet.iterator();
+		while(iterator.hasNext()){
+			floors.add(iterator.next());
+		}
+		return floors;
 	}
 }
