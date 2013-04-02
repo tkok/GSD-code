@@ -43,6 +43,13 @@
     <load-on-startup>1</load-on-startup>
     
   </servlet>
+     
+  <servlet>
+  <servlet-name>PostData</servlet-name>
+    <servlet-class>dk.itu.nicl.gsd.postdata.PostData</servlet-class>
+    <load-on-startup>5</load-on-startup>
+  </servlet>
+  
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/GetAllPolicies</url-pattern>
@@ -54,5 +61,10 @@
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/ListProperties</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>PostData</servlet-name>
+		<url-pattern>/PostData</url-pattern>
 	</servlet-mapping>
 </web-app>   
