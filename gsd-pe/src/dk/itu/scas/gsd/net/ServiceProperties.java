@@ -6,18 +6,13 @@ import java.util.List;
 
 public class ServiceProperties {
 	
-	/*private final static String [] LIGHT = {"wattage","efficiency","gain_input","luminosity","production","state"};
-	private final static String [] AC = {"efficiency","wattage","gain_input","production","state","gain_output"};
-	private final static String [] HEATER = {"efficiency","wattage","gain_input","production","state","gain_output"};
-	private final static String [] WATER = {"efficiency","gain_input","flow","production","state","gain_output"};
-	private final static String [] BLINDS = {"speed","size","setpoint"}; 
-	*/
 	private final static String [] PROPS =  {"gain","production","state"};
 	/*private final static String [] LIGHT = {"gain","production","state"};
 	private final static String [] AC = {"gain","production","state"};
 	private final static String [] HEATER =  {"gain","production","state"};
 	private final static String [] WATER =  {"gain","production","state"};*/
 	private final static String [] BLINDS = {"setpoint","state"};
+	
 	/**
 	 * Return a list with each sensor's properties, given as input a list of sensor's id. 
 	 * @param sensorIds
@@ -25,25 +20,31 @@ public class ServiceProperties {
 	 */
 	public static List<String> allSensorsWithProperties(List<String> sensorIds){
 		List<String> list = new ArrayList<String>();
-		Iterator<String> iterator = sensorIds.iterator();
+		Iterator iterator = sensorIds.iterator();
 		while(iterator.hasNext()){
-			String id = iterator.next();
+			String id = (String) iterator.next();
+			System.out.println(id.trim());
 			if(id.contains("blind")){
-				list.add(id+"-"+BLINDS);
+				for(String s : BLINDS)
+					list.add(id+"-"+s.toString());
 			}
-			else 
-				list.add(id+"-"+PROPS);
+			else{
+				for(String s : PROPS)
+					list.add(id+"-"+s.toString());
+			}
 		}
-		
 		return list;
 	}
 	public static List<String> allSensorsWithProperties(String id){
 		List<String> list = new ArrayList<String>();
 		if(id.contains("blind")){
-			list.add(id+"-"+BLINDS);
+			for(String s : BLINDS)
+				list.add(id+"-"+s.toString());
 		}
-		else 
-			list.add(id+"-"+PROPS);
+		else{
+			for(String s : PROPS)
+				list.add(id+"-"+s.toString());
+		}
 		return list;
 	}
 }

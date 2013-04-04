@@ -163,8 +163,6 @@ public class PolicyEngineServlet extends HttpServlet {
 			if (userPath.equals("/ListProperties")) {
 				String id = request.getParameter("element");
 				out.println("<br>id = " + id);
-				// session.setAttribute("sensorProperties",
-				// ServiceProperties.allSensorsWithProperties(id));
 				List<String> sens = ServiceProperties.allSensorsWithProperties(id);
 				for (String s : sens)
 					out.println("<br>" + s);
