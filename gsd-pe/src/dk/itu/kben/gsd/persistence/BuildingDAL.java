@@ -102,13 +102,10 @@ public class BuildingDAL {
 	
 	public static PolicyEntity persist(PolicyEntity policyEntity) {
 		connection = CreateConn();
-
 		try {
 			if (policyEntity.getId() != -1) {
 				System.out.println("UPDATING!");
-				
-				preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ? AND toTime = ? AND active = ? AND policy = ? WHERE ID = ?");
-				
+				preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ?, toTime = ?, active = ?,  policy = ? WHERE ID = ?");
 				preparedStatement.setLong(5, policyEntity.getId()); 
 			} else {
 				preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -119,7 +116,7 @@ public class BuildingDAL {
 			preparedStatement.setTime(2, policyEntity.getToTime());
 			preparedStatement.setBoolean(3, policyEntity.isActive());
 			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
-
+			
 			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			if (rs.next()) {

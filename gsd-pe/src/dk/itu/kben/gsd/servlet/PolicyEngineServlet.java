@@ -2,6 +2,7 @@ package dk.itu.kben.gsd.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -159,32 +160,62 @@ public class PolicyEngineServlet extends HttpServlet {
 		if (userPath.equals("/ListSensors")) {
 			List<String> sensors = connection.getSensorIds();
 			session.setAttribute("sensors", (List<String>) sensors);
-		} else {
-			if (userPath.equals("/ListProperties")) {
+		} 
+		else if (userPath.equals("/ListProperties")) {
 				String id = request.getParameter("element");
 				out.println("<br>id = " + id);
 				List<String> sens = ServiceProperties.allSensorsWithProperties(id);
 				for (String s : sens)
 					out.println("<br>" + s);
-			} else {
-				if (userPath.equals("/GetAllPolicies")) {
+		} 
+		else if (userPath.equals("/GetAllPolicies")) {
 					PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
-
 					response.setContentType("application/json");
 					String json = policyEntities.toJSON();
 					System.out.println(json);
 
 					out.print(json);
-				} else {
-					if (userPath.equals("/PersistPolicy")) {
+				} 
+		else if (userPath.equals("/PersistPolicy")) {
 						String policyEntityJson = request.getParameter("policyEntity");
 						Gson gson = GsonFactory.getInstance();
 						PolicyEntity policyEntity = gson.fromJson(policyEntityJson, PolicyEntity.class);
 
 						BuildingDAL.persist(policyEntity);
 					}
-				}
+		else if (userPath.equals("/ChangeValue")){
+			String sensorId = request.getParameter("sensorId");
+			String value = request.getParameter("value");
+			try {
+				connection.setSensorValue(sensorId, Integer.parseInt(value));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
+		else if (userPath.equals("/Test")){
+			try {
+				connection.connect("http://localhost:5050/test/TestTimeout");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				out.println("<br>"+"Timeout exception");
+			}
+		}
+		else if (userPath.equals("/TestTimeout")){
+						try {
+							Thread.sleep(15000);
+							out.println("<br>"+"it works");
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							out.println("<br>"+"Timeout");
+						}
+					}
 	}
 }
+
+				
+
+

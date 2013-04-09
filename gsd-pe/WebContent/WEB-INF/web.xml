@@ -62,7 +62,18 @@
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/ListProperties</url-pattern>
 	</servlet-mapping>
-	
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/Test</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/TestTimeout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/ChangeValue</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PostData</servlet-name>
 		<url-pattern>/PostData</url-pattern>
