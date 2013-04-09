@@ -1,10 +1,9 @@
-CREATE  TABLE `webaholic_gsd`.`policy` (
-  `id` BIGINT NOT NULL ,
-  `fromTime` TIME NOT NULL ,
-  `toTime` TIME NOT NULL ,
-  `active` BINARY NOT NULL ,
-  `policy` TEXT NOT NULL ,
-  PRIMARY KEY (`id`) );
+CREATE TABLE `policy` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fromTime` time NOT NULL,
+  `toTime` time NOT NULL,
+  `active` binary(1) NOT NULL,
+  `policy` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=70 DEFAULT CHARSET=latin1$$
 
-  ALTER TABLE `webaholic_gsd`.`policy` CHANGE COLUMN `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT  ;
-  
