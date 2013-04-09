@@ -157,10 +157,19 @@ public class PolicyEngineServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String userPath = request.getServletPath();
 		HttpSession session = request.getSession();
+		
 		if (userPath.equals("/ListSensors")) {
 			List<String> sensors = connection.getSensorIds();
 			session.setAttribute("sensors", (List<String>) sensors);
-		} 
+		}
+		else if(userPath.equals("/ListSensorsInJson")){
+			try {
+				String json = connection.connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		else if (userPath.equals("/ListProperties")) {
 				String id = request.getParameter("element");
 				out.println("<br>id = " + id);
