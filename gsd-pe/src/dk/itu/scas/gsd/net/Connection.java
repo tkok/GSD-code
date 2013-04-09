@@ -38,10 +38,12 @@ public class Connection {
 	public Connection(){
 		
 	}
-	public List<String> getSensorIds(){ 
-		List<String> sensors = new ArrayList<String>();
+	public String getSensorIds(){ 
+		String data = "";
+		
 		try {
-			String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+			data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+			/*
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
@@ -58,12 +60,14 @@ public class Connection {
 					}
 				}
 			}
+			*/
 		} 
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return sensors;
+		
+		return data;
 	}
 	/**
 	 * Connect to the simulator's api and get a JSON object.
@@ -149,6 +153,7 @@ public class Connection {
 	 * @param roomId
 	 * @return A list with the sensors ids.
 	 */
+	/*
 	public List<String> getSensorListByRoomId(String roomId){
 		List<String> sensors = getSensorIds();
 		List<String> sensorList = new ArrayList<String>();
@@ -161,6 +166,8 @@ public class Connection {
 		}
 		return sensorList;
 	}
+	*/
+	
 	public List<String> getRoomListByFloor(String floor) throws MalformedURLException, IOException, URISyntaxException{
 		List<String> roomList = new ArrayList<String>();
 		String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());

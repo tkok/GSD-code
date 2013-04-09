@@ -42,7 +42,7 @@ public class PolicyEngineServlet extends HttpServlet {
 		System.out.println("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
 
 		connection = new Connection();
-		final List<String> sensors = connection.getSensorIds();
+		//final List<String> sensors = connection.getSensorIds();
 
 		thread = new Thread(new Runnable() {
 			Date getNext() {
@@ -87,13 +87,13 @@ public class PolicyEngineServlet extends HttpServlet {
 
 							// end for
 
-							for (String sensorId : sensors) {
+							/*for (String sensorId : sensors) {
 
 								// fetch the value of sensorId and put it into
 								// BuildingDAO's hashtable
 								// System.out.println(sensorId);
 
-							}
+							}*/
 
 							// for each policy
 
@@ -153,12 +153,13 @@ public class PolicyEngineServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		response.setContentType("text/html");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		PrintWriter out = response.getWriter();
 		String userPath = request.getServletPath();
 		HttpSession session = request.getSession();
 		if (userPath.equals("/ListSensors")) {
-			List<String> sensors = connection.getSensorIds();
-			session.setAttribute("sensors", (List<String>) sensors);
+			response.setContentType("application/json");
+			response.getWriter().print(connection.getSensorIds());
 		} else {
 			if (userPath.equals("/ListProperties")) {
 				String id = request.getParameter("element");
@@ -182,6 +183,15 @@ public class PolicyEngineServlet extends HttpServlet {
 						PolicyEntity policyEntity = gson.fromJson(policyEntityJson, PolicyEntity.class);
 
 						BuildingDAL.persist(policyEntity);
+					}
+					else {
+						if (userPath.equals("/")) {
+							String policyEntityJson = request.getParameter("policyEntity");
+							Gson gson = GsonFactory.getInstance();
+							PolicyEntity policyEntity = gson.fromJson(policyEntityJson, PolicyEntity.class);
+
+							BuildingDAL.persist(policyEntity);
+						}
 					}
 				}
 			}

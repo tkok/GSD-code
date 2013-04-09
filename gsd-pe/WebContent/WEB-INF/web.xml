@@ -5,51 +5,45 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-   
-  <servlet>
-    <servlet-name>PolicyEngineServlet</servlet-name>
-    <servlet-class>dk.itu.kben.gsd.servlet.PolicyEngineServlet</servlet-class>
-    <!-- INITIAL PARAMETERS -->
-    <init-param>
-    	<param-name>server</param-name>
-    	<param-value>http://gsd.itu.dk/</param-value>
-    	<description>Server address</description>
-    </init-param>
-    <init-param>
-    	<param-name>building</param-name>
-    	<param-value>api/user/building/entry/description/1/?format=</param-value>
-    	<description>Query url for building info</description>
-    </init-param>
-    <init-param>
-    	<param-name>setvalue</param-name>
-    	<param-value>api/user/building/entry/set/1/</param-value>
-    	<description>Query url for setting a value</description>
-    </init-param>
-    <init-param>
-    	<param-name>format</param-name>
-    	<param-value>json</param-value>
-    	<description>Json/xml return when querying</description>
-    </init-param>
-    <init-param>
-    	<param-name>activationInterval</param-name>
-    	<param-value>10</param-value>
-    	<description>The number of seconds in between the servlet's internal running thread</description>
-    </init-param>
-    <init-param>
-    	<param-name>timeout</param-name>
-    	<param-value>6000</param-value>
-    	<description>Timeout interval for the connection with the GSD server</description>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-    
-  </servlet>
-     
-  <servlet>
-  <servlet-name>PostData</servlet-name>
-    <servlet-class>dk.itu.nicl.gsd.postdata.PostData</servlet-class>
-    <load-on-startup>5</load-on-startup>
-  </servlet>
-  
+
+	<servlet>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<servlet-class>dk.itu.kben.gsd.servlet.PolicyEngineServlet</servlet-class>
+		<!-- INITIAL PARAMETERS -->
+		<init-param>
+			<param-name>server</param-name>
+			<param-value>http://gsd.itu.dk/</param-value>
+			<description>Server address</description>
+		</init-param>
+		<init-param>
+			<param-name>building</param-name>
+			<param-value>api/user/building/entry/description/1/?format=</param-value>
+			<description>Query url for building info</description>
+		</init-param>
+		<init-param>
+			<param-name>setvalue</param-name>
+			<param-value>api/user/building/entry/set/1/</param-value>
+			<description>Query url for setting a value</description>
+		</init-param>
+		<init-param>
+			<param-name>format</param-name>
+			<param-value>json</param-value>
+			<description>Json/xml return when querying</description>
+		</init-param>
+		<init-param>
+			<param-name>activationInterval</param-name>
+			<param-value>10</param-value>
+			<description>The number of seconds in between the servlet's internal
+				running thread</description>
+		</init-param>
+		<init-param>
+			<param-name>timeout</param-name>
+			<param-value>6000</param-value>
+			<description>Timeout interval for the connection with the GSD server</description>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/GetAllPolicies</url-pattern>
@@ -61,10 +55,5 @@
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/ListProperties</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>PostData</servlet-name>
-		<url-pattern>/PostData</url-pattern>
 	</servlet-mapping>
 </web-app>   

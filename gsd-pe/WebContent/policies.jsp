@@ -14,7 +14,8 @@
         <link rel="stylesheet" href="style.css">
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-        <script>
+        <script language="javascript">
+        	<!-- var mylist =  connection.getRoomsIds(); -->
             jQuery(function(){
                 jQuery('a.add-link').click(function(event){
                     event.preventDefault();
@@ -36,6 +37,41 @@
                     
                 });
             });
+            
+
+            var $fe = "noFe";
+            var $re = "noRe";
+            var $se = "noSe";
+            
+            function updateFloorElement(i){
+        		fe = i;
+        	}
+            function updateSensorElement(i){
+        		var se = i;
+        	}
+            function updateRoomElement(i){
+        		var re = i;
+        	}
+            
+            
+            jQuery(function(){
+                jQuery('a.print-json-button').click(function(event){
+                    event.preventDefault();
+                    var obj = 
+                    {"statements":[{"type":"dk.itu.kben.gsd.domain.IfStatement","data":{"conditionalExpressions":[{"prefixOperator":"AND","aValue":{"type":"dk.itu.kben.gsd.domain.IntValue","data":{"theValue":25}},"operator":"GREATER_THAN","sensorId":"ROOM1.TEMPERATURE"}],"thenStatements":[{"type":"dk.itu.kben.gsd.domain.IfStatement","data":{"conditionalExpressions":[{"prefixOperator":"AND","aValue":{"type":"dk.itu.kben.gsd.domain.BooleanValue","data":{"theValue":false}},"operator":"EQUALS","sensorId":"ROOM1.BLINDS"}],"thenStatements":[{"type":"dk.itu.kben.gsd.domain.SetStatement","data":{"aValue":{"type":"dk.itu.kben.gsd.domain.BooleanValue","data":{"theValue":true}},"sensorID":"ROOM1.BLINDS"}}],"elseStatements":[]}}],"elseStatements":[]}}]}
+                    var str = JSON.stringify(obj, undefined, 2); // indentation level = 2
+                    //$('div.json-printout').replaceWith(str);
+                    
+                    $('div.json-printout').replaceWith(jQuery.parse);
+                    
+                    
+                    
+                    
+                });
+            });
+        	
+        	
+        
         </script>
     </head>
     <body>
@@ -52,34 +88,29 @@
                     <td><button type="delete-button">Delete</button></td>
                     <td>-</td>
                     <td>
-                        <select>
-                        	<% List<String> floors = connection.getFloorIds(); 
-								for(String floor: floors){
-									out.println("<option value="+floor+">"+floor+"</option>");
-								}
-							%>
-                            <!-- <option value="all-floors">* (all)</option>
+                        <select id="floorList" onchange="updateFloorElement(this.value)">
+                            <option value="all-floors">* (all)</option>
                             <option value="floor-0">Floor 0</option>
                             <option value="floor-1">Floor 1</option>
                             <option value="floor-2">floor 2</option>
-                            <option value="floor-3">Floor 3</option> -->
+                            <option value="floor-3">Floor 3</option>
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select id="roomList" onchange="updateRoomElement(this.value)">
                             <option value="all-rooms">* (all)</option>
                             <option value="room-0">Room 0</option>
                             <option value="room-1">Room 1</option>
                             <option value="room-2">Room 2</option>
-                            <option value="room-3">Room 3</option>
+                            <option value="room-3">Room 3</option> -->
                         </select>
                     </td>
                     <td>IF<br /><a href="#" class="add-more-services-link">+</a></td>
                     <td class="services">
                         <div class="service">
-                            <select>
+                            <select  id="sensorList" onchange="updateSensorElement(this.value)">
                                 <option value="temp">Temp</option>
-                                <option value="weather">Whether</option>
+                                <option value="weather">Whether</option> -->
                             </select>
                             IS
                             <select>
@@ -111,9 +142,13 @@
                     <!-- end -->
                 </tr>
 
-
+			
                 
             </table>
         </div><!-- end of boxed -->
+        
+        <hr />
+        <a href="" class="print-json-button">Print JSON</a><br />
+        <div class="json-printout"></div>
     </body>
 </html>
