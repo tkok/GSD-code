@@ -7,21 +7,33 @@
   <style>img{ height: 100px; float: left; }</style>
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <title>My JSON</title>
-</head>
-<body>
-  <div id="images">
- 
-</div>
-<script>
+  
+  
+  <script>
 var key;
 var key2;
 var key3;
 var key4;
-(function() {
+var myArray = new Array();
+counter = 0;
+
+function cutOutFloorID(str) {
+    return str.split('-')[1];
+}
+function cutOutRoomID(str) {
+    return str.split('m-')[1];
+}
+
+//alert(cutOutFloorID("floor-20-room-61"));
+//alert(cutOutRoomID("floor-20-room-61"));
+
+function buildFloorAndRoomSelectors() {
 	  var sim = "http://127.0.0.1:8080/test/ListSensors";
 	  document.write("Fetching from: <b>"+sim+"</b><br />");
 	  
+	  
 	  $.getJSON('http://127.0.0.1:8080/test/ListSensors', function(data) {
+		  
 		  for (key in data)
 			{
 			   //alert(key);
@@ -29,15 +41,20 @@ var key4;
 			    //alert(data.value); 
 				   for (key2 in data.value)
 					{
-					   alert(key2);
+					   //alert(key2); //alerts "rooms"
 					   if (key2 == 'rooms')
 						    //alert(data.value); 
 							   for (key3 in data.value.rooms)
 								{
-								   //alert(key3);
-								   $("")
+									//counter++;
+									//$('.container').append(counter + ": <br />");
+								  	//$('.container').append(key3 + "<br />");
+								  	myArray.push(key3);
+								  	$('#floors').append("<option value='floor-"+cutOutFloorID(key3)+"'>Floor "+cutOutFloorID(key3)+"</option>");
+								  	$('#rooms').append("<option value='"+cutOutRoomID(key3)+"'>Room "+cutOutRoomID(key3)+"</option>");
+								  	
 								}
-					   
+					   $('.theArray').append(myArray);
 					}
 			}
 		  
@@ -45,21 +62,13 @@ var key4;
 		  
 		});
 	  
-	  
-	  document.write(items);
-	})();
+	};
+	
+	
+	
+buildFloorAndRoomSelectors();
 
 
-
-
-var d = "http://127.0.0.1:8080/test/ListSensors";
-
-for (var key in d.description)
-{
-   alert(key);
-   //if (key == 'comment')
-    //alert(myJSONObject.topicos[0].comment.commentable_type); 
-}
 
 
 
@@ -67,6 +76,19 @@ for (var key in d.description)
 
 </script>
 
+</head>
+<body>
+  <div id="images">
+ 
+</div>
+			
+			
+<select id="floors"></select>
+<select id="rooms"></select>
+<!-- 
+<div class="theArray">The Array: <br /></div>
+<div class="container">Container: <br /></div>
+ -->
  
 </body>
 </html>
