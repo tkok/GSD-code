@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -73,18 +74,25 @@ public class Connection {
 	 * @throws IOException
 	 * @throws URISyntaxException 
 	 */
-	public String connect(String url) throws MalformedURLException, IOException, URISyntaxException {
-		URL _url = new URL(url);
-		URLConnection urlConnection = _url.openConnection();
-		urlConnection.setReadTimeout(Configuration.getTimeout());
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+	public String connect(String url) throws MalformedURLException, URISyntaxException {
 		StringBuffer bufferString = new StringBuffer();
-		String line;
-		while((line = bufferedReader.readLine()) !=null){
-			bufferString.append(line);
+		try{
+			System.out.println("Trying to connect to "+url);
+			URL _url = new URL(url);
+			URLConnection urlConnection = _url.openConnection();
+			urlConnection.setReadTimeout(Configuration.getTimeout());
+			BufferedReader bufferedReader;
+			bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+						String line;
+			while((line = bufferedReader.readLine()) !=null){
+				bufferString.append(line);
+			}
+			bufferedReader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Socket timeout exception");
 		}
-		bufferedReader.close();
-		return bufferString.toString();
+			return bufferString.toString();
 	}
 	/**
 	 * Query the simulator on a specific sensor for the current value.
@@ -128,21 +136,23 @@ public class Connection {
 	/**
 	 * Set a sensor value by using the sensor's Id.
 	 * @param sensorId
-	 * @param value
+	 * @param d
 	 * @return
 	 * @throws MalformedURLException
 	 * @throws IOException
 	 * @throws URISyntaxException 
 	 */
-	public String setSensorValue(String sensorId, int value) throws MalformedURLException, IOException, URISyntaxException{
-		String data = connect(Configuration.getServer() + Configuration.getSetvalue() + sensorId+"/"+value+"/?format="+Configuration.getFormat());
-		JSONObject jsonObject = new JSONObject(data);
+	public boolean setSensorValue(String sensorId, int d) throws MalformedURLException, IOException, URISyntaxException{
+		String data = connect(Configuration.getServer() + Configuration.getSetvalue() + sensorId+"/"+String.valueOf(d)+"/?format="+Configuration.getFormat());
+		/*JSONObject jsonObject = new JSONObject(data);
 		Object response = jsonObject.getJSONObject("value").get("returnvalue");
 		if(jsonObject.getJSONObject("value").get("returnvalue").toString().equals("true"))
-			return "Value changed.";
+			return true;
 		else
-			return "Error occured";
-		
+			return false;
+		*/
+		System.out.println(data);
+		return true;
 	}
 	/**
 	 * Get a list of sensors ids by the room id.

@@ -102,7 +102,6 @@ public class BuildingDAL {
 	
 	private static PolicyEntity insertPolicyEntity(PolicyEntity policyEntity) {
 		connection = CreateConn();
-
 		try {
 			preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
@@ -110,7 +109,7 @@ public class BuildingDAL {
 			preparedStatement.setTime(2, policyEntity.getToTime());
 			preparedStatement.setBoolean(3, policyEntity.isActive());
 			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
-
+			
 			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			if (rs.next()) {

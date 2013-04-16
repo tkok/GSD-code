@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -154,49 +155,46 @@ public class PolicyEngineServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		doPost(request, response);
 	}
-	
+
 	private Time getTimeFromParameter(String parameterName, HttpServletRequest request) {
 		Date aDate = null;
 		Time aTime = null;
-		
+
 		String sTime = request.getParameter(parameterName);
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-		
+
 		try {
 			aDate = simpleDateFormat.parse(sTime);
-			
+
 			aTime = new Time(aDate.getTime());
-		}
-		catch (ParseException parseException) {
+		} catch (ParseException parseException) {
 			parseException.printStackTrace();
 		}
-		
+
 		return aTime;
 	}
-	
+
 	private boolean getBooleanFromParameter(String parameterName, HttpServletRequest request) {
 		String sBoolean = request.getParameter(parameterName);
-		
+
 		if (sBoolean.compareToIgnoreCase("true") == 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	private long getLongFromParameter(String parameterName, HttpServletRequest request) {
 		String sLong = request.getParameter(parameterName);
-		
+
 		long aLong = -1;
-		
+
 		try {
 			aLong = Long.parseLong(sLong);
+		} catch (NumberFormatException numberFormatException) {
+			// numberFormatException.printStackTrace();
 		}
-		catch (NumberFormatException numberFormatException) {
-			//numberFormatException.printStackTrace();
-		}
-		
+
 		return aLong;
 	}
 
@@ -205,54 +203,84 @@ public class PolicyEngineServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String userPath = request.getServletPath();
 		HttpSession session = request.getSession();
+
 		if (userPath.equals("/ListSensors")) {
 			List<String> sensors = connection.getSensorIds();
 			session.setAttribute("sensors", (List<String>) sensors);
+		} else if (userPath.equals("/ListSensorsInJson")) {
+			try {
+				String json = connection.connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (userPath.equals("/ListProperties")) {
+			String id = request.getParameter("element");
+			out.println("<br>id = " + id);
+			List<String> sens = ServiceProperties.allSensorsWithProperties(id);
+			for (String s : sens)
+				out.println("<br>" + s);
+		} else if (userPath.equals("/GetAllPolicies")) {
+			PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
+			response.setContentType("application/json");
+			String json = policyEntities.toJSON();
+			System.out.println(json);
+
+			out.print(json);
 		} else {
-			if (userPath.equals("/ListProperties")) {
-				String id = request.getParameter("element");
-				out.println("<br>id = " + id);
-				List<String> sens = ServiceProperties.allSensorsWithProperties(id);
-				for (String s : sens)
-					out.println("<br>" + s);
-			} else {
-				if (userPath.equals("/GetAllPolicies")) {
-					PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
+			if (userPath.equals("/PersistPolicy")) {
+				String policyEntityJson = request.getParameter("policy");
 
-					response.setContentType("application/json");
-					String json = policyEntities.toJSON();
-					System.out.println(json);
+				long id = getLongFromParameter("id", request);
 
-					out.print(json);
-				} else {
-					if (userPath.equals("/PersistPolicy")) {
-						String policyEntityJson = request.getParameter("policy");
-						
-						long id = getLongFromParameter("id", request);
-						
-						// Format : HH:MM
-						Time fromTime = getTimeFromParameter("fromTime", request);
-						
-						// Format : HH:MM
-						Time toTime = getTimeFromParameter("toTime", request);
-						
-						// Format : true | false
-						boolean active = getBooleanFromParameter("active", request);
-						
-						Gson gson = GsonFactory.getInstance();
-						
-						PolicyEntity policyEntity = new PolicyEntity();
-						Policy policy = gson.fromJson(policyEntityJson, Policy.class);
-						
-						policyEntity.setPolicy(policy);
-						policyEntity.setId(id);
-						
-						policyEntity.setFromTime(fromTime);
-						policyEntity.setToTime(toTime);
-						policyEntity.setActive(active);
+				// Format : HH:MM
+				Time fromTime = getTimeFromParameter("fromTime", request);
 
-						BuildingDAL.persist(policyEntity);
-					}
+				// Format : HH:MM
+				Time toTime = getTimeFromParameter("toTime", request);
+
+				// Format : true | false
+				boolean active = getBooleanFromParameter("active", request);
+
+				Gson gson = GsonFactory.getInstance();
+
+				PolicyEntity policyEntity = new PolicyEntity();
+				Policy policy = gson.fromJson(policyEntityJson, Policy.class);
+
+				policyEntity.setPolicy(policy);
+				policyEntity.setId(id);
+
+				policyEntity.setFromTime(fromTime);
+				policyEntity.setToTime(toTime);
+				policyEntity.setActive(active);
+
+				BuildingDAL.persist(policyEntity);
+			} else if (userPath.equals("/ChangeValue")) {
+				String sensorId = request.getParameter("sensorId");
+				String value = request.getParameter("value");
+				try {
+					connection.setSensorValue(sensorId, Integer.parseInt(value));
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (userPath.equals("/Test")) {
+				try {
+					connection.connect("http://localhost:5050/test/TestTimeout");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					out.println("<br>" + "Timeout exception");
+				}
+			} else if (userPath.equals("/TestTimeout")) {
+				try {
+					Thread.sleep(15000);
+					out.println("<br>" + "it works");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					out.println("<br>" + "Timeout");
 				}
 			}
 		}
