@@ -10,13 +10,27 @@
   
   
   <script>
+  
+// Variable used ////////////////////////////////////////////////////////////////////////////////////////////////////
+//{"statements":[{"type":"dk.itu.kben.gsd.domain.IfStatement","data":{"conditionalExpressions":[{"prefixOperator":"AND","aValue":{"type":"dk.itu.kben.gsd.domain.IntValue","data":{"theValue":10}},"operator":"EQUALS","sensorId":"ROOM1.TEMPERATURE"}],"thenStatements":[{"type":"dk.itu.kben.gsd.domain.SetStatement","data":{"aValue":{"type":"dk.itu.kben.gsd.domain.BooleanValue","data":{"theValue":true}},"sensorID":"ROOM1.HEATER"}}],"elseStatements":[{"type":"dk.itu.kben.gsd.domain.SetStatement","data":{"aValue":{"type":"dk.itu.kben.gsd.domain.BooleanValue","data":{"theValue":true}},"sensorID":"ROOM1.BLINDS"}}]}}]}
+
+var jsonType ="dk.itu.kben.gsd.domain.IfStatement"
+var jsonData = "";
+
+var jsonFloor = "";
+var jsonRoom = "";
+
+
 var key;
 var key2;
 var key3;
 var key4;
 var myArray = new Array();
-counter = 0;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// These funtion break floor-1-room2 and return floor/room id. Eg. 1 for floor-1 and 2 for room-2.
 function cutOutFloorID(str) {
     return str.split('-')[1];
 }
@@ -27,6 +41,7 @@ function cutOutRoomID(str) {
 //alert(cutOutFloorID("floor-20-room-61"));
 //alert(cutOutRoomID("floor-20-room-61"));
 
+// This funtion appends the rooms and floor ids used in the selectors in the <body> element /////////////////////
 function buildFloorAndRoomSelectors() {
 	  var sim = "http://127.0.0.1:8080/test/ListSensors";
 	  document.write("Fetching from: <b>"+sim+"</b><br />");
@@ -69,7 +84,17 @@ function buildFloorAndRoomSelectors() {
 buildFloorAndRoomSelectors();
 
 
+// These funtion update jsonVariable onchange from the selectors //////////////////////////////////////////
+function updateFloor(f){
+	jsonFloor = f;
+}
+function updateRoom(r){
+	jsonRoom = r;
+}
 
+
+
+ // End of SCRIPT /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -78,13 +103,22 @@ buildFloorAndRoomSelectors();
 
 </head>
 <body>
-  <div id="images">
- 
-</div>
+
+	<hr />
+  	<form action="/test/PersistPolicy" method="post">
+  		<input type="hidden" name="id" value="policyID">
+		<input name="policyEntity" value="jsonString">
+		<input type="hidden" name="fromTime" value="08:00">
+		<input type="hidden" name="toTime" value="16:00">
+		<input type="hidden" name="active" value="true">
+		<input type="submit" value="Submit">
+	</form>
+  
+	<hr />			
 			
-			
-<select id="floors"></select>
-<select id="rooms"></select>
+<select id="floors" onchange="updateFloor(this.value)"></select>
+<select id="rooms" onchange="updateRoom(this.value)"></select>
+
 <!-- 
 <div class="theArray">The Array: <br /></div>
 <div class="container">Container: <br /></div>

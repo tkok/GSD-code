@@ -56,4 +56,8 @@
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/ListProperties</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/PersistPolicy</url-pattern>
+	</servlet-mapping>
 </web-app>   
