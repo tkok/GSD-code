@@ -100,20 +100,11 @@ public class BuildingDAL {
 		}
 	}
 	
-	public static PolicyEntity persist(PolicyEntity policyEntity) {
+	private static PolicyEntity insertPolicyEntity(PolicyEntity policyEntity) {
 		connection = CreateConn();
 
 		try {
-			if (policyEntity.getId() != -1) {
-				System.out.println("UPDATING!");
-				
-				preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ? AND toTime = ? AND active = ? AND policy = ? WHERE ID = ?");
-				
-				preparedStatement.setLong(5, policyEntity.getId()); 
-			} else {
-				preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-				System.out.println("INSERTING!");
-			}
+			preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setTime(1, policyEntity.getFromTime());
 			preparedStatement.setTime(2, policyEntity.getToTime());
@@ -131,10 +122,45 @@ public class BuildingDAL {
 			e.printStackTrace();
 		} finally {
 			CloseConn();
-			System.out.println("Close DB connection \n");
 		}
 		
 		return policyEntity;
+	}
+	
+	private static void updatePolicyEntity(PolicyEntity policyEntity) {
+		connection = CreateConn();
+
+		try {
+			preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ? AND toTime = ? AND active = ? AND policy = ? WHERE ID = ?");
+			
+			preparedStatement.setTime(1, policyEntity.getFromTime());
+			preparedStatement.setTime(2, policyEntity.getToTime());
+			preparedStatement.setBoolean(3, policyEntity.isActive());
+			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
+			preparedStatement.setLong(5, policyEntity.getId()); 
+
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseConn();
+		}
+	}
+	
+	public static PolicyEntity persist(PolicyEntity policyEntity) {
+		PolicyEntity result = null;
+		
+		if (policyEntity.getId() > -1) {
+			// Update
+			updatePolicyEntity(policyEntity);
+		}
+		else {
+			// Insert
+			result = insertPolicyEntity(policyEntity);
+		}
+		
+		return result;
 	}
 
 	public static PolicyEntities getActivePolicies() {

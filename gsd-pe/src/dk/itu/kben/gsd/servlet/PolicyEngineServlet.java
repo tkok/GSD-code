@@ -2,6 +2,9 @@ package dk.itu.kben.gsd.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import dk.itu.kben.gsd.domain.GsonFactory;
+import dk.itu.kben.gsd.domain.Policy;
 import dk.itu.kben.gsd.domain.PolicyEntities;
 import dk.itu.kben.gsd.domain.PolicyEntity;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
@@ -150,6 +154,51 @@ public class PolicyEngineServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		doPost(request, response);
 	}
+	
+	private Time getTimeFromParameter(String parameterName, HttpServletRequest request) {
+		Date aDate = null;
+		Time aTime = null;
+		
+		String sTime = request.getParameter(parameterName);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+		
+		try {
+			aDate = simpleDateFormat.parse(sTime);
+			
+			aTime = new Time(aDate.getTime());
+		}
+		catch (ParseException parseException) {
+			parseException.printStackTrace();
+		}
+		
+		return aTime;
+	}
+	
+	private boolean getBooleanFromParameter(String parameterName, HttpServletRequest request) {
+		String sBoolean = request.getParameter(parameterName);
+		
+		if (sBoolean.compareToIgnoreCase("true") == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private long getLongFromParameter(String parameterName, HttpServletRequest request) {
+		String sLong = request.getParameter(parameterName);
+		
+		long aLong = -1;
+		
+		try {
+			aLong = Long.parseLong(sLong);
+		}
+		catch (NumberFormatException numberFormatException) {
+			//numberFormatException.printStackTrace();
+		}
+		
+		return aLong;
+	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		response.setContentType("text/html");
@@ -177,9 +226,30 @@ public class PolicyEngineServlet extends HttpServlet {
 					out.print(json);
 				} else {
 					if (userPath.equals("/PersistPolicy")) {
-						String policyEntityJson = request.getParameter("policyEntity");
+						String policyEntityJson = request.getParameter("policy");
+						
+						long id = getLongFromParameter("id", request);
+						
+						// Format : HH:MM
+						Time fromTime = getTimeFromParameter("fromTime", request);
+						
+						// Format : HH:MM
+						Time toTime = getTimeFromParameter("toTime", request);
+						
+						// Format : true | false
+						boolean active = getBooleanFromParameter("active", request);
+						
 						Gson gson = GsonFactory.getInstance();
-						PolicyEntity policyEntity = gson.fromJson(policyEntityJson, PolicyEntity.class);
+						
+						PolicyEntity policyEntity = new PolicyEntity();
+						Policy policy = gson.fromJson(policyEntityJson, Policy.class);
+						
+						policyEntity.setPolicy(policy);
+						policyEntity.setId(id);
+						
+						policyEntity.setFromTime(fromTime);
+						policyEntity.setToTime(toTime);
+						policyEntity.setActive(active);
 
 						BuildingDAL.persist(policyEntity);
 					}

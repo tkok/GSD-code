@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>PersistPolicy Test</title>
+</head>
+<body>
+	<h1>PersistPolicy Test</h1>
+	<form action="PersistPolicy" method="post">
+		<input type="hidden" name="policy" value='{"statements":[{"type":"dk.itu.kben.gsd.domain.IfStatement","data":{"conditionalExpressions":[{"prefixOperator":"AND","aValue":{"type":"dk.itu.kben.gsd.domain.IntValue","data":{"theValue":10}},"operator":"EQUALS","sensorId":"ROOM1.TEMPERATURE"}],"thenStatements":[{"type":"dk.itu.kben.gsd.domain.SetStatement","data":{"aValue":{"type":"dk.itu.kben.gsd.domain.BooleanValue","data":{"theValue":true}},"sensorID":"ROOM1.HEATER"}}],"elseStatements":[{"type":"dk.itu.kben.gsd.domain.SetStatement","data":{"aValue":{"type":"dk.itu.kben.gsd.domain.BooleanValue","data":{"theValue":true}},"sensorID":"ROOM1.BLINDS"}}]}}]}'>
+		<input type="hidden" name="id" value="">
+		<input type="hidden" name="fromTime" value="05:59">
+		<input type="hidden" name="toTime" value="06:00">
+		<input type="hidden" name="active" value="true">
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
