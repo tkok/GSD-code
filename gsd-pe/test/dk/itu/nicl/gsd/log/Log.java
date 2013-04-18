@@ -1,4 +1,4 @@
-package dk.itu.nicl.gsd.postdata;
+package dk.itu.nicl.gsd.log;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
