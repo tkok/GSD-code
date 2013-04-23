@@ -13,6 +13,7 @@ import java.util.Hashtable;
 
 import com.google.gson.Gson;
 
+import dk.itu.kben.gsd.domain.FloatValue;
 import dk.itu.kben.gsd.domain.GsonFactory;
 import dk.itu.kben.gsd.domain.IntValue;
 import dk.itu.kben.gsd.domain.Policy;
@@ -73,10 +74,10 @@ public class BuildingDAL {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				String uuid = resultSet.getString("uuid");
-				int val = resultSet.getInt("val");
+				float val = resultSet.getInt("val");
 				Log.log(uuid + val);
 				System.out.println(uuid + val + "\n");
-				ht.put(uuid, new IntValue(val));
+				ht.put(uuid, new FloatValue(val));
 			}
 			Log.log("ht size: " + ht.size());
 			System.out.println("ht size: " + ht.size() + "\n");

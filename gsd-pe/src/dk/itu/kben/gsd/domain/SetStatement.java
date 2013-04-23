@@ -1,6 +1,7 @@
 package dk.itu.kben.gsd.domain;
 
 import dk.itu.kben.gsd.persistence.BuildingDAO;
+import dk.itu.scas.gsd.utils.SensorValueCache;
 
 public class SetStatement implements Statement {
 	
@@ -17,6 +18,6 @@ public class SetStatement implements Statement {
 	}
 	
 	public void execute() {
-		BuildingDAO.setValue(sensorID, aValue);
+		SensorValueCache.setValue(sensorID, aValue);
 	}
 }
