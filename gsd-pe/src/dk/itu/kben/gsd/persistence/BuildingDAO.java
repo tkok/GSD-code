@@ -3,6 +3,7 @@ package dk.itu.kben.gsd.persistence;
 import java.util.Hashtable;
 
 import dk.itu.kben.gsd.domain.Value;
+import dk.itu.nicl.gsd.log.Log;
 
 public class BuildingDAO {
 
@@ -13,6 +14,7 @@ public class BuildingDAO {
 	}
 
 	public static void setValue(String name, Value value) {
+		Log.log("Setting " + name + " to " + value);
 		System.out.println("Setting " + name + " to " + value);
 		hashtable.put(name, value);
 	}

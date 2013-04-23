@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import dk.itu.nicl.gsd.log.Log;
+
 public class ServiceProperties {
 	
 	private final static String [] PROPS =  {"gain","production","state"};
@@ -24,6 +26,7 @@ public class ServiceProperties {
 		while(iterator.hasNext()){
 			String id = (String) iterator.next();
 			System.out.println(id.trim());
+			Log.log(id.trim());
 			if(id.contains("blind")){
 				for(String s : BLINDS)
 					list.add(id+"-"+s.toString());

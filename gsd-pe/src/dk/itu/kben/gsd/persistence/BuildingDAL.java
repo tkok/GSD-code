@@ -19,6 +19,7 @@ import dk.itu.kben.gsd.domain.Policy;
 import dk.itu.kben.gsd.domain.PolicyEntities;
 import dk.itu.kben.gsd.domain.PolicyEntity;
 import dk.itu.kben.gsd.domain.Value;
+import dk.itu.nicl.gsd.log.Log;
 
 public class BuildingDAL {
 
@@ -38,6 +39,7 @@ public class BuildingDAL {
 		try {
 			Class.forName(driver).newInstance();
 			connection = DriverManager.getConnection(serverUrl + dbName, userName, password);
+			Log.log("Creating DB connection");
 			System.out.println("Creating DB connection \n");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,15 +74,18 @@ public class BuildingDAL {
 			while (resultSet.next()) {
 				String uuid = resultSet.getString("uuid");
 				int val = resultSet.getInt("val");
+				Log.log(uuid + val);
 				System.out.println(uuid + val + "\n");
 				ht.put(uuid, new IntValue(val));
 			}
+			Log.log("ht size: " + ht.size());
 			System.out.println("ht size: " + ht.size() + "\n");
 			return ht;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			CloseConn();
+			Log.log("Close DB connection \n");
 			System.out.println("Close DB connection \n");
 		}
 		return null;
@@ -96,6 +101,7 @@ public class BuildingDAL {
 			e.printStackTrace();
 		} finally {
 			CloseConn();
+			Log.log("Close DB connection");
 			System.out.println("Close DB connection \n");
 		}
 	}
@@ -173,13 +179,15 @@ public class BuildingDAL {
 			int seconds = calendar.get(Calendar.SECOND);
 			int minutes = calendar.get(Calendar.MINUTE);
 			int hours = calendar.get(Calendar.HOUR_OF_DAY);
-
+			
+			Log.log("Hour: " + hours + ", Minutes: " + minutes + ", Seconds: " + seconds);
 			System.out.println("Hour: " + hours + ", Minutes: " + minutes + ", Seconds: " + seconds);
 
 			long milliseconds = ((hours * 60 * 60) + (minutes * 60) + seconds) * 1000;
 
 			Time time = new Time(milliseconds);
-
+			
+			Log.log("Milliseconds: " + milliseconds);
 			System.out.println("Milliseconds: " + milliseconds);
 
 			preparedStatement = connection.prepareStatement("SELECT * FROM policy WHERE fromTime <= ? AND toTime >= ? AND active = TRUE");
@@ -215,6 +223,7 @@ public class BuildingDAL {
 			e.printStackTrace();
 		} finally {
 			CloseConn();
+			Log.log("Close DB connection");
 			System.out.println("Close DB connection \n");
 		}
 

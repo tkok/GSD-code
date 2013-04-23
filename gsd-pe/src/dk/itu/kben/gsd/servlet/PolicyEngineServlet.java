@@ -25,6 +25,7 @@ import dk.itu.kben.gsd.domain.Policy;
 import dk.itu.kben.gsd.domain.PolicyEntities;
 import dk.itu.kben.gsd.domain.PolicyEntity;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
+import dk.itu.nicl.gsd.log.Log;
 import dk.itu.scas.gsd.net.Connection;
 import dk.itu.scas.gsd.net.ServiceProperties;
 
@@ -43,7 +44,8 @@ public class PolicyEngineServlet extends HttpServlet {
 		// Initializes the Configuration class based on the current
 		// ServletConfig
 		Configuration.setConfiguration(config);
-
+		
+		Log.log("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
 		System.out.println("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
 
 		connection = new Connection();
@@ -120,17 +122,20 @@ public class PolicyEngineServlet extends HttpServlet {
 
 					System.out.println(secondsPassed + " seconds passed.");
 				}
-
+				
 				System.out.println("PolicyEngineServlet is stopping...");
 				System.out.println("PolicyEngineServlet was stopped.");
+				Log.log("PolicyEngineServlet was stopped.");
 
 				wasStopped = true;
 			}
 		});
-
+		
+		
 		System.out.println("PolicyEngineServlet is starting...");
 		thread.start();
 		System.out.println("PolicyEngineServlet was started.");
+		Log.log("PolicyEngineServlet was started.");
 	}
 
 	@Override
@@ -147,6 +152,7 @@ public class PolicyEngineServlet extends HttpServlet {
 
 		thread = null;
 		System.out.println("PolicyEngineServlet internal thread was stopped and available to garbage collector.");
+		Log.log("PolicyEngineServlet internal thread was stopped and available to garbage collector.");
 
 		super.destroy();
 	}
@@ -224,6 +230,8 @@ public class PolicyEngineServlet extends HttpServlet {
 			PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
 			response.setContentType("application/json");
 			String json = policyEntities.toJSON();
+			
+			Log.log(json);
 			System.out.println(json);
 
 			out.print(json);
@@ -272,14 +280,17 @@ public class PolicyEngineServlet extends HttpServlet {
 					connection.connect("http://localhost:5050/test/TestTimeout");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					Log.log("Timeout exception");
 					out.println("<br>" + "Timeout exception");
 				}
 			} else if (userPath.equals("/TestTimeout")) {
 				try {
 					Thread.sleep(15000);
+					Log.log("it works");
 					out.println("<br>" + "it works");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
+					Log.log("Timeout");
 					out.println("<br>" + "Timeout");
 				}
 			}

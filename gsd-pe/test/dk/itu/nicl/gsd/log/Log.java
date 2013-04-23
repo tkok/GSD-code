@@ -2,6 +2,8 @@ package dk.itu.nicl.gsd.log;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -9,8 +11,7 @@ import java.io.FileWriter;
  */
 public class Log {
 
-    // Singleton - Lazy initilization (http://en.wikipedia.org/wiki/Singleton_pattern) - we only want one log.
-    
+    // Singleton
     private Log(){   }
 
     public enum LogWhat{ALL, IMPORTANT, NONE};
@@ -31,18 +32,17 @@ public class Log {
     }
     
     // Log message to a file
-    
     public static void log(String s) {
 	try {
 	    
-            // Create file if it does not exist and make sure to not overwrite data
-
+        // Create file if it does not exist and make sure to not overwrite data
 	    FileWriter fileWriter = new FileWriter("Log.txt", true);
 	    BufferedWriter outBuffer = new BufferedWriter(fileWriter);
 	    
+	    String sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
             
 	    String newLine = System.getProperty("line.separator");
-	    outBuffer.write(s+newLine);
+	    outBuffer.write(sdf + ": " + s + newLine);
 	    
             
 	    outBuffer.close();
@@ -81,13 +81,14 @@ public class Log {
     private void logToFile(String s) {
 	try {
             
-            // Create file if it does not exist and make sure to not overwrite data
-            
+        // Create file if it does not exist and make sure to not overwrite data
 	    FileWriter fileWriter = new FileWriter("Log.txt", true);
 	    BufferedWriter outBuffer = new BufferedWriter(fileWriter);
 	    
+	    String sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+	    
 	    String newLine = System.getProperty("line.separator");
-	    outBuffer.write(s+newLine);
+	    outBuffer.write(sdf + ": " + s + newLine);
 	    
 	    outBuffer.close();
 	} catch (Exception e) {
@@ -95,7 +96,8 @@ public class Log {
     }
 
     private void logToConsole(String s){
-	System.out.println(s);
+    	String sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+    	System.out.println(sdf + ": " + s);
     }
 
 }

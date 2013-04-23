@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dk.itu.kben.gsd.servlet.Configuration;
+import dk.itu.nicl.gsd.log.Log;
 
 public class Connection {
 	// variables
@@ -90,6 +91,7 @@ public class Connection {
 			bufferedReader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			Log.log("Socket timeout exception");
 			System.out.println("Socket timeout exception");
 		}
 			return bufferString.toString();
@@ -151,6 +153,7 @@ public class Connection {
 		else
 			return false;
 		*/
+		Log.log(data);
 		System.out.println(data);
 		return true;
 	}
