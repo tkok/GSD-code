@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.kben.gsd.sanitychecks;
 
 import junit.framework.Assert;
 
@@ -13,7 +13,7 @@ import dk.itu.kben.gsd.domain.SetStatement;
 import dk.itu.kben.gsd.domain.Statement;
 import dk.itu.scas.gsd.utils.SensorValueCache;
 
-public class IfStatement_IntValue_Equal_Test {
+public class IfStatement_IntValue_Not_Test {
 	
 	private static String ROOM1_TEMPERATURE = "ROOM1.TEMPERATURE";
 	private static String ROOM1_HEATER 		= "ROOM1.HEATER";
@@ -25,8 +25,8 @@ public class IfStatement_IntValue_Equal_Test {
 	}
 
 	@Test
-	public void simpleEqual_Execute() {
-		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new FloatValue(11));
+	public void simpleEqual_ExecuteBecauseLT() {
+		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.NOT, new FloatValue(10));
 		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
 		
 		IfStatement ifStatement = new IfStatement();
@@ -39,8 +39,22 @@ public class IfStatement_IntValue_Equal_Test {
 	}
 	
 	@Test
-	public void simpleEqual_NoExecuteBecauseLT() {
-		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new FloatValue(10));
+	public void simpleEqual_ExecuteBecauseGT() {
+		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.NOT, new FloatValue(12));
+		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
+		
+		IfStatement ifStatement = new IfStatement();
+		ifStatement.addExpression(expression);
+		ifStatement.addThenStatement(thenStatement);
+		
+		Assert.assertEquals(0f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
+		ifStatement.execute();
+		Assert.assertEquals(1f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
+	}
+	
+	@Test
+	public void simpleEquak_NoExecuteEqual() {
+		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.NOT, new FloatValue(11));
 		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
 		
 		IfStatement ifStatement = new IfStatement();
@@ -52,17 +66,4 @@ public class IfStatement_IntValue_Equal_Test {
 		Assert.assertEquals(0f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
 	}
 	
-	@Test
-	public void simpleEquak_NoExecuteBecauseGT() {
-		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new FloatValue(12));
-		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
-		
-		IfStatement ifStatement = new IfStatement();
-		ifStatement.addExpression(expression);
-		ifStatement.addThenStatement(thenStatement);
-		
-		Assert.assertEquals(0f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
-		ifStatement.execute();
-		Assert.assertEquals(0f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
-	}	
 }
