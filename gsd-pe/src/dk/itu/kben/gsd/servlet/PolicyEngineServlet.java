@@ -20,14 +20,12 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import dk.itu.kben.gsd.domain.GsonFactory;
-import dk.itu.kben.gsd.domain.Policy;
-import dk.itu.kben.gsd.domain.PolicyEntities;
-import dk.itu.kben.gsd.domain.PolicyEntity;
+import dk.itu.kben.gsd.domain.*;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
 import dk.itu.nicl.gsd.log.Log;
 import dk.itu.scas.gsd.net.Connection;
 import dk.itu.scas.gsd.net.ServiceProperties;
+import dk.itu.scas.gsd.utils.SensorValueCache;
 
 @SuppressWarnings("serial")
 public class PolicyEngineServlet extends HttpServlet {
@@ -74,43 +72,36 @@ public class PolicyEngineServlet extends HttpServlet {
 								break;
 							Thread.sleep(1);
 
-							// select all policies WHERE
-							// policy.activationFromTime >= currentTime AND
-							// policy.activationToTime <= currentTime AND
-							// policy.active = TRUE ORDER BY timestamp DESC
-							// LIMIT 1
-
+							// hashtable for sensors and values
+							// Get active policies and set values of the sensors in the sensor cache hashtable.							
+							PolicyEntities activePoliciesEntities = BuildingDAL.getActivePolicies();
+							System.out.println(activePoliciesEntities.getSize());
 							// for each policy
-
-							// for each IfStatement
-
-							// for each expression
-
-							// sensors.add(expression.getSensorId());
-
-							// end for
-
-							// end for
-
-							// end for
-
-							for (String sensorId : sensors) {
-
-								// fetch the value of sensorId and put it into
-								// BuildingDAO's hashtable
-								// System.out.println(sensorId);
-
+							for(PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()){
+								Policy policy = policyEntity.getPolicy();
+								// for each IfStatement
+								for(Statement statement : policy.getStatements()){
+									if(statement instanceof IfStatement){
+										// for each expression
+										for(Expression expression : ((IfStatement) statement).getExpressions()){
+											if(!SensorValueCache.containsKey(expression.getSensorId())){
+												// fetch the value of the sensor and put it in the sensorValues hashtable
+												String sensorValue = connection.getSensorValue(expression.getSensorId());
+												SensorValueCache.setValue(expression.getSensorId(), new FloatValue(Float.parseFloat(sensorValue)));
+											}	// end for
+										}
+									}
+								}		// end for
+							}		// end for
+							
+							// for each policy
+							for(PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()){
+								for(Statement statement : policyEntity.getPolicy().getStatements()){
+									statement.execute();
+								}
 							}
-
-							// for each policy
-
-							// for each Statement
-
-							// execute
-
-							// end for
-
-							// end for
+							// clear cache
+							SensorValueCache.clearCache();
 
 						} catch (InterruptedException e) {
 							e.printStackTrace();

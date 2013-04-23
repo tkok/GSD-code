@@ -22,7 +22,9 @@ public class IfStatement implements Statement {
 	public void addElseStatement(Statement statement) {
 		elseStatements.add(statement);
 	}
-	
+	public ArrayList<Expression> getExpressions(){
+		return conditionalExpressions;
+	}
 	public ArrayList<Statement> getElseStatements() {
 		return elseStatements;
 	}

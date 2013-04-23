@@ -102,22 +102,24 @@ public class Connection {
 	 * @return Returns an Object - this should actually be the value of the sensor's property
 	 * @throws Exception
 	 */
-	public Object getSensorValue(String query) throws Exception{
+	public String getSensorValue(String sensorId) throws Exception{
+		String query = Configuration.getServer() + "api/user/measurement/?bid=1&uuid="+sensorId+"&order_by=-timestamp&format=json&limit=1";
 		String data = connect(query);
 		//String data = readFromFile("query_sensor.json");
-		Object object = new Object();
+		String value = "";
 		JSONObject jsonObject = new JSONObject(data);
 		JSONArray objects = jsonObject.getJSONArray("objects");
 		for(int i=0;i<objects.length();i++){
 			JSONObject jsonobject = objects.getJSONObject(i);
 			//System.out.println(jsonobject.getInt("bid"));
 			if(jsonobject.getInt("bid")==1){
-				object = jsonobject.get("val");
+				value = jsonobject.get("val").toString();
+				//value = Double.valueOf(s);
 				//System.out.println("sensor "+query+" had value "+object.toString()+" at "+jsonobject.getString("timestamp"));
 				break;
 			}
 		}
-		return object;
+		return value;
 		
 	}
 	/**

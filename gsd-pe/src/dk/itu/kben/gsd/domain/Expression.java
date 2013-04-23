@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import dk.itu.kben.gsd.persistence.BuildingDAO;
 import dk.itu.nicl.gsd.log.*;
+import dk.itu.scas.gsd.utils.SensorValueCache;
 
 public class Expression implements Serializable {
 	
@@ -30,7 +31,7 @@ public class Expression implements Serializable {
 	}
 	
 	public boolean evaluate() {
-		Value sensorValue = BuildingDAO.getValue(sensorId);
+		Value sensorValue = SensorValueCache.getValue(sensorId);
 		
 		if (operator == Operator.EQUALS) {
 			int c = sensorValue.compareTo(aValue);
