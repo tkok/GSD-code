@@ -31,6 +31,12 @@ public class FloatValue implements Value{
 		// TODO Auto-generated method stub
 		return floatValue;
 	}
+
+	@Override
+	public int getIntValue() {
+		// TODO Auto-generated method stub
+		return getValue().intValue();
+	}
 	
 	
 }

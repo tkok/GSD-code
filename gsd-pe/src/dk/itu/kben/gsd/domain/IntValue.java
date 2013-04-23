@@ -35,4 +35,10 @@ public class IntValue implements Value {
 	public String toString() {
 		return theValue.toString();
 	}
+
+	@Override
+	public int getIntValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
