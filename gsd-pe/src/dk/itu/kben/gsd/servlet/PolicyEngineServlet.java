@@ -2,10 +2,10 @@ package dk.itu.kben.gsd.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -20,7 +20,14 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import dk.itu.kben.gsd.domain.*;
+import dk.itu.kben.gsd.domain.Expression;
+import dk.itu.kben.gsd.domain.FloatValue;
+import dk.itu.kben.gsd.domain.GsonFactory;
+import dk.itu.kben.gsd.domain.IfStatement;
+import dk.itu.kben.gsd.domain.Policy;
+import dk.itu.kben.gsd.domain.PolicyEntities;
+import dk.itu.kben.gsd.domain.PolicyEntity;
+import dk.itu.kben.gsd.domain.Statement;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
 import dk.itu.nicl.gsd.log.Log;
 import dk.itu.scas.gsd.net.Connection;
@@ -31,7 +38,9 @@ import dk.itu.scas.gsd.utils.SensorValueCache;
 public class PolicyEngineServlet extends HttpServlet {
 
 	Thread thread = null;
+	
 	static boolean shouldRun = true;
+	
 	static boolean wasStopped = false;
 	Connection connection;
 
@@ -39,17 +48,15 @@ public class PolicyEngineServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 
-		// Initializes the Configuration class based on the current
-		// ServletConfig
+		// Initializes the Configuration class based on the current ServletConfig
 		Configuration.setConfiguration(config);
 		
-		Log.log("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
 		System.out.println("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
 
 		connection = new Connection();
-		final List<String> sensors = connection.getSensorIds();
 
 		thread = new Thread(new Runnable() {
+			
 			Date getNext() {
 				Calendar calendar = new GregorianCalendar();
 
@@ -57,61 +64,62 @@ public class PolicyEngineServlet extends HttpServlet {
 
 				return calendar.getTime();
 			}
+			
+			private void loadServerValues(PolicyEntities activePoliciesEntities) {
+				for (PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()) {
+					Policy policy = policyEntity.getPolicy();
+
+					for (Statement statement : policy.getStatements()) {
+						if (statement instanceof IfStatement) {
+							for(Expression expression : ((IfStatement) statement).getExpressions()) {
+								if (!SensorValueCache.containsKey(expression.getSensorId())) {
+									
+									// fetch the value of the sensor and put it in the sensorValues cache
+									String sensorValue = connection.getSensorValue(expression.getSensorId());
+									
+									if (sensorValue == null || sensorValue.length() == 0) {
+										System.out.println("Trying to fetch value for sensor " + expression.getSensorId() + " but it is empty.");
+									}
+									else {
+										SensorValueCache.setValue(expression.getSensorId(), new FloatValue(Float.parseFloat(sensorValue)));
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 
 			@Override
 			public void run() {
-				int secondsPassed = Configuration.getActivationInterval();
-
 				while (shouldRun) {
-
 					Date nextTime = getNext();
-
-					while (new Date().getTime() < nextTime.getTime()) {
+					
+					while (Calendar.getInstance().getTime().getTime() < nextTime.getTime()) {
 						try {
-							if (!shouldRun)
-								break;
-							Thread.sleep(1);
-
-							// hashtable for sensors and values
-							// Get active policies and set values of the sensors in the sensor cache hashtable.							
-							PolicyEntities activePoliciesEntities = BuildingDAL.getActivePolicies();
-							System.out.println(activePoliciesEntities.getSize());
-							// for each policy
-							for(PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()){
-								Policy policy = policyEntity.getPolicy();
-								// for each IfStatement
-								for(Statement statement : policy.getStatements()){
-									if(statement instanceof IfStatement){
-										// for each expression
-										for(Expression expression : ((IfStatement) statement).getExpressions()){
-											if(!SensorValueCache.containsKey(expression.getSensorId())){
-												// fetch the value of the sensor and put it in the sensorValues hashtable
-												String sensorValue = connection.getSensorValue(expression.getSensorId());
-												SensorValueCache.setValue(expression.getSensorId(), new FloatValue(Float.parseFloat(sensorValue)));
-											}	// end for
-										}
-									}
-								}		// end for
-							}		// end for
-							
-							// for each policy
-							for(PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()){
-								for(Statement statement : policyEntity.getPolicy().getStatements()){
-									statement.execute();
-								}
-							}
-							// clear cache
-							SensorValueCache.clearCache();
-
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Thread.sleep(10);
+						}
+						catch (InterruptedException interruptedException) {
+							interruptedException.printStackTrace();
 						}
 					}
 
-					System.out.println(secondsPassed + " seconds passed.");
+					PolicyEntities activePoliciesEntities = BuildingDAL.getActivePolicies();
+					
+					System.out.println(activePoliciesEntities.getSize() + " Policies are active.");
+					
+					loadServerValues(activePoliciesEntities);
+							
+					for(PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()){
+						for(Statement statement : policyEntity.getPolicy().getStatements()){
+							statement.execute();
+						}
+					}
+					
+					// Clear cache
+					SensorValueCache.clearCache();
+
+					System.out.println(Configuration.getActivationInterval() + " seconds passed.");
 				}
 				
 				System.out.println("PolicyEngineServlet is stopping...");

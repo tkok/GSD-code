@@ -9,7 +9,7 @@
 	<servlet>
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<servlet-class>dk.itu.kben.gsd.servlet.PolicyEngineServlet</servlet-class>
-		<!-- INITIAL PARAMETERS -->
+		
 		<init-param>
 			<param-name>server</param-name>
 			<param-value>http://gsd.itu.dk/</param-value>
@@ -32,9 +32,8 @@
 		</init-param>
 		<init-param>
 			<param-name>activationInterval</param-name>
-			<param-value>10000</param-value>
-			<description>The number of miliseconds in between the servlet's internal
-				running thread</description>
+			<param-value>5</param-value>
+			<description>The number of seconds in between policy execution</description>
 		</init-param>
 		<init-param>
 			<param-name>timeout</param-name>

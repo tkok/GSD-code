@@ -94,7 +94,7 @@ public class PolicyTemperatureWorkingHours {
 		entity.setFromTime(new Time(7, 0, 0));
 		
 		// To 17:00
-		entity.setToTime(new Time(20, 0, 0));
+		entity.setToTime(new Time(23, 59, 0));
 		entity.setActive(true);
 		
 		entity = BuildingDAL.persist(entity);		
