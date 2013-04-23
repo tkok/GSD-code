@@ -13,11 +13,22 @@ public class Configuration {
 	
 	public static void setConfiguration(ServletConfig servletConfig) {
 		server = servletConfig.getInitParameter("server");
+		System.out.println("Server: " + server);
+		
 		building = servletConfig.getInitParameter("building");
+		System.out.println("Building: " + building);
+		
 		format = servletConfig.getInitParameter("format");
+		System.out.println("Format: " + format);
+		
 		setvalue = servletConfig.getInitParameter("setvalue");
+		System.out.println("SetValue: " + setvalue);
+		
 		activationInterval = new Integer(servletConfig.getInitParameter("activationInterval")).intValue();
+		System.out.println("ActivationInterval: " + activationInterval);
+		
 		timeout = new Integer(servletConfig.getInitParameter("timeout")).intValue();
+		System.out.println("Timeout: " + timeout);
 	}
 
 	public static String getServer() {
