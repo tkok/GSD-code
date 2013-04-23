@@ -7,14 +7,13 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
-import dk.itu.kben.gsd.domain.BooleanValue;
 import dk.itu.kben.gsd.domain.Expression;
+import dk.itu.kben.gsd.domain.FloatValue;
 import dk.itu.kben.gsd.domain.IfStatement;
-import dk.itu.kben.gsd.domain.IntValue;
 import dk.itu.kben.gsd.domain.Operator;
 import dk.itu.kben.gsd.domain.SetStatement;
 import dk.itu.kben.gsd.domain.Statement;
-import dk.itu.kben.gsd.persistence.BuildingDAO;
+import dk.itu.scas.gsd.utils.SensorValueCache;
 
 public class IfStamenet_toJSONByGSON_Test {
 	
@@ -24,16 +23,15 @@ public class IfStamenet_toJSONByGSON_Test {
 	
 	@Before
 	public void setupDatabase() {
-		BuildingDAO.setValue(ROOM1_TEMPERATURE, new IntValue(21));
-		BuildingDAO.setValue(ROOM2_TEMPERATURE, new IntValue(21));
-		BuildingDAO.setValue(WING1_HEATER, new BooleanValue(true));
+		SensorValueCache.setValue(ROOM1_TEMPERATURE, new FloatValue(21));
+		SensorValueCache.setValue(ROOM2_TEMPERATURE, new FloatValue(21));
 	}
 
 	@Test
 	public void prettyPrintToJSON() {
-		Expression expression1 = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new IntValue(21));
-		Expression expression2 = new Expression(ROOM2_TEMPERATURE, Operator.EQUALS, new IntValue(21));
-		Statement thenStatement = new SetStatement(WING1_HEATER, new BooleanValue(false));
+		Expression expression1 = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new FloatValue(21));
+		Expression expression2 = new Expression(ROOM2_TEMPERATURE, Operator.EQUALS, new FloatValue(21));
+		Statement thenStatement = new SetStatement(WING1_HEATER, new FloatValue(1));
 		
 		IfStatement ifStatement = new IfStatement();
 		ifStatement.addExpression(expression1);
@@ -43,6 +41,6 @@ public class IfStamenet_toJSONByGSON_Test {
 		Gson gson = new Gson();
 		
 		String json = gson.toJson(ifStatement);
-		Assert.assertEquals("{\"conditionalExpressions\":[{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM1.TEMPERATURE\"},{\"prefixOperator\":\"AND\",\"aValue\":{\"theValue\":21},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM2.TEMPERATURE\"}],\"thenStatements\":[{\"aValue\":{\"theValue\":false},\"sensorID\":\"WING1.HEATER\"}],\"elseStatements\":[]}", json);
+		Assert.assertEquals(json, "{\"conditionalExpressions\":[{\"prefixOperator\":\"AND\",\"aValue\":{\"floatValue\":21.0},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM1.TEMPERATURE\"},{\"prefixOperator\":\"AND\",\"aValue\":{\"floatValue\":21.0},\"operator\":\"EQUALS\",\"sensorId\":\"ROOM2.TEMPERATURE\"}],\"thenStatements\":[{\"aValue\":{\"floatValue\":1.0},\"sensorID\":\"WING1.HEATER\"}],\"elseStatements\":[]}");
 	}
 }

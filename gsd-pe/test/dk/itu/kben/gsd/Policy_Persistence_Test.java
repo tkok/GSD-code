@@ -8,10 +8,9 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import dk.itu.kben.gsd.domain.BooleanValue;
 import dk.itu.kben.gsd.domain.Expression;
+import dk.itu.kben.gsd.domain.FloatValue;
 import dk.itu.kben.gsd.domain.IfStatement;
-import dk.itu.kben.gsd.domain.IntValue;
 import dk.itu.kben.gsd.domain.Operator;
 import dk.itu.kben.gsd.domain.Policy;
 import dk.itu.kben.gsd.domain.PolicyEntities;
@@ -19,7 +18,7 @@ import dk.itu.kben.gsd.domain.PolicyEntity;
 import dk.itu.kben.gsd.domain.SetStatement;
 import dk.itu.kben.gsd.domain.Statement;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
-import dk.itu.kben.gsd.persistence.BuildingDAO;
+import dk.itu.scas.gsd.utils.SensorValueCache;
 
 public class Policy_Persistence_Test {
 	
@@ -32,18 +31,18 @@ public class Policy_Persistence_Test {
 	
 	@Before
 	public void setupDatabase() {
-		BuildingDAO.setValue(ROOM1_TEMPERATURE, new IntValue(11));
-		BuildingDAO.setValue(ROOM1_HEATER, new BooleanValue(false));
-		BuildingDAO.setValue(ROOM1_BLINDS, new BooleanValue(false));
+		SensorValueCache.setValue(ROOM1_TEMPERATURE, new FloatValue(11));
+		SensorValueCache.setValue(ROOM1_HEATER, new FloatValue(0));
+		SensorValueCache.setValue(ROOM1_BLINDS, new FloatValue(0));
 	}
 
 	@Test
 	public void persistNewIfStatement() {
 		BuildingDAL.deleteAll();
 		
-		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new IntValue(10));
-		Statement thenStatement = new SetStatement(ROOM1_HEATER, new BooleanValue(true));
-		Statement elseStatement = new SetStatement(ROOM1_BLINDS, new BooleanValue(true));
+		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new FloatValue(10));
+		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
+		Statement elseStatement = new SetStatement(ROOM1_BLINDS, new FloatValue(1));
 		
 		IfStatement ifStatement = new IfStatement();
 		ifStatement.addExpression(expression);

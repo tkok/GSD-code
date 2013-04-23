@@ -15,7 +15,6 @@ import com.google.gson.Gson;
 
 import dk.itu.kben.gsd.domain.FloatValue;
 import dk.itu.kben.gsd.domain.GsonFactory;
-import dk.itu.kben.gsd.domain.IntValue;
 import dk.itu.kben.gsd.domain.Policy;
 import dk.itu.kben.gsd.domain.PolicyEntities;
 import dk.itu.kben.gsd.domain.PolicyEntity;
@@ -25,11 +24,19 @@ import dk.itu.nicl.gsd.log.Log;
 public class BuildingDAL {
 
 	// TODO: Have config-stuff like this in a config-file (i.e. web.config)?
+	/*
 	private static final String serverUrl = "jdbc:mysql://mysql2.gigahost.dk:3306/";
 	private static final String dbName = "webaholic_gsd";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "webaholic";
 	private static final String password = "Gh2kZuCwlpU5ZfpHQN4i";
+	*/
+	private static final String serverUrl = "jdbc:mysql://localhost:8889/gsd";
+	private static final String dbName = "";
+	private static final String driver = "com.mysql.jdbc.Driver";
+	private static final String userName = "root";
+	private static final String password = "root";
+	
 	private static Connection connection = null;
 	private static PreparedStatement preparedStatement = null;
 
@@ -108,7 +115,9 @@ public class BuildingDAL {
 	}
 	
 	private static PolicyEntity insertPolicyEntity(PolicyEntity policyEntity) {
+		System.out.println("Inserting policy.");
 		connection = CreateConn();
+		
 		try {
 			preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
@@ -134,6 +143,7 @@ public class BuildingDAL {
 	}
 	
 	private static void updatePolicyEntity(PolicyEntity policyEntity) {
+		System.out.println("Updating policy.");
 		connection = CreateConn();
 
 		try {

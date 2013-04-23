@@ -31,10 +31,10 @@ public class Expression implements Serializable {
 	}
 	
 	public boolean evaluate() {
-		Value sensorValue = SensorValueCache.getValue(sensorId);
+		FloatValue sensorValue = SensorValueCache.getValue(sensorId);
 		
 		if (operator == Operator.EQUALS) {
-			int c = sensorValue.compareTo(aValue);
+			float c = sensorValue.compareTo(aValue);
 			
 			Log.log("Is " + sensorValue + " equal to " + aValue + " ? ");
 			System.out.print("Is " + sensorValue + " equal to " + aValue + " ? ");

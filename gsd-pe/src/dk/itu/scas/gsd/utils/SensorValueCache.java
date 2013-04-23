@@ -2,21 +2,22 @@ package dk.itu.scas.gsd.utils;
 
 import java.util.Hashtable;
 
+import dk.itu.kben.gsd.domain.FloatValue;
 import dk.itu.kben.gsd.domain.Value;
-
 import dk.itu.nicl.gsd.log.Log;
 
 public class SensorValueCache {
 
-	static Hashtable<String, Value> hashtable = new Hashtable<String, Value>();
+	static Hashtable<String, FloatValue> hashtable = new Hashtable<String, FloatValue>();
 
-	public static Value getValue(String name) {
-		return hashtable.get(name);
+	public static FloatValue getValue(String name) {
+		return (FloatValue) hashtable.get(name);
 	}
 
-	public static void setValue(String name, Value value) {
+	public static void setValue(String name, FloatValue value) {
 		Log.log("Setting " + name + " to " + value);
 		System.out.println("Setting " + name + " to " + value);
+		
 		hashtable.put(name, value);
 	}
 	

@@ -5,12 +5,12 @@ public class FloatValue implements Value{
 	Float floatValue;
 	
 	public FloatValue(){
-		
 	}
 	
 	public FloatValue(float value){
 		floatValue = new Float(value);
 	}
+	
 	@Override
 	public int compareTo(Value aValue) {
 		float iAValue = ((FloatValue) aValue).getValue().floatValue();
@@ -28,15 +28,16 @@ public class FloatValue implements Value{
 
 	@Override
 	public Float getValue() {
-		// TODO Auto-generated method stub
 		return floatValue;
 	}
 
 	@Override
 	public int getIntValue() {
-		// TODO Auto-generated method stub
 		return getValue().intValue();
 	}
 	
-	
+	@Override
+	public String toString() {
+		return String.valueOf(floatValue);
+	}
 }

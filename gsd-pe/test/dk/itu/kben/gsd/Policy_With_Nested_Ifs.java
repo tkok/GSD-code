@@ -5,17 +5,16 @@ import java.sql.Time;
 import org.junit.Before;
 import org.junit.Test;
 
-import dk.itu.kben.gsd.domain.BooleanValue;
 import dk.itu.kben.gsd.domain.Expression;
+import dk.itu.kben.gsd.domain.FloatValue;
 import dk.itu.kben.gsd.domain.IfStatement;
-import dk.itu.kben.gsd.domain.IntValue;
 import dk.itu.kben.gsd.domain.Operator;
 import dk.itu.kben.gsd.domain.Policy;
 import dk.itu.kben.gsd.domain.PolicyEntity;
 import dk.itu.kben.gsd.domain.SetStatement;
 import dk.itu.kben.gsd.domain.Statement;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
-import dk.itu.kben.gsd.persistence.BuildingDAO;
+import dk.itu.scas.gsd.utils.SensorValueCache;
 
 public class Policy_With_Nested_Ifs {
 	
@@ -29,9 +28,9 @@ public class Policy_With_Nested_Ifs {
 	
 	@Before
 	public void setupDatabase() {
-		BuildingDAO.setValue(ROOM1_TEMPERATURE, new IntValue(11));
-		BuildingDAO.setValue(ROOM1_HEATER, new BooleanValue(false));
-		BuildingDAO.setValue(ROOM1_BLINDS, new BooleanValue(false));
+		SensorValueCache.setValue(ROOM1_TEMPERATURE, new FloatValue(11));
+		SensorValueCache.setValue(ROOM1_HEATER, new FloatValue(0));
+		SensorValueCache.setValue(ROOM1_BLINDS, new FloatValue(0));
 	}
 
 	@Test
@@ -39,14 +38,14 @@ public class Policy_With_Nested_Ifs {
 		//BuildingDAL.deleteAll();
 		
 		IfStatement outerIfStatement = new IfStatement();
-		Expression outerIfStatementExpression = new Expression(ROOM1_TEMPERATURE, Operator.GREATER_THAN, new IntValue(25));
+		Expression outerIfStatementExpression = new Expression(ROOM1_TEMPERATURE, Operator.GREATER_THAN, new FloatValue(25));
 		outerIfStatement.addExpression(outerIfStatementExpression);
 		
 		IfStatement innerIfStatement = new IfStatement();
-		Expression innerIfStatementExpression = new Expression(ROOM1_BLINDS, Operator.EQUALS, new BooleanValue(false));
+		Expression innerIfStatementExpression = new Expression(ROOM1_BLINDS, Operator.EQUALS, new FloatValue(0));
 		innerIfStatement.addExpression(innerIfStatementExpression);
 		
-		Statement innerIfThenSetStatement = new SetStatement(ROOM1_BLINDS, new BooleanValue(true));
+		Statement innerIfThenSetStatement = new SetStatement(ROOM1_BLINDS, new FloatValue(1));
 		innerIfStatement.addThenStatement(innerIfThenSetStatement);
 		
 		outerIfStatement.addThenStatement(innerIfStatement);
