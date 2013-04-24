@@ -15,8 +15,10 @@ import dk.itu.kben.gsd.domain.Statement;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
 
 public class PolicyTemperatureWorkingHours {
-	String lightId = "room-2-light-5-gain";
-	String blindsId = "room-2-blinds-gain";
+	String lightId1 = "room-2-light-4-gain";
+	String lightId2 = "room-2-light-5-gain";
+	String blindId1 = "room-2-blind-4-setpoint";
+	String blindId2 = "room-2-blind-5-setpoint";
 	String temp = "floor-0-room-2.temp";
 	String heaterId = "room-2-heater-2-gain";
 	String acId = "room-2-ac-2-gain";
@@ -71,10 +73,14 @@ public class PolicyTemperatureWorkingHours {
 				
 				ifTempIsAbove22.addThenStatement(ifTempIsAbove23);
 					// THEN
-					Statement rollDownBlinds = new SetStatement(blindsId, new FloatValue(1f));
-					Statement turnOnLights = new SetStatement(lightId, new FloatValue(1f));
-					ifTempIsAbove23.addThenStatement(rollDownBlinds);
-					ifTempIsAbove23.addThenStatement(turnOnLights);
+					Statement rollDownBlind1 = new SetStatement(blindId1, new FloatValue(1f));
+					Statement rollDownBlind2 = new SetStatement(blindId2, new FloatValue(1f));
+					Statement turnOnLight1 = new SetStatement(lightId1, new FloatValue(1f));
+					Statement turnOnLight2 = new SetStatement(lightId2, new FloatValue(1f));
+					ifTempIsAbove23.addThenStatement(rollDownBlind1);
+					ifTempIsAbove23.addThenStatement(rollDownBlind2);
+					ifTempIsAbove23.addThenStatement(turnOnLight1);
+					ifTempIsAbove23.addThenStatement(turnOnLight2);
 			
 			// ELSE AC = 0
 			Statement turnOffAc = new SetStatement(acId, new FloatValue(0f));
