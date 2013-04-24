@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import dk.itu.kben.gsd.servlet.Configuration;
@@ -44,6 +45,33 @@ public class Connection {
 		List<String> sensors = new ArrayList<String>();
 		try {
 			String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+			JSONObject jsonObject = new JSONObject(data.toString());
+			JSONObject value = jsonObject.getJSONObject("value");
+			JSONObject rooms = value.getJSONObject("rooms");
+			String [] s = rooms.getNames(rooms);
+			// parse the json object by retrieving the keys of a room
+			for(String str : s){
+				JSONObject room = rooms.getJSONObject(str);
+				for(String string : services){
+					JSONObject obj = room.getJSONObject(string);
+					Iterator iterator = obj.keys();
+					while(iterator.hasNext()){
+						sensors.add(iterator.next().toString());
+						//System.out.println(iterator.next().toString());
+					}
+				}
+			}
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sensors;
+	}
+	public List<String> getSensorIdsOffline(){ 
+		List<String> sensors = new ArrayList<String>();
+		try {
+			String data = connect("http://127.0.0.1:9000/api/user/building/entry/description/1/?format=json");
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
@@ -107,24 +135,35 @@ public class Connection {
 		
 		String query = Configuration.getServer() + "api/user/measurement/?bid=1&uuid="+sensorId+"&order_by=-timestamp&format=json&limit=1";
 		try {
-			String data = connect(query);
-			//String data = readFromFile("query_sensor.json");
+			String data = "";
 			
-			JSONObject jsonObject = new JSONObject(data);
-			JSONArray objects = jsonObject.getJSONArray("objects");
-			for(int i=0;i<objects.length();i++){
-				JSONObject jsonobject = objects.getJSONObject(i);
-				//System.out.println(jsonobject.getInt("bid"));
-				if(jsonobject.getInt("bid")==1){
-					value = jsonobject.get("val").toString();
-					//value = Double.valueOf(s);
-					//System.out.println("sensor "+query+" had value "+object.toString()+" at "+jsonobject.getString("timestamp"));
-					break;
+			try {
+				data = connect(query);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//String data = readFromFile("query_sensor.json");
+			if(data != ""){
+				JSONObject jsonObject = new JSONObject(data);
+				JSONArray objects = jsonObject.getJSONArray("objects");
+				for(int i=0;i<objects.length();i++){
+					JSONObject jsonobject = objects.getJSONObject(i);
+					//System.out.println(jsonobject.getInt("bid"));
+					if(jsonobject.getInt("bid")==1){
+						value = jsonobject.get("val").toString();
+						//value = Double.valueOf(s);
+						//System.out.println("sensor "+query+" had value "+object.toString()+" at "+jsonobject.getString("timestamp"));
+						break;
+					}
+				}
 				}
 			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+		catch (JSONException e) {
+			System.out.println("JSON Exception");
 		}
 		
 		return value;
