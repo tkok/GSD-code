@@ -68,10 +68,10 @@ public class Connection {
 		}
 		return sensors;
 	}
-	public List<String> getSensorIdsOffline(){ 
+	public List<String> getSensorIds(String url){ 
 		List<String> sensors = new ArrayList<String>();
 		try {
-			String data = connect("http://127.0.0.1:9000/api/user/building/entry/description/1/?format=json");
+			String data = connect(url);
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
@@ -213,6 +213,18 @@ public class Connection {
 	 */
 	public List<String> getSensorListByRoomId(String roomId){
 		List<String> sensors = getSensorIds();
+		List<String> sensorList = new ArrayList<String>();
+		Iterator iterator = sensors.iterator();
+		while(iterator.hasNext()){
+			String id = (String) iterator.next();
+			if(id.contains(roomId+"-")){
+				sensorList.add(id);
+			}
+		}
+		return sensorList;
+	}
+	public List<String> getSensorListByRoomId(String roomId,String url){
+		List<String> sensors = getSensorIds(url);
 		List<String> sensorList = new ArrayList<String>();
 		Iterator iterator = sensors.iterator();
 		while(iterator.hasNext()){

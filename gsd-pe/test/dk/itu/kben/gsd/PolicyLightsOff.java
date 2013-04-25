@@ -21,15 +21,16 @@ import dk.itu.scas.gsd.net.Connection;
 public class PolicyLightsOff {
 	
 	
-	long _2300 = 24*60*60*1000;
+	long _2300 = 21*60*60*1000;
 	long _0700 = 6*60*60*1000;
 	List<String> sensorIds;
 	List<String> lightIds;
+	String url = "http://localhost:9000/api/user/building/entry/description/1/?format=json";
 	@Before
 	public void setupIds(){
 		Connection connection = new Connection();
 		//connection.setConnectionData();
-		sensorIds = connection.getSensorIdsOffline();
+		sensorIds = connection.getSensorIds(url);
 		lightIds = new ArrayList<String>();
 		for(String s : sensorIds){
 			if(s.contains("light"))
