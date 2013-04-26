@@ -44,7 +44,12 @@ public class Connection {
 	public List<String> getSensorIds(){ 
 		List<String> sensors = new ArrayList<String>();
 		try {
-			String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+			String data = "";
+			if(Configuration.getServer() != null){
+				data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+			}
+			else
+				data = connect("http://gsd.itu.dk/api/user/building/entry/description/1/?format=json");
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
@@ -223,13 +228,23 @@ public class Connection {
 		}
 		return sensorList;
 	}
-	public List<String> getSensorListByRoomId(String roomId,String url){
+	
+	public List<String> getAllSensorIdsByType(String type){
+		List<String> ids = new ArrayList<String>();
+		List<String> requestedIds = new ArrayList<String>();
+		ids = getSensorIds();
+		for(String id : ids){
+			if(id.contains(type)){
+				requestedIds.add(id);
+			}
+		}
+		return requestedIds;
+	}
+	public List<String> getSensorListByRoomIdAndType(String roomId,String sensor, String url){
 		List<String> sensors = getSensorIds(url);
 		List<String> sensorList = new ArrayList<String>();
-		Iterator iterator = sensors.iterator();
-		while(iterator.hasNext()){
-			String id = (String) iterator.next();
-			if(id.contains(roomId+"-")){
+		for(String id : sensors){
+			if(id.contains(roomId) && id.contains(sensor)){
 				sensorList.add(id);
 			}
 		}

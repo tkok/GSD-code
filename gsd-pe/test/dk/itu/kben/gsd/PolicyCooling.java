@@ -32,14 +32,14 @@ public class PolicyCooling {
 		
 		Connection connection = new Connection();
 		ids = new ArrayList<String>();
-		ids = connection.getSensorListByRoomId("room-6", url);
+		ids = connection.getSensorListByRoomId("room-6");
 		acIds = new ArrayList<String>();
 		addAcId(ids);
 		ids.clear();
-		ids = connection.getSensorListByRoomId("room-13", url);
+		ids = connection.getSensorListByRoomId("room-13");
 		addAcId(ids);
 		ids.clear();
-		ids = connection.getSensorListByRoomId("room-20", url);
+		ids = connection.getSensorListByRoomId("room-20");
 		addAcId(ids);
 	}
 	public void addAcId(List<String> id){

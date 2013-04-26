@@ -23,23 +23,11 @@ public class PolicyLightsOff {
 	
 	long _2300 = 21*60*60*1000;
 	long _0700 = 6*60*60*1000;
-	List<String> sensorIds;
 	List<String> lightIds;
-	String url = "http://localhost:9000/api/user/building/entry/description/1/?format=json";
-	@Before
-	public void setupIds(){
-		Connection connection = new Connection();
-		//connection.setConnectionData();
-		sensorIds = connection.getSensorIds(url);
-		lightIds = new ArrayList<String>();
-		for(String s : sensorIds){
-			if(s.contains("light"))
-				lightIds.add(s+"-gain");
-				System.out.println(s);
-		}
-	}
+	//String url = "http://localhost:9000/api/user/building/entry/description/1/?format=json";
 	@Test
 	public void execute(){
+		lightIds = new Connection().getAllSensorIdsByType("light");
 		Policy lightOff = new Policy();
 		for(String s: lightIds){
 			Expression expression = new Expression(s,Operator.EQUALS,new FloatValue(1f));
