@@ -22,3 +22,7 @@
 2013-04-25 09:45:43.993: Creating DB connection
 2013-04-25 09:45:52.443: Creating DB connection
 2013-04-25 09:46:25.891: Creating DB connection
+2013-04-26 10:25:48.468: Creating DB connection
+2013-04-26 10:26:43.530: Creating DB connection
+2013-04-26 10:26:55.659: Creating DB connection
+2013-04-26 10:27:36.617: Creating DB connection

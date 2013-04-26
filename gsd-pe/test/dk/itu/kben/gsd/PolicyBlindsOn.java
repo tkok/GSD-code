@@ -1,10 +1,15 @@
 package dk.itu.kben.gsd;
-
+/**
+ * @author = Stefan
+ * Roll down the blinds during the night - it should help preserve heat
+ * 
+ */
 import static org.junit.Assert.assertEquals;
 
 import java.sql.Time;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import dk.itu.kben.gsd.domain.Expression;
@@ -17,15 +22,11 @@ import dk.itu.kben.gsd.domain.SetStatement;
 import dk.itu.kben.gsd.domain.Statement;
 import dk.itu.kben.gsd.persistence.BuildingDAL;
 import dk.itu.scas.gsd.net.Connection;
-/*
- * Drop down the blinds during the night - it should help preserve heat. 
- * 
- * 
- */
+
 public class PolicyBlindsOn {
 	private List<String> blindIds;
 	
-	@Test
+	@Before
 	public void execute(){
 		blindIds = new Connection().getAllSensorIdsByType("blind");
 		assertEquals(30,blindIds.size());

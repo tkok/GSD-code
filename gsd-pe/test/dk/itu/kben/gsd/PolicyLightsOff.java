@@ -1,5 +1,9 @@
 package dk.itu.kben.gsd;
-
+/**
+ * @author Stefan
+ * Policy for shutting off all the lights during the night.
+ * 
+ */
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +28,6 @@ public class PolicyLightsOff {
 	long _2300 = 21*60*60*1000;
 	long _0700 = 6*60*60*1000;
 	List<String> lightIds;
-	//String url = "http://localhost:9000/api/user/building/entry/description/1/?format=json";
 	@Test
 	public void execute(){
 		lightIds = new Connection().getAllSensorIdsByType("light");

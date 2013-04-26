@@ -1,5 +1,9 @@
 package dk.itu.kben.gsd;
-
+/**
+ * @author Stefan
+ * Policy for cooling the environment if it is too hot.  
+ * 
+ */
 import static org.junit.Assert.*;
 
 import java.sql.Time;
@@ -21,7 +25,6 @@ import dk.itu.kben.gsd.persistence.BuildingDAL;
 import dk.itu.scas.gsd.net.Connection;
 
 public class PolicyCooling {
-	private String url = "http://localhost:9000/api/user/building/entry/description/1/?format=json";
 	private List<String> ids;
 	private List<String> acIds;
 
@@ -31,16 +34,10 @@ public class PolicyCooling {
 	public void getAcIDS(){
 		
 		Connection connection = new Connection();
-		ids = new ArrayList<String>();
-		ids = connection.getSensorListByRoomId("room-6");
 		acIds = new ArrayList<String>();
-		addAcId(ids);
-		ids.clear();
-		ids = connection.getSensorListByRoomId("room-13");
-		addAcId(ids);
-		ids.clear();
-		ids = connection.getSensorListByRoomId("room-20");
-		addAcId(ids);
+		addAcId(connection.getSensorListByRoomId("room-6"));
+		addAcId(connection.getSensorListByRoomId("room-13"));
+		addAcId(connection.getSensorListByRoomId("room-20"));
 	}
 	public void addAcId(List<String> id){
 		for(String s : id){
@@ -61,8 +58,10 @@ public class PolicyCooling {
 		for(String id : acIds){
 			IfStatement ifStatement = new IfStatement();
 			Statement turnOnAc = new SetStatement(id,new FloatValue(1f));
+			Statement turnOffAc = new SetStatement(id,new FloatValue(0f));
 			ifStatement.addExpression(expression);
 			ifStatement.addThenStatement(turnOnAc);
+			ifStatement.addElseStatement(turnOffAc);
 			policy.addStatement(ifStatement);
 		}
 		PolicyEntity policyEntity = new PolicyEntity();
