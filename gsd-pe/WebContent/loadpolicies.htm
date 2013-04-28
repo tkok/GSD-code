@@ -140,6 +140,8 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 	   	
 	   
 	   // Update a value (save json using persistPolicy)
+	   
+	   // For each policy items can be updated as below:
 	   console.log("---------- Test of setting/updating a value in json ----------") 
 	   json[0].id = 3000;
 	   console.log( "Id: " + json[0].id );
