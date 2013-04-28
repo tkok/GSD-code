@@ -141,10 +141,54 @@ $("#all").click(function() {
 		
     	$.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
     		   // iterate over each policy
-    		   for (var k in json) {
-    			   $('.policies').append('<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: ' + json[k].id + '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: ' + json[k].fromTime + '<br /><br />To: ' + json[k].toTime + '</div><div class="inner_section"><label for="policy">Assign more values to form</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
-   			   
-    		   }
+    		   for ( var k in json) {
+
+							// iterate over statements
+							for ( var l in json[k].policy.statements) {
+								// statement type
+								var type = json[k].policy.statements[l].type;
+
+								// iterate over conditionalExpressions
+								for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
+
+									// get prefixOperator
+									var prefixOperator = json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator;
+									// aValue type
+									var avalueType = json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type;
+									// aValue data floatvalue
+									var avaluetypefloat = json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue;
+									// operator
+									var operator = json[k].policy.statements[l].data.conditionalExpressions[m].operator;
+									// sensorid
+									var sensorId = json[k].policy.statements[l].data.conditionalExpressions[m].sensorId;
+								}
+
+							}
+
+							// Append policy to view
+							$('.policies')
+									.append(
+											'<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: '
+													+ json[k].id
+													+ '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
+													+ json[k].fromTime
+													+ '<br /><br />To: '
+													+ json[k].toTime
+													+ '</div><div class="inner_section">'
+													+ prefixOperator
+													+ ', '
+													+ avalueType
+													+ ',<br/>'
+													+ avaluetypefloat
+													+ ', '
+													+ operator
+													+ ', '
+													+ sensorId
+													+ '</div><div class="inner_section"><label for="policy">'
+													+ type
+													+ '</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+
+						}
     	});
 });
 
@@ -154,23 +198,110 @@ $("#active").click(function() {
 	
 	$.getJSON( "http://localhost:8080/test/GetActivePolicies", function( json ) {
 		   // iterate over each policy
-		   for (var k in json) {
-			   $('.policies').append('<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: ' + json[k].id + '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: ' + json[k].fromTime + '<br /><br />To: ' + json[k].toTime + '</div><div class="inner_section"><label for="policy">Assign more values to form</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
-			   
-		   }
+		   for ( var k in json) {
+
+							// iterate over statements
+							for ( var l in json[k].policy.statements) {
+								// statement type
+								var type = json[k].policy.statements[l].type;
+
+								// iterate over conditionalExpressions
+								for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
+
+									// get prefixOperator
+									var prefixOperator = json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator;
+									// aValue type
+									var avalueType = json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type;
+									// aValue data floatvalue
+									var avaluetypefloat = json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue;
+									// operator
+									var operator = json[k].policy.statements[l].data.conditionalExpressions[m].operator;
+									// sensorid
+									var sensorId = json[k].policy.statements[l].data.conditionalExpressions[m].sensorId;
+								}
+
+							}
+
+							// Append policy to view
+							$('.policies')
+									.append(
+											'<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: '
+													+ json[k].id
+													+ '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
+													+ json[k].fromTime
+													+ '<br /><br />To: '
+													+ json[k].toTime
+													+ '</div><div class="inner_section">'
+													+ prefixOperator
+													+ ', '
+													+ avalueType
+													+ ',<br/>'
+													+ avaluetypefloat
+													+ ', '
+													+ operator
+													+ ', '
+													+ sensorId
+													+ '</div><div class="inner_section"><label for="policy">'
+													+ type
+													+ '</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+
+						}
 	});
 });
 
 // Default behavior
 $.getJSON( "http://localhost:8080/test/GetActivePolicies", function( json ) {
 	   // iterate over each policy
-	   for (var k in json) {
+	   
+	for ( var k in json) {
 
-		   $('.policies').append('<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: ' + json[k].id + '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: ' + json[k].fromTime + '<br /><br />To: ' + json[k].toTime + '</div><div class="inner_section"><label for="policy">Assign more values to form</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+							// iterate over statements
+							for ( var l in json[k].policy.statements) {
+								// statement type
+								var type = json[k].policy.statements[l].type;
 
-		   
-	   }
-});
+								// iterate over conditionalExpressions
+								for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
+
+									// get prefixOperator
+									var prefixOperator = json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator;
+									// aValue type
+									var avalueType = json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type;
+									// aValue data floatvalue
+									var avaluetypefloat = json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue;
+									// operator
+									var operator = json[k].policy.statements[l].data.conditionalExpressions[m].operator;
+									// sensorid
+									var sensorId = json[k].policy.statements[l].data.conditionalExpressions[m].sensorId;
+								}
+
+							}
+
+							// Append policy to view
+							$('.policies')
+									.append(
+											'<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: '
+													+ json[k].id
+													+ '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
+													+ json[k].fromTime
+													+ '<br /><br />To: '
+													+ json[k].toTime
+													+ '</div><div class="inner_section">'
+													+ prefixOperator
+													+ ', '
+													+ avalueType
+													+ ',<br/>'
+													+ avaluetypefloat
+													+ ', '
+													+ operator
+													+ ', '
+													+ sensorId
+													+ '</div><div class="inner_section"><label for="policy">'
+													+ type
+													+ '</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+
+						}
+					});
 </script>
 
 </div>
