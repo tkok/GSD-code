@@ -75,15 +75,16 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 			   				
 					   		// iterate over nested thenStatements
 					   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
-					   			console.log("-- NESTED 1st lvl thenStatement: " + n + " ---");
-				   				
+
 					   			// check for 2nd level nested statements
 					   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
 					   				
 					   				// IF we want to support 2nd level nested statements - do the same as for 1st level......
-					   			
+					   				console.log("-- NESTED 2st lvl thenStatement: " + n + " ---");
+					   				
 					   			} else {
-					   			
+					   				
+					   			console.log("-- NESTED 1st lvl thenStatement: " + n + " ---");
 				   				// aValue type
 				   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].type );
 				   				// aValue data floatvalue
