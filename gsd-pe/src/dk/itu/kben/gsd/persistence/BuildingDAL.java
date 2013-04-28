@@ -10,6 +10,8 @@ import java.sql.Time;
 import java.util.Calendar;
 import java.util.Hashtable;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 
 import dk.itu.kben.gsd.domain.FloatValue;
@@ -21,24 +23,25 @@ import dk.itu.kben.gsd.domain.Value;
 import dk.itu.nicl.gsd.log.Log;
 
 public class BuildingDAL {
-
+	/*
 	private static final String serverUrl = "jdbc:mysql://mysql2.gigahost.dk:3306/";
 	private static final String dbName = "webaholic_gsd";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "webaholic";
 	private static final String password = "Gh2kZuCwlpU5ZfpHQN4i";
 
-	/*
-	private static final String serverUrl = "jdbc:mysql://localhost:8889/gsd";
+	*/
+	private static final String serverUrl = "jdbc:mysql://localhost:3306/gsd";
 	private static final String dbName = "";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "root";
-	private static final String password = "root";
-	*/
+	private static final String password = "stefan";
+	
 	
 	private static Connection connection = null;
 	private static PreparedStatement preparedStatement = null;
-
+	private final static Logger logger = Logger.getLogger(BuildingDAL.class);
+	
 	private BuildingDAL() {
 	}
 
@@ -47,6 +50,7 @@ public class BuildingDAL {
 			Class.forName(driver).newInstance();
 			connection = DriverManager.getConnection(serverUrl + dbName, userName, password);
 			Log.log("Creating DB connection");
+			logger.info("Creating DB connection to "+serverUrl);
 			System.out.println("Creating DB connection \n");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,10 +86,12 @@ public class BuildingDAL {
 				String uuid = resultSet.getString("uuid");
 				float val = resultSet.getInt("val");
 				Log.log(uuid + val);
+				logger.info(uuid+val);
 				System.out.println(uuid + val + "\n");
 				ht.put(uuid, new FloatValue(val));
 			}
 			Log.log("ht size: " + ht.size());
+			logger.info("ht size" + ht.size());
 			System.out.println("ht size: " + ht.size() + "\n");
 			return ht;
 		} catch (SQLException e) {
@@ -93,6 +99,7 @@ public class BuildingDAL {
 		} finally {
 			CloseConn();
 			Log.log("Close DB connection \n");
+			logger.info("Close DB Connection");
 			System.out.println("Close DB connection \n");
 		}
 		return null;
@@ -109,6 +116,7 @@ public class BuildingDAL {
 		} finally {
 			CloseConn();
 			Log.log("Close DB connection");
+			logger.info("Close DB Connection");
 			System.out.println("Close DB connection \n");
 		}
 	}
@@ -214,6 +222,7 @@ public class BuildingDAL {
 		} finally {
 			CloseConn();
 			Log.log("Close DB connection");
+			logger.info("Close DB Connection");
 			System.out.println("Close DB connection \n");
 		}
 

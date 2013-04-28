@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +34,7 @@ public class Connection {
 	//private static final String SET_SENSOR_VALUE = "api/user/building/entry/set/1/";
 	//private static final String SET_SENSOR_VALUE_LOCAL= "http://127.0.0.1:8000/api/user/building/entry/set/1/";
 	private static final String file = "sensor.json";
+	private final Logger logger = Logger.getLogger(this.getClass());
 	
 	/**
 	 * Get list of sensors. Return a list of sensors id's
@@ -49,7 +51,7 @@ public class Connection {
 				data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
 			}
 			else
-				data = connect("http://gsd.itu.dk/api/user/building/entry/description/1/?format=json");
+				data = connect("http://localhost:9000/api/user/building/entry/description/1/?format=json");
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
@@ -112,6 +114,7 @@ public class Connection {
 		StringBuffer bufferString = new StringBuffer();
 		try{
 			System.out.println("Trying to connect to "+url);
+			logger.info("Trying to fetch data from "+url);
 			URL _url = new URL(url);
 			URLConnection urlConnection = _url.openConnection();
 			urlConnection.setReadTimeout(Configuration.getTimeout());
@@ -125,6 +128,7 @@ public class Connection {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Log.log("Socket timeout exception");
+			logger.info("Server is not responding");
 			System.out.println("Socket timeout exception");
 		}
 			return bufferString.toString();

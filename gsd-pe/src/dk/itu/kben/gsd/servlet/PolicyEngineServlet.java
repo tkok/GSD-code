@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
+
 import com.google.gson.Gson;
 
 import dk.itu.kben.gsd.domain.Expression;
@@ -38,7 +41,7 @@ import dk.itu.scas.gsd.utils.SensorValueCache;
 public class PolicyEngineServlet extends HttpServlet {
 
 	Thread thread = null;
-	
+	private Logger logger = Logger.getLogger(this.getClass());
 	static boolean shouldRun = true;
 	
 	static boolean wasStopped = false;
@@ -47,10 +50,9 @@ public class PolicyEngineServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-
 		// Initializes the Configuration class based on the current ServletConfig
 		Configuration.setConfiguration(config);
-		
+		logger.info("Initializing servlet with initial parameters");
 		System.out.println("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
 
 		connection = new Connection();
@@ -105,7 +107,7 @@ public class PolicyEngineServlet extends HttpServlet {
 					}
 
 					PolicyEntities activePoliciesEntities = BuildingDAL.getActivePolicies();
-					
+					logger.info("There are "+activePoliciesEntities.getSize()+" active policies now.");
 					System.out.println(activePoliciesEntities.getSize() + " Policies are active.");
 					
 					loadServerValues(activePoliciesEntities);
@@ -125,7 +127,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				System.out.println("PolicyEngineServlet is stopping...");
 				System.out.println("PolicyEngineServlet was stopped.");
 				Log.log("PolicyEngineServlet was stopped.");
-
+				logger.info("PolicyEngineServlet was stopped.");
 				wasStopped = true;
 			}
 		});
