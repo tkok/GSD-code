@@ -80,7 +80,7 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 					   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
 					   				
 					   				// IF we want to support 2nd level nested statements - do the same as for 1st level......
-					   				console.log("-- NESTED 2st lvl thenStatement: " + n + " ---");
+					   				console.log("-- NESTED 2nd lvl thenStatement: " + n + " ---");
 					   				
 					   			} else {
 					   				
