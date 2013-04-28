@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>img{ height: 100px; float: left; }</style>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+  <div id="images">
+ 
+</div>
+<script>
+$.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
+	   
+	   // iterate over each policy
+	   for (var k in json) {
+		   console.log("---------- start of policy ----------") 
+		   
+		   // id
+		   console.log( "Id: " + json[k].id );
+		   // from time
+		   console.log( "Fromtime: " + json[k].fromTime );
+		   // to time
+		   console.log( "Totime: " + json[k].toTime );
+		   // is active?
+		   console.log( "Is active: " + json[k].active );
+		   
+		   		// iterate over statements
+		   		for (var l in json[k].policy.statements) {
+		   			
+		   			// statement type
+		   			console.log("----- statement: " + l + " ----- type: " + json[k].policy.statements[l].type);
+
+		   			// iterate over conditionalExpressions
+			   		for (var m in json[k].policy.statements[l].data.conditionalExpressions) {
+			   			console.log("--- conditionalExpression: " + m + " ---");
+		   				
+			   			// get prefixOperator
+		   				console.log( "prefixOperator: " + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator );
+			   			// aValue type
+		   				console.log( "type: " + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type );
+		   				// aValue data floatvalue
+		   				console.log( "floatvalue: " + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue );
+		   				// operator
+		   				console.log( "operator: " + json[k].policy.statements[l].data.conditionalExpressions[m].operator );
+		   				// sensorid
+		   				console.log( "sensorid: " + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId );
+			   		}
+		   			
+			   		// iterate over thenStatements
+			   		for (var m in json[k].policy.statements[l].data.thenStatements) {
+			   			console.log("--- thenStatement: " + m + " ---");
+
+			   			// aValue type
+		   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
+		   				// aValue data floatvalue
+		   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue );
+		   				// sensorID
+		   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.sensorID );
+			   		}
+			   		
+			   		// iterate over elseStatements
+			   		for (var m in json[k].policy.statements[l].data.elseStatements) {
+			   			console.log("--- elseStatement: " + m + " ---");
+
+			   			// aValue type
+		   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
+		   				// aValue data floatvalue
+		   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue );
+		   				// sensorID
+		   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.sensorID );
+			   		}
+		   		}
+		   
+		   
+		  console.log("---------- end of policy ----------") 
+		 }
+	   
+	   
+	 });
+</script>
+ 
+</body>
+</html>
