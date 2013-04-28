@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>img{ height: 100px; float: left; }</style>
+  <style>
+  </style>
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 <body>
-  <div id="images">
+  <div id="policies">
  
 </div>
 <script>
@@ -49,13 +50,75 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 			   		// iterate over thenStatements
 			   		for (var m in json[k].policy.statements[l].data.thenStatements) {
 			   			console.log("--- thenStatement: " + m + " ---");
+						
+			   			// check for nested statements
+			   			if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
 
-			   			// aValue type
-		   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
-		   				// aValue data floatvalue
-		   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue );
-		   				// sensorID
-		   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.sensorID );
+			   				// aValue type
+			   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
+			   				
+			   				// iterate over nested conditionalExpressions
+					   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
+					   			console.log("-- NESTED 1lvl conditionalExpression: " + n + " --");
+				   				
+					   			// get prefixOperator
+				   				console.log( "prefixOperator: " + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].prefixOperator );
+					   			// aValue type
+				   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.type );
+				   				// aValue data floatvalue
+				   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.data.floatValue );
+				   				// operator
+				   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].operator );
+				   				// sensorid
+				   				console.log( "sensorid: " + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].sensorId );
+					   		}
+			   				
+					   		// iterate over nested thenStatements
+					   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
+					   			console.log("-- NESTED 1lvl thenStatement: " + n + " ---");
+				   				
+					   			// check for 2nd level nested statements
+					   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
+					   				
+					   				
+					   			
+					   			} else {
+					   			
+				   				// aValue type
+				   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].type );
+				   				// aValue data floatvalue
+				   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].data.aValue.floatValue );
+				   				// sensorID
+				   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].data.sensorID );
+					   			}
+					   		}
+					   		
+					   		// iterate over nested elseStatements
+					   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.elseStatements) {
+					   			console.log("-- NESTED 1lvl elseStatement: " + m + " ---");
+
+					   			// aValue type
+				   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].type );
+				   				// aValue data floatvalue
+				   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.aValue.floatValue );
+				   				// sensorID
+				   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.sensorID );
+					   		}
+			   				
+			   				
+			   			} else {
+			   				
+			   				// aValue type
+			   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
+			   				// aValue data floatvalue
+			   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue );
+			   				// sensorID
+			   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.sensorID );
+			   				
+			   			}
+			   			
+			   			
+			   			
 			   		}
 			   		
 			   		// iterate over elseStatements
@@ -63,17 +126,23 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 			   			console.log("--- elseStatement: " + m + " ---");
 
 			   			// aValue type
-		   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
+		   				console.log( "type: " + json[k].policy.statements[l].data.elseStatements[m].type );
 		   				// aValue data floatvalue
-		   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue );
+		   				console.log( "floatvalue: " + json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue );
 		   				// sensorID
-		   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.sensorID );
+		   				console.log( "operator: " + json[k].policy.statements[l].data.elseStatements[m].data.sensorID );
 			   		}
 		   		}
 		   
 		   
 		  console.log("---------- end of policy ----------") 
 		 }
+	   	
+	   
+	   // Update a value (save json using persistPolicy)
+	   console.log("---------- Test of setting/updating a value in json ----------") 
+	   json[0].id = 3000;
+	   console.log( "Id: " + json[0].id );
 	   
 	   
 	 });
