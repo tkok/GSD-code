@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-  </style>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<link href="nw_style.css" rel="stylesheet" type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+ 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 <body>
-  <div id="policies">
- 
-</div>
 <script>
-$.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
-	   
+// Console test
+/*$.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 	   // iterate over each policy
 	   for (var k in json) {
 		   console.log("---------- start of policy ----------") 
-		   
 		   // id
 		   console.log( "Id: " + json[k].id );
 		   // from time
@@ -27,10 +23,8 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 		   
 		   		// iterate over statements
 		   		for (var l in json[k].policy.statements) {
-		   			
 		   			// statement type
 		   			console.log("----- statement: " + l + " ----- type: " + json[k].policy.statements[l].type);
-
 		   			// iterate over conditionalExpressions
 			   		for (var m in json[k].policy.statements[l].data.conditionalExpressions) {
 			   			console.log("--- conditionalExpression: " + m + " ---");
@@ -46,17 +40,13 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 		   				// sensorid
 		   				console.log( "sensorid: " + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId );
 			   		}
-		   			
 			   		// iterate over thenStatements
 			   		for (var m in json[k].policy.statements[l].data.thenStatements) {
 			   			console.log("--- thenStatement: " + m + " ---");
-						
 			   			// check for nested statements
 			   			if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
-
 			   				// aValue type
 			   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
-			   				
 			   				// iterate over nested conditionalExpressions
 					   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
 					   			console.log("-- NESTED 1st lvl conditionalExpression: " + n + " --");
@@ -72,18 +62,13 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 				   				// sensorid
 				   				console.log( "sensorid: " + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].sensorId );
 					   		}
-			   				
 					   		// iterate over nested thenStatements
 					   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
-
 					   			// check for 2nd level nested statements
 					   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
-					   				
 					   				// IF we want to support 2nd level nested statements - do the same as for 1st level......
 					   				console.log("-- NESTED 2nd lvl thenStatement: " + n + " ---");
-					   				
 					   			} else {
-					   				
 					   			console.log("-- NESTED 1st lvl thenStatement: " + n + " ---");
 				   				// aValue type
 				   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].type );
@@ -93,11 +78,9 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 				   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[m].data.sensorID );
 					   			}
 					   		}
-					   		
 					   		// iterate over nested elseStatements
 					   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.elseStatements) {
 					   			console.log("-- NESTED 1st lvl elseStatement: " + m + " ---");
-
 					   			// aValue type
 				   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].type );
 				   				// aValue data floatvalue
@@ -105,27 +88,18 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 				   				// sensorID
 				   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.sensorID );
 					   		}
-			   				
-			   				
 			   			} else {
-			   				
 			   				// aValue type
 			   				console.log( "type: " + json[k].policy.statements[l].data.thenStatements[m].type );
 			   				// aValue data floatvalue
 			   				console.log( "floatvalue: " + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue );
 			   				// sensorID
 			   				console.log( "operator: " + json[k].policy.statements[l].data.thenStatements[m].data.sensorID );
-			   				
 			   			}
-			   			
-			   			
-			   			
 			   		}
-			   		
 			   		// iterate over elseStatements
 			   		for (var m in json[k].policy.statements[l].data.elseStatements) {
 			   			console.log("--- elseStatement: " + m + " ---");
-
 			   			// aValue type
 		   				console.log( "type: " + json[k].policy.statements[l].data.elseStatements[m].type );
 		   				// aValue data floatvalue
@@ -134,13 +108,9 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 		   				console.log( "operator: " + json[k].policy.statements[l].data.elseStatements[m].data.sensorID );
 			   		}
 		   		}
-		   
-		   
 		  console.log("---------- end of policy ----------") 
 		 }
-	   	
 	   // Update a value (save json using persistPolicy)
-	   
 	   // For each policy items can be updated as below:
 	   console.log("---------- Test of setting/updating a value in json ----------") 
 	   json[0].id = 3000;
@@ -150,20 +120,59 @@ $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
 	   console.log("---------- Build new policy ----------") 
 	   // Have a basic template in a var that have all the basic values constructed already
 	   var policyStartTemplate = {"statements":[{"type":"dk.itu.kben.gsd.domain.IfStatement","data":{"conditionalExpressions":[{"prefixOperator":"AND","aValue":{"type":"dk.itu.kben.gsd.domain.FloatValue","data":{"floatValue":23.0}},"operator":"GREATER_THAN","sensorId":"environment.temp"}],"thenStatements":[{"type":"dk.itu.kben.gsd.domain.SetStatement","data":{"aValue":{"floatValue":1.0},"sensorID":"room-20-ac-19-gain"}}],"elseStatements":[{"type":"dk.itu.kben.gsd.domain.SetStatement","data":{"aValue":{"floatValue":0.0},"sensorID":"room-20-ac-19-gain"}}]}}]}
-	   
 	   // then alter the stuff we want in our new policy
 	   // For instance change float value from 23 to 24
-	   
 	   policyStartTemplate.statements[0].data.conditionalExpressions[0].aValue.data.floatValue = 24;
 	   
 	   console.log(policyStartTemplate.statements[0].data.conditionalExpressions[0].aValue.data.floatValue);
-	   
 	   // After more changes then post it to /persistPolicy
-		
-	   
-	   
-	 });
+	 });*/
 </script>
- 
+ <div class="header">
+ <div class="top">Policy Engine Administration</div>
+ <div class="menu"><a id="active" href="JavaScript:void(0);">Running policies</a> | <a id="all" href="JavaScript:void(0);">All policies</a></div>
+ </div>
+ <div class="policies">
+
+<script>
+$("#all").click(function() {
+		
+		$('.policies').empty();
+		
+    	$.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
+    		   // iterate over each policy
+    		   for (var k in json) {
+    			   $('.policies').append('<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: ' + json[k].id + '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: ' + json[k].fromTime + '<br /><br />To: ' + json[k].toTime + '</div><div class="inner_section"><label for="policy">Assign more values to form</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+   			   
+    		   }
+    	});
+});
+
+$("#active").click(function() {
+	
+	$('.policies').empty();
+	
+	$.getJSON( "http://localhost:8080/test/GetActivePolicies", function( json ) {
+		   // iterate over each policy
+		   for (var k in json) {
+			   $('.policies').append('<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: ' + json[k].id + '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: ' + json[k].fromTime + '<br /><br />To: ' + json[k].toTime + '</div><div class="inner_section"><label for="policy">Assign more values to form</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+			   
+		   }
+	});
+});
+
+// Default behavior
+$.getJSON( "http://localhost:8080/test/GetActivePolicies", function( json ) {
+	   // iterate over each policy
+	   for (var k in json) {
+
+		   $('.policies').append('<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: ' + json[k].id + '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: ' + json[k].fromTime + '<br /><br />To: ' + json[k].toTime + '</div><div class="inner_section"><label for="policy">Assign more values to form</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+
+		   
+	   }
+});
+</script>
+
+</div>
 </body>
 </html>

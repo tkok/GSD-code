@@ -122,6 +122,7 @@ public class PolicyEngineServlet extends HttpServlet {
 					SensorValueCache.clearCache();
 
 					System.out.println(Configuration.getActivationInterval() + " seconds passed.");
+
 				}
 				
 				System.out.println("PolicyEngineServlet is stopping...");
@@ -227,13 +228,16 @@ public class PolicyEngineServlet extends HttpServlet {
 			List<String> sens = ServiceProperties.allSensorsWithProperties(id);
 			for (String s : sens)
 				out.println("<br>" + s);
-		} else if (userPath.equals("/GetAllPolicies")) {
+		} else if (userPath.equals("/GetActivePolicies")) {
 			PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
 			response.setContentType("application/json");
 			String json = policyEntities.toJSON();
-			
-			Log.log(json);
-			System.out.println(json);
+
+			out.print(json);
+		} else if (userPath.equals("/GetAllPolicies")) {
+			PolicyEntities policyEntities = BuildingDAL.getAllPolicies();
+			response.setContentType("application/json");
+			String json = policyEntities.toJSON();
 
 			out.print(json);
 		} else {

@@ -23,19 +23,20 @@ import dk.itu.kben.gsd.domain.Value;
 import dk.itu.nicl.gsd.log.Log;
 
 public class BuildingDAL {
-	/*
+	
 	private static final String serverUrl = "jdbc:mysql://mysql2.gigahost.dk:3306/";
 	private static final String dbName = "webaholic_gsd";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "webaholic";
 	private static final String password = "Gh2kZuCwlpU5ZfpHQN4i";
 
-	*/
+	/*
 	private static final String serverUrl = "jdbc:mysql://localhost:3306/gsd";
 	private static final String dbName = "";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "root";
 	private static final String password = "stefan";
+	*/
 	
 	
 	private static Connection connection = null;
@@ -206,6 +207,47 @@ public class BuildingDAL {
 				policyEntity.setFromTime(rs.getTime("fromTime"));
 				policyEntity.setToTime(rs.getTime("toTime"));
 				policyEntity.setActive(true);
+				String json = rs.getString("policy");
+
+				Gson gson = GsonFactory.getInstance();
+
+				Policy policy = null;
+				policy = gson.fromJson(json, Policy.class);
+
+				policyEntity.setPolicy(policy);
+
+				policyEntities.add(policyEntity);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			CloseConn();
+			Log.log("Close DB connection");
+			logger.info("Close DB Connection");
+			System.out.println("Close DB connection \n");
+		}
+
+		return policyEntities;
+	}
+	
+	public static PolicyEntities getAllPolicies() {
+		connection = CreateConn();
+
+		PolicyEntities policyEntities = new PolicyEntities();
+
+		try {
+
+			preparedStatement = connection.prepareStatement("SELECT * FROM policy");
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				PolicyEntity policyEntity = new PolicyEntity();
+
+				policyEntity.setId(rs.getLong("id"));
+				policyEntity.setFromTime(rs.getTime("fromTime"));
+				policyEntity.setToTime(rs.getTime("toTime"));
+				policyEntity.setActive(rs.getBoolean("active"));
 				String json = rs.getString("policy");
 
 				Gson gson = GsonFactory.getInstance();

@@ -51,7 +51,7 @@ public class Connection {
 				data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
 			}
 			else
-				data = connect("http://localhost:9000/api/user/building/entry/description/1/?format=json");
+				data = connect("http://gsd.itu.dk/api/user/building/entry/description/1/?format=json");
 			JSONObject jsonObject = new JSONObject(data.toString());
 			JSONObject value = jsonObject.getJSONObject("value");
 			JSONObject rooms = value.getJSONObject("rooms");
