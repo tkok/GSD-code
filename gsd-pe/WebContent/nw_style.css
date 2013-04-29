@@ -20,6 +20,8 @@ body {
 .policy_box .clear{float:left;}
 
 
-.inner_section {float: left; color:#FFF;font-size:.95em!important;margin:0!important;display:block;padding:0px 10px 0px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
+.inner_section {width: 800px; float: left; color:#FFF;font-size:.95em!important;margin:0!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
+
+.inner_inner_section {width: 780px; float: left; color:#FFF;font-size:.95em!important;margin:0!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
 
 
