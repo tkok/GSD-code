@@ -25,19 +25,20 @@ import dk.itu.policyengine.domain.Value;
 public class DataAccessLayer {
 	private final static Logger logger = Logger.getLogger(DataAccessLayer.class);
 	
-	/*
+	
 	private static final String serverUrl = "jdbc:mysql://mysql2.gigahost.dk:3306/";
 	private static final String dbName = "webaholic_gsd";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "webaholic";
 	private static final String password = "Gh2kZuCwlpU5ZfpHQN4i";
-	*/
-
+	
+	/*
 	private static final String serverUrl = "jdbc:mysql://localhost:8889/gsd";
 	private static final String dbName = "";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "root";
 	private static final String password = "root";
+	*/
 	
 	private static Connection connection = null;
 	private static PreparedStatement preparedStatement = null;
