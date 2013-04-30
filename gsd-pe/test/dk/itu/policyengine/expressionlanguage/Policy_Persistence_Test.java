@@ -26,8 +26,12 @@ public class Policy_Persistence_Test {
 	private static String ROOM1_HEATER 		= "ROOM1.HEATER";
 	private static String ROOM1_BLINDS 		= "ROOM1.BLINDS";
 	
-	private static long _08_00 = 7 * 60 * 60 * 1000;
-	private static long _16_00 = 15 * 60 * 60 * 1000;
+	// From 00:00:00
+	Time fromTime = new Time(0, 0, 0);
+	
+	// To 23:59:59
+	Time toTime = new Time(23, 59, 59);
+
 	
 	@Before
 	public void setupDatabase() {
@@ -52,11 +56,10 @@ public class Policy_Persistence_Test {
 		Policy policy = new Policy();
 		policy.addStatement(ifStatement);
 		
-		Time fromTime = new Time(_08_00);
-		Time toTime = new Time(_16_00);
-		
 		PolicyEntity policyEntity = new PolicyEntity();
 		
+		policyEntity.setName("Test policy");
+		policyEntity.setDescription("This is a test policy doing nothing, really.");
 		policyEntity.setPolicy(policy);
 		policyEntity.setFromTime(fromTime);
 		policyEntity.setToTime(toTime);
@@ -65,8 +68,8 @@ public class Policy_Persistence_Test {
 		policyEntity = DataAccessLayer.persist(policyEntity);
 	}
 	
-	//@Test
-	public void notWorkingYet() {
+	@Test
+	public void getsThePolicyAndDeletesTheElseStatementAsAProofOfSQLUpdate() {
 		PolicyEntities policyEntities = DataAccessLayer.getActivePolicies(); 
 		
 		Assert.assertEquals(1, policyEntities.getSize());
@@ -75,7 +78,7 @@ public class Policy_Persistence_Test {
 			if (statement instanceof IfStatement) {
 				IfStatement theIfStatement = (IfStatement) statement;
 				
-				Assert.assertEquals(1,  theIfStatement.getElseStatements().size());
+				Assert.assertEquals(1, theIfStatement.getElseStatements().size());
 				
 				// Delete the ElseStatement
 				theIfStatement.setElseStatements(new ArrayList<Statement>());
