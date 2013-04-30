@@ -146,7 +146,10 @@ public class BuildingDAL {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			
 			CloseConn();
+			logger.info("Close DB Connection");
+			System.out.println("Close DB connection");
 		}
 		
 		return policyEntity;
@@ -157,7 +160,7 @@ public class BuildingDAL {
 		connection = CreateConn();
 
 		try {
-			preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ? AND toTime = ? AND active = ? AND policy = ? AND name = ? AND description = ? WHERE ID = ?");
+			preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ?, toTime = ?, active = ?, policy = ?, name = ?, description = ? WHERE id = ?");
 			
 			preparedStatement.setTime(1, policyEntity.getFromTime());
 			preparedStatement.setTime(2, policyEntity.getToTime());
@@ -211,6 +214,8 @@ public class BuildingDAL {
 				policyEntity.setFromTime(rs.getTime("fromTime"));
 				policyEntity.setToTime(rs.getTime("toTime"));
 				policyEntity.setActive(true);
+				policyEntity.setName(rs.getString("name"));
+				policyEntity.setDescription(rs.getString("description"));
 				String json = rs.getString("policy");
 
 				Gson gson = GsonFactory.getInstance();
