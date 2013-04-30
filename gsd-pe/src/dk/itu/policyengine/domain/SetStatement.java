@@ -1,13 +1,12 @@
 package dk.itu.policyengine.domain;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
+import org.apache.log4j.Logger;
 
 import dk.itu.policyengine.integration.Connection;
 import dk.itu.policyengine.persistence.SensorValueCache;
 
 public class SetStatement implements Statement {
+	private transient final Logger logger = Logger.getLogger(this.getClass());
 	
 	FloatValue aValue;
 	
@@ -23,17 +22,11 @@ public class SetStatement implements Statement {
 	
 	public void execute() {
 		SensorValueCache.setValue(sensorID, aValue);
+		
 		try {
 			new Connection().setSensorValue(sensorID, aValue.getIntValue());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			logger.error(e);
+		} 
 	}
 }
