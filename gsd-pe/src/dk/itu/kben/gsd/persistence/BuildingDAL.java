@@ -127,12 +127,14 @@ public class BuildingDAL {
 		connection = CreateConn();
 		
 		try {
-			preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy, name, description) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setTime(1, policyEntity.getFromTime());
 			preparedStatement.setTime(2, policyEntity.getToTime());
 			preparedStatement.setBoolean(3, policyEntity.isActive());
 			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
+			preparedStatement.setString(5, policyEntity.getName());
+			preparedStatement.setString(6, policyEntity.getDescription());
 			
 			preparedStatement.executeUpdate();
 			ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -155,13 +157,15 @@ public class BuildingDAL {
 		connection = CreateConn();
 
 		try {
-			preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ? AND toTime = ? AND active = ? AND policy = ? WHERE ID = ?");
+			preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ? AND toTime = ? AND active = ? AND policy = ? AND name = ? AND description = ? WHERE ID = ?");
 			
 			preparedStatement.setTime(1, policyEntity.getFromTime());
 			preparedStatement.setTime(2, policyEntity.getToTime());
 			preparedStatement.setBoolean(3, policyEntity.isActive());
 			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
-			preparedStatement.setLong(5, policyEntity.getId()); 
+			preparedStatement.setString(5, policyEntity.getName());
+			preparedStatement.setString(6, policyEntity.getDescription());
+			preparedStatement.setLong(7, policyEntity.getId()); 
 
 			preparedStatement.executeUpdate();
 			
@@ -248,6 +252,8 @@ public class BuildingDAL {
 				policyEntity.setFromTime(rs.getTime("fromTime"));
 				policyEntity.setToTime(rs.getTime("toTime"));
 				policyEntity.setActive(rs.getBoolean("active"));
+				policyEntity.setName(rs.getString("name"));
+				policyEntity.setDescription(rs.getString("description"));
 				String json = rs.getString("policy");
 
 				Gson gson = GsonFactory.getInstance();
