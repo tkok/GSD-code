@@ -45,7 +45,8 @@ public class PolicyLightsOff {
 		policyEntity.setFromTime(new Time(_2300));
 		policyEntity.setToTime(new Time(_0700));
 		policyEntity.setActive(true);
-		
+		policyEntity.setName("Lights off");
+		policyEntity.setDescription("Turn off the lights during the night");
 		BuildingDAL.persist(policyEntity);
 	}
 }

@@ -69,6 +69,9 @@ public class PolicyCooling {
 		policyEntity.setFromTime(new Time(_2400));
 		policyEntity.setToTime(new Time(23,59,0));
 		policyEntity.setActive(true);
+		policyEntity.setName("Cool the hallways");
+		policyEntity.setDescription("If the environment temperature is higher than 23 degrees, then turn on  " +
+			"turn on the air conditioning units");
 		
 		BuildingDAL.persist(policyEntity);
 		

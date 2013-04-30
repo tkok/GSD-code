@@ -102,7 +102,8 @@ public class PolicyTemperatureWorkingHours {
 		// To 17:00
 		entity.setToTime(new Time(23, 59, 0));
 		entity.setActive(true);
-		
+		entity.setName("Temperature in room 2");
+		entity.setDescription("Monitor the temperature in room 2. Turn off the heater if temperature is over 20 and turn on the AC otherwise");
 		entity = BuildingDAL.persist(entity);		
 	}
 }

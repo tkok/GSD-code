@@ -13,6 +13,11 @@ public class PolicyEntity implements Serializable {
 	
 	Time toTime;
 	
+	String name;
+	
+	String description;
+	
+	
 	boolean active = false;
 	
 	public PolicyEntity() {
@@ -56,5 +61,21 @@ public class PolicyEntity implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

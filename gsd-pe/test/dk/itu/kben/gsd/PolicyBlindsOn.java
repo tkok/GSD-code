@@ -48,6 +48,8 @@ public class PolicyBlindsOn {
 		policyEntity.setFromTime(new Time(23,0,0));
 		policyEntity.setToTime(new Time(06,0,0));
 		policyEntity.setActive(true);
+		policyEntity.setName("Roll blinds down");
+		policyEntity.setDescription("Roll blinds down to conserve heat.");
 		
 		BuildingDAL.persist(policyEntity);
 		
