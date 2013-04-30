@@ -166,14 +166,16 @@ function doPopulation(json)
 									+ '<div id="then-nested-' + json[k].id + '" class="inner_section">'
 									+ '<div class="inner_section float"><i><b>IF VALUES </b></i></div>'
 									+ '<div id="then-nested-if-' + json[k].id + '" class="inner_section">'
+									+ '<div style="clear: both;"></div>'
 									+ '</div>'
 									+ '<div class="inner_section"><i><b>THEN VALUES </b></i></div>'
 									+ '<div id="then-nested-then-' + json[k].id + '" class="inner_section">'
+									+ '<div style="clear: both;"></div>'
 									+ '</div>'
 									+ '<div class="inner_section"><i><b>ELSE VALUES </b></i></div>'
 									+ '<div id="then-nested-else-' + json[k].id + '" class="inner_section">'
-									+ '</div>'
 									+ '<div style="clear: both;"></div>'
+									+ '</div>'
 									+ '</div>'
 									+ '<div class="inner_section"><b>ELSE VALUES </b></div>'
 									+ '<div id="else-' + json[k].id + '" class="inner_section">'
@@ -209,7 +211,7 @@ function doPopulation(json)
 				   		for (var m in json[k].policy.statements[l].data.thenStatements) {
 
 				   			// check for nested statements
-				   			if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
+				   			if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.policyengine.domain.IfStatement") {
 
 				   				// iterate over nested conditionalExpressions
 						   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
@@ -233,7 +235,7 @@ function doPopulation(json)
 						   		// iterate over nested thenStatements
 						   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
 						   			// check for 2nd level nested statements
-						   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type == "dk.itu.kben.gsd.domain.IfStatement") {
+						   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type == "dk.itu.policyengine.domain.IfStatement") {
 						   				// IF we want to support 2nd level nested statements - do the same as for 1st level......
 						   				console.log("-- NESTED 2nd lvl thenStatement: " + n + " ---");
 						   				
