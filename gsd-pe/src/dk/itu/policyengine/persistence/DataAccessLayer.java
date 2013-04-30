@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.Calendar;
@@ -14,7 +13,6 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
-import dk.itu.nicl.gsd.log.Log;
 import dk.itu.policyengine.domain.FloatValue;
 import dk.itu.policyengine.domain.GsonFactory;
 import dk.itu.policyengine.domain.Policy;
