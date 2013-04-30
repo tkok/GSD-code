@@ -144,7 +144,7 @@ public class PolicyEngineServlet extends HttpServlet {
 		
 		logger.info("PolicyEngineServlet is starting...");
 		thread.start();
-		logger.info("PolicyEngineServlet was starting...");
+		logger.info("PolicyEngineServlet was started.");
 	}
 
 	@Override
