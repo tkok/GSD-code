@@ -154,19 +154,30 @@ function doPopulation(json)
 									+ '<br /><br />Description: '
 									+ json[k].description
 									+ '</div>'
-									+ '<div id="if-' + json[k].id + '" class="inner_section"><div><b>IF VALUES </b></div>'
+									+ '<div class="inner_section"><b>IF VALUES </b></div>'
+									+ '<div id="if-' + json[k].id + '" class="inner_section">'
+									+ '<div style="clear: both;"></div>'
 									+ '</div>'
-									+ '<div id="then-' + json[k].id + '" class="inner_section"><div><b>THEN VALUES </b></div>'
+									+ '<div class="inner_section"><b>THEN VALUES </b></div>'
+									+ '<div id="then-' + json[k].id + '" class="inner_section">'
+									+ '<div style="clear: both;"></div>'
 									+ '</div>'
-									+ '<div id="then-nested-' + json[k].id + '" class="inner_section"><div><b>THEN (1st level nested) VALUES </b></div>'
-									+ '<div id="then-nested-if-' + json[k].id + '" class="inner_section"><div><i><b>IF VALUES </b></i></div>'
+									+ '<div class="inner_section"><b>THEN (1st level nested) VALUES </b></div>'
+									+ '<div id="then-nested-' + json[k].id + '" class="inner_section">'
+									+ '<div class="inner_section float"><i><b>IF VALUES </b></i></div>'
+									+ '<div id="then-nested-if-' + json[k].id + '" class="inner_section">'
 									+ '</div>'
-									+ '<div id="then-nested-then-' + json[k].id + '" class="inner_section"><div><i><b>THEN VALUES </b></i></div>'
+									+ '<div class="inner_section"><i><b>THEN VALUES </b></i></div>'
+									+ '<div id="then-nested-then-' + json[k].id + '" class="inner_section">'
 									+ '</div>'
-									+ '<div id="then-nested-else-' + json[k].id + '" class="inner_section"><div><i><b>ELSE VALUES </b></i></div>'
+									+ '<div class="inner_section"><i><b>ELSE VALUES </b></i></div>'
+									+ '<div id="then-nested-else-' + json[k].id + '" class="inner_section">'
 									+ '</div>'
+									+ '<div style="clear: both;"></div>'
 									+ '</div>'
-									+ '<div id="else-' + json[k].id + '" class="inner_section"><div><b>ELSE VALUES </b></div>'
+									+ '<div class="inner_section"><b>ELSE VALUES </b></div>'
+									+ '<div id="else-' + json[k].id + '" class="inner_section">'
+									+ '<div style="clear: both;"></div>'
 									+ '</div>'
 									+ '<div class="inner_section"><label for="policy">'
 									+ '</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
@@ -180,7 +191,7 @@ function doPopulation(json)
 						for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
 							// Append to policy
 							$('#if-'+ json[k].id)
-							.append('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
+							.prepend('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
 							+ json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator
 							+ ', '
 							+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
@@ -190,7 +201,7 @@ function doPopulation(json)
 							+ json[k].policy.statements[l].data.conditionalExpressions[m].operator
 							+ ', '
 							+ json[k].policy.statements[l].data.conditionalExpressions[m].sensorId
-							+ '<div style="clear: both;"></div></div>'
+							+ '</div>'
 							);
 						}
 						
@@ -200,12 +211,12 @@ function doPopulation(json)
 				   			// check for nested statements
 				   			if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.kben.gsd.domain.IfStatement") {
 
-				   				/*// iterate over nested conditionalExpressions
+				   				// iterate over nested conditionalExpressions
 						   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
 						   			
 						   		// Append to policy
 									$('#then-nested-if-'+ json[k].id)
-									.append('<div id="then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section if"><div><b>then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+									.prepend('<div id="then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section if"><div><b>then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
 									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].prefixOperator
 									+ ', '
 									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.type
@@ -215,7 +226,7 @@ function doPopulation(json)
 									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].operator
 									+ ', '
 									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].sensorId
-									+ '<div style="clear: both;"></div></div>'
+									+ '</div>'
 									);
 
 						   		}
@@ -228,10 +239,10 @@ function doPopulation(json)
 						   				
 						   				// NO SUPPORT FOR 2nd level nested so just take type Append to policy
 										$('#then-nested-then-'+ json[k].id)
-										.append('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+										.prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
 										+ '2nd level nested NOT SUPPORTED, '
 										+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
-										+ '<div style="clear: both;"></div></div>'
+										+ '</div>'
 										);
 
 										
@@ -239,13 +250,13 @@ function doPopulation(json)
 						   			
 						   			// Append to policy
 									$('#then-nested-then-'+ json[k].id)
-									.append('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+									.prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
 									+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
 									+ ', '
 									+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.aValue.floatValue
 									+ ', '
 									+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.sensorID
-									+ '<div style="clear: both;"></div></div>'
+									+ '</div>'
 									);	
 					   			
 						   			
@@ -259,26 +270,26 @@ function doPopulation(json)
 						   			
 						   			// Append to policy
 									$('#then-nested-else-'+ json[k].id)
-									.append('<div id="then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section else"><div><b>then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+									.prepend('<div id="then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section else"><div><b>then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
 									+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].type
 									+ ', '
 									+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.aValue.floatValue
 									+ ', '
 									+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.sensorID
-									+ '<div style="clear: both;"></div></div>'
+									+ '</div>'
 									);
-						   		}*/
+						   		}
 				   			} else {
 				   				
 				   				// Append to policy (non nested)
 								$('#then-'+ json[k].id)
-								.append('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
+								.prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
 								+ json[k].policy.statements[l].data.thenStatements[m].type
 								+ ', '
 								+ json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue
 								+ ', '
 								+ json[k].policy.statements[l].data.thenStatements[m].data.sensorID
-								+ '<div style="clear: both;"></div></div>'
+								+ '</div>'
 								);
 				   			}
 				   		}
@@ -287,32 +298,24 @@ function doPopulation(json)
 				   			
 							// Append to policy
 							$('#else-'+ json[k].id)
-							.append('<div id="else-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + l + '-' + m +'</b></div>'
+							.prepend('<div id="else-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + l + '-' + m +'</b></div>'
 							+ json[k].policy.statements[l].data.elseStatements[m].type
 							+ ', '
 							+ json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue
 							+ ', '
 							+ json[k].policy.statements[l].data.elseStatements[m].data.sensorID
-							+ '<div style="clear: both;"></div></div>'
+							+ '</div>'
 							);
 
 				   		}
 
 					}
-					
-					
-					
-					$('#if-'+ json[k].id)
-					.append('<div style="clear: both;"></div>');
-					
-					$('#else-'+ json[k].id)
-					.append('<div style="clear: both;"></div>');
-					
-					$('#then-'+ json[k].id)
-					.append('<div style="clear: both;"></div>');
-
 				}
 }
+
+
+
+
 
 $("#all").click(function() {
 		
