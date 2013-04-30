@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd.domain;
+package dk.itu.policyengine.domain;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

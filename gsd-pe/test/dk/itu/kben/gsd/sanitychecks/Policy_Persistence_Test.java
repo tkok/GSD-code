@@ -8,17 +8,17 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import dk.itu.kben.gsd.domain.Expression;
-import dk.itu.kben.gsd.domain.FloatValue;
-import dk.itu.kben.gsd.domain.IfStatement;
-import dk.itu.kben.gsd.domain.Operator;
-import dk.itu.kben.gsd.domain.Policy;
-import dk.itu.kben.gsd.domain.PolicyEntities;
-import dk.itu.kben.gsd.domain.PolicyEntity;
-import dk.itu.kben.gsd.domain.SetStatement;
-import dk.itu.kben.gsd.domain.Statement;
-import dk.itu.kben.gsd.persistence.BuildingDAL;
-import dk.itu.scas.gsd.utils.SensorValueCache;
+import dk.itu.policyengine.domain.Expression;
+import dk.itu.policyengine.domain.FloatValue;
+import dk.itu.policyengine.domain.IfStatement;
+import dk.itu.policyengine.domain.Operator;
+import dk.itu.policyengine.domain.Policy;
+import dk.itu.policyengine.domain.PolicyEntities;
+import dk.itu.policyengine.domain.PolicyEntity;
+import dk.itu.policyengine.domain.SetStatement;
+import dk.itu.policyengine.domain.Statement;
+import dk.itu.policyengine.persistence.DataAccessLayer;
+import dk.itu.policyengine.persistence.SensorValueCache;
 
 public class Policy_Persistence_Test {
 	
@@ -38,7 +38,7 @@ public class Policy_Persistence_Test {
 
 	@Test
 	public void persistNewIfStatement() {
-		BuildingDAL.deleteAll();
+		DataAccessLayer.deleteAll();
 		
 		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.EQUALS, new FloatValue(10));
 		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
@@ -62,12 +62,12 @@ public class Policy_Persistence_Test {
 		policyEntity.setToTime(toTime);
 		policyEntity.setActive(true);
 		
-		policyEntity = BuildingDAL.persist(policyEntity);
+		policyEntity = DataAccessLayer.persist(policyEntity);
 	}
 	
 	//@Test
 	public void notWorkingYet() {
-		PolicyEntities policyEntities = BuildingDAL.getActivePolicies(); 
+		PolicyEntities policyEntities = DataAccessLayer.getActivePolicies(); 
 		
 		Assert.assertEquals(1, policyEntities.getSize());
 		
@@ -82,9 +82,9 @@ public class Policy_Persistence_Test {
 			}
 		}
 		
-		PolicyEntity policyEntity = BuildingDAL.persist(policyEntities.getPolicyEntities().get(0));
+		PolicyEntity policyEntity = DataAccessLayer.persist(policyEntities.getPolicyEntities().get(0));
 		
-		policyEntities = BuildingDAL.getActivePolicies();
+		policyEntities = DataAccessLayer.getActivePolicies();
 		Assert.assertEquals(1, policyEntities.getSize());
 
 		for (Statement statement: policyEntities.getPolicyEntities().get(0).getPolicy().getStatements()) {

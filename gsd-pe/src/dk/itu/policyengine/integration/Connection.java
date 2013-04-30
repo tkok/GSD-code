@@ -1,4 +1,4 @@
-package dk.itu.scas.gsd.net;
+package dk.itu.policyengine.integration;
 
 
 import java.io.BufferedReader;
@@ -23,8 +23,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dk.itu.kben.gsd.servlet.Configuration;
 import dk.itu.nicl.gsd.log.Log;
+import dk.itu.policyengine.servlet.Configuration;
 
 public class Connection {
 	// variables

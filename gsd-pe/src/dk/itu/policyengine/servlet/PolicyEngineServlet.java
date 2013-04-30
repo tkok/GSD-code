@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd.servlet;
+package dk.itu.policyengine.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,19 +23,19 @@ import org.apache.log4j.Priority;
 
 import com.google.gson.Gson;
 
-import dk.itu.kben.gsd.domain.Expression;
-import dk.itu.kben.gsd.domain.FloatValue;
-import dk.itu.kben.gsd.domain.GsonFactory;
-import dk.itu.kben.gsd.domain.IfStatement;
-import dk.itu.kben.gsd.domain.Policy;
-import dk.itu.kben.gsd.domain.PolicyEntities;
-import dk.itu.kben.gsd.domain.PolicyEntity;
-import dk.itu.kben.gsd.domain.Statement;
-import dk.itu.kben.gsd.persistence.BuildingDAL;
 import dk.itu.nicl.gsd.log.Log;
-import dk.itu.scas.gsd.net.Connection;
-import dk.itu.scas.gsd.net.ServiceProperties;
-import dk.itu.scas.gsd.utils.SensorValueCache;
+import dk.itu.policyengine.domain.Expression;
+import dk.itu.policyengine.domain.FloatValue;
+import dk.itu.policyengine.domain.GsonFactory;
+import dk.itu.policyengine.domain.IfStatement;
+import dk.itu.policyengine.domain.Policy;
+import dk.itu.policyengine.domain.PolicyEntities;
+import dk.itu.policyengine.domain.PolicyEntity;
+import dk.itu.policyengine.domain.Statement;
+import dk.itu.policyengine.integration.Connection;
+import dk.itu.policyengine.integration.ServiceProperties;
+import dk.itu.policyengine.persistence.DataAccessLayer;
+import dk.itu.policyengine.persistence.SensorValueCache;
 
 @SuppressWarnings("serial")
 public class PolicyEngineServlet extends HttpServlet {
@@ -106,7 +106,7 @@ public class PolicyEngineServlet extends HttpServlet {
 						}
 					}
 
-					PolicyEntities activePoliciesEntities = BuildingDAL.getActivePolicies();
+					PolicyEntities activePoliciesEntities = DataAccessLayer.getActivePolicies();
 					logger.info("There are "+activePoliciesEntities.getSize()+" active policies now.");
 					System.out.println(activePoliciesEntities.getSize() + " Policies are active.");
 					
@@ -229,13 +229,13 @@ public class PolicyEngineServlet extends HttpServlet {
 			for (String s : sens)
 				out.println("<br>" + s);
 		} else if (userPath.equals("/GetActivePolicies")) {
-			PolicyEntities policyEntities = BuildingDAL.getActivePolicies();
+			PolicyEntities policyEntities = DataAccessLayer.getActivePolicies();
 			response.setContentType("application/json");
 			String json = policyEntities.toJSON();
 
 			out.print(json);
 		} else if (userPath.equals("/GetAllPolicies")) {
-			PolicyEntities policyEntities = BuildingDAL.getAllPolicies();
+			PolicyEntities policyEntities = DataAccessLayer.getAllPolicies();
 			response.setContentType("application/json");
 			String json = policyEntities.toJSON();
 
@@ -267,7 +267,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				policyEntity.setToTime(toTime);
 				policyEntity.setActive(active);
 
-				BuildingDAL.persist(policyEntity);
+				DataAccessLayer.persist(policyEntity);
 			} else if (userPath.equals("/ChangeValue")) {
 				String sensorId = request.getParameter("sensorId");
 				String value = request.getParameter("value");

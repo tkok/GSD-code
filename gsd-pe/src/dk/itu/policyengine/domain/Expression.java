@@ -1,9 +1,9 @@
-package dk.itu.kben.gsd.domain;
+package dk.itu.policyengine.domain;
 
 import java.io.Serializable;
 
 import dk.itu.nicl.gsd.log.Log;
-import dk.itu.scas.gsd.utils.SensorValueCache;
+import dk.itu.policyengine.persistence.SensorValueCache;
 
 public class Expression implements Serializable {
 	

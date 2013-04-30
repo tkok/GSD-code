@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd.domain;
+package dk.itu.policyengine.domain;
 
 public enum Operator {
 	LESS_THAN,

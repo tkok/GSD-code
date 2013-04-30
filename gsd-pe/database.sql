@@ -4,6 +4,8 @@ CREATE TABLE `policy` (
   `toTime` time NOT NULL,
   `active` binary(1) NOT NULL,
   `policy` text NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=70 DEFAULT CHARSET=latin1$$
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=UTF8
 

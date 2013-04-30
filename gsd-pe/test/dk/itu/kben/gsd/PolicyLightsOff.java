@@ -11,16 +11,16 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import dk.itu.kben.gsd.domain.Expression;
-import dk.itu.kben.gsd.domain.FloatValue;
-import dk.itu.kben.gsd.domain.IfStatement;
-import dk.itu.kben.gsd.domain.Operator;
-import dk.itu.kben.gsd.domain.Policy;
-import dk.itu.kben.gsd.domain.PolicyEntity;
-import dk.itu.kben.gsd.domain.SetStatement;
-import dk.itu.kben.gsd.domain.Statement;
-import dk.itu.kben.gsd.persistence.BuildingDAL;
-import dk.itu.scas.gsd.net.Connection;
+import dk.itu.policyengine.domain.Expression;
+import dk.itu.policyengine.domain.FloatValue;
+import dk.itu.policyengine.domain.IfStatement;
+import dk.itu.policyengine.domain.Operator;
+import dk.itu.policyengine.domain.Policy;
+import dk.itu.policyengine.domain.PolicyEntity;
+import dk.itu.policyengine.domain.SetStatement;
+import dk.itu.policyengine.domain.Statement;
+import dk.itu.policyengine.integration.Connection;
+import dk.itu.policyengine.persistence.DataAccessLayer;
 
 public class PolicyLightsOff {
 	
@@ -47,6 +47,6 @@ public class PolicyLightsOff {
 		policyEntity.setActive(true);
 		policyEntity.setName("Lights off");
 		policyEntity.setDescription("Turn off the lights during the night");
-		BuildingDAL.persist(policyEntity);
+		DataAccessLayer.persist(policyEntity);
 	}
 }

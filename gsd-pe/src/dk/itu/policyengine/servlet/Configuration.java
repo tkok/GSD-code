@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd.servlet;
+package dk.itu.policyengine.servlet;
 
 import javax.servlet.ServletConfig;
 

@@ -1,8 +1,8 @@
-package dk.itu.scas.gsd.utils;
+package dk.itu.policyengine.persistence;
 
 import java.util.Hashtable;
 
-import dk.itu.kben.gsd.domain.FloatValue;
+import dk.itu.policyengine.domain.FloatValue;
 
 public class SensorValueCache {
 

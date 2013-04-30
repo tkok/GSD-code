@@ -7,7 +7,7 @@
 <web-app>
 	<servlet>
 		<servlet-name>PolicyEngineServlet</servlet-name>
-		<servlet-class>dk.itu.kben.gsd.servlet.PolicyEngineServlet</servlet-class>
+		<servlet-class>dk.itu.policyengine.servlet.PolicyEngineServlet</servlet-class>
 		
 		<init-param>
 			<param-name>server</param-name>

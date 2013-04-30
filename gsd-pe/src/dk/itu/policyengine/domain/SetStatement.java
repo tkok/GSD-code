@@ -1,11 +1,11 @@
-package dk.itu.kben.gsd.domain;
+package dk.itu.policyengine.domain;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
-import dk.itu.scas.gsd.net.Connection;
-import dk.itu.scas.gsd.utils.SensorValueCache;
+import dk.itu.policyengine.integration.Connection;
+import dk.itu.policyengine.persistence.SensorValueCache;
 
 public class SetStatement implements Statement {
 	

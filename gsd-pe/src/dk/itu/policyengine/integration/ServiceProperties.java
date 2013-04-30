@@ -1,4 +1,4 @@
-package dk.itu.scas.gsd.net;
+package dk.itu.policyengine.integration;
 
 import java.util.ArrayList;
 import java.util.Iterator;

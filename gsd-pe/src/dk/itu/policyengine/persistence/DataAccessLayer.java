@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd.persistence;
+package dk.itu.policyengine.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,36 +14,35 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
-import dk.itu.kben.gsd.domain.FloatValue;
-import dk.itu.kben.gsd.domain.GsonFactory;
-import dk.itu.kben.gsd.domain.Policy;
-import dk.itu.kben.gsd.domain.PolicyEntities;
-import dk.itu.kben.gsd.domain.PolicyEntity;
-import dk.itu.kben.gsd.domain.Value;
 import dk.itu.nicl.gsd.log.Log;
+import dk.itu.policyengine.domain.FloatValue;
+import dk.itu.policyengine.domain.GsonFactory;
+import dk.itu.policyengine.domain.Policy;
+import dk.itu.policyengine.domain.PolicyEntities;
+import dk.itu.policyengine.domain.PolicyEntity;
+import dk.itu.policyengine.domain.Value;
 
-public class BuildingDAL {
+public class DataAccessLayer {
 	
+	/*
 	private static final String serverUrl = "jdbc:mysql://mysql2.gigahost.dk:3306/";
 	private static final String dbName = "webaholic_gsd";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "webaholic";
 	private static final String password = "Gh2kZuCwlpU5ZfpHQN4i";
+	*/
 
-	/*
-	private static final String serverUrl = "jdbc:mysql://localhost:3306/gsd";
+	private static final String serverUrl = "jdbc:mysql://localhost:8889/gsd";
 	private static final String dbName = "";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String userName = "root";
-	private static final String password = "stefan";
-	*/
-	
+	private static final String password = "root";
 	
 	private static Connection connection = null;
 	private static PreparedStatement preparedStatement = null;
-	private final static Logger logger = Logger.getLogger(BuildingDAL.class);
+	private final static Logger logger = Logger.getLogger(DataAccessLayer.class);
 	
-	private BuildingDAL() {
+	private DataAccessLayer() {
 	}
 
 	private static Connection CreateConn() {
@@ -65,7 +64,7 @@ public class BuildingDAL {
 		}
 		return connection;
 	}
-
+	
 	private static void CloseConn() {
 		try {
 			connection.close();

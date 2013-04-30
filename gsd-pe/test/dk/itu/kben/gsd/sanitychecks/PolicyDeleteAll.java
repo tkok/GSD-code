@@ -4,13 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dk.itu.kben.gsd.persistence.BuildingDAL;
+import dk.itu.policyengine.persistence.DataAccessLayer;
 
 public class PolicyDeleteAll {
 
 	@Test
 	public void delete(){
-		BuildingDAL.deleteAll();
-		assertEquals(0, BuildingDAL.getAllPolicies().getSize());
+		DataAccessLayer.deleteAll();
+		assertEquals(0, DataAccessLayer.getAllPolicies().getSize());
 	}
 }

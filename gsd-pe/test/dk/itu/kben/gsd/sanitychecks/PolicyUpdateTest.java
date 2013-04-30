@@ -9,10 +9,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import dk.itu.kben.gsd.domain.Policy;
-import dk.itu.kben.gsd.domain.PolicyEntities;
-import dk.itu.kben.gsd.domain.PolicyEntity;
-import dk.itu.kben.gsd.persistence.BuildingDAL;
+import dk.itu.policyengine.domain.Policy;
+import dk.itu.policyengine.domain.PolicyEntities;
+import dk.itu.policyengine.domain.PolicyEntity;
+import dk.itu.policyengine.persistence.DataAccessLayer;
 
 public class PolicyUpdateTest {
 	List<PolicyEntity> policyEntity;
@@ -20,7 +20,7 @@ public class PolicyUpdateTest {
 	@Before
 	public void set(){
 		policyEntity = new ArrayList<PolicyEntity>();
-		policyEntity = BuildingDAL.getActivePolicies().getPolicyEntities();
+		policyEntity = DataAccessLayer.getActivePolicies().getPolicyEntities();
 	}
 	@Test
 	public void test() {
@@ -28,7 +28,7 @@ public class PolicyUpdateTest {
 		PolicyEntity policy = policyEntity.get(0);
 		long id = policy.getId();
 		policy.setName(name);
-		BuildingDAL.persist(policy);
+		DataAccessLayer.persist(policy);
 		
 	}
 
