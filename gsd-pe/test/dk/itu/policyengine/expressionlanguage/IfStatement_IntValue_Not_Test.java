@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd.sanitychecks;
+package dk.itu.policyengine.expressionlanguage;
 
 import junit.framework.Assert;
 
@@ -13,7 +13,7 @@ import dk.itu.policyengine.domain.SetStatement;
 import dk.itu.policyengine.domain.Statement;
 import dk.itu.policyengine.persistence.SensorValueCache;
 
-public class IfStatement_IntValue_LT_Test {
+public class IfStatement_IntValue_Not_Test {
 	
 	private static String ROOM1_TEMPERATURE = "ROOM1.TEMPERATURE";
 	private static String ROOM1_HEATER 		= "ROOM1.HEATER";
@@ -25,8 +25,8 @@ public class IfStatement_IntValue_LT_Test {
 	}
 
 	@Test
-	public void simpleLT_Execute() {
-		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.LESS_THAN, new FloatValue(12));
+	public void simpleEqual_ExecuteBecauseLT() {
+		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.NOT, new FloatValue(10));
 		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
 		
 		IfStatement ifStatement = new IfStatement();
@@ -39,8 +39,8 @@ public class IfStatement_IntValue_LT_Test {
 	}
 	
 	@Test
-	public void simpleLT_NoExecuteBecauseEqual() {
-		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.LESS_THAN, new FloatValue(11));
+	public void simpleEqual_ExecuteBecauseGT() {
+		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.NOT, new FloatValue(12));
 		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
 		
 		IfStatement ifStatement = new IfStatement();
@@ -49,12 +49,12 @@ public class IfStatement_IntValue_LT_Test {
 		
 		Assert.assertEquals(0f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
 		ifStatement.execute();
-		Assert.assertEquals(0f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
-	}	
-
+		Assert.assertEquals(1f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
+	}
+	
 	@Test
-	public void simpleLT_NoExecuteBecauseLT() {
-		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.LESS_THAN, new FloatValue(10));
+	public void simpleEquak_NoExecuteEqual() {
+		Expression expression = new Expression(ROOM1_TEMPERATURE, Operator.NOT, new FloatValue(11));
 		Statement thenStatement = new SetStatement(ROOM1_HEATER, new FloatValue(1));
 		
 		IfStatement ifStatement = new IfStatement();
@@ -65,4 +65,5 @@ public class IfStatement_IntValue_LT_Test {
 		ifStatement.execute();
 		Assert.assertEquals(0f, SensorValueCache.getValue(ROOM1_HEATER).getValue());
 	}
+	
 }

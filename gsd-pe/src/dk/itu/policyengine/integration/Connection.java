@@ -1,15 +1,10 @@
 package dk.itu.policyengine.integration;
 
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -23,10 +18,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import dk.itu.nicl.gsd.log.Log;
 import dk.itu.policyengine.servlet.Configuration;
 
 public class Connection {
+	private final Logger logger = Logger.getLogger(this.getClass());
+	
 	// variables
 	private String [] services = {"lights", "acs", "heaters", "blinds", "waters"};
 	//private static final String BUILDING_INFO = "api/user/building/entry/description/1/?format=json";
@@ -34,7 +30,6 @@ public class Connection {
 	//private static final String SET_SENSOR_VALUE = "api/user/building/entry/set/1/";
 	//private static final String SET_SENSOR_VALUE_LOCAL= "http://127.0.0.1:8000/api/user/building/entry/set/1/";
 	private static final String file = "sensor.json";
-	private final Logger logger = Logger.getLogger(this.getClass());
 	
 	/**
 	 * Get list of sensors. Return a list of sensors id's
@@ -64,7 +59,6 @@ public class Connection {
 					Iterator iterator = obj.keys();
 					while(iterator.hasNext()){
 						sensors.add(iterator.next().toString());
-						//System.out.println(iterator.next().toString());
 					}
 				}
 			}
@@ -91,14 +85,12 @@ public class Connection {
 					Iterator iterator = obj.keys();
 					while(iterator.hasNext()){
 						sensors.add(iterator.next().toString());
-						//System.out.println(iterator.next().toString());
 					}
 				}
 			}
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("JSON error", e);
 		}
 		return sensors;
 	}
@@ -113,8 +105,8 @@ public class Connection {
 	public String connect(String url) throws MalformedURLException, URISyntaxException {
 		StringBuffer bufferString = new StringBuffer();
 		try{
-			System.out.println("Trying to connect to "+url);
-			logger.info("Trying to fetch data from "+url);
+			logger.debug("Trying to connect to  " + url);
+			
 			URL _url = new URL(url);
 			URLConnection urlConnection = _url.openConnection();
 			urlConnection.setReadTimeout(Configuration.getTimeout());
@@ -126,10 +118,7 @@ public class Connection {
 			}
 			bufferedReader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.log("Socket timeout exception");
-			logger.info("Server is not responding");
-			System.out.println("Socket timeout exception");
+			logger.warn("Socket timeout exception", e);
 		}
 			return bufferString.toString();
 	}
@@ -161,18 +150,15 @@ public class Connection {
 				JSONArray objects = jsonObject.getJSONArray("objects");
 				for(int i=0;i<objects.length();i++){
 					JSONObject jsonobject = objects.getJSONObject(i);
-					//System.out.println(jsonobject.getInt("bid"));
 					if(jsonobject.getInt("bid")==1){
 						value = jsonobject.get("val").toString();
-						//value = Double.valueOf(s);
-						//System.out.println("sensor "+query+" had value "+object.toString()+" at "+jsonobject.getString("timestamp"));
 						break;
 					}
 				}
 				}
 			}
 		catch (JSONException e) {
-			System.out.println("JSON Exception");
+			logger.error("JSON exception.", e);
 		}
 		
 		return value;
@@ -211,8 +197,7 @@ public class Connection {
 		else
 			return false;
 		*/
-		Log.log(data);
-		System.out.println(data);
+		logger.info(data);
 		return true;
 	}
 	/**

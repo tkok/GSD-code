@@ -2,10 +2,11 @@ package dk.itu.policyengine.persistence;
 
 import java.util.Hashtable;
 
+import org.apache.log4j.Logger;
+
 import dk.itu.policyengine.domain.FloatValue;
 
 public class SensorValueCache {
-
 	static Hashtable<String, FloatValue> hashtable = new Hashtable<String, FloatValue>();
 
 	public static FloatValue getValue(String name) {
@@ -13,8 +14,9 @@ public class SensorValueCache {
 	}
 
 	public static void setValue(String name, FloatValue value) {
-		//Log.log("Setting " + name + " to " + value);
-		System.out.println("Setting " + name + " to " + value);
+		final Logger logger = Logger.getLogger(SensorValueCache.class);
+		
+		logger.debug("Setting " + name + " to " + value);
 		
 		hashtable.put(name, value);
 	}

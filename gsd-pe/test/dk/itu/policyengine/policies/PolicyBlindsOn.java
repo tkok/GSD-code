@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.policyengine.policies;
 /**
  * @author = Stefan
  * Roll down the blinds during the night - it should help preserve heat

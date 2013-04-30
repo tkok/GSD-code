@@ -2,8 +2,9 @@ package dk.itu.policyengine.servlet;
 
 import javax.servlet.ServletConfig;
 
+import org.apache.log4j.Logger;
+
 public class Configuration {
-	
 	private static String server;
 	private static String building;
 	private static String setvalue;
@@ -12,23 +13,25 @@ public class Configuration {
 	private static int timeout;
 	
 	public static void setConfiguration(ServletConfig servletConfig) {
+		Logger logger = Logger.getLogger(Configuration.class);
+		
 		server = servletConfig.getInitParameter("server");
-		System.out.println("Server: " + server);
+		logger.debug("Server: " + server);
 		
 		building = servletConfig.getInitParameter("building");
-		System.out.println("Building: " + building);
+		logger.debug("Building: " + building);
 		
 		format = servletConfig.getInitParameter("format");
-		System.out.println("Format: " + format);
+		logger.debug("Format: " + format);
 		
 		setvalue = servletConfig.getInitParameter("setvalue");
-		System.out.println("SetValue: " + setvalue);
+		logger.debug("SetValue: " + setvalue);
 		
 		activationInterval = new Integer(servletConfig.getInitParameter("activationInterval")).intValue();
-		System.out.println("ActivationInterval: " + activationInterval);
+		logger.debug("ActivationInterval: " + activationInterval);
 		
 		timeout = new Integer(servletConfig.getInitParameter("timeout")).intValue();
-		System.out.println("Timeout: " + timeout);
+		logger.debug("Timeout: " + timeout);
 	}
 
 	public static String getServer() {

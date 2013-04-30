@@ -2,12 +2,14 @@ package dk.itu.policyengine.domain;
 
 import java.io.Serializable;
 
-import dk.itu.nicl.gsd.log.Log;
+import org.apache.log4j.Logger;
+
 import dk.itu.policyengine.persistence.SensorValueCache;
 
 public class Expression implements Serializable {
+	private transient Logger logger = Logger.getLogger(this.getClass());
 	
-	// Default should be AND
+	// The current expression language supports only AND between expressions inside an IF.
 	LogicalOperator prefixOperator = LogicalOperator.AND;
 
 	Value aValue = null;
@@ -35,66 +37,54 @@ public class Expression implements Serializable {
 		if (operator == Operator.EQUALS) {
 			float c = sensorValue.compareTo(aValue);
 			
-			Log.log("Is " + sensorValue + " equal to " + aValue + " ? ");
-			System.out.print("Is " + sensorValue + " equal to " + aValue + " ? ");
+			logger.debug("Is " + sensorValue + " equal to " + aValue + " ? ");
 			
 			if (c == 0) {
-				Log.log("Yes.");
-				System.out.println("Yes.");
+				logger.debug("Yes.");
 				return true;
 			}
 			else {
-				Log.log("No.");
-				System.out.println("No.");
+				logger.debug("No.");
 			}
 		}
 		else {
 			if (operator == Operator.LESS_THAN) {
 				int c = sensorValue.compareTo(aValue);
-				Log.log("Is " + sensorValue + " less than " + aValue + " ? ");
-				System.out.print("Is " + sensorValue + " less than " + aValue + " ? ");
+				logger.debug("Is " + sensorValue + " less than " + aValue + " ? ");
 				
 				if (c < 0) {
-					Log.log("Yes.");
-					System.out.println("Yes.");
+					logger.debug("Yes.");
 					return true;
 				}
 				else {
-					Log.log("No.");
-					System.out.println("No.");
+					logger.debug("No.");
 				}
 					
 			}
 			else {
 				if (operator == Operator.GREATER_THAN) {
 					int c = sensorValue.compareTo(aValue);
-					Log.log("Is " + sensorValue + " greater than " + aValue + " ? ");
-					System.out.print("Is " + sensorValue + " greater than " + aValue + " ? ");
+					logger.debug("Is " + sensorValue + " greater than " + aValue + " ? ");
 					
 					if (c > 0) {
-						Log.log("Yes.");
-						System.out.println("Yes.");
+						logger.debug("Yes.");
 						return true;
 					}
 					else {
-						Log.log("No.");
-						System.out.println("No.");
+						logger.debug("No.");
 					}
 				}
 				else {
 					if (operator == Operator.NOT) {
 						int c = sensorValue.compareTo(aValue);
-						Log.log("Is " + sensorValue + " different from " + aValue + " ? ");
-						System.out.print("Is " + sensorValue + " different from " + aValue + " ? ");
+						logger.debug("Is " + sensorValue + " different from " + aValue + " ? ");
 						
 						if (c != 0) {
-							Log.log("Yes.");
-							System.out.println("Yes.");
+							logger.debug("Yes.");
 							return true;
 						}
 						else {
-							Log.log("No.");
-							System.out.println("No.");
+							logger.debug("No.");
 						}
 					}
 				}

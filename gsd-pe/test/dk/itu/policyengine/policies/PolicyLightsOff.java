@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.policyengine.policies;
 /**
  * @author Stefan
  * Policy for shutting off all the lights during the night.

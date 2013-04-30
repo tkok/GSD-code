@@ -23,6 +23,7 @@ import dk.itu.policyengine.domain.PolicyEntity;
 import dk.itu.policyengine.domain.Value;
 
 public class DataAccessLayer {
+	private final static Logger logger = Logger.getLogger(DataAccessLayer.class);
 	
 	/*
 	private static final String serverUrl = "jdbc:mysql://mysql2.gigahost.dk:3306/";
@@ -40,7 +41,6 @@ public class DataAccessLayer {
 	
 	private static Connection connection = null;
 	private static PreparedStatement preparedStatement = null;
-	private final static Logger logger = Logger.getLogger(DataAccessLayer.class);
 	
 	private DataAccessLayer() {
 	}
@@ -49,31 +49,22 @@ public class DataAccessLayer {
 		try {
 			Class.forName(driver).newInstance();
 			connection = DriverManager.getConnection(serverUrl + dbName, userName, password);
-			Log.log("Creating DB connection");
-			logger.info("Creating DB connection to "+serverUrl);
-			System.out.println("Creating DB connection \n");
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			logger.debug("Creating DB connection to " + serverUrl);
+		} catch (Exception e) {
+			logger.error("Error creating database connection.", e);
 		}
+		
 		return connection;
 	}
 	
 	private static void CloseConn() {
 		try {
+			logger.debug("Close DB Connection");
+			
 			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-
 		} catch (Exception e) {
-			e.toString();
-		}
+			logger.error("Error closing DB connection.", e);
+		} 
 	}
 
 	protected static Hashtable<String, Value> GetHashtableWithStringValueFromDB(String tableFromName) {
@@ -85,22 +76,16 @@ public class DataAccessLayer {
 			while (resultSet.next()) {
 				String uuid = resultSet.getString("uuid");
 				float val = resultSet.getInt("val");
-				Log.log(uuid + val);
-				logger.info(uuid+val);
-				System.out.println(uuid + val + "\n");
+				
+				logger.debug(uuid+val);
 				ht.put(uuid, new FloatValue(val));
 			}
-			Log.log("ht size: " + ht.size());
-			logger.info("ht size" + ht.size());
-			System.out.println("ht size: " + ht.size() + "\n");
+			logger.debug("ht size" + ht.size());
 			return ht;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(e);
 		} finally {
 			CloseConn();
-			Log.log("Close DB connection \n");
-			logger.info("Close DB Connection");
-			System.out.println("Close DB connection \n");
 		}
 		return null;
 	}
@@ -111,18 +96,14 @@ public class DataAccessLayer {
 			preparedStatement = connection.prepareStatement("DELETE FROM policy");
 			
 			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(e);
 		} finally {
 			CloseConn();
-			Log.log("Close DB connection");
-			logger.info("Close DB Connection");
-			System.out.println("Close DB connection \n");
 		}
 	}
 	
 	private static PolicyEntity insertPolicyEntity(PolicyEntity policyEntity) {
-		System.out.println("Inserting policy.");
 		connection = CreateConn();
 		
 		try {
@@ -136,26 +117,24 @@ public class DataAccessLayer {
 			preparedStatement.setString(6, policyEntity.getDescription());
 			
 			preparedStatement.executeUpdate();
+			logger.debug("Policy " + policyEntity.getName() + " was inserted into the database.");
+			
 			ResultSet rs = preparedStatement.getGeneratedKeys();
 			if (rs.next()) {
 				long id = rs.getLong(1);
 				policyEntity.setId(id);
 			}
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(e);
 		} finally {
-			
 			CloseConn();
-			logger.info("Close DB Connection");
-			System.out.println("Close DB connection");
 		}
 		
 		return policyEntity;
 	}
 	
 	private static void updatePolicyEntity(PolicyEntity policyEntity) {
-		System.out.println("Updating policy.");
 		connection = CreateConn();
 
 		try {
@@ -170,9 +149,9 @@ public class DataAccessLayer {
 			preparedStatement.setLong(7, policyEntity.getId()); 
 
 			preparedStatement.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.debug("Policy " + policyEntity.getName() + " was updated in the database.");
+		} catch (Exception e) {
+			logger.error(e);
 		} finally {
 			CloseConn();
 		}
@@ -226,13 +205,10 @@ public class DataAccessLayer {
 
 				policyEntities.add(policyEntity);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(e);
 		} finally {
 			CloseConn();
-			Log.log("Close DB connection");
-			logger.info("Close DB Connection");
-			System.out.println("Close DB connection \n");
 		}
 
 		return policyEntities;
@@ -244,7 +220,6 @@ public class DataAccessLayer {
 		PolicyEntities policyEntities = new PolicyEntities();
 
 		try {
-
 			preparedStatement = connection.prepareStatement("SELECT * FROM policy");
 
 			ResultSet rs = preparedStatement.executeQuery();
@@ -269,13 +244,10 @@ public class DataAccessLayer {
 
 				policyEntities.add(policyEntity);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error(e);
 		} finally {
 			CloseConn();
-			Log.log("Close DB connection");
-			logger.info("Close DB Connection");
-			System.out.println("Close DB connection \n");
 		}
 
 		return policyEntities;

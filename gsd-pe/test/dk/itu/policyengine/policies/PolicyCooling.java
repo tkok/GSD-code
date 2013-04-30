@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.policyengine.policies;
 /**
  * @author Stefan
  * Policy for cooling the environment if it is too hot.  

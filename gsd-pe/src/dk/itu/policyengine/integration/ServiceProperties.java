@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import dk.itu.nicl.gsd.log.Log;
 
 public class ServiceProperties {
-	
 	private final static String [] PROPS =  {"gain","production","state"};
 	/*private final static String [] LIGHT = {"gain","production","state"};
 	private final static String [] AC = {"gain","production","state"};
@@ -21,12 +22,13 @@ public class ServiceProperties {
 	 * @return
 	 */
 	public static List<String> allSensorsWithProperties(List<String> sensorIds){
+		final Logger logger = Logger.getLogger(ServiceProperties.class);
+		
 		List<String> list = new ArrayList<String>();
 		Iterator iterator = sensorIds.iterator();
 		while(iterator.hasNext()){
 			String id = (String) iterator.next();
-			System.out.println(id.trim());
-			Log.log(id.trim());
+			logger.debug(id.trim());
 			if(id.contains("blind")){
 				for(String s : BLINDS)
 					list.add(id+"-"+s.toString());

@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
 import com.google.gson.Gson;
 
@@ -39,9 +38,9 @@ import dk.itu.policyengine.persistence.SensorValueCache;
 
 @SuppressWarnings("serial")
 public class PolicyEngineServlet extends HttpServlet {
+	private Logger logger = Logger.getLogger(this.getClass());
 
 	Thread thread = null;
-	private Logger logger = Logger.getLogger(this.getClass());
 	static boolean shouldRun = true;
 	
 	static boolean wasStopped = false;
@@ -50,10 +49,9 @@ public class PolicyEngineServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		// Initializes the Configuration class based on the current ServletConfig
+
 		Configuration.setConfiguration(config);
-		logger.info("Initializing servlet with initial parameters");
-		System.out.println("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
+		logger.debug("PolicyEngineServlet is using server: " + config.getInitParameter("server"));
 
 		connection = new Connection();
 
@@ -80,7 +78,7 @@ public class PolicyEngineServlet extends HttpServlet {
 									String sensorValue = connection.getSensorValue(expression.getSensorId());
 									
 									if (sensorValue == null || sensorValue.length() == 0) {
-										System.out.println("Trying to fetch value for sensor " + expression.getSensorId() + " but it is empty.");
+										logger.debug("Trying to fetch value for sensor " + expression.getSensorId() + " but it is empty.");
 									}
 									else {
 										SensorValueCache.setValue(expression.getSensorId(), new FloatValue(Float.parseFloat(sensorValue)));
@@ -107,37 +105,46 @@ public class PolicyEngineServlet extends HttpServlet {
 					}
 
 					PolicyEntities activePoliciesEntities = DataAccessLayer.getActivePolicies();
-					logger.info("There are "+activePoliciesEntities.getSize()+" active policies now.");
-					System.out.println(activePoliciesEntities.getSize() + " Policies are active.");
+					
+					if (activePoliciesEntities.getSize() == 1) {
+						logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
+					}
+					else {
+						if (activePoliciesEntities.getSize() > 1) {
+							logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
+						}
+					}
 					
 					loadServerValues(activePoliciesEntities);
 							
 					for(PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()){
 						for(Statement statement : policyEntity.getPolicy().getStatements()){
-							statement.execute();
+							try {
+								statement.execute();
+							}
+							catch (Exception e) {
+								// Oh oh. Move along, nothing to see here.
+								
+								logger.debug("Error executing statement.", e);
+							}
 						}
 					}
 					
 					// Clear cache
 					SensorValueCache.clearCache();
 
-					System.out.println(Configuration.getActivationInterval() + " seconds passed.");
-
+					logger.info(Configuration.getActivationInterval() + " seconds passed.");
 				}
 				
-				System.out.println("PolicyEngineServlet is stopping...");
-				System.out.println("PolicyEngineServlet was stopped.");
-				Log.log("PolicyEngineServlet was stopped.");
-				logger.info("PolicyEngineServlet was stopped.");
+				logger.info("PolicyEngineServlet is stopping...");
 				wasStopped = true;
 			}
 		});
 		
 		
-		System.out.println("PolicyEngineServlet is starting...");
+		logger.info("PolicyEngineServlet is starting...");
 		thread.start();
-		System.out.println("PolicyEngineServlet was started.");
-		Log.log("PolicyEngineServlet was started.");
+		logger.info("PolicyEngineServlet was starting...");
 	}
 
 	@Override
@@ -153,8 +160,7 @@ public class PolicyEngineServlet extends HttpServlet {
 		}
 
 		thread = null;
-		System.out.println("PolicyEngineServlet internal thread was stopped and available to garbage collector.");
-		Log.log("PolicyEngineServlet internal thread was stopped and available to garbage collector.");
+		logger.info("PolicyEngineServlet was stopped.");
 
 		super.destroy();
 	}

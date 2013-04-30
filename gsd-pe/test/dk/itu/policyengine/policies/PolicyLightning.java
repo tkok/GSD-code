@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd;
+package dk.itu.policyengine.policies;
 
 import java.sql.Time;
 

@@ -1,4 +1,4 @@
-package dk.itu.kben.gsd.sanitychecks;
+package dk.itu.policyengine.expressionlanguage;
 
 import static org.junit.Assert.*;
 
