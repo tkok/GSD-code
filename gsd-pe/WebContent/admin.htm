@@ -13,7 +13,7 @@
  <div class="policies">
 <script>
 
-function recursiveThen(json, k, l, m, runs)
+function recursiveThen(json, k, l, m)
 		{
 
 				   			// check for nested statements
@@ -41,16 +41,14 @@ function recursiveThen(json, k, l, m, runs)
 						   		// iterate over nested thenStatements
 						   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
 						   			
-						   			runs--;
 						   			
-						   			if(json[k].policy.statements[l].data.thenStatements[m].data.thenStatements.length >= runs) {
 		
-						   				recursiveThen(json, k, l, m, runs)
+						   				//recursiveThen(json, k, l, m)
 						   				
-						   			}
+						   				// Problem is how to handle the paths in each level of a run
 						   			
 						   			
-						   			/*// check for 2nd level nested statements
+						   			// check for 2nd level nested statements
 						   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type == "dk.itu.policyengine.domain.IfStatement") {
 						   				// IF we want to support 2nd level nested statements - do the same as for 1st level......
 						   				console.log("-- NESTED 2nd lvl thenStatement: " + n + " ---");
@@ -78,7 +76,7 @@ function recursiveThen(json, k, l, m, runs)
 									);	
 					   			
 						   			
-						   			}*/
+						   			}
 						   			
 						   			
 						   			
@@ -187,7 +185,7 @@ function doPopulation(json)
 						// iterate over thenStatements
 				   		for (var m in json[k].policy.statements[l].data.thenStatements) {
 
-				   			recursiveThen(json, k, l, m, json[k].policy.statements[l].data.thenStatements.lenght);
+				   			recursiveThen(json, k, l, m);
 
 				   		}
 				   		// iterate over elseStatements
