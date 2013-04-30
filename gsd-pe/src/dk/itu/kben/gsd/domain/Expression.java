@@ -2,8 +2,7 @@ package dk.itu.kben.gsd.domain;
 
 import java.io.Serializable;
 
-import dk.itu.kben.gsd.persistence.BuildingDAO;
-import dk.itu.nicl.gsd.log.*;
+import dk.itu.nicl.gsd.log.Log;
 import dk.itu.scas.gsd.utils.SensorValueCache;
 
 public class Expression implements Serializable {
