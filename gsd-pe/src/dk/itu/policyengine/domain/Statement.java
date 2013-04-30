@@ -1,8 +1,6 @@
 package dk.itu.policyengine.domain;
 
-import java.io.Serializable;
-
-public interface Statement extends Serializable {
+public interface Statement {
 	
 	public void execute();
 

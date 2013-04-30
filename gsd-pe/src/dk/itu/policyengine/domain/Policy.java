@@ -1,11 +1,10 @@
 package dk.itu.policyengine.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
-public class Policy implements Serializable {
+public class Policy {
 
 	ArrayList<Statement> statements = new ArrayList<Statement>();
 	

@@ -1,12 +1,10 @@
 package dk.itu.policyengine.domain;
 
-import java.io.Serializable;
-
 import org.apache.log4j.Logger;
 
 import dk.itu.policyengine.persistence.SensorValueCache;
 
-public class Expression implements Serializable {
+public class Expression {
 	private transient Logger logger = Logger.getLogger(this.getClass());
 	
 	// The current expression language supports only AND between expressions inside an IF.

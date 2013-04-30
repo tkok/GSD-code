@@ -1,9 +1,8 @@
 package dk.itu.policyengine.domain;
 
-import java.io.Serializable;
 import java.sql.Time;
 
-public class PolicyEntity implements Serializable {
+public class PolicyEntity {
 	
 	long id = -1;
 	

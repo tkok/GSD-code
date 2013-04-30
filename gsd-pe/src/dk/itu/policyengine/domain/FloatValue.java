@@ -1,6 +1,6 @@
 package dk.itu.policyengine.domain;
 
-public class FloatValue implements Value{
+public class FloatValue implements Value {
 
 	Float floatValue;
 	
