@@ -286,7 +286,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				DataAccessLayer.persist(policyEntity);
 				
 				// route back
-				response.sendRedirect("/test/");
+				response.sendRedirect("/test/details.jsp?id=" + id);
 				
 			} else if (userPath.equals("/ChangeValue")) {
 				String sensorId = request.getParameter("sensorId");
