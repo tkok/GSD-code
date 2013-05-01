@@ -14,11 +14,16 @@
                 // iterate over each policy 
                 for ( var k in json) {
                     // Append policy to view
+                    var active = "";
+                    if(json[k].active == true) { var active = '<span style="font-weight: bold; color: lightgreen;">Active</span>'; } else { var active = '<span style="font-weight: bold; color: #8C1700;">Not active</span>'; }
+                    
                     $('.policies')
                     .append(
                     '<a href="/test/details.jsp?id='+ json[k].id +'"><div class="policy_box"><div class="inner_section"><b>Id: '
                         + json[k].id
-                        + '</b>, <span style="color: lightgreen;">Active</span>, From: <b>' 
+                        + '</b>, '
+                        + active
+                        + ', From: <b>' 
                         + json[k].interval.fromTime 
                         + '</b>, To: <b>'
                         + json[k].interval.toTime
