@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.Calendar;
@@ -42,7 +43,10 @@ public class DataAccessLayer {
 	
 	private DataAccessLayer() {
 	}
-
+	/**
+	 * Connection to the database
+	 * @return Returns a connection to the database.
+	 */
 	private static Connection CreateConn() {
 		try {
 			Class.forName(driver).newInstance();
@@ -54,7 +58,9 @@ public class DataAccessLayer {
 		
 		return connection;
 	}
-	
+	/**
+	 * Close the connection to the database. 
+	 */
 	private static void CloseConn() {
 		try {
 			logger.debug("Close DB Connection");
@@ -87,7 +93,9 @@ public class DataAccessLayer {
 		}
 		return null;
 	}
-
+	/**
+	 * Delete all the policies from the database
+	 */
 	public static void deleteAll() {
 		connection = CreateConn();
 		try {
@@ -100,7 +108,11 @@ public class DataAccessLayer {
 			CloseConn();
 		}
 	}
-	
+	/**
+	 * Insert a policy into the database. Takes as an argument a PolicyEntity object
+	 * @param policyEntity
+	 * @return
+	 */
 	private static PolicyEntity insertPolicyEntity(PolicyEntity policyEntity) {
 		connection = CreateConn();
 		
@@ -131,7 +143,10 @@ public class DataAccessLayer {
 		
 		return policyEntity;
 	}
-	
+	/**
+	 * Update policy
+	 * @param policyEntity
+	 */
 	private static void updatePolicyEntity(PolicyEntity policyEntity) {
 		connection = CreateConn();
 
@@ -154,7 +169,11 @@ public class DataAccessLayer {
 			CloseConn();
 		}
 	}
-	
+	/**
+	 * Persist the data to the database
+	 * @param policyEntity
+	 * @return
+	 */
 	public static PolicyEntity persist(PolicyEntity policyEntity) {
 		PolicyEntity result = null;
 		
@@ -169,8 +188,46 @@ public class DataAccessLayer {
 		
 		return result;
 	}
+	/**
+	 * Get the active policies. 
+	 * @return List with the active policies
+	 */
+	public static PolicyEntities getActivePolicies(){
+		connection = CreateConn();
+		PolicyEntities policyEntities = new PolicyEntities();
+		try{
+		preparedStatement = connection.prepareStatement("SELECT * FROM policy WHERE active = TRUE");
+		ResultSet rs = preparedStatement.executeQuery();
+		while(rs.next()){
+			PolicyEntity policyEntity = new PolicyEntity();
+			policyEntity.setId(rs.getLong("id"));
+			policyEntity.getInterval().setFromTime(rs.getTime("fromTime"));
+			policyEntity.getInterval().setToTime(rs.getTime("toTime"));
+			policyEntity.setActive(true);
+			policyEntity.setName(rs.getString("name"));
+			policyEntity.setDescription(rs.getString("description"));
+			String json = rs.getString("policy");
 
-	public static PolicyEntities getActivePolicies() {
+			Gson gson = GsonFactory.getInstance();
+
+			Policy policy = null;
+			policy = gson.fromJson(json, Policy.class);
+
+			policyEntity.setPolicy(policy);
+
+			policyEntities.add(policyEntity);
+		}
+		}catch(SQLException e){
+			logger.debug("SQL Exception. Check your query" + e);
+		}
+		return policyEntities;
+		
+	}
+	/**
+	 * Get the policies that are active at the current time
+	 * @return List with the policies
+	 */
+	public static PolicyEntities getTimeActivePolicies() {
 		connection = CreateConn();
 
 		PolicyEntities policyEntities = new PolicyEntities();
@@ -211,7 +268,10 @@ public class DataAccessLayer {
 
 		return policyEntities;
 	}
-	
+	/**
+	 * Get all the policies existing in the database
+	 * @return List with all the policies
+	 */
 	public static PolicyEntities getAllPolicies() {
 		connection = CreateConn();
 

@@ -70,7 +70,7 @@ public class Policy_Persistence_Test {
 	
 	@Test
 	public void getsThePolicyAndDeletesTheElseStatementAsAProofOfSQLUpdate() {
-		PolicyEntities policyEntities = DataAccessLayer.getActivePolicies(); 
+		PolicyEntities policyEntities = DataAccessLayer.getTimeActivePolicies(); 
 		
 		Assert.assertEquals(1, policyEntities.getSize());
 		
@@ -87,7 +87,7 @@ public class Policy_Persistence_Test {
 		
 		PolicyEntity policyEntity = DataAccessLayer.persist(policyEntities.getPolicyEntities().get(0));
 		
-		policyEntities = DataAccessLayer.getActivePolicies();
+		policyEntities = DataAccessLayer.getTimeActivePolicies();
 		Assert.assertEquals(1, policyEntities.getSize());
 
 		for (Statement statement: policyEntities.getPolicyEntities().get(0).getPolicy().getStatements()) {

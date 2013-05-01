@@ -102,13 +102,13 @@ public class PolicyEngineServlet extends HttpServlet {
 						}
 					}
 
-					PolicyEntities activePoliciesEntities = DataAccessLayer.getActivePolicies();
+					PolicyEntities activePoliciesEntities = DataAccessLayer.getTimeActivePolicies();
 
 					if (activePoliciesEntities.getSize() == 1) {
 						logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
 					} else {
 						if (activePoliciesEntities.getSize() > 1) {
-							logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
+							logger.info("There are " + activePoliciesEntities.getSize() + " active policies.");
 						}
 					}
 
@@ -230,7 +230,7 @@ public class PolicyEngineServlet extends HttpServlet {
 			for (String s : sens)
 				out.println("<br>" + s);
 		} else if (userPath.equals("/GetActivePolicies")) {
-			PolicyEntities policyEntities = DataAccessLayer.getActivePolicies();
+			PolicyEntities policyEntities = DataAccessLayer.getTimeActivePolicies();
 			response.setContentType("application/json");
 			String json = policyEntities.toJSON();
 
