@@ -11,22 +11,22 @@
 
             function doPopulation(json)
             {
-                // iterate over each policy
+                // iterate over each policy 
                 for ( var k in json) {
                     // Append policy to view
                     $('.policies')
                     .append(
                     '<a href="/test/details.jsp?id='+ json[k].id +'"><div class="policy_box"><div class="inner_section"><b>Id: '
                         + json[k].id
-                        + '</b>, <span style="color: lightgreen;">Active</span>, From: ' 
+                        + '</b>, <span style="color: lightgreen;">Active</span>, From: <b>' 
                         + json[k].interval.fromTime 
-                        + ', To: '
+                        + '</b>, To: <b>'
                         + json[k].interval.toTime
-                        + '<br /><br />Name: ' 
+                        + '</b><br /><br /><span class="headline">' 
                         + json[k].name
-                        + '<br /><br />Description: ' 
+                        + '</span><br /><br /><span class="description">' 
                         + json[k].description
-                        + '</div>'
+                        + '</span></div>'
                         + '<div style="clear:both"></div></div></a>');
 
                 }

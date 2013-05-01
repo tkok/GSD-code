@@ -4,6 +4,10 @@ body {
     padding: 0px;
 }
 
+a:link { color: #FFFFFF; text-decoration: none; }
+a:visited {color: #FFFFFF; text-decoration: none; } 
+a:hover {color: #FFFFFF; text-decoration: none; } 
+a:active {color: #FFFFFF; text-decoration: none; }
 
 .header{background:#fff url(img/page-bg.png) repeat-x; height: 128px;}
 .top {height:60px;color: #ffffff;font-family:"Droid Serif",Georgia,"Times New Roman",Times,serif;font-weight:normal;font-size:1.6em;line-height:1.25em;margin:0;padding:28px 20px 0px 20px;}
@@ -19,7 +23,9 @@ body {
 .policy_box .button:hover{box-shadow:1px 1px 0 #626262 inset;-moz-box-shadow:1px 1px 0 #626262 inset;-webkit-box-shadow:1px 1px 0 #626262 inset;background-color:#373737;}
 .policy_box .clear{float:left;}
 
+.headline {font-size: 16px; font-weight: bold;}
 
+.inner_section a {text-decoration: none;}
 .inner_section {color:#FFF;font-size:.95em!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
 
 .inner_inner_section {float: left; color:#FFF;font-size:.95em!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
