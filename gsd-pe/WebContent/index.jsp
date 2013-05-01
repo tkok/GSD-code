@@ -22,13 +22,12 @@
                         + json[k].interval.fromTime 
                         + ', To: '
                         + json[k].interval.toTime
-                        + ', Name: ' 
+                        + '<br /><br />Name: ' 
                         + json[k].name
-                        + ', Description: ' 
+                        + '<br /><br />Description: ' 
                         + json[k].description
                         + '</div>'
-                        
-                        + '<div class="inner_section"></div><div style="clear:both"></div></div></a>');
+                        + '<div style="clear:both"></div></div></a>');
 
                 }
 
@@ -46,7 +45,7 @@
     <body>
         <div class="header">
             <div class="top">Policy Engine Administration</div>
-            <div class="menu"><a id="all" href="/test/">All policies</a></div>
+            <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="javascript:void(0);">Create new policy</a></div>
         </div>
         <%
 		    if (request.getParameter("updated") == "true") {

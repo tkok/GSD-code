@@ -8,6 +8,7 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="jquery.validate.js"></script>
         <script>
+
             function operator(operator) {
 	
                 // Construct operator selector 
@@ -36,21 +37,21 @@
                     // Append policy to view
                     $('.policies')
                     .append(
-                    '<div class="policy_box"><form id="submit' + json[k].id + '" action="PersistPolicy" method="post"><div class="inner_section"><b>Id: '
+                    '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><b>Id: '
                         + json[k].id
-                        + '<input type="hidden" id="id' + json[k].id + '" name="id" value="' + json[k].id + '"></b>, <span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
-                        + '<input type="hidden" id="active' + json[k].id + '" name="active" value="true">'
+                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, <span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
+                        + '<input type="hidden" id="active" name="active" value="true">'
 									
                         + json[k].interval.fromTime
-                        + '<input type="hidden" id="fromTime' + json[k].id + '" name="fromTime" value="05:59"><br /><br />To: '
+                        + '<input type="hidden" id="fromTime" name="fromTime" value="05:59"><br /><br />To: '
                         + json[k].interval.toTime
-                        + '<input type="hidden" id="toTime' + json[k].id + '" name="toTime" value="06:00"><br /><br />'
-                        + 'Name: <input type="text" class="required" name="name" id="name' + json[k].id + '" value="'
+                        + '<input type="hidden" id="toTime" name="toTime" value="06:00"><br /><br />'
+                        + 'Name: <input type="text" class="required" name="name" id="name" value="'
                         + json[k].name
-                        + '"> Description: <input style="width: 500px;" id="description' + json[k].id + '" type="text" name="description" value="'
+                        + '"> Description: <input class="required" style="width: 500px;" id="description" type="text" name="description" value="'
                         + json[k].description
                         + '"></div>'
-                        + '<input type="hidden" id="policy' + json[k].id + '" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
+                        + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
                         + '<div class="inner_section"><b>IF VALUES (<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
                         + '<div id="if-' + json[k].id + '" class="inner_section">'
                         + '<div style="clear: both;"></div>'
@@ -128,6 +129,16 @@
                         }
 
                     }
+                    
+                    $("form#submit").submit(function() {
+                        
+                        if($("form#submit").valid() == true) {
+            				
+                        	// Submit
+
+                        } else { return false; }
+                        
+                    });
 	
                     // buttons defined
                     $('#newif-' + json[k].id).click(function() {
@@ -261,7 +272,7 @@
     <body>
         <div class="header">
             <div class="top">Policy Engine Administration</div>
-            <div class="menu"><a id="all" href="/test/">All policies</a></div>
+            <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="javascript:void(0);">Create new policy</a></div>
         </div>
         <%
 		    if (request.getParameter("updated") == "true") {
