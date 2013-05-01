@@ -22,7 +22,6 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
-import dk.itu.nicl.gsd.log.Log;
 import dk.itu.policyengine.domain.Expression;
 import dk.itu.policyengine.domain.FloatValue;
 import dk.itu.policyengine.domain.GsonFactory;
@@ -290,18 +289,16 @@ public class PolicyEngineServlet extends HttpServlet {
 				try {
 					connection.connect("http://localhost:5050/test/TestTimeout");
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					Log.log("Timeout exception");
+					logger.warn("Timeout exception", e);
 					out.println("<br>" + "Timeout exception");
 				}
 			} else if (userPath.equals("/TestTimeout")) {
 				try {
 					Thread.sleep(15000);
-					Log.log("it works");
 					out.println("<br>" + "it works");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
-					Log.log("Timeout");
+					logger.warn("Timeout exception", e);
 					out.println("<br>" + "Timeout");
 				}
 			}

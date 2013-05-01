@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import dk.itu.nicl.gsd.log.Log;
-
 public class ServiceProperties {
 	private final static String [] PROPS =  {"gain","production","state"};
 	/*private final static String [] LIGHT = {"gain","production","state"};
