@@ -51,7 +51,7 @@
                     .append(
                     '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><b>Id: '
                         + json[k].id
-                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, '
+                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"><input type="hidden" id="active" name="active" value="' + json[k].active + '"></b>, '
                         + active
                         + '</div>'
                         + '<div class="inner_section">From: '
