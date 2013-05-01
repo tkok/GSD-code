@@ -10,7 +10,6 @@
         <script>
 
             function operator(operator) {
-	
                 // Construct operator selector 
                 var operatorselect = '<select name="operator">';
 	
@@ -22,7 +21,17 @@
                 operatorselect += '</select>';
 	
                 return operatorselect;
+            }
+            function active(status) {
+                // Construct operator selector 
+                var activeselector = '<select name="active">';
 	
+                if(status == true) {  activeselector += '<option value="true" selected>True</option>' } else {  activeselector += '<option value="true">True</option>'}
+                if(status == false) { activeselector += '<option value="false" selected>False</option>' } else { activeselector += '<option value="false">False</option>'}
+                
+                activeselector += '</select>';
+	
+                return activeselector;
             }
            
             function doPopulation(json)
@@ -34,14 +43,18 @@
                 // iterate over each policy
                 for ( var k in json) {
 			
+                	var active = "";
+                    if(json[k].active == true) { var active = '<span style="font-weight: bold; color: lightgreen;">Active</span>'; } else { var active = '<span style="font-weight: bold; color: #8C1700;">Not active</span>'; }
+
                     // Append policy to view
                     $('.policies')
                     .append(
                     '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><b>Id: '
                         + json[k].id
-                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, <span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
-                        + '<input type="hidden" id="active" name="active" value="true">'
-									
+                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, '
+                        + active
+                        + '</div>'
+                        + '<div class="inner_section">From: '
                         + json[k].interval.fromTime
                         + '<input type="hidden" id="fromTime" name="fromTime" value="05:59"><br /><br />To: '
                         + json[k].interval.toTime
