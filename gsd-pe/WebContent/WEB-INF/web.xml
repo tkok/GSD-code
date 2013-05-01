@@ -52,6 +52,11 @@
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/GetActivePolicies</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/GetPolicy</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>

@@ -310,4 +310,43 @@ public class DataAccessLayer {
 
 		return policyEntities;
 	}
+	public static PolicyEntities getPolicy(String id) {
+		connection = CreateConn();
+
+		PolicyEntities policyEntities = new PolicyEntities();
+
+		try {
+			preparedStatement = connection.prepareStatement("SELECT * FROM policy WHERE id = ?");
+			preparedStatement.setString(1, id);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				PolicyEntity policyEntity = new PolicyEntity();
+
+				policyEntity.setId(rs.getLong("id"));
+				policyEntity.getInterval().setFromTime(rs.getTime("fromTime"));
+				policyEntity.getInterval().setToTime(rs.getTime("toTime"));
+				policyEntity.setActive(rs.getBoolean("active"));
+				policyEntity.setName(rs.getString("name"));
+				policyEntity.setDescription(rs.getString("description"));
+				String json = rs.getString("policy");
+
+				Gson gson = GsonFactory.getInstance();
+
+				Policy policy = null;
+				policy = gson.fromJson(json, Policy.class);
+
+				policyEntity.setPolicy(policy);
+
+				policyEntities.add(policyEntity);
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		} finally {
+			CloseConn();
+		}
+
+		return policyEntities;
+	}
 }

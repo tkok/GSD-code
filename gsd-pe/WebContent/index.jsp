@@ -1,16 +1,291 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<% String redirectURL = "admin.htm";
-    response.sendRedirect(redirectURL);
-  %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+    <head>
+        <link href="style.css" rel="stylesheet" type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="jquery.validate.js"></script>
+        <script>
+            function operator(operator) {
+	
+                // Construct operator selector 
+                var operatorselect = '<select name="operator">';
+	
+                if(operator == "LESS_THAN") {  operatorselect += '<option value="LESS_THAN" selected>LESS_THAN</option>' } else {  operatorselect += '<option value="LESS_THAN">LESS_THAN</option>'}
+                if(operator == "GREATER_THAN") { operatorselect += '<option value="GREATER_THAN" selected>GREATER_THAN</option>' } else { operatorselect += '<option value="GREATER_THAN">GREATER_THAN</option>'}
+                if(operator == "EQUALS") {  operatorselect += '<option value="EQUALS" selected>EQUALS</option>' } else {  operatorselect += '<option value="EQUALS">EQUALS</option>'}
+                if(operator == "NOT") {  operatorselect += '<option value="NOT" selected>NOT</option>' } else {  operatorselect += '<option value="NOT">NOT</option>'}
+	
+                operatorselect += '</select>';
+	
+                return operatorselect;
+	
+            }
+           
+            function doPopulation(json)
+            {
+                // count variables
+                var countce = 0;
+                var countts = 0;
+                var countes = 0;
+                // iterate over each policy
+                for ( var k in json) {
+			
+                    // Append policy to view
+                    $('.policies')
+                    .append(
+                    '<div class="policy_box"><form id="submit' + json[k].id + '" action="PersistPolicy" method="post"><div class="inner_section"><b>Id: '
+                        + json[k].id
+                        + '<input type="hidden" id="id' + json[k].id + '" name="id" value="' + json[k].id + '"></b>, <span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
+                        + '<input type="hidden" id="active' + json[k].id + '" name="active" value="true">'
+									
+                        + json[k].fromTime
+                        + '<input type="hidden" id="fromTime' + json[k].id + '" name="fromTime" value="05:59"><br /><br />To: '
+                        + json[k].toTime
+                        + '<input type="hidden" id="toTime' + json[k].id + '" name="toTime" value="06:00"><br /><br />'
+                        + 'Name: <input type="text" class="required" name="name" id="name' + json[k].id + '" value="'
+                        + json[k].name
+                        + '"> Description: <input style="width: 500px;" id="description' + json[k].id + '" type="text" name="description" value="'
+                        + json[k].description
+                        + '"></div>'
+                        + '<input type="hidden" id="policy' + json[k].id + '" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
+                        + '<div class="inner_section"><b>IF VALUES (<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
+                        + '<div id="if-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><b>THEN VALUES (+ New)</b></div>'
+                        + '<div id="then-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><b>THEN (1st level nested) VALUES </b></div>'
+                        + '<div id="then-nested-' + json[k].id + '" class="inner_section">'
+                        + '<div class="inner_section float"><i><b>IF VALUES </b></i></div>'
+                        + '<div id="then-nested-if-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><i><b>THEN VALUES </b></i></div>'
+                        + '<div id="then-nested-then-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><i><b>ELSE VALUES </b></i></div>'
+                        + '<div id="then-nested-else-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '</div>'
+                        + '<div class="inner_section"><b>ELSE VALUES (+ New)</b></div>'
+                        + '<div id="else-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form></div>');
 
-</body>
+                    // iterate over statements 
+                    for ( var l in json[k].policy.statements) {
+                        // statement type
+                        var con_type = json[k].policy.statements[l].type;
+					
+                            
+                        // iterate over conditionalExpressions 
+                        for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
+                            // Append to policy
+                            $('#if-'+ json[k].id)
+                            .prepend('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
+                            //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
+                                + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
+                                + ', '
+                                + operator(json[k].policy.statements[l].data.conditionalExpressions[m].operator)
+                                + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
+                                + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue
+                                + '">, '
+                                + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
+                                + '</div>'
+                        );
+								
+                            countce++;
+                        }
+                        // iterate over thenStatements
+                        for (var m in json[k].policy.statements[l].data.thenStatements) {
+
+                            recursiveThen(json, k, l, m);
+                                
+                            countts++;
+                        }
+                        // iterate over elseStatements
+                        for (var m in json[k].policy.statements[l].data.elseStatements) {
+				   			
+                            // Append to policy
+                            $('#else-'+ json[k].id)
+                            .prepend('<div id="else-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + l + '-' + m +'</b></div>'
+                                + json[k].policy.statements[l].data.elseStatements[m].type
+                                + ', '
+                                + json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue
+                                + ', '
+                                + json[k].policy.statements[l].data.elseStatements[m].data.sensorID
+                                + '</div>'
+                        );
+                            countes++;
+                        }
+
+                    }
+	
+                    // buttons defined
+                    $('#newif-' + json[k].id).click(function() {
+						
+                        console.log(countce);
+                        $('#if-' + json[k].id)
+                        .prepend('<div id="if-' + json[k].id + '-' + countce + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + countce + '-' + m +'</b></div>'
+                        //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
+                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
+                            + ', '
+                            + operator(json[k].policy.statements[l].data.conditionalExpressions[m].operator)
+                            + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
+                            + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue
+                            + '">, '
+                            + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
+                            + '</div>'
+                    );
+                    });
+
+                }
+
+            }
+            
+            function recursiveThen(json, k, l, m)
+            {
+
+                // check for nested statements 
+                if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.policyengine.domain.IfStatement") {
+
+                    // iterate over nested conditionalExpressions
+                    for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
+				   			
+                        // Append to policy
+                        $('#then-nested-if-'+ json[k].id)
+                        .prepend('<div id="then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section if"><div><b>then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+                            + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].prefixOperator
+                            + ', '
+                            + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.type
+                            + ', '
+                            + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.data.floatValue
+                            + ', '
+                            + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].operator
+                            + ', '
+                            + json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].sensorId
+                            + '</div>'
+                    );
+
+                    }
+                    // iterate over nested thenStatements
+                    for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
+
+                        //recursiveThen(json, k, l, m)
+				   				
+                        // Problem is how to handle the paths in each level of a run
+				   			
+				   			
+                        // check for 2nd level nested statements
+                        if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type == "dk.itu.policyengine.domain.IfStatement") {
+                            // IF we want to support 2nd level nested statements - do the same as for 1st level......
+                            console.log("-- NESTED 2nd lvl thenStatement: " + n + " ---");
+				   				
+                            // NO SUPPORT FOR 2nd level nested so just take type Append to policy
+                            $('#then-nested-then-'+ json[k].id)
+                            .prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+                                + '2nd level nested NOT SUPPORTED, '
+                                + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
+                                + '</div>'
+                        );
+
+								
+                        } else {
+				   			
+                            // Append to policy
+                            $('#then-nested-then-'+ json[k].id)
+                            .prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+                                + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
+                                + ', '
+                                + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.aValue.floatValue
+                                + ', '
+                                + json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.sensorID
+                                + '</div>'
+                        );	
+	   			
+                        }
+   			
+                    }
+                    // iterate over nested elseStatements
+                    for (var n in json[k].policy.statements[l].data.thenStatements[m].data.elseStatements) {
+				   			
+                        // Append to policy
+                        $('#then-nested-else-'+ json[k].id)
+                        .prepend('<div id="then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section else"><div><b>then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+                            + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].type
+                            + ', '
+                            + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.aValue.floatValue
+                            + ', '
+                            + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.sensorID
+                            + '</div>'
+                    );
+                    }
+                } else {
+		   				
+                    // Append to policy (non nested) 
+                    $('#then-'+ json[k].id)
+                    .prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
+                        + json[k].policy.statements[l].data.thenStatements[m].type
+                        + ', '
+                        + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue
+                        + ', '
+                        + json[k].policy.statements[l].data.thenStatements[m].data.sensorID
+                        + '</div>'
+                );
+                }
+
+            }
+            // Default behavior
+            $.getJSON( "http://localhost:8080/test/GetActivePolicies", function( json ) {
+	   
+                doPopulation(json);
+	
+            });
+            
+        </script>   
+    </head>
+    <body>
+        <div class="header">
+            <div class="top">Policy Engine Administration</div>
+            <div class="menu"><a id="active" href="JavaScript:void(0);">Running policies</a> | <a id="all" href="JavaScript:void(0);">All policies</a></div>
+        </div>
+        <%
+		    if (request.getParameter("updated") == "true") {
+		        out.println("Updated successfully");
+		    } 
+		%>
+        <div class="policies">
+
+        </div>
+        <script>
+        $("#all").click(function() {
+    		
+            $('.policies').empty();
+	
+            $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
+
+                doPopulation(json);
+		
+            });
+        });
+        
+        $("#active").click(function() {
+        	
+            $('.policies').empty();
+
+            $.getJSON( "http://localhost:8080/test/GetActivePolicies", function( json ) {
+	   
+                doPopulation(json);
+            });
+        });
+        </script>
+    </body>
 </html>

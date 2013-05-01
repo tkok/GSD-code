@@ -241,6 +241,14 @@ public class PolicyEngineServlet extends HttpServlet {
 			String json = policyEntities.toJSON();
 
 			out.print(json);
+		} else if (userPath.equals("/GetPolicy")) {
+			
+			String id = request.getParameter("id");
+			PolicyEntities policyEntities = DataAccessLayer.getPolicy(id);
+			response.setContentType("application/json");
+			String json = policyEntities.toJSON();
+
+			out.print(json);
 		} else {
 			if (userPath.equals("/PersistPolicy")) {
 				String policyEntityJson = request.getParameter("policy");
@@ -276,6 +284,10 @@ public class PolicyEngineServlet extends HttpServlet {
 				policyEntity.setActive(active);
 
 				DataAccessLayer.persist(policyEntity);
+				
+				// route back
+				response.sendRedirect("/test/");
+				
 			} else if (userPath.equals("/ChangeValue")) {
 				String sensorId = request.getParameter("sensorId");
 				String value = request.getParameter("value");
