@@ -13,122 +13,30 @@
  <div class="policies">
 <script>
 
-function recursiveThen(json, k, l, m)
-		{
 
-				   			// check for nested statements
-				   			if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.policyengine.domain.IfStatement") {
-
-				   				// iterate over nested conditionalExpressions
-						   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
-						   			
-						   		// Append to policy
-									$('#then-nested-if-'+ json[k].id)
-									.prepend('<div id="then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section if"><div><b>then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
-									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].prefixOperator
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.type
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.data.floatValue
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].operator
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].sensorId
-									+ '</div>'
-									);
-
-						   		}
-						   		// iterate over nested thenStatements
-						   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
-						   			
-						   			
-		
-						   				//recursiveThen(json, k, l, m)
-						   				
-						   				// Problem is how to handle the paths in each level of a run
-						   			
-						   			
-						   			// check for 2nd level nested statements
-						   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type == "dk.itu.policyengine.domain.IfStatement") {
-						   				// IF we want to support 2nd level nested statements - do the same as for 1st level......
-						   				console.log("-- NESTED 2nd lvl thenStatement: " + n + " ---");
-						   				
-						   				// NO SUPPORT FOR 2nd level nested so just take type Append to policy
-										$('#then-nested-then-'+ json[k].id)
-										.prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
-										+ '2nd level nested NOT SUPPORTED, '
-										+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
-										+ '</div>'
-										);
-
-										
-						   			} else {
-						   			
-						   			// Append to policy
-									$('#then-nested-then-'+ json[k].id)
-									.prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
-									+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.aValue.floatValue
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.sensorID
-									+ '</div>'
-									);	
-					   			
-						   			
-						   			}
-						   			
-						   			
-						   			
-						   		}
-						   		// iterate over nested elseStatements
-						   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.elseStatements) {
-						   			
-						   			// Append to policy
-									$('#then-nested-else-'+ json[k].id)
-									.prepend('<div id="then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section else"><div><b>then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
-									+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].type
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.aValue.floatValue
-									+ ', '
-									+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.sensorID
-									+ '</div>'
-									);
-						   		}
-				   			} else {
-				   				
-				   				// Append to policy (non nested)
-								$('#then-'+ json[k].id)
-								.prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
-								+ json[k].policy.statements[l].data.thenStatements[m].type
-								+ ', '
-								+ json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue
-								+ ', '
-								+ json[k].policy.statements[l].data.thenStatements[m].data.sensorID
-								+ '</div>'
-								);
-				   			}
-}
 
 function doPopulation(json)
 {
 	// iterate over each policy
 	   for ( var k in json) {
-		   
+			
 		// Append policy to view
 			$('.policies')
 					.append(
-							'<div class="policy_box"><form action="" method="post"><div class="inner_section"><b>Id: '
+							'<div class="policy_box"><form action="PersistPolicy" method="post"><div class="inner_section"><b>Id: '
 									+ json[k].id
-									+ '</b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
+									+ '<input type="hidden" name="id" value="' + json[k].id + '"></b><br/><br/><span style="color: lightgreen;">Active</span></div><div class="inner_section">From: '
+									+ '<input type="hidden" name="active" value="true">'
+									
 									+ json[k].fromTime
-									+ '<br /><br />To: '
+									+ '<input type="hidden" name="fromTime" value="05:59"><br /><br />To: '
 									+ json[k].toTime
-									+ '<br /><br />Name: '
+									+ '<input type="hidden" name="toTime" value="06:00"><br /><br />Name: <input type="text" name="name" id="name" value="'
 									+ json[k].name
-									+ '<br /><br />Description: '
+									+ '"><br /><br />Description: <input type="text" name="description" value="'
 									+ json[k].description
-									+ '</div>'
+									+ '"></div>'
+									+ '<input type="text" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
 									+ '<div class="inner_section"><b>IF VALUES </b></div>'
 									+ '<div id="if-' + json[k].id + '" class="inner_section">'
 									+ '<div style="clear: both;"></div>'
@@ -157,7 +65,7 @@ function doPopulation(json)
 									+ '<div style="clear: both;"></div>'
 									+ '</div>'
 									+ '<div class="inner_section"><label for="policy">'
-									+ '</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="submit" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+									+ '</label><input type="text" value="" name="whatever" class="field" id="policy" placeholder="Whatever value"></div><div class="inner_section"><input type="submit" value="Update" name="update" class="button"> <input type="button" value="Deactivate" name="update" class="button"></div><div style="clear:both"></div></form></div>');
 
 					// iterate over statements
 					for ( var l in json[k].policy.statements) {
@@ -208,14 +116,109 @@ function doPopulation(json)
 				}
 }
 
+function recursiveThen(json, k, l, m)
+{
 
+		   			// check for nested statements
+		   			if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.policyengine.domain.IfStatement") {
+
+		   				// iterate over nested conditionalExpressions
+				   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
+				   			
+				   		// Append to policy
+							$('#then-nested-if-'+ json[k].id)
+							.prepend('<div id="then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section if"><div><b>then-nested-if-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+							+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].prefixOperator
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.type
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].aValue.data.floatValue
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].operator
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions[n].sensorId
+							+ '</div>'
+							);
+
+				   		}
+				   		// iterate over nested thenStatements
+				   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.thenStatements) {
+				   			
+				   			
+
+				   				//recursiveThen(json, k, l, m)
+				   				
+				   				// Problem is how to handle the paths in each level of a run
+				   			
+				   			
+				   			// check for 2nd level nested statements
+				   			if (json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type == "dk.itu.policyengine.domain.IfStatement") {
+				   				// IF we want to support 2nd level nested statements - do the same as for 1st level......
+				   				console.log("-- NESTED 2nd lvl thenStatement: " + n + " ---");
+				   				
+				   				// NO SUPPORT FOR 2nd level nested so just take type Append to policy
+								$('#then-nested-then-'+ json[k].id)
+								.prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+								+ '2nd level nested NOT SUPPORTED, '
+								+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
+								+ '</div>'
+								);
+
+								
+				   			} else {
+				   			
+				   			// Append to policy
+							$('#then-nested-then-'+ json[k].id)
+							.prepend('<div id="then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section then"><div><b>then-nested-then-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+							+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].type
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.aValue.floatValue
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.thenStatements[n].data.sensorID
+							+ '</div>'
+							);	
+			   			
+				   			
+				   			}
+				   			
+				   			
+				   			
+				   		}
+				   		// iterate over nested elseStatements
+				   		for (var n in json[k].policy.statements[l].data.thenStatements[m].data.elseStatements) {
+				   			
+				   			// Append to policy
+							$('#then-nested-else-'+ json[k].id)
+							.prepend('<div id="then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'" class="inner_inner_section else"><div><b>then-nested-else-' + json[k].id + '-' + l + '-' + m +'-' + n +'</b></div>'
+							+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].type
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.aValue.floatValue
+							+ ', '
+							+ json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.sensorID
+							+ '</div>'
+							);
+				   		}
+		   			} else {
+		   				
+		   				// Append to policy (non nested)
+						$('#then-'+ json[k].id)
+						.prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
+						+ json[k].policy.statements[l].data.thenStatements[m].type
+						+ ', '
+						+ json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue
+						+ ', '
+						+ json[k].policy.statements[l].data.thenStatements[m].data.sensorID
+						+ '</div>'
+						);
+		   			}
+}
 
 $("#all").click(function() {
 		
 		$('.policies').empty();
 		
     	$.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
-    		
+
     		doPopulation(json);
     		
     });

@@ -256,7 +256,13 @@ public class PolicyEngineServlet extends HttpServlet {
 
 				// Format : HH:MM
 				Time toTime = getTimeFromParameter("toTime", request);
-
+				
+				// Name
+				String name = request.getParameter("name");
+				
+				// Description
+				String description = request.getParameter("description");
+				
 				// Format : true | false
 				boolean active = getBooleanFromParameter("active", request);
 
@@ -267,7 +273,9 @@ public class PolicyEngineServlet extends HttpServlet {
 
 				policyEntity.setPolicy(policy);
 				policyEntity.setId(id);
-
+				
+				policyEntity.setName(name);
+				policyEntity.setDescription(description);
 				policyEntity.setFromTime(fromTime);
 				policyEntity.setToTime(toTime);
 				policyEntity.setActive(active);
