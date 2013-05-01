@@ -13,8 +13,7 @@ public class GsonFactory {
 			
 			gsonBuilder.registerTypeAdapter(Statement.class, new InterfaceAdapter<Statement>());
 			gsonBuilder.registerTypeAdapter(Value.class, new InterfaceAdapter<Value>());
-			
-			gsonBuilder.setDateFormat("dd-MM-yyyy hh:mm:ss");
+			gsonBuilder.registerTypeAdapter(Interval.class, new IntervalAdapter());
 			
 			gson = gsonBuilder.create();
 		}

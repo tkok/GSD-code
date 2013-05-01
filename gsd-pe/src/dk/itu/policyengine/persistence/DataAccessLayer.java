@@ -23,7 +23,6 @@ import dk.itu.policyengine.domain.Value;
 public class DataAccessLayer {
 	private final static Logger logger = Logger.getLogger(DataAccessLayer.class);
 	
-	
 	private static final String serverUrl = "jdbc:mysql://mysql2.gigahost.dk:3306/";
 	private static final String dbName = "webaholic_gsd";
 	private static final String driver = "com.mysql.jdbc.Driver";
@@ -108,8 +107,8 @@ public class DataAccessLayer {
 		try {
 			preparedStatement = connection.prepareStatement("INSERT INTO policy (fromTime, toTime, active, policy, name, description) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
-			preparedStatement.setTime(1, policyEntity.getFromTime());
-			preparedStatement.setTime(2, policyEntity.getToTime());
+			preparedStatement.setTime(1, policyEntity.getInterval().getFromTime());
+			preparedStatement.setTime(2, policyEntity.getInterval().getToTime());
 			preparedStatement.setBoolean(3, policyEntity.isActive());
 			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
 			preparedStatement.setString(5, policyEntity.getName());
@@ -139,8 +138,8 @@ public class DataAccessLayer {
 		try {
 			preparedStatement = connection.prepareStatement("UPDATE policy SET fromTime = ?, toTime = ?, active = ?, policy = ?, name = ?, description = ? WHERE id = ?");
 			
-			preparedStatement.setTime(1, policyEntity.getFromTime());
-			preparedStatement.setTime(2, policyEntity.getToTime());
+			preparedStatement.setTime(1, policyEntity.getInterval().getFromTime());
+			preparedStatement.setTime(2, policyEntity.getInterval().getToTime());
 			preparedStatement.setBoolean(3, policyEntity.isActive());
 			preparedStatement.setString(4, policyEntity.getPolicy().getJSON());
 			preparedStatement.setString(5, policyEntity.getName());
@@ -188,8 +187,8 @@ public class DataAccessLayer {
 				PolicyEntity policyEntity = new PolicyEntity();
 
 				policyEntity.setId(rs.getLong("id"));
-				policyEntity.setFromTime(rs.getTime("fromTime"));
-				policyEntity.setToTime(rs.getTime("toTime"));
+				policyEntity.getInterval().setFromTime(rs.getTime("fromTime"));
+				policyEntity.getInterval().setToTime(rs.getTime("toTime"));
 				policyEntity.setActive(true);
 				policyEntity.setName(rs.getString("name"));
 				policyEntity.setDescription(rs.getString("description"));
@@ -227,8 +226,8 @@ public class DataAccessLayer {
 				PolicyEntity policyEntity = new PolicyEntity();
 
 				policyEntity.setId(rs.getLong("id"));
-				policyEntity.setFromTime(rs.getTime("fromTime"));
-				policyEntity.setToTime(rs.getTime("toTime"));
+				policyEntity.getInterval().setFromTime(rs.getTime("fromTime"));
+				policyEntity.getInterval().setToTime(rs.getTime("toTime"));
 				policyEntity.setActive(rs.getBoolean("active"));
 				policyEntity.setName(rs.getString("name"));
 				policyEntity.setDescription(rs.getString("description"));

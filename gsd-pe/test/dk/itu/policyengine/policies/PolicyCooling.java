@@ -66,8 +66,8 @@ public class PolicyCooling {
 		}
 		PolicyEntity policyEntity = new PolicyEntity();
 		policyEntity.setPolicy(policy);
-		policyEntity.setFromTime(new Time(_2400));
-		policyEntity.setToTime(new Time(23,59,0));
+		policyEntity.getInterval().setFromTime(new Time(_2400));
+		policyEntity.getInterval().setToTime(new Time(23,59,0));				
 		policyEntity.setActive(true);
 		policyEntity.setName("Cool the hallways");
 		policyEntity.setDescription("If the environment temperature is higher than 23 degrees, then turn on  " +

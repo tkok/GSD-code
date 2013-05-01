@@ -41,7 +41,7 @@ public class PolicyEngineServlet extends HttpServlet {
 
 	Thread thread = null;
 	static boolean shouldRun = true;
-	
+
 	static boolean wasStopped = false;
 	Connection connection;
 
@@ -55,7 +55,7 @@ public class PolicyEngineServlet extends HttpServlet {
 		connection = new Connection();
 
 		thread = new Thread(new Runnable() {
-			
+
 			Date getNext() {
 				Calendar calendar = new GregorianCalendar();
 
@@ -63,23 +63,23 @@ public class PolicyEngineServlet extends HttpServlet {
 
 				return calendar.getTime();
 			}
-			
+
 			private void loadServerValues(PolicyEntities activePoliciesEntities) {
 				for (PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()) {
 					Policy policy = policyEntity.getPolicy();
 
 					for (Statement statement : policy.getStatements()) {
 						if (statement instanceof IfStatement) {
-							for(Expression expression : ((IfStatement) statement).getExpressions()) {
+							for (Expression expression : ((IfStatement) statement).getExpressions()) {
 								if (!SensorValueCache.containsKey(expression.getSensorId())) {
-									
-									// fetch the value of the sensor and put it in the sensorValues cache
+
+									// fetch the value of the sensor and put it
+									// in the sensorValues cache
 									String sensorValue = connection.getSensorValue(expression.getSensorId());
-									
+
 									if (sensorValue == null || sensorValue.length() == 0) {
 										logger.debug("Trying to fetch value for sensor " + expression.getSensorId() + " but it is empty.");
-									}
-									else {
+									} else {
 										SensorValueCache.setValue(expression.getSensorId(), new FloatValue(Float.parseFloat(sensorValue)));
 									}
 								}
@@ -93,54 +93,50 @@ public class PolicyEngineServlet extends HttpServlet {
 			public void run() {
 				while (shouldRun) {
 					Date nextTime = getNext();
-					
+
 					while (Calendar.getInstance().getTime().getTime() < nextTime.getTime()) {
 						try {
 							Thread.sleep(10);
-						}
-						catch (InterruptedException interruptedException) {
+						} catch (InterruptedException interruptedException) {
 							interruptedException.printStackTrace();
 						}
 					}
 
 					PolicyEntities activePoliciesEntities = DataAccessLayer.getActivePolicies();
-					
+
 					if (activePoliciesEntities.getSize() == 1) {
 						logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
-					}
-					else {
+					} else {
 						if (activePoliciesEntities.getSize() > 1) {
 							logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
 						}
 					}
-					
+
 					loadServerValues(activePoliciesEntities);
-							
-					for(PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()){
-						for(Statement statement : policyEntity.getPolicy().getStatements()){
+
+					for (PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()) {
+						for (Statement statement : policyEntity.getPolicy().getStatements()) {
 							try {
 								statement.execute();
-							}
-							catch (Exception e) {
+							} catch (Exception e) {
 								// Oh oh. Move along, nothing to see here.
-								
+
 								logger.debug("Error executing statement.", e);
 							}
 						}
 					}
-					
+
 					// Clear cache
 					SensorValueCache.clearCache();
 
 					logger.info(Configuration.getActivationInterval() + " seconds passed.");
 				}
-				
+
 				logger.info("PolicyEngineServlet is stopping...");
 				wasStopped = true;
 			}
 		});
-		
-		
+
 		logger.info("PolicyEngineServlet is starting...");
 		thread.start();
 		logger.info("PolicyEngineServlet was started.");
@@ -268,8 +264,8 @@ public class PolicyEngineServlet extends HttpServlet {
 				policyEntity.setPolicy(policy);
 				policyEntity.setId(id);
 
-				policyEntity.setFromTime(fromTime);
-				policyEntity.setToTime(toTime);
+				policyEntity.getInterval().setFromTime(fromTime);
+				policyEntity.getInterval().setToTime(toTime);
 				policyEntity.setActive(active);
 
 				DataAccessLayer.persist(policyEntity);

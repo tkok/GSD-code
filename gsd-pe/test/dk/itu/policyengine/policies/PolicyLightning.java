@@ -39,8 +39,9 @@ public class PolicyLightning {
 		PolicyEntity entity = new PolicyEntity();
 		entity.setPolicy(policy);
 		
-		entity.setFromTime(new Time(_2100));
-		entity.setToTime(new Time(_0800));
+		entity.getInterval().setFromTime(new Time(_2100));
+		entity.getInterval().setToTime(new Time(_0800));				
+
 		entity.setActive(true);
 		
 		entity = DataAccessLayer.persist(entity);		

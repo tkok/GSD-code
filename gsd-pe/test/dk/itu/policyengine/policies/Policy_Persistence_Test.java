@@ -61,8 +61,8 @@ public class Policy_Persistence_Test {
 		policyEntity.setName("Test policy");
 		policyEntity.setDescription("This is a test policy doing nothing, really.");
 		policyEntity.setPolicy(policy);
-		policyEntity.setFromTime(fromTime);
-		policyEntity.setToTime(toTime);
+		policyEntity.getInterval().setFromTime(fromTime);
+		policyEntity.getInterval().setToTime(toTime);		
 		policyEntity.setActive(true);
 		
 		policyEntity = DataAccessLayer.persist(policyEntity);

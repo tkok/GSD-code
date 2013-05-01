@@ -42,8 +42,8 @@ public class PolicyLightsOff {
 		}
 		PolicyEntity policyEntity = new PolicyEntity();
 		policyEntity.setPolicy(lightOff);
-		policyEntity.setFromTime(new Time(_2300));
-		policyEntity.setToTime(new Time(_0700));
+		policyEntity.getInterval().setFromTime(new Time(_2300));
+		policyEntity.getInterval().setToTime(new Time(_0700));
 		policyEntity.setActive(true);
 		policyEntity.setName("Lights off");
 		policyEntity.setDescription("Turn off the lights during the night");

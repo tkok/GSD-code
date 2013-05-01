@@ -1,16 +1,12 @@
 package dk.itu.policyengine.domain;
 
-import java.sql.Time;
-
 public class PolicyEntity {
 	
 	long id = -1;
 	
 	Policy policy;
 	
-	Time fromTime;
-	
-	Time toTime;
+	Interval interval = new Interval();
 	
 	String name;
 	
@@ -38,20 +34,12 @@ public class PolicyEntity {
 		this.policy = policy;
 	}
 
-	public Time getFromTime() {
-		return fromTime;
+	public Interval getInterval() {
+		return interval;
 	}
-
-	public void setFromTime(Time fromTime) {
-		this.fromTime = fromTime;
-	}
-
-	public Time getToTime() {
-		return toTime;
-	}
-
-	public void setToTime(Time toTime) {
-		this.toTime = toTime;
+	
+	public void setInterval(Interval interval) {
+		this.interval = interval;
 	}
 
 	public boolean isActive() {

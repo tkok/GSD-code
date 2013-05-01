@@ -7,6 +7,7 @@ import org.junit.Test;
 import dk.itu.policyengine.domain.Expression;
 import dk.itu.policyengine.domain.FloatValue;
 import dk.itu.policyengine.domain.IfStatement;
+import dk.itu.policyengine.domain.Interval;
 import dk.itu.policyengine.domain.Operator;
 import dk.itu.policyengine.domain.Policy;
 import dk.itu.policyengine.domain.PolicyEntity;
@@ -97,10 +98,15 @@ public class PolicyTemperatureWorkingHours {
 		entity.setPolicy(policy);
 		
 		// From 07:00
-		entity.setFromTime(new Time(7, 0, 0));
+		//entity.setFromTime(new Time(7, 0, 0));
+		Time fromTime = new Time(7, 0, 0);
 		
 		// To 17:00
-		entity.setToTime(new Time(23, 59, 0));
+		//entity.setToTime(new Time(23, 59, 0));
+		Time toTime = new Time(23, 59, 0);
+		
+		entity.setInterval(new Interval(fromTime, toTime));
+		
 		entity.setActive(true);
 		entity.setName("Temperature in room 2");
 		entity.setDescription("Monitor the temperature in room 2. Turn off the heater if temperature is over 20 and turn on the AC otherwise");
