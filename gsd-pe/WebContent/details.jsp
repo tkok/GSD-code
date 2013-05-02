@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="style.css" rel="stylesheet" type='text/css'>
+        <link href="/test/css/style.css" rel="stylesheet" type='text/css'>
         <link href="/test/js/jquery-ui-1.10.2.custom/css/jquery-ui.min.css" rel="stylesheet" type='text/css'>
         <link href="/test/js/jquery-ui-1.10.2.custom/css/jquery.ui.theme.css" rel="stylesheet" type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -26,17 +26,6 @@
 	
                 return operatorselect;
             }
-            function active(status) {
-                // Construct operator selector 
-                var activeselector = '<select name="active">';
-	
-                if(status == true) {  activeselector += '<option value="true" selected>True</option>' } else {  activeselector += '<option value="true">True</option>'}
-                if(status == false) { activeselector += '<option value="false" selected>False</option>' } else { activeselector += '<option value="false">False</option>'}
-                
-                activeselector += '</select>';
-	
-                return activeselector;
-            }
            
             function doPopulation(json)
             {
@@ -50,22 +39,27 @@
                 	var active = "";
                     if(json[k].active == true) { var active = '<span style="font-weight: bold; color: lightgreen;">Active</span>'; } else { var active = '<span style="font-weight: bold; color: #8C1700;">Not active</span>'; }
 
+                    var activecheckbox = "";
+                    if(json[k].active == true) { var activecheckbox = '<input type="radio" name="active" value="true" checked> Yes <input type="radio" name="active" value="false">No'; } else { var activecheckbox = '<input type="radio" name="active" value="true">Yes <input type="radio" name="active" value="false" checked> No'; }
+                    
                     // Append policy to view
                     $('.policies')
                     .append(
-                    '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><b>Id: '
+                    '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><span class="headline">Edit Policy</span> (<b>Id: '
                         + json[k].id
-                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"><input type="hidden" id="active" name="active" value="' + json[k].active + '"></b>, '
+                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, '
                         + active
-                        + '</div>'
-                        + '<div class="inner_section">From: '
-                        + 'From: <input type="text" id="fromTime" name="fromTime" value="' + json[k].interval.fromTime + '"><br /><br /> '
-                        + 'To: <input type="text" id="toTime" name="toTime" value="' + json[k].interval.toTime + '"><br /><br />'
-                        + 'Name: <input type="text" class="required" name="name" id="name" value="'
+                        + ')</div>'
+                        + '<div class="inner_section">'
+                        + 'Is active: ' + activecheckbox
+                        + '<br /><br />Name: <input type="text" class="required" name="name" id="name" value="'
                         + json[k].name
-                        + '"> Description: <input class="required" style="width: 500px;" id="description" type="text" name="description" value="'
+                        + '"> '
+                        + 'From: <input type="text" id="fromTime" name="fromTime" style="width: 50px;" value="' + json[k].interval.fromTime + '"> '
+                        + 'To: <input type="text" id="toTime" name="toTime" style="width: 50px;" value="' + json[k].interval.toTime + '"><br /><br />'
+                        + 'Description: <textarea class="field required" style="width: 500px;" id="description" type="text" name="description">'
                         + json[k].description
-                        + '"></div>'
+                        + '</textarea></div>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
                         + '<div class="inner_section"><b>IF VALUES (<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
                         + '<div id="if-' + json[k].id + '" class="inner_section">'

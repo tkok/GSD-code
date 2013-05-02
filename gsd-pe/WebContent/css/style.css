@@ -1,15 +1,11 @@
-body {
-    background:#eee;
-    margin: 0px;
-    padding: 0px;
-}
+body {background:#eee; margin: 0px; padding: 0px; font-family: Arial;}
 
 a:link { color: #FFFFFF; text-decoration: none; }
 a:visited {color: #FFFFFF; text-decoration: none; } 
 a:hover {color: #FFFFFF; text-decoration: none; } 
 a:active {color: #FFFFFF; text-decoration: none; }
 
-.header{background:#fff url(img/page-bg.png) repeat-x; height: 128px; min-width: 420px;}
+.header{background:#fff url(../img/page-bg.png) repeat-x; height: 128px; min-width: 420px;}
 .top {height:60px;color: #ffffff;font-family:"Droid Serif",Georgia,"Times New Roman",Times,serif;font-weight:normal;font-size:1.6em;line-height:1.25em;margin:0;padding:28px 20px 0px 20px;}
 .menu {height: 32px; padding: 8px 0px 0px 20px; color:#FFF;text-shadow:1px 1px #333333;font-family:"Droid Serif",Georgia,"Times New Roman",Times,serif;font-weight:normal;}
 .menu a {color:#FFF;text-shadow:1px 1px #333333;font-family:"Droid Serif",Georgia,"Times New Roman",Times,serif; font-weight:normal; font-size:1.0em; text-decoration: none;}
@@ -17,8 +13,10 @@ a:active {color: #FFFFFF; text-decoration: none; }
 .policy_box {background-color:#5C7AA4;background:-webkit-gradient(linear,0% 0,0% 100%,from(#6281AE),to(#4F6B92));background:-webkit-linear-gradient(top,#6281AE,#4F6B92);background:-moz-linear-gradient(top,#6281AE,#4F6B92);background:-ms-linear-gradient(top,#6281AE,#4F6B92);background:-o-linear-gradient(top,#6281AE,#4F6B92);border:1px solid #496183;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;box-shadow:0 4px 4px -4px rgba(0,0,0,0.7);-moz-box-shadow:0 4px 4px -4px rgba(0,0,0,0.7);-webkit-box-shadow:0 4px 4px -4px rgba(0,0,0,0.7);box-shadow:0 4px 4px -4px rgba(0,0,0,0.7);font:14px Helvetica,Arial,sans-serif;margin:20px 20px 20px 20px;}
 .policy_box form{box-shadow:1px 1px 0 #7b98c1 inset;-moz-box-shadow:1px 1px 0 #7b98c1 inset;-webkit-box-shadow:1px 1px 0 #7b98c1 inset;padding:15px 15px 10px!important;}
 .policy_box label{color:#FFF;font-size:.95em!important;margin:0!important;display:block;padding:0 0 7px!important;text-shadow:1px 1px #49668F;font-weight:normal;}
-.policy_box input.field{display:block;margin:0 4% 10px 0;min-width:110px;padding:6px 0;text-indent:5px;width:130px;font-size:12px;float:left;}
+.policy_box input.field{display:block;margin:0 4% 10px 0;min-width:110px;width:130px;font-size:12px;float:left; font-family: Arial;}
 .policy_box input {border:1px solid #314f79;}
+.policy_box textarea.field{display:block;margin:0 4% 10px 0;min-width:110px;font-size:12px; font-family: Arial; height: 100px;}
+.policy_box textarea {border:1px solid #314f79;}
 .policy_box .button{background-color:#424242;border:1px solid #000;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;clear:both;color:#FFF;cursor:pointer;display:inline-block;font-family:arial;font-size:.9em;font-weight:bold;height:28px;padding:4px 8px;text-align:center;text-decoration:none;box-shadow:1px 1px 0 #6e6e6e inset;-moz-box-shadow:1px 1px 0 #6e6e6e inset;-webkit-box-shadow:1px 1px 0 #6e6e6e inset;}
 .policy_box .button:hover{box-shadow:1px 1px 0 #626262 inset;-moz-box-shadow:1px 1px 0 #626262 inset;-webkit-box-shadow:1px 1px 0 #626262 inset;background-color:#373737;}
 .policy_box .clear{float:left;}
@@ -27,15 +25,11 @@ a:active {color: #FFFFFF; text-decoration: none; }
 
 .inner_section a {text-decoration: none;}
 .inner_section {color:#FFF;font-size:.95em!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
-
 .inner_inner_section {float: left; color:#FFF;font-size:.95em!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
 
 .if {background: #E55C72; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px;}
-
 .else {background: #29B06F; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px;}
-
 .then {background: #29B06F; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px;}
-
 
 /* css for timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
