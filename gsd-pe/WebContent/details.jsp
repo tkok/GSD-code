@@ -13,10 +13,10 @@
                 // Construct operator selector 
                 var operatorselect = '<select name="operator">';
 	
-                if(operator == "LESS_THAN") {  operatorselect += '<option value="LESS_THAN" selected>LESS_THAN</option>' } else {  operatorselect += '<option value="LESS_THAN">LESS_THAN</option>'}
-                if(operator == "GREATER_THAN") { operatorselect += '<option value="GREATER_THAN" selected>GREATER_THAN</option>' } else { operatorselect += '<option value="GREATER_THAN">GREATER_THAN</option>'}
-                if(operator == "EQUALS") {  operatorselect += '<option value="EQUALS" selected>EQUALS</option>' } else {  operatorselect += '<option value="EQUALS">EQUALS</option>'}
-                if(operator == "NOT") {  operatorselect += '<option value="NOT" selected>NOT</option>' } else {  operatorselect += '<option value="NOT">NOT</option>'}
+                if(operator == "LESS_THAN") {  operatorselect += '<option value="LESS_THAN" selected><</option>' } else {  operatorselect += '<option value="LESS_THAN"><</option>'}
+                if(operator == "GREATER_THAN") { operatorselect += '<option value="GREATER_THAN" selected>></option>' } else { operatorselect += '<option value="GREATER_THAN">></option>'}
+                if(operator == "EQUALS") {  operatorselect += '<option value="EQUALS" selected>==</option>' } else {  operatorselect += '<option value="EQUALS">==</option>'}
+                if(operator == "NOT") {  operatorselect += '<option value="NOT" selected>!=</option>' } else {  operatorselect += '<option value="NOT">!=</option>'}
 	
                 operatorselect += '</select>';
 	
