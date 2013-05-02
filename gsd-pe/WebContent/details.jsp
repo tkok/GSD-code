@@ -4,9 +4,13 @@
 <html>
     <head>
         <link href="style.css" rel="stylesheet" type='text/css'>
+        <link href="/test/js/jquery-ui-1.10.2.custom/css/jquery-ui.min.css" rel="stylesheet" type='text/css'>
+        <link href="/test/js/jquery-ui-1.10.2.custom/css/jquery.ui.theme.css" rel="stylesheet" type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="jquery.validate.js"></script>
+        <script type="text/javascript" src="/test/js/jquery.validate.js"></script>
+        <script type="text/javascript" src="/test/js/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js"></script>
+        <script type="text/javascript" src="/test/js/jquery-ui-timepicker-addon.js"></script>
         <script>
 
             function operator(operator) {
@@ -55,10 +59,8 @@
                         + active
                         + '</div>'
                         + '<div class="inner_section">From: '
-                        + json[k].interval.fromTime
-                        + '<input type="hidden" id="fromTime" name="fromTime" value="05:59"><br /><br />To: '
-                        + json[k].interval.toTime
-                        + '<input type="hidden" id="toTime" name="toTime" value="06:00"><br /><br />'
+                        + 'From: <input type="text" id="fromTime" name="fromTime" value="' + json[k].interval.fromTime + '"><br /><br /> '
+                        + 'To: <input type="text" id="toTime" name="toTime" value="' + json[k].interval.toTime + '"><br /><br />'
                         + 'Name: <input type="text" class="required" name="name" id="name" value="'
                         + json[k].name
                         + '"> Description: <input class="required" style="width: 500px;" id="description" type="text" name="description" value="'
@@ -170,9 +172,13 @@
                             + '</div>'
                     );
                     });
+                    
+                    $('#fromTime').timepicker();
+                    $('#toTime').timepicker();
 
                 }
-
+                
+                
             }
             
             function recursiveThen(json, k, l, m)

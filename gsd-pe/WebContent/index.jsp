@@ -6,7 +6,7 @@
         <link href="style.css" rel="stylesheet" type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="jquery.validate.js"></script>
+        <script type="text/javascript" src="/test/js/jquery.validate.js"></script>
         <script>
 
             function doPopulation(json)
