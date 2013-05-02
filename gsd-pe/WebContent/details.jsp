@@ -61,7 +61,11 @@
                         + json[k].description
                         + '</textarea></div>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
-                        + '<div class="inner_section"><span class="headline line">Policy Rules</span></div>'
+                        + '<div class="inner_section"><span class="headline line">Policy Statements</span></div>'
+                        + '<div class="inner_section">'
+                        + '<div class="statement">'
+                        + '<a href="Javascript:void(0);"><div class="statement_headline" id="st1"><div class="statement_inner_headline">Statement 1</div></div></a>'
+                        + '<div class="statement_content" id="st1_content">'
                         + '<div class="inner_section"><span class="headline2">IF Values </span>(<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
                         + '<div id="if-' + json[k].id + '" class="inner_section">'
                         + '<div style="clear: both;"></div>'
@@ -88,6 +92,14 @@
                         + '<div class="inner_section"><span class="headline2">ELSE Values </span>(+ New)</b></div>'
                         + '<div id="else-' + json[k].id + '" class="inner_section">'
                         + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '<div class="statement">'
+                        + '<a href="Javascript:void(0);"><div class="statement_headline" id="st2"><div class="statement_inner_headline">Statement 2</div></div></a>'
+                        + '<div class="statement_content" id="st2_content"><div class="inner_section">lolol</div>'
+                        + '</div>'
+                        + '</div>'
                         + '</div>'
                         + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form></div>');
 
@@ -149,6 +161,16 @@
                         } else { return false; }
                         
                     });
+                    
+                    $("#st1").click(function() {
+                        $("#st1_content").toggle();
+                    });
+                    
+                    $("#st2").click(function() {
+                        $("#st2_content").toggle();
+                    });
+                    
+                    
 	
                     // buttons defined
                     $('#newif-' + json[k].id).click(function() {
@@ -166,6 +188,41 @@
                             + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
                             + '</div>'
                     );
+                        
+                        /*// Update object with new statement
+                        
+                        // prefixOperator
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].prefixOperator = "AND";
+			   			// aValue type
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.type = "test1";
+		   				// aValue data floatvalue
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.data.floatValue = 2.2;
+		   				// operator
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].operator = "test1";
+		   				// sensorid
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].sensorId = "test1";
+                        
+                        
+		   				for(var i = 0; i < arry.length; i++)
+		   				{
+		   				  	arry[i].add
+		   					arry[i].prop = "value";
+		   				}
+		   				
+		   				
+		   				// prefixOperator
+		   				console.log( "prefixOperator: " + countce );
+                        // prefixOperator
+		   				console.log( "prefixOperator: " + json[k].policy.statements[0].data.conditionalExpressions[countce].prefixOperator );
+			   			// aValue type
+		   				console.log( "type: " + json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.type );
+		   				// aValue data floatvalue
+		   				console.log( "floatvalue: " + json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.data.floatValue );
+		   				// operator
+		   				console.log( "operator: " + json[k].policy.statements[0].data.conditionalExpressions[countce].operator );
+		   				// sensorid
+		   				console.log( "sensorid: " + json[k].policy.statements[0].data.conditionalExpressions[countce].sensorId );*/
+
                         countce++;
                     });
                     
