@@ -166,6 +166,7 @@
                             + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
                             + '</div>'
                     );
+                        countce++;
                     });
                     
                     $('#fromTime').timepicker();
