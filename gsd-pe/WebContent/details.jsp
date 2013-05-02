@@ -40,7 +40,7 @@
                     if(json[k].active == true) { var active = '<span style="font-weight: bold; color: lightgreen;">Active</span>'; } else { var active = '<span style="font-weight: bold; color: #8C1700;">Not active</span>'; }
 
                     var activecheckbox = "";
-                    if(json[k].active == true) { var activecheckbox = '<input type="radio" name="active" value="true" checked> Yes <input type="radio" name="active" value="false">No'; } else { var activecheckbox = '<input type="radio" name="active" value="true">Yes <input type="radio" name="active" value="false" checked> No'; }
+                    if(json[k].active == true) { var activecheckbox = '<input type="radio" name="active" id="r_true" value="true" style="float: left;" checked> <label style="float: left;" for="r_true">Yes</label> <input style="float: left;" type="radio" id="r_false" name="active" value="false"> <label style="float: left;" for="r_false">No</label>'; } else { var activecheckbox = '<input type="radio" id="r_true" style="float: left;" name="active" value="true"> <label style="float: left;" for="r_true">Yes</label> <input type="radio" style="float: left;" name="active" id="r_false" value="false" checked> <label style="float: left;" for="r_false">No</label>'; }
                     
                     // Append policy to view
                     $('.policies')
@@ -51,7 +51,7 @@
                         + active
                         + ')</div>'
                         + '<div class="inner_section">'
-                        + 'Is active: ' + activecheckbox
+                        + '<div style="float: left;">Is active: </div>' + activecheckbox
                         + '<br /><br />Name: <input type="text" class="required" name="name" id="name" value="'
                         + json[k].name
                         + '"> '
