@@ -45,7 +45,7 @@
                     // Append policy to view
                     $('.policies')
                     .append(
-                    '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><span class="headline">Edit Policy</span> (<b>Id: '
+                    '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><span class="headline line">Policy Information</span> (<b>Id: '
                         + json[k].id
                         + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, '
                         + active
@@ -61,11 +61,12 @@
                         + json[k].description
                         + '</textarea></div>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
-                        + '<div class="inner_section"><b>IF VALUES (<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
+                        + '<div class="inner_section"><span class="headline line">Policy Rules</span></div>'
+                        + '<div class="inner_section"><span class="headline2">IF Values </span>(<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
                         + '<div id="if-' + json[k].id + '" class="inner_section">'
                         + '<div style="clear: both;"></div>'
                         + '</div>'
-                        + '<div class="inner_section"><b>THEN VALUES (+ New)</b></div>'
+                        + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
                         + '<div id="then-' + json[k].id + '" class="inner_section">'
                         + '<div style="clear: both;"></div>'
                         + '</div>'
@@ -84,7 +85,7 @@
                         + '<div style="clear: both;"></div>'
                         + '</div>'
                         + '</div>'
-                        + '<div class="inner_section"><b>ELSE VALUES (+ New)</b></div>'
+                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(+ New)</b></div>'
                         + '<div id="else-' + json[k].id + '" class="inner_section">'
                         + '<div style="clear: both;"></div>'
                         + '</div>'
