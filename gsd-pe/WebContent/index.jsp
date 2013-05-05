@@ -52,11 +52,6 @@
             <div class="top">Policy Engine Administration</div>
             <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="javascript:void(0);">Create new policy</a></div>
         </div>
-        <%
-		    if (request.getParameter("updated") == "true") {
-		        out.println("Updated successfully");
-		    } 
-		%>
         <div class="policies">
 
         </div>

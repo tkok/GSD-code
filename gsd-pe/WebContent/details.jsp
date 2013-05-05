@@ -114,6 +114,7 @@
                                 + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue
                                 + '">, '
                                 + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
+                                + '<div class="deletebutton deleteif" id="deleteif-' + json[k].id + '-' + l + '-' + m +'"></div>'
                                 + '</div>'
                         );
 								
@@ -162,6 +163,8 @@
                         
                         var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
 
+                        //var getlatestid = json[k].policy.statements[n[1]].data.conditionalExpressions[(ce-1)];
+                        
                         // Alter POLICY OBJECT
                         json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'Nico.testing'});
                         
@@ -175,12 +178,31 @@
                             + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].aValue.data.floatValue
                             + '">, '
                             + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '</option></select>'
+                            + '<div class="deletebutton deleteif" id="deleteif-' + json[k].id + '-' + n[1] + '-' + ce +'"></div>'
                             + '</div>'
                     	);
                         
                         ce++;
 						
                     });
+                    
+                    jQuery(".deleteif").click(function() {
+                        var contentPanelId = jQuery(this).attr("id");
+
+                        var n = contentPanelId.split("-");
+                        
+                        var ce = json[k].policy.statements[n[2]].data.conditionalExpressions.length;
+
+                        // Alter POLICY OBJECT
+                        json[k].policy.statements[n[2]].data.conditionalExpressions.splice(n[3], 1);
+                        
+                        // Update GUI
+                        $('#if-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
+
+                        ce--;
+						
+                    });
+                    
                     
 					$("form#submit").submit(function() {
                     	
@@ -332,11 +354,6 @@
             <div class="top">Policy Engine Administration</div>
             <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="javascript:void(0);">Create new policy</a></div>
         </div>
-        <%
-		    if (request.getParameter("updated") == "true") {
-		        out.println("Updated successfully");
-		    } 
-		%>
         <div class="policies">
 
         </div>
