@@ -103,11 +103,8 @@
 					
                         // iterate over conditionalExpressions 
                         for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
-                        	// clean up array
-                        	console.log(json[k].policy.statements[l].data.conditionalExpressions);
+                        	// clean up array before populating
                         	json[k].policy.statements[l].data.conditionalExpressions = json[k].policy.statements[l].data.conditionalExpressions.filter(function(e){return e});
-	                        //json[k].policy.statements[l].data.conditionalExpressions.filter(function(e){return e});
-	                        console.log(json[k].policy.statements[l].data.conditionalExpressions);
                         }
                         for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
 
