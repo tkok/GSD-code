@@ -33,6 +33,7 @@
                 var countce = 0;
                 var countts = 0;
                 var countes = 0;
+
                 // iterate over each policy
                 for ( var k in json) {
 			
@@ -45,74 +46,65 @@
                     // Append policy to view
                     $('.policies')
                     .append(
-                    '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><span class="headline line">Policy Information</span> (<b>Id: '
-                        + json[k].id
-                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, '
-                        + active
-                        + ')</div>'
+                    '<div class="policy_box">'
+                    	+ '<form id="submit" action="PersistPolicy" method="post">'
+                    	+ '<div class="inner_section"><span class="headline line">Policy Information</span> (<b>Id: '
+                        	+ json[k].id
+                        	+ '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, ' + active + ')'
+                        + '</div>'
                         + '<div class="inner_section">'
-                        + '<div style="float: left;">Is active: </div>' + activecheckbox
-                        + '<br /><br />Name: <input type="text" class="required" name="name" id="name" value="'
-                        + json[k].name
-                        + '"> '
-                        + 'From: <input type="text" id="fromTime" name="fromTime" style="width: 50px;" value="' + json[k].interval.fromTime + '"> '
-                        + 'To: <input type="text" id="toTime" name="toTime" style="width: 50px;" value="' + json[k].interval.toTime + '"><br /><br />'
-                        + 'Description: <textarea class="field required" style="width: 500px;" id="description" type="text" name="description">'
-                        + json[k].description
-                        + '</textarea></div>'
+                        	+ '<div style="float: left;">Is active: </div>' + activecheckbox
+                        	+ '<br /><br />Name: <input type="text" class="required" name="name" id="name" value="' + json[k].name + '"> '
+                        	+ 'From: <input type="text" id="fromTime" name="fromTime" style="width: 50px;" value="' + json[k].interval.fromTime + '"> '
+                        	+ 'To: <input type="text" id="toTime" name="toTime" style="width: 50px;" value="' + json[k].interval.toTime + '"><br /><br />'
+                        	+ 'Description: <textarea class="field required" style="width: 500px;" id="description" type="text" name="description">'
+                        	+ json[k].description
+                        	+ '</textarea>'
+                        + '</div>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
                         + '<div class="inner_section"><span class="headline line">Policy Statements</span></div>'
-                        + '<div class="inner_section">'
-                        + '<div class="statement">'
-                        + '<a href="Javascript:void(0);"><div class="statement_headline" id="st1"><div class="statement_inner_headline">Statement 1</div></div></a>'
-                        + '<div class="statement_content" id="st1_content">'
-                        + '<div class="inner_section"><span class="headline2">IF Values </span>(<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
-                        + '<div id="if-' + json[k].id + '" class="inner_section">'
-                        + '<div style="clear: both;"></div>'
-                        + '</div>'
-                        + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
-                        + '<div id="then-' + json[k].id + '" class="inner_section">'
-                        + '<div style="clear: both;"></div>'
-                        + '</div>'
-                        + '<div class="inner_section"><b>THEN (1st level nested) VALUES </b></div>'
-                        + '<div id="then-nested-' + json[k].id + '" class="inner_section">'
-                        + '<div class="inner_section float"><i><b>IF VALUES </b></i></div>'
-                        + '<div id="then-nested-if-' + json[k].id + '" class="inner_section">'
-                        + '<div style="clear: both;"></div>'
-                        + '</div>'
-                        + '<div class="inner_section"><i><b>THEN VALUES </b></i></div>'
-                        + '<div id="then-nested-then-' + json[k].id + '" class="inner_section">'
-                        + '<div style="clear: both;"></div>'
-                        + '</div>'
-                        + '<div class="inner_section"><i><b>ELSE VALUES </b></i></div>'
-                        + '<div id="then-nested-else-' + json[k].id + '" class="inner_section">'
-                        + '<div style="clear: both;"></div>'
-                        + '</div>'
-                        + '</div>'
-                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(+ New)</b></div>'
-                        + '<div id="else-' + json[k].id + '" class="inner_section">'
-                        + '<div style="clear: both;"></div>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '<div class="statement">'
-                        + '<a href="Javascript:void(0);"><div class="statement_headline" id="st2"><div class="statement_inner_headline">Statement 2</div></div></a>'
-                        + '<div class="statement_content" id="st2_content"><div class="inner_section">lolol</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
-                        + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form></div>');
+                        + '<div class="statements"></div>'
+                        + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form>'
+                    + '</div>');
 
                     // iterate over statements 
                     for ( var l in json[k].policy.statements) {
                         // statement type
                         var con_type = json[k].policy.statements[l].type;
+                        
+                        $('.statements')
+                        .append(
+                        		'<div class="statement" id="statement_' + l + '">'
+                        			+ '<a href="Javascript:void(0);"><div class="statement_headline" id="st' + l +'"><div class="statement_inner_headline">Statement ' + l + '</div></div></a>'
+                        			+ '<div class="statement_content" id="st' + l + '_content">'
+                        				+ '<div class="inner_section">'
+											
+                        					// If 
+	                                        + '<div class="inner_section"><span class="headline2">IF Values </span>(<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
+	                                        + '<div id="if-' + json[k].id + '-' + l + '" class="inner_section">'
+	                                        	+ '<div style="clear: both;"></div>'
+	                                        + '</div>'
+	                                        
+	                                        // Then
+	                                        + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
+					                        + '<div id="then-' + json[k].id + '-' + l + '" class="inner_section">'
+					                        	+ '<div style="clear: both;"></div>'
+					                        + '</div>'
+					                        
+					                        // Else
+					                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(+ New)</b></div>'
+					                        + '<div id="else-' + json[k].id + '-' + l + '" class="inner_section">'
+					                        	+ '<div style="clear: both;"></div>'
+					                        + '</div>'
+					                        
+                        				+ '</div>'
+                        			+ '</div>'
+                        		+ '</div');
 					
-                            
                         // iterate over conditionalExpressions 
                         for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
                             // Append to policy
-                            $('#if-'+ json[k].id)
+                            $('#if-'+ json[k].id + '-' + l)
                             .prepend('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                             //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
                                 + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
@@ -138,7 +130,7 @@
                         for (var m in json[k].policy.statements[l].data.elseStatements) {
 				   			
                             // Append to policy
-                            $('#else-'+ json[k].id)
+                            $('#else-'+ json[k].id + '-' + l)
                             .prepend('<div id="else-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                                 + json[k].policy.statements[l].data.elseStatements[m].type
                                 + ', '
@@ -152,6 +144,13 @@
 
                     }
                     
+                    $(".statement_headline").click(function(event) {
+                    	
+                    	$(event.target.id + "_content").toggle();
+                        //alert(event.target.id);
+                    });
+                    
+                    
                     $("form#submit").submit(function() {
                         
                         if($("form#submit").valid() == true) {
@@ -162,13 +161,7 @@
                         
                     });
                     
-                    $("#st1").click(function() {
-                        $("#st1_content").toggle();
-                    });
                     
-                    $("#st2").click(function() {
-                        $("#st2_content").toggle();
-                    });
                     
                     
 	
@@ -314,7 +307,7 @@
                 } else {
 		   				
                     // Append to policy (non nested) 
-                    $('#then-'+ json[k].id)
+                    $('#then-'+ json[k].id + '-' + l)
                     .prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                         + json[k].policy.statements[l].data.thenStatements[m].type
                         + ', '
