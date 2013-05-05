@@ -103,6 +103,14 @@
 					
                         // iterate over conditionalExpressions 
                         for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
+                        	// clean up array
+                        	console.log(json[k].policy.statements[l].data.conditionalExpressions);
+                        	json[k].policy.statements[l].data.conditionalExpressions = json[k].policy.statements[l].data.conditionalExpressions.filter(function(e){return e});
+	                        //json[k].policy.statements[l].data.conditionalExpressions.filter(function(e){return e});
+	                        console.log(json[k].policy.statements[l].data.conditionalExpressions);
+                        }
+                        for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
+
                             // Append to policy
                             $('#if-'+ json[k].id + '-' + l)
                             .prepend('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
@@ -194,7 +202,8 @@
                         var ce = json[k].policy.statements[n[2]].data.conditionalExpressions.length;
 
                         // Alter POLICY OBJECT
-                        json[k].policy.statements[n[2]].data.conditionalExpressions.splice(n[3], 1);
+                        //json[k].policy.statements[n[2]].data.conditionalExpressions.splice(n[3], 1);
+                        delete json[k].policy.statements[n[2]].data.conditionalExpressions[n[3]];
                         
                         // Update GUI
                         $('#if-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
