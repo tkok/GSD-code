@@ -15,14 +15,12 @@
 
             function operator(operator) {
                 // Construct operator selector 
-                var operatorselect = '<select name="operator">';
-	
+				var operatorselect = "";
+                
                 if(operator == "LESS_THAN") {  operatorselect += '<option value="LESS_THAN" selected><</option>' } else {  operatorselect += '<option value="LESS_THAN"><</option>'}
                 if(operator == "GREATER_THAN") { operatorselect += '<option value="GREATER_THAN" selected>></option>' } else { operatorselect += '<option value="GREATER_THAN">></option>'}
                 if(operator == "EQUALS") {  operatorselect += '<option value="EQUALS" selected>==</option>' } else {  operatorselect += '<option value="EQUALS">==</option>'}
                 if(operator == "NOT") {  operatorselect += '<option value="NOT" selected>!=</option>' } else {  operatorselect += '<option value="NOT">!=</option>'}
-	
-                operatorselect += '</select>';
 	
                 return operatorselect;
             }
@@ -109,10 +107,10 @@
                             $('#if-'+ json[k].id + '-' + l)
                             .prepend('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                             //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
-                                + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
-                                + ', '
+                                + '<input style="width:140px;" type="text" id="if-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
+                                + ', <select id="if-operator-' + l + '-' + m + '" name="operator">'
                                 + operator(json[k].policy.statements[l].data.conditionalExpressions[m].operator)
-                                + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
+                                + '</select>, <input type="text" id="if-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue" style="width:30px;" value="'
                                 + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue
                                 + '">, '
                                 + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
@@ -159,13 +157,30 @@
                     
                     
                     $("form#submit").submit(function() {
+                    	
+                    	// for each statement
+                    	for ( var l in json[k].policy.statements) {
+                    		// for each conditional statement
+                        	for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
+                        		// update each value in the object
+
+                        		json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue = $('#if-datafloatvalue-' + l + '-' + m).val();
+                        		json[k].policy.statements[l].data.conditionalExpressions[m].operator = $('#if-operator-' + l + '-' + m).val();
+                        		json[k].policy.statements[l].data.conditionalExpressions[m].sensorId = $('#if-sensorid-' + l + '-' + m).val();
+                        		
+                        	}
+                    	}
+                    	
+                    	// Set Policy hidden field value to new updated object
                     	$('#policy').val(JSON.stringify(json[k].policy));
-                        if($("form#submit").valid() == true) {
-            				
-                        	// Set Policy hidden field value to new object
-                        	
-							//console.log(JSON.stringify(json[k].policy));
+                        
+                    	if($("form#submit").valid() == true) {
 							
+                    		// if valid submit!
+                    		
+                    		//console.log(JSON.stringify(json[k].policy));
+                    		
+                    		//return false;
                         } else { return false; }
                         
                     });
@@ -180,12 +195,7 @@
                         var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
 
                         // Alter POLICY OBJECT
-                       
-                        
                         json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'Nico.testing'});
-                        
-                        
-                        console.log(json);
                         
                         $('#' + alter)
                         .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
