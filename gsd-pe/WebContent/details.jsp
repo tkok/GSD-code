@@ -153,10 +153,36 @@
                         $("#" + alter).toggle();
 						//alert(alter);
                     });
+
+                    jQuery(".newif").click(function() {
+                        var contentPanelId = jQuery(this).attr("id");
+                        var alter = "if-" + contentPanelId;
+
+                        var n = contentPanelId.split("-");
+                        
+                        var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
+
+                        // Alter POLICY OBJECT
+                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'Nico.testing'});
+                        
+                        $('#' + alter)
+                        .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
+
+                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].sensorId + '">'
+                            + ', <select id="if-operator-' + l + '-' + m + '" name="operator">'
+                            + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[ce].operator)
+                            + ', </select>, <input type="text" name="datafloatvalue" style="width:30px;" value="'
+                            + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].aValue.data.floatValue
+                            + '">, '
+                            + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '</option></select>'
+                            + '</div>'
+                    	);
+                        
+                        ce++;
+						
+                    });
                     
-                    
-                    
-                    $("form#submit").submit(function() {
+					$("form#submit").submit(function() {
                     	
                     	// for each statement
                     	for ( var l in json[k].policy.statements) {
@@ -183,38 +209,6 @@
                     		//return false;
                         } else { return false; }
                         
-                    });
-                    
-                    
-                    jQuery(".newif").click(function() {
-                        var contentPanelId = jQuery(this).attr("id");
-                        var alter = "if-" + contentPanelId;
-
-                        var n = contentPanelId.split("-");
-                        
-                        var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
-
-                        // Alter POLICY OBJECT
-                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'Nico.testing'});
-                        
-                        $('#' + alter)
-                        .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
-                        //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
-                        
-                        	
-                        
-                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].sensorId + '">'
-                            + ', '
-                            + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[ce].operator)
-                            + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
-                            + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].aValue.data.floatValue
-                            + '">, '
-                            + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '</option></select>'
-                            + '</div>'
-                    	);
-                        
-                        ce++;
-						
                     });
 
                     
