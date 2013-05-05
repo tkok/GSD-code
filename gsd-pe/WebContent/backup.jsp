@@ -15,12 +15,14 @@
 
             function operator(operator) {
                 // Construct operator selector 
-				var operatorselect = "";
-                
+                var operatorselect = '<select name="operator">';
+	
                 if(operator == "LESS_THAN") {  operatorselect += '<option value="LESS_THAN" selected><</option>' } else {  operatorselect += '<option value="LESS_THAN"><</option>'}
                 if(operator == "GREATER_THAN") { operatorselect += '<option value="GREATER_THAN" selected>></option>' } else { operatorselect += '<option value="GREATER_THAN">></option>'}
                 if(operator == "EQUALS") {  operatorselect += '<option value="EQUALS" selected>==</option>' } else {  operatorselect += '<option value="EQUALS">==</option>'}
                 if(operator == "NOT") {  operatorselect += '<option value="NOT" selected>!=</option>' } else {  operatorselect += '<option value="NOT">!=</option>'}
+	
+                operatorselect += '</select>';
 	
                 return operatorselect;
             }
@@ -31,8 +33,6 @@
                 var countce = 0;
                 var countts = 0;
                 var countes = 0;
-                var countst = 0;
-
                 // iterate over each policy
                 for ( var k in json) {
 			
@@ -45,72 +45,80 @@
                     // Append policy to view
                     $('.policies')
                     .append(
-                    '<div class="policy_box">'
-                    	+ '<form id="submit" action="PersistPolicy" method="post">'
-                    	+ '<div class="inner_section"><span class="headline line">Policy Information</span> (<b>Id: '
-                        	+ json[k].id
-                        	+ '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, ' + active + ')'
-                        + '</div>'
+                    '<div class="policy_box"><form id="submit" action="PersistPolicy" method="post"><div class="inner_section"><span class="headline line">Policy Information</span> (<b>Id: '
+                        + json[k].id
+                        + '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, '
+                        + active
+                        + ')</div>'
                         + '<div class="inner_section">'
-                        	+ '<div style="float: left;">Is active: </div>' + activecheckbox
-                        	+ '<br /><br />Name: <input type="text" class="required" name="name" id="name" value="' + json[k].name + '"> '
-                        	+ 'From: <input type="text" id="fromTime" name="fromTime" style="width: 50px;" value="' + json[k].interval.fromTime + '"> '
-                        	+ 'To: <input type="text" id="toTime" name="toTime" style="width: 50px;" value="' + json[k].interval.toTime + '"><br /><br />'
-                        	+ 'Description: <textarea class="field required" style="width: 500px;" id="description" type="text" name="description">'
-                        	+ json[k].description
-                        	+ '</textarea>'
-                        + '</div>'
-                        //+ '<textarea type="text" style="width: 400px; height: 400px;" id="policy1" name="policy1">' + JSON.stringify(json[k].policy) + '</textarea>'
+                        + '<div style="float: left;">Is active: </div>' + activecheckbox
+                        + '<br /><br />Name: <input type="text" class="required" name="name" id="name" value="'
+                        + json[k].name
+                        + '"> '
+                        + 'From: <input type="text" id="fromTime" name="fromTime" style="width: 50px;" value="' + json[k].interval.fromTime + '"> '
+                        + 'To: <input type="text" id="toTime" name="toTime" style="width: 50px;" value="' + json[k].interval.toTime + '"><br /><br />'
+                        + 'Description: <textarea class="field required" style="width: 500px;" id="description" type="text" name="description">'
+                        + json[k].description
+                        + '</textarea></div>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
                         + '<div class="inner_section"><span class="headline line">Policy Statements</span></div>'
-                        + '<div class="statements"></div>'
-                        + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form>'
-                    + '</div>');
+                        + '<div class="inner_section">'
+                        + '<div class="statement">'
+                        + '<a href="Javascript:void(0);"><div class="statement_headline" id="st1"><div class="statement_inner_headline">Statement 1</div></div></a>'
+                        + '<div class="statement_content" id="st1_content">'
+                        + '<div class="inner_section"><span class="headline2">IF Values </span>(<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
+                        + '<div id="if-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
+                        + '<div id="then-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><b>THEN (1st level nested) VALUES </b></div>'
+                        + '<div id="then-nested-' + json[k].id + '" class="inner_section">'
+                        + '<div class="inner_section float"><i><b>IF VALUES </b></i></div>'
+                        + '<div id="then-nested-if-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><i><b>THEN VALUES </b></i></div>'
+                        + '<div id="then-nested-then-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '<div class="inner_section"><i><b>ELSE VALUES </b></i></div>'
+                        + '<div id="then-nested-else-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '</div>'
+                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(+ New)</b></div>'
+                        + '<div id="else-' + json[k].id + '" class="inner_section">'
+                        + '<div style="clear: both;"></div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '<div class="statement">'
+                        + '<a href="Javascript:void(0);"><div class="statement_headline" id="st2"><div class="statement_inner_headline">Statement 2</div></div></a>'
+                        + '<div class="statement_content" id="st2_content"><div class="inner_section">lolol</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                        + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form></div>');
 
                     // iterate over statements 
                     for ( var l in json[k].policy.statements) {
                         // statement type
                         var con_type = json[k].policy.statements[l].type;
-                        
-                        $('.statements')
-                        .append(
-                        		'<div class="statement" id="statement_' + l + '">'
-                        			+ '<a href="Javascript:void(0);"><div class="statement_headline" id="st' + l +'"><div class="statement_inner_headline">Statement ' + l + '</div></div></a>'
-                        			+ '<div class="statement_content" id="st' + l + '_content">'
-                        				+ '<div class="inner_section">'
-											
-                        					// If 
-	                                        + '<div class="inner_section"><span class="headline2">IF Values </span>(<a class="newif" id="' + json[k].id + '-' + l +'" href="JavaScript:void(0);">+ New</a>)</b></div>'
-	                                        + '<div id="if-' + json[k].id + '-' + l + '" class="inner_section">'
-	                                        	+ '<div style="clear: both;"></div>'
-	                                        + '</div>'
-	                                        
-	                                        // Then
-	                                        + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
-					                        + '<div id="then-' + json[k].id + '-' + l + '" class="inner_section">'
-					                        	+ '<div style="clear: both;"></div>'
-					                        + '</div>'
-					                        
-					                        // Else
-					                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(+ New)</b></div>'
-					                        + '<div id="else-' + json[k].id + '-' + l + '" class="inner_section">'
-					                        	+ '<div style="clear: both;"></div>'
-					                        + '</div>'
-					                        
-                        				+ '</div>'
-                        			+ '</div>'
-                        		+ '</div');
 					
+                            
                         // iterate over conditionalExpressions 
                         for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
                             // Append to policy
-                            $('#if-'+ json[k].id + '-' + l)
+                            $('#if-'+ json[k].id)
                             .prepend('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                             //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
-                                + '<input style="width:140px;" type="text" id="if-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
-                                + ', <select id="if-operator-' + l + '-' + m + '" name="operator">'
+                                + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
+                                + ', '
                                 + operator(json[k].policy.statements[l].data.conditionalExpressions[m].operator)
-                                + '</select>, <input type="text" id="if-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue" style="width:30px;" value="'
+                                + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
                                 + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue
                                 + '">, '
                                 + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
@@ -130,7 +138,7 @@
                         for (var m in json[k].policy.statements[l].data.elseStatements) {
 				   			
                             // Append to policy
-                            $('#else-'+ json[k].id + '-' + l)
+                            $('#else-'+ json[k].id)
                             .prepend('<div id="else-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                                 + json[k].policy.statements[l].data.elseStatements[m].type
                                 + ', '
@@ -141,76 +149,82 @@
                         );
                             countes++;
                         }
-                        
-                        countst++;
 
                     }
-
                     
-                    jQuery(".statement_headline").click(function() {
-                        var contentPanelId = jQuery(this).attr("id");
-                        var alter = contentPanelId + "_content";
-                        $("#" + alter).toggle();
-						//alert(alter);
-                    });
-
-                    jQuery(".newif").click(function() {
-                        var contentPanelId = jQuery(this).attr("id");
-                        var alter = "if-" + contentPanelId;
-
-                        var n = contentPanelId.split("-");
+                    $("form#submit").submit(function() {
                         
-                        var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
+                        if($("form#submit").valid() == true) {
+            				
+                        	// Submit
 
-                        // Alter POLICY OBJECT
-                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'Nico.testing'});
-                        
-                        $('#' + alter)
-                        .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
-
-                            + '<input id="if-sensorid-' + n[1] + '-' + ce + '" style="width:140px;" type="text" name="sensorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].sensorId + '">'
-                            + ', <select id="if-operator-' + n[1] + '-' + ce + '" name="operator">'
-                            + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[ce].operator)
-                            + ', </select>, <input id="if-datafloatvalue-' + n[1] + '-' + ce + '" type="text" name="datafloatvalue" style="width:30px;" value="'
-                            + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].aValue.data.floatValue
-                            + '">, '
-                            + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '</option></select>'
-                            + '</div>'
-                    	);
-                        
-                        ce++;
-						
-                    });
-                    
-					$("form#submit").submit(function() {
-                    	
-                    	// for each statement
-                    	for ( var l in json[k].policy.statements) {
-                    		// for each conditional statement
-                        	for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
-                        		// update each value in the object
-								console.log($('#if-sensorid-' + l + '-' + m).val());
-                        		/*json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue = $('#if-datafloatvalue-' + l + '-' + m).val();
-                        		json[k].policy.statements[l].data.conditionalExpressions[m].operator = $('#if-operator-' + l + '-' + m).val();
-                        		json[k].policy.statements[l].data.conditionalExpressions[m].sensorId = $('#if-sensorid-' + l + '-' + m).val();
-                        		*/
-                        	}
-                    	}
-                    	
-                    	// Set Policy hidden field value to new updated object
-                    	$('#policy').val(JSON.stringify(json[k].policy));
-                        
-                    	if($("form#submit").valid() == true) {
-							
-                    		// if valid submit!
-                    		
-                    		// Test
-                    		//console.log(JSON.stringify(json[k].policy));
-                    		//return false;
                         } else { return false; }
                         
                     });
+                    
+                    $("#st1").click(function() {
+                        $("#st1_content").toggle();
+                    });
+                    
+                    $("#st2").click(function() {
+                        $("#st2_content").toggle();
+                    });
+                    
+                    
+	
+                    // buttons defined
+                    $('#newif-' + json[k].id).click(function() {
+						
+                        console.log(countce);
+                        $('#if-' + json[k].id)
+                        .prepend('<div id="if-' + json[k].id + '-' + countce + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + countce + '-' + m +'</b></div>'
+                        //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
+                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
+                            + ', '
+                            + operator(json[k].policy.statements[l].data.conditionalExpressions[m].operator)
+                            + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
+                            + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue
+                            + '">, '
+                            + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
+                            + '</div>'
+                    );
+                        
+                        /*// Update object with new statement
+                        
+                        // prefixOperator
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].prefixOperator = "AND";
+			   			// aValue type
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.type = "test1";
+		   				// aValue data floatvalue
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.data.floatValue = 2.2;
+		   				// operator
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].operator = "test1";
+		   				// sensorid
+		   				json[k].policy.statements[0].data.conditionalExpressions[countce].sensorId = "test1";
+                        
+                        
+		   				for(var i = 0; i < arry.length; i++)
+		   				{
+		   				  	arry[i].add
+		   					arry[i].prop = "value";
+		   				}
+		   				
+		   				
+		   				// prefixOperator
+		   				console.log( "prefixOperator: " + countce );
+                        // prefixOperator
+		   				console.log( "prefixOperator: " + json[k].policy.statements[0].data.conditionalExpressions[countce].prefixOperator );
+			   			// aValue type
+		   				console.log( "type: " + json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.type );
+		   				// aValue data floatvalue
+		   				console.log( "floatvalue: " + json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.data.floatValue );
+		   				// operator
+		   				console.log( "operator: " + json[k].policy.statements[0].data.conditionalExpressions[countce].operator );
+		   				// sensorid
+		   				console.log( "sensorid: " + json[k].policy.statements[0].data.conditionalExpressions[countce].sensorId );*/
 
+                        countce++;
+                    });
                     
                     $('#fromTime').timepicker();
                     $('#toTime').timepicker();
@@ -300,7 +314,7 @@
                 } else {
 		   				
                     // Append to policy (non nested) 
-                    $('#then-'+ json[k].id + '-' + l)
+                    $('#then-'+ json[k].id)
                     .prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                         + json[k].policy.statements[l].data.thenStatements[m].type
                         + ', '
