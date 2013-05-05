@@ -143,12 +143,15 @@
                         }
 
                     }
+
                     
-                    $(".statement_headline").click(function(event) {
-                    	
-                    	$(event.target.id + "_content").toggle();
-                        //alert(event.target.id);
+                    jQuery(".statement_headline").click(function() {
+                        var contentPanelId = jQuery(this).attr("id");
+                        var alter = contentPanelId + "_content";
+                        $("#" + alter).toggle();
+						//alert(alter);
                     });
+                    
                     
                     
                     $("form#submit").submit(function() {
