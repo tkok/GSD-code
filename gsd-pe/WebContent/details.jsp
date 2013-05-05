@@ -189,11 +189,11 @@
                     		// for each conditional statement
                         	for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
                         		// update each value in the object
-								console.log($('#if-sensorid-' + l + '-' + m).val());
-                        		/*json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue = $('#if-datafloatvalue-' + l + '-' + m).val();
+								
+                        		json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue = $('#if-datafloatvalue-' + l + '-' + m).val();
                         		json[k].policy.statements[l].data.conditionalExpressions[m].operator = $('#if-operator-' + l + '-' + m).val();
                         		json[k].policy.statements[l].data.conditionalExpressions[m].sensorId = $('#if-sensorid-' + l + '-' + m).val();
-                        		*/
+                        		
                         	}
                     	}
                     	
