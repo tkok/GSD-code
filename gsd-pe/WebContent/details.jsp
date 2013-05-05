@@ -62,6 +62,7 @@
                         	+ json[k].description
                         	+ '</textarea>'
                         + '</div>'
+                        //+ '<textarea type="text" style="width: 400px; height: 400px;" id="policy1" name="policy1">' + JSON.stringify(json[k].policy) + '</textarea>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
                         + '<div class="inner_section"><span class="headline line">Policy Statements</span></div>'
                         + '<div class="statements"></div>'
@@ -158,11 +159,13 @@
                     
                     
                     $("form#submit").submit(function() {
-                        
+                    	$('#policy').val(JSON.stringify(json[k].policy));
                         if($("form#submit").valid() == true) {
             				
-                        	// Submit
-
+                        	// Set Policy hidden field value to new object
+                        	
+							//console.log(JSON.stringify(json[k].policy));
+							
                         } else { return false; }
                         
                     });
@@ -174,72 +177,36 @@
 
                         var n = contentPanelId.split("-");
                         
-                        var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length++;
+                        var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
 
+                        // Alter POLICY OBJECT
+                       
+                        
+                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'Nico.testing'});
+                        
+                        
+                        console.log(json);
+                        
                         $('#' + alter)
                         .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
                         //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
                         
                         	
                         
-                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[0].sensorId + '">'
+                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].sensorId + '">'
                             + ', '
-                            + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[0].operator)
+                            + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[ce].operator)
                             + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
-                            + json[k].policy.statements[n[1]].data.conditionalExpressions[0].aValue.data.floatValue
+                            + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].aValue.data.floatValue
                             + '">, '
-                            + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[0].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[0].prefixOperator + '</option></select>'
+                            + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '</option></select>'
                             + '</div>'
                     	);
                         
-                        //ce++;
+                        ce++;
 						
                     });
-                    
-                    
-	
-                    // buttons defined
-                    $('#newif-' + json[k].id).click(function() {
-						
-                        
-                        
-                        
-                        /*// Update object with new statement
-                        
-                        // prefixOperator
-		   				json[k].policy.statements[0].data.conditionalExpressions[countce].prefixOperator = "AND";
-			   			// aValue type
-		   				json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.type = "test1";
-		   				// aValue data floatvalue
-		   				json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.data.floatValue = 2.2;
-		   				// operator
-		   				json[k].policy.statements[0].data.conditionalExpressions[countce].operator = "test1";
-		   				// sensorid
-		   				json[k].policy.statements[0].data.conditionalExpressions[countce].sensorId = "test1";
-                        
-                        
-		   				for(var i = 0; i < arry.length; i++)
-		   				{
-		   				  	arry[i].add
-		   					arry[i].prop = "value";
-		   				}
-		   				
-		   				
-		   				// prefixOperator
-		   				console.log( "prefixOperator: " + countce );
-                        // prefixOperator
-		   				console.log( "prefixOperator: " + json[k].policy.statements[0].data.conditionalExpressions[countce].prefixOperator );
-			   			// aValue type
-		   				console.log( "type: " + json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.type );
-		   				// aValue data floatvalue
-		   				console.log( "floatvalue: " + json[k].policy.statements[0].data.conditionalExpressions[countce].aValue.data.floatValue );
-		   				// operator
-		   				console.log( "operator: " + json[k].policy.statements[0].data.conditionalExpressions[countce].operator );
-		   				// sensorid
-		   				console.log( "sensorid: " + json[k].policy.statements[0].data.conditionalExpressions[countce].sensorId );*/
 
-                        
-                    });
                     
                     $('#fromTime').timepicker();
                     $('#toTime').timepicker();
