@@ -33,6 +33,7 @@
                 var countce = 0;
                 var countts = 0;
                 var countes = 0;
+                var countst = 0;
 
                 // iterate over each policy
                 for ( var k in json) {
@@ -80,7 +81,7 @@
                         				+ '<div class="inner_section">'
 											
                         					// If 
-	                                        + '<div class="inner_section"><span class="headline2">IF Values </span>(<a id="newif-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
+	                                        + '<div class="inner_section"><span class="headline2">IF Values </span>(<a class="newif" id="' + json[k].id + '-' + l +'" href="JavaScript:void(0);">+ New</a>)</b></div>'
 	                                        + '<div id="if-' + json[k].id + '-' + l + '" class="inner_section">'
 	                                        	+ '<div style="clear: both;"></div>'
 	                                        + '</div>'
@@ -141,6 +142,8 @@
                         );
                             countes++;
                         }
+                        
+                        countst++;
 
                     }
 
@@ -165,25 +168,41 @@
                     });
                     
                     
+                    jQuery(".newif").click(function() {
+                        var contentPanelId = jQuery(this).attr("id");
+                        var alter = "if-" + contentPanelId;
+
+                        var n = contentPanelId.split("-");
+                        
+                        var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length++;
+
+                        $('#' + alter)
+                        .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
+                        //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
+                        
+                        	
+                        
+                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[0].sensorId + '">'
+                            + ', '
+                            + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[0].operator)
+                            + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
+                            + json[k].policy.statements[n[1]].data.conditionalExpressions[0].aValue.data.floatValue
+                            + '">, '
+                            + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[0].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[0].prefixOperator + '</option></select>'
+                            + '</div>'
+                    	);
+                        
+                        //ce++;
+						
+                    });
                     
                     
 	
                     // buttons defined
                     $('#newif-' + json[k].id).click(function() {
 						
-                        console.log(countce);
-                        $('#if-' + json[k].id)
-                        .prepend('<div id="if-' + json[k].id + '-' + countce + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + countce + '-' + m +'</b></div>'
-                        //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
-                            + '<input style="width:140px;" type="text" name="sesorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
-                            + ', '
-                            + operator(json[k].policy.statements[l].data.conditionalExpressions[m].operator)
-                            + ', <input type="text" name="datafloatvalue" style="width:30px;" value="'
-                            + json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue
-                            + '">, '
-                            + '<select><option value="' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '" selected>' + json[k].policy.statements[l].data.conditionalExpressions[m].prefixOperator + '</option></select>'
-                            + '</div>'
-                    );
+                        
+                        
                         
                         /*// Update object with new statement
                         
@@ -219,7 +238,7 @@
 		   				// sensorid
 		   				console.log( "sensorid: " + json[k].policy.statements[0].data.conditionalExpressions[countce].sensorId );*/
 
-                        countce++;
+                        
                     });
                     
                     $('#fromTime').timepicker();
