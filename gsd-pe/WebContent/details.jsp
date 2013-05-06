@@ -89,7 +89,7 @@
 	                                        + '</div>'
 	                                        
 	                                        // Then
-	                                        + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
+	                                        + '<div class="inner_section"><span class="headline2">THEN Values </span>(<a class="newthen" id="' + json[k].id + '-' + l + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
 					                        + '<div id="then-' + json[k].id + '-' + l + '" class="inner_section">'
 					                        	+ '<div style="clear: both;"></div>'
 					                        + '</div>'
@@ -184,7 +184,7 @@
                                 + '</div>'
                                 
                                 // Then
-                                + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
+                                + '<div class="inner_section"><span class="headline2">THEN Values </span>(<a class="newthen" id="' + json[k].id + '-' + st + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
 		                        + '<div id="then-' + json[k].id + '-' + st + '" class="inner_section">'
 		                        	+ '<div style="clear: both;"></div>'
 		                        + '</div>'
@@ -224,6 +224,29 @@
                             + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '</option></select>'
                             + '<div class="deletebutton deleteif" id="deleteif-' + json[k].id + '-' + n[1] + '-' + ce +'"></div>'
                             + '</div>'
+                    	);
+						
+                    });
+                    
+                    $(".statements").delegate(".newthen", "click", function (){
+                        var contentPanelId = jQuery(this).attr("id");
+                        var alter = "then-" + contentPanelId;
+
+                        var n = contentPanelId.split("-");
+                        
+                        var ts = json[k].policy.statements[n[1]].data.thenStatements.length;
+                        
+                        // Alter POLICY OBJECT 
+                        json[k].policy.statements[n[1]].data.thenStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : 'room-6-ac-6-gain'}});
+                        
+                        $('#' + alter)
+                        .prepend('<div id="then-' + json[k].id + '-' + n[1] + '-' + ts +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + n[1] + '-' + ts +'</b></div>'
+                        		 + 'Set: <input style="width:140px;" type="text" id="then-sensorid-' + n[1] + '-' + ts + '" name="sensorid" value="' + json[k].policy.statements[n[1]].data.thenStatements[ts].data.sensorID + '">, '
+                                 + 'To: <input type="text" id="then-datafloatvalue-' + n[1] + '-' + ts + '" name="datafloatvalue" style="width:30px;" value="'
+                                 + json[k].policy.statements[n[1]].data.thenStatements[ts].data.aValue.floatValue
+                                 + '">'
+                                + '<div class="deletebutton deletethen" id="deletethen-' + json[k].id + '-' + n[1] + '-' + ts +'"></div>'
+                                + '</div>'
                     	);
 						
                     });
@@ -281,6 +304,22 @@
 
                     	});
                     
+                 	// Delete then function with delegate events
+                    $(".statements").delegate(".deletethen", "click", function (){
+                    	
+                    	var contentPanelId = jQuery(this).attr("id");
+
+                        var n = contentPanelId.split("-");
+
+                        // Alter POLICY OBJECT
+                        delete json[k].policy.statements[n[2]].data.thenStatements[n[3]];
+                        
+                        // Update GUI
+                        $('#then-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
+
+
+                	});
+                    
                  	// Delete else function with delegate events
                     $(".statements").delegate(".deleteelse", "click", function (){
                     	
@@ -310,8 +349,14 @@
                         		json[k].policy.statements[l].data.conditionalExpressions[m].sensorId = $('#if-sensorid-' + l + '-' + m).val();
                         		
                         	}
-                    		
-                        	for ( var m in json[k].policy.statements[l].data.elseStatements) {
+                        	for ( var m in json[k].policy.statements[l].data.thenStatements) {
+                        		// update each value in the object
+								
+                        		json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue = $('#then-datafloatvalue-' + l + '-' + m).val();
+                        		json[k].policy.statements[l].data.thenStatements[m].data.sensorID = $('#then-sensorid-' + l + '-' + m).val();
+                        		
+                        	}
+                    		for ( var m in json[k].policy.statements[l].data.elseStatements) {
                         		// update each value in the object
 								
                         		json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue = $('#else-datafloatvalue-' + l + '-' + m).val();
@@ -349,7 +394,7 @@
                 // check for nested statements 
                 if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.policyengine.domain.IfStatement") {
 
-                    // iterate over nested conditionalExpressions
+                    /*// iterate over nested conditionalExpressions
                     for (var n in json[k].policy.statements[l].data.thenStatements[m].data.conditionalExpressions) {
 				   			
                         // Append to policy
@@ -419,19 +464,21 @@
                             + json[k].policy.statements[l].data.thenStatements[m].data.elseStatements[n].data.sensorID
                             + '</div>'
                     );
-                    }
+                    }*/
                 } else {
 		   				
                     // Append to policy (non nested) 
                     $('#then-'+ json[k].id + '-' + l)
                     .prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
-                        + json[k].policy.statements[l].data.thenStatements[m].type
-                        + ', '
+                        //+ json[k].policy.statements[l].data.thenStatements[m].type
+                        
+                        + 'Set: <input style="width:140px;" type="text" id="then-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.thenStatements[m].data.sensorID + '">, '
+                        + 'To: <input type="text" id="then-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue" style="width:30px;" value="'
                         + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue
-                        + ', '
-                        + json[k].policy.statements[l].data.thenStatements[m].data.sensorID
+                        + '">'
+                        + '<div class="deletebutton deletethen" id="deletethen-' + json[k].id + '-' + l + '-' + m +'"></div>'
                         + '</div>'
-                );
+                	);
                 }
 
             }
