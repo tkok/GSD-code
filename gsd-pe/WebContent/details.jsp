@@ -127,6 +127,9 @@
                             countce++;
                         }
                         // iterate over thenStatements
+                        // clean up array before populating
+                        json[k].policy.statements[l].data.thenStatements = json[k].policy.statements[l].data.thenStatements.filter(function(e){return e});
+                        
                         for (var m in json[k].policy.statements[l].data.thenStatements) {
 
                             recursiveThen(json, k, l, m);
