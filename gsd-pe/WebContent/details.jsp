@@ -62,7 +62,7 @@
                         + '</div>'
                         //+ '<textarea type="text" style="width: 400px; height: 400px;" id="policy1" name="policy1">' + JSON.stringify(json[k].policy) + '</textarea>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
-                        + '<div class="inner_section"><span class="headline line">Policy Statements</span></div>'
+                        + '<div class="inner_section"><span class="headline line">Policy Statements</span> (+ New)</div>'
                         + '<div class="statements"></div>'
                         + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form>'
                     + '</div>');
