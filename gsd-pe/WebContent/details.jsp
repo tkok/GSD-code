@@ -68,6 +68,10 @@
                     + '</div>');
 
                     // iterate over statements 
+                    for (var m in json[k].policy.statements) {
+                        	// clean up array before populating
+                        	json[k].policy.statements = json[k].policy.statements.filter(function(e){return e});
+                        }
                     for ( var l in json[k].policy.statements) {
                         // statement type
                         var con_type = json[k].policy.statements[l].type;
@@ -75,7 +79,7 @@
                         $('.statements')
                         .append(
                         		'<div class="statement" id="statement_' + l + '">'
-                        			+ '<a href="Javascript:void(0);"><div class="statement_headline" id="st' + l +'"><div class="statement_inner_headline">Statement ' + l + '</div></div></a>'
+                        			+ '<a href="Javascript:void(0);"><div class="statement_headline" id="st' + l +'"><div class="statement_inner_headline">Statement ' + l + '</div><div class="deletebutton deletestatement" id="deletest-' + json[k].id + '-' + l + '"></div></div></a>'
                         			+ '<div class="statement_content" id="st' + l + '_content">'
                         				+ '<div class="inner_section">'
 											
@@ -173,7 +177,7 @@
                         
                         $('.statements')
                         .append('<div class="statement" id="statement_' + st + '">'
-            			+ '<a href="Javascript:void(0);"><div class="statement_headline" id="st' + st + '"><div class="statement_inner_headline">Statement ' + st + '</div></div></a>'
+            			+ '<a href="Javascript:void(0);"><div class="statement_headline" id="st' + st + '"><div class="statement_inner_headline">Statement ' + st + '</div><div class="deletebutton deletestatement" id="deletest-' + json[k].id + '-' + st + '"></div></div></a>'
             			+ '<div class="statement_content" id="st' + st + '_content">'
             				+ '<div class="inner_section">'
 								
@@ -251,6 +255,21 @@
 						
                     });
                     
+                 // Delete statement function with delegate events
+                    $(".statements").delegate(".deletestatement", "click", function (){
+                    	
+	                    	var contentPanelId = jQuery(this).attr("id");
+	
+	                        var n = contentPanelId.split("-");
+	
+	                        // Alter POLICY OBJECT
+	                        delete json[k].policy.statements[n[2]];
+	                        
+	                        // Update GUI
+	                        $('#statement_' + n[2]).remove();
+							
+                    	});
+                    
                     // Delete if function with delegate events
                     $(".statements").delegate(".deleteif", "click", function (){
                     	
@@ -259,7 +278,6 @@
 	                        var n = contentPanelId.split("-");
 	
 	                        // Alter POLICY OBJECT
-	                        //json[k].policy.statements[n[2]].data.conditionalExpressions.splice(n[3], 1);
 	                        delete json[k].policy.statements[n[2]].data.conditionalExpressions[n[3]];
 	                        
 	                        // Update GUI
