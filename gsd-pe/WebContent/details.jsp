@@ -12,7 +12,7 @@
         <script type="text/javascript" src="/test/js/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js"></script>
         <script type="text/javascript" src="/test/js/jquery-ui-timepicker-addon.js"></script>
         <script>
-
+        $(document).ready(function() {
             function operator(operator) {
                 // Construct operator selector 
 				var operatorselect = "";
@@ -398,7 +398,7 @@
                 doPopulation(json);
 	
             });
-            
+        }); 
         </script>   
     </head>
     <body>

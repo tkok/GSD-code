@@ -8,7 +8,8 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="/test/js/jquery.validate.js"></script>
         <script>
-
+        $(document).ready(function() {
+       	
             function doPopulation(json)
             {
                 // iterate over each policy 
@@ -44,7 +45,7 @@
                 doPopulation(json);
 	
             });
-            
+        });   
         </script>   
     </head>
     <body>
