@@ -62,7 +62,7 @@
                         + '</div>'
                         //+ '<textarea type="text" style="width: 400px; height: 400px;" id="policy1" name="policy1">' + JSON.stringify(json[k].policy) + '</textarea>'
                         + '<input type="hidden" id="policy" name="policy" value=\'' + JSON.stringify(json[k].policy) + '\'>'
-                        + '<div class="inner_section"><span class="headline line">Policy Statements</span> (+ New)</div>'
+                        + '<div class="inner_section"><span class="headline line">Policy Statements</span> (<a class="newstatement" id="newst-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</div>'
                         + '<div class="statements"></div>'
                         + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form>'
                     + '</div>');
@@ -158,15 +158,50 @@
 
                     }
 
-                    
-                    jQuery(".statement_headline").click(function() {
+                    $(".statements").delegate(".statement_headline", "click", function (){
                         var contentPanelId = jQuery(this).attr("id");
                         var alter = contentPanelId + "_content";
                         $("#" + alter).toggle();
+                    });
+                    
+                    jQuery(".newstatement").click(function() {
+                        
+                        var st = json[k].policy.statements.length;
+                        
+                        // Alter POLICY OBJECT
+                        json[k].policy.statements.push({type : 'dk.itu.policyengine.domain.IfStatement', data : {conditionalExpressions : [], thenStatements : [], elseStatements : [] }});
+                        
+                        $('.statements')
+                        .append('<div class="statement" id="statement_' + st + '">'
+            			+ '<a href="Javascript:void(0);"><div class="statement_headline" id="st' + st + '"><div class="statement_inner_headline">Statement ' + st + '</div></div></a>'
+            			+ '<div class="statement_content" id="st' + st + '_content">'
+            				+ '<div class="inner_section">'
+								
+            					// If 
+                                + '<div class="inner_section"><span class="headline2">IF Values </span>(<a class="newif" id="' + json[k].id + '-' + st + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
+                                + '<div id="if-' + json[k].id + '-' + st + '" class="inner_section">'
+                                	+ '<div style="clear: both;"></div>'
+                                + '</div>'
+                                
+                                // Then
+                                + '<div class="inner_section"><span class="headline2">THEN Values </span>(+ New)</b></div>'
+		                        + '<div id="then-' + json[k].id + '-' + st + '" class="inner_section">'
+		                        	+ '<div style="clear: both;"></div>'
+		                        + '</div>'
+		                        
+		                        // Else
+		                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(<a class="newelse" id="' + json[k].id + '-' + st + '" href="JavaScript:void(0);">+ New</a>)</b></div>'
+		                        + '<div id="else-' + json[k].id + '-' + st + '" class="inner_section">'
+		                        	+ '<div style="clear: both;"></div>'
+		                        + '</div>'
+		                        
+            				+ '</div>'
+            			+ '</div>'
+            		+ '</div');
 						
                     });
-
-                    jQuery(".newif").click(function() {
+					
+                    $(".statements").delegate(".newif", "click", function (){
                         var contentPanelId = jQuery(this).attr("id");
                         var alter = "if-" + contentPanelId;
 
@@ -193,7 +228,7 @@
 						
                     });
                     
-                    jQuery(".newelse").click(function() {
+                    $(".statements").delegate(".newelse", "click", function (){
                         var contentPanelId = jQuery(this).attr("id");
                         var alter = "else-" + contentPanelId;
 
