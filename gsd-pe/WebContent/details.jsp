@@ -92,7 +92,7 @@
 					                        + '</div>'
 					                        
 					                        // Else
-					                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(+ New)</b></div>'
+					                        + '<div class="inner_section"><span class="headline2">ELSE Values </span>(<a class="newelse" id="' + json[k].id + '-' + l +'" href="JavaScript:void(0);">+ New</a>)</b></div>'
 					                        + '<div id="else-' + json[k].id + '-' + l + '" class="inner_section">'
 					                        	+ '<div style="clear: both;"></div>'
 					                        + '</div>'
@@ -132,17 +132,23 @@
                                 
                             countts++;
                         }
-                        // iterate over elseStatements
+                        // iterate over elseStatements 
+                        for (var m in json[k].policy.statements[l].data.elseStatements) {
+                        	// clean up array before populating
+                        	json[k].policy.statements[l].data.elseStatements = json[k].policy.statements[l].data.elseStatements.filter(function(e){return e});
+                        }
                         for (var m in json[k].policy.statements[l].data.elseStatements) {
 				   			
                             // Append to policy
                             $('#else-'+ json[k].id + '-' + l)
                             .prepend('<div id="else-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + l + '-' + m +'</b></div>'
-                                + json[k].policy.statements[l].data.elseStatements[m].type
-                                + ', '
+                                //+ json[k].policy.statements[l].data.elseStatements[m].type
+                                
+                                + 'Set: <input style="width:140px;" type="text" id="else-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.elseStatements[m].data.sensorID + '">, '
+                                + 'To: <input type="text" id="else-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue" style="width:30px;" value="'
                                 + json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue
-                                + ', '
-                                + json[k].policy.statements[l].data.elseStatements[m].data.sensorID
+                                + '">'
+                                + '<div class="deletebutton deleteelse" id="deleteelse-' + json[k].id + '-' + l + '-' + m +'"></div>'
                                 + '</div>'
                         );
                             countes++;
@@ -157,7 +163,7 @@
                         var contentPanelId = jQuery(this).attr("id");
                         var alter = contentPanelId + "_content";
                         $("#" + alter).toggle();
-						//alert(alter);
+						
                     });
 
                     jQuery(".newif").click(function() {
@@ -167,11 +173,9 @@
                         var n = contentPanelId.split("-");
                         
                         var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
-
-                        //var getlatestid = json[k].policy.statements[n[1]].data.conditionalExpressions[(ce-1)];
                         
                         // Alter POLICY OBJECT
-                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'Nico.testing'});
+                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'environment.temp'});
                         
                         $('#' + alter)
                         .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
@@ -186,18 +190,38 @@
                             + '<div class="deletebutton deleteif" id="deleteif-' + json[k].id + '-' + n[1] + '-' + ce +'"></div>'
                             + '</div>'
                     	);
-                        
-                        ce++;
 						
                     });
                     
+                    jQuery(".newelse").click(function() {
+                        var contentPanelId = jQuery(this).attr("id");
+                        var alter = "else-" + contentPanelId;
+
+                        var n = contentPanelId.split("-");
+                        
+                        var es = json[k].policy.statements[n[1]].data.elseStatements.length;
+                        
+                        // Alter POLICY OBJECT 
+                        json[k].policy.statements[n[1]].data.elseStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : 'room-6-ac-6-gain'}});
+                        
+                        $('#' + alter)
+                        .prepend('<div id="else-' + json[k].id + '-' + n[1] + '-' + es +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + n[1] + '-' + es +'</b></div>'
+                        		 + 'Set: <input style="width:140px;" type="text" id="else-sensorid-' + n[1] + '-' + es + '" name="sensorid" value="' + json[k].policy.statements[n[1]].data.elseStatements[es].data.sensorID + '">, '
+                                 + 'To: <input type="text" id="else-datafloatvalue-' + n[1] + '-' + es + '" name="datafloatvalue" style="width:30px;" value="'
+                                 + json[k].policy.statements[n[1]].data.elseStatements[es].data.aValue.floatValue
+                                 + '">'
+                                + '<div class="deletebutton deleteelse" id="deleteelse-' + json[k].id + '-' + n[1] + '-' + es +'"></div>'
+                                + '</div>'
+                    	);
+						
+                    });
+                    
+                    // Delete if function with delegate events
                     $(".statements").delegate(".deleteif", "click", function (){
                     	
 	                    	var contentPanelId = jQuery(this).attr("id");
 	
 	                        var n = contentPanelId.split("-");
-	                        
-	                        var ce = json[k].policy.statements[n[2]].data.conditionalExpressions.length;
 	
 	                        // Alter POLICY OBJECT
 	                        //json[k].policy.statements[n[2]].data.conditionalExpressions.splice(n[3], 1);
@@ -205,10 +229,24 @@
 	                        
 	                        // Update GUI
 	                        $('#if-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
-	
-	                        ce--;
 
                     	});
+                    
+                 	// Delete else function with delegate events
+                    $(".statements").delegate(".deleteelse", "click", function (){
+                    	
+                    	var contentPanelId = jQuery(this).attr("id");
+
+                        var n = contentPanelId.split("-");
+
+                        // Alter POLICY OBJECT
+                        delete json[k].policy.statements[n[2]].data.elseStatements[n[3]];
+                        
+                        // Update GUI
+                        $('#else-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
+
+
+                	});
                     
 					$("form#submit").submit(function() {
                     	
@@ -221,6 +259,14 @@
                         		json[k].policy.statements[l].data.conditionalExpressions[m].aValue.data.floatValue = $('#if-datafloatvalue-' + l + '-' + m).val();
                         		json[k].policy.statements[l].data.conditionalExpressions[m].operator = $('#if-operator-' + l + '-' + m).val();
                         		json[k].policy.statements[l].data.conditionalExpressions[m].sensorId = $('#if-sensorid-' + l + '-' + m).val();
+                        		
+                        	}
+                    		
+                        	for ( var m in json[k].policy.statements[l].data.elseStatements) {
+                        		// update each value in the object
+								
+                        		json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue = $('#else-datafloatvalue-' + l + '-' + m).val();
+                        		json[k].policy.statements[l].data.elseStatements[m].data.sensorID = $('#else-sensorid-' + l + '-' + m).val();
                         		
                         	}
                     	}
