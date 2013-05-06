@@ -68,10 +68,9 @@
                     + '</div>');
 
                     // iterate over statements 
-                    for (var m in json[k].policy.statements) {
-                        	// clean up array before populating
-                        	json[k].policy.statements = json[k].policy.statements.filter(function(e){return e});
-                        }
+                    // clean up array before populating
+                    json[k].policy.statements = json[k].policy.statements.filter(function(e){return e});
+                        
                     for ( var l in json[k].policy.statements) {
                         // statement type
                         var con_type = json[k].policy.statements[l].type;
@@ -106,10 +105,8 @@
                         		+ '</div');
 					
                         // iterate over conditionalExpressions 
-                        for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
-                        	// clean up array before populating
-                        	json[k].policy.statements[l].data.conditionalExpressions = json[k].policy.statements[l].data.conditionalExpressions.filter(function(e){return e});
-                        }
+                        json[k].policy.statements[l].data.conditionalExpressions = json[k].policy.statements[l].data.conditionalExpressions.filter(function(e){return e});
+                        
                         for ( var m in json[k].policy.statements[l].data.conditionalExpressions) {
 
                             // Append to policy
@@ -137,10 +134,9 @@
                             countts++;
                         }
                         // iterate over elseStatements 
-                        for (var m in json[k].policy.statements[l].data.elseStatements) {
-                        	// clean up array before populating
-                        	json[k].policy.statements[l].data.elseStatements = json[k].policy.statements[l].data.elseStatements.filter(function(e){return e});
-                        }
+                        // clean up array before populating
+                        json[k].policy.statements[l].data.elseStatements = json[k].policy.statements[l].data.elseStatements.filter(function(e){return e});
+                        
                         for (var m in json[k].policy.statements[l].data.elseStatements) {
 				   			
                             // Append to policy
