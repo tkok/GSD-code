@@ -191,24 +191,24 @@
 						
                     });
                     
-                    jQuery(".deleteif").click(function() {
-                        var contentPanelId = jQuery(this).attr("id");
+                    $(".statements").delegate(".deleteif", "click", function (){
+                    	
+	                    	var contentPanelId = jQuery(this).attr("id");
+	
+	                        var n = contentPanelId.split("-");
+	                        
+	                        var ce = json[k].policy.statements[n[2]].data.conditionalExpressions.length;
+	
+	                        // Alter POLICY OBJECT
+	                        //json[k].policy.statements[n[2]].data.conditionalExpressions.splice(n[3], 1);
+	                        delete json[k].policy.statements[n[2]].data.conditionalExpressions[n[3]];
+	                        
+	                        // Update GUI
+	                        $('#if-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
+	
+	                        ce--;
 
-                        var n = contentPanelId.split("-");
-                        
-                        var ce = json[k].policy.statements[n[2]].data.conditionalExpressions.length;
-
-                        // Alter POLICY OBJECT
-                        //json[k].policy.statements[n[2]].data.conditionalExpressions.splice(n[3], 1);
-                        delete json[k].policy.statements[n[2]].data.conditionalExpressions[n[3]];
-                        
-                        // Update GUI
-                        $('#if-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
-
-                        ce--;
-						
-                    });
-                    
+                    	});
                     
 					$("form#submit").submit(function() {
                     	
