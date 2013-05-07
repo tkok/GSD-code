@@ -23,7 +23,7 @@ public class Wildcards {
 	
 	public List<String> getWildcards() throws IOException, URISyntaxException{
 		List<String> floors = connection.getFloorIds();
-		System.out.println(floors.size());
+		//System.out.println(floors.size());
 		List<String> rooms = new ArrayList<String>();
 		
 		for(String s : floors){
@@ -50,11 +50,15 @@ public class Wildcards {
 	public static void main(String [] args) throws IOException, URISyntaxException{
 		Wildcards wildcards = new Wildcards();
 		List<String> list = wildcards.getWildcards();
-		List<String> test = wildcards.getSensorListByWildcard("floor-0-light");
-		
+		for(String s : list){
+			System.out.println(s);
+		}
+		/*
+		List<String> test = wildcards.getSensorListByWildcard("floor-0-ac");
+		//List<String> t = new Connection().getRoomListByFloor("floor-0");
 		for(String s:test){
 			System.out.println(s);
 		}
-		
+		*/
 	}
 }
