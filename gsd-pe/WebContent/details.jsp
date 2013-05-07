@@ -255,9 +255,9 @@
                         $('#' + alter)
                         .prepend('<div id="then-' + json[k].id + '-' + n[1] + '-' + ts +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + n[1] + '-' + ts +'</b></div>'
                         		 + 'Set: <input style="width:140px;" type="text" id="then-sensorid-' + n[1] + '-' + ts + '" name="sensorid" value="' + json[k].policy.statements[n[1]].data.thenStatements[ts].data.sensorID + '">, '
-                                 + 'To: <input type="text" id="then-datafloatvalue-' + n[1] + '-' + ts + '" name="datafloatvalue" style="width:30px;" value="'
-                                 + json[k].policy.statements[n[1]].data.thenStatements[ts].data.aValue.floatValue
-                                 + '">'
+                        		 + 'To: <select id="then-datafloatvalue-' + n[1] + '-' + ts + '" name="datafloatvalue">'
+                                 + setto(json[k].policy.statements[n[1]].data.thenStatements[ts].data.aValue.floatValue)
+                                 + '</select>'
                                 + '<div class="deletebutton deletethen" id="deletethen-' + json[k].id + '-' + n[1] + '-' + ts +'"></div>'
                                 + '</div>'
                     	);
@@ -278,9 +278,9 @@
                         $('#' + alter)
                         .prepend('<div id="else-' + json[k].id + '-' + n[1] + '-' + es +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + n[1] + '-' + es +'</b></div>'
                         		 + 'Set: <input style="width:140px;" type="text" id="else-sensorid-' + n[1] + '-' + es + '" name="sensorid" value="' + json[k].policy.statements[n[1]].data.elseStatements[es].data.sensorID + '">, '
-                                 + 'To: <input type="text" id="else-datafloatvalue-' + n[1] + '-' + es + '" name="datafloatvalue" style="width:30px;" value="'
-                                 + json[k].policy.statements[n[1]].data.elseStatements[es].data.aValue.floatValue
-                                 + '">'
+                        		 + 'To: <select id="else-datafloatvalue-' + n[1] + '-' + es + '" name="datafloatvalue">'
+                                 + setto(json[k].policy.statements[n[1]].data.elseStatements[es].data.aValue.floatValue)
+                                 + '</select>'
                                 + '<div class="deletebutton deleteelse" id="deleteelse-' + json[k].id + '-' + n[1] + '-' + es +'"></div>'
                                 + '</div>'
                     	);
