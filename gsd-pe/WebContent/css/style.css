@@ -48,6 +48,7 @@ a:active {color: #FFFFFF; text-decoration: none; }
 
 .statements {color:#FFF;font-size:.95em!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal;}
 
+/* Input validation */
 label.error {color: #8C1700 !important; display: none !important;}
 
 input[type="text"].error,

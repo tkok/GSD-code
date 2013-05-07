@@ -124,7 +124,7 @@
                             $('#if-'+ json[k].id + '-' + l)
                             .prepend('<div id="if-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                             //+ json[k].policy.statements[l].data.conditionalExpressions[m].aValue.type
-                                + '<input style="width:140px;" class="autocomplete_get" type="text" id="if-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
+                                + '<input style="width:140px;" class="autocomplete_get required" type="text" id="if-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.conditionalExpressions[m].sensorId + '">'
                                 + ', <select id="if-operator-' + l + '-' + m + '" name="operator">'
                                 + operator(json[k].policy.statements[l].data.conditionalExpressions[m].operator)
                                 + '</select>, <input type="text" id="if-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue" style="width:30px;" value="'
@@ -158,7 +158,7 @@
                             .prepend('<div id="else-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                                 //+ json[k].policy.statements[l].data.elseStatements[m].type
                                 
-                                + 'Set: <input style="width:140px;" type="text" class="autocomplete_set" id="else-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.elseStatements[m].data.sensorID + '">, '
+                                + 'Set: <input style="width:140px;" type="text" class="autocomplete_set required" id="else-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.elseStatements[m].data.sensorID + '">, '
                                 + 'To: <select id="else-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue">'
                                 + setto(json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue)
                                 + '</select>'
@@ -229,7 +229,7 @@
                         $('#' + alter)
                         .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
 
-                            + '<input class="autocomplete_get" id="if-sensorid-' + n[1] + '-' + ce + '" style="width:140px;" type="text" name="sensorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].sensorId + '">'
+                            + '<input class="autocomplete_get required" id="if-sensorid-' + n[1] + '-' + ce + '" style="width:140px;" type="text" name="sensorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].sensorId + '">'
                             + ', <select id="if-operator-' + n[1] + '-' + ce + '" name="operator">'
                             + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[ce].operator)
                             + ', </select>, <input id="if-datafloatvalue-' + n[1] + '-' + ce + '" type="text" name="datafloatvalue" style="width:30px;" value="'
@@ -260,7 +260,7 @@
                         
                         $('#' + alter)
                         .prepend('<div id="then-' + json[k].id + '-' + n[1] + '-' + ts +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + n[1] + '-' + ts +'</b></div>'
-                        		 + 'Set: <input style="width:140px;" type="text" id="then-sensorid-' + n[1] + '-' + ts + '" class="autocomplete_set" name="sensorid" value="' + json[k].policy.statements[n[1]].data.thenStatements[ts].data.sensorID + '">, '
+                        		 + 'Set: <input style="width:140px;" type="text" id="then-sensorid-' + n[1] + '-' + ts + '" class="autocomplete_set required" name="sensorid" value="' + json[k].policy.statements[n[1]].data.thenStatements[ts].data.sensorID + '">, '
                         		 + 'To: <select id="then-datafloatvalue-' + n[1] + '-' + ts + '" name="datafloatvalue">'
                                  + setto(json[k].policy.statements[n[1]].data.thenStatements[ts].data.aValue.floatValue)
                                  + '</select>'
@@ -288,7 +288,7 @@
                         
                         $('#' + alter)
                         .prepend('<div id="else-' + json[k].id + '-' + n[1] + '-' + es +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + n[1] + '-' + es +'</b></div>'
-                        		 + 'Set: <input style="width:140px;" type="text" id="else-sensorid-' + n[1] + '-' + es + '" class="autocomplete_set" name="sensorid" value="' + json[k].policy.statements[n[1]].data.elseStatements[es].data.sensorID + '">, '
+                        		 + 'Set: <input style="width:140px;" type="text" id="else-sensorid-' + n[1] + '-' + es + '" class="autocomplete_set required" name="sensorid" value="' + json[k].policy.statements[n[1]].data.elseStatements[es].data.sensorID + '">, '
                         		 + 'To: <select id="else-datafloatvalue-' + n[1] + '-' + es + '" name="datafloatvalue">'
                                  + setto(json[k].policy.statements[n[1]].data.elseStatements[es].data.aValue.floatValue)
                                  + '</select>'
@@ -506,7 +506,7 @@
                     .prepend('<div id="then-' + json[k].id + '-' + l + '-' + m +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + l + '-' + m +'</b></div>'
                         //+ json[k].policy.statements[l].data.thenStatements[m].type
                         
-                        + 'Set: <input style="width:140px;" type="text" class="autocomplete_set" id="then-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.thenStatements[m].data.sensorID + '">, '
+                        + 'Set: <input style="width:140px;" type="text" class="autocomplete_set required" id="then-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.thenStatements[m].data.sensorID + '">, '
                         + 'To: <select id="then-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue">'
                         + setto(json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue)
                         + '</select>'
