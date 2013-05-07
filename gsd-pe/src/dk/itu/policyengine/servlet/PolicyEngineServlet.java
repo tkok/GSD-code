@@ -34,6 +34,7 @@ import dk.itu.policyengine.integration.Connection;
 import dk.itu.policyengine.integration.ServiceProperties;
 import dk.itu.policyengine.persistence.DataAccessLayer;
 import dk.itu.policyengine.persistence.SensorValueCache;
+import dk.itu.policyengine.utils.Wildcards;
 
 @SuppressWarnings("serial")
 public class PolicyEngineServlet extends HttpServlet {
@@ -335,7 +336,18 @@ public class PolicyEngineServlet extends HttpServlet {
 				// route back
 				response.sendRedirect("/test/");
 				
-			} else if (userPath.equals("/ChangeValue")) {
+			} 
+			else if (userPath.equals("/GetWildcards")){
+				try {
+					List<String> wildcards = new Wildcards().getWildcards();
+					
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			else if (userPath.equals("/ChangeValue")) {
 				String sensorId = request.getParameter("sensorId");
 				String value = request.getParameter("value");
 				try {
