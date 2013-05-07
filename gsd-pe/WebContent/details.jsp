@@ -24,6 +24,16 @@
 	
                 return operatorselect;
             }
+            
+            function setto(value) {
+                // Construct operator selector 
+				var setto = "";
+                
+                if(value == 0) { setto += '<option value="0" selected>OFF</option>' } else {  setto += '<option value="0">OFF</option>'}
+                if(value == 1) { setto += '<option value="1" selected>ON</option>' } else { setto += '<option value="1">ON</option>'}
+                	
+                return setto;
+            }
            
             function doPopulation(json)
             {
@@ -148,9 +158,9 @@
                                 //+ json[k].policy.statements[l].data.elseStatements[m].type
                                 
                                 + 'Set: <input style="width:140px;" type="text" id="else-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.elseStatements[m].data.sensorID + '">, '
-                                + 'To: <input type="text" id="else-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue" style="width:30px;" value="'
-                                + json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue
-                                + '">'
+                                + 'To: <select id="else-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue">'
+                                + setto(json[k].policy.statements[l].data.elseStatements[m].data.aValue.floatValue)
+                                + '</select>'
                                 + '<div class="deletebutton deleteelse" id="deleteelse-' + json[k].id + '-' + l + '-' + m +'"></div>'
                                 + '</div>'
                         );
@@ -476,9 +486,9 @@
                         //+ json[k].policy.statements[l].data.thenStatements[m].type
                         
                         + 'Set: <input style="width:140px;" type="text" id="then-sensorid-' + l + '-' + m + '" name="sensorid" value="' + json[k].policy.statements[l].data.thenStatements[m].data.sensorID + '">, '
-                        + 'To: <input type="text" id="then-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue" style="width:30px;" value="'
-                        + json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue
-                        + '">'
+                        + 'To: <select id="then-datafloatvalue-' + l + '-' + m + '" name="datafloatvalue">'
+                        + setto(json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue)
+                        + '</select>'
                         + '<div class="deletebutton deletethen" id="deletethen-' + json[k].id + '-' + l + '-' + m +'"></div>'
                         + '</div>'
                 	);
