@@ -30,8 +30,8 @@
                 // Construct operator selector 
 				var setto = "";
                 
-                if(value == 0) { setto += '<option value="0" selected>OFF</option>' } else {  setto += '<option value="0">OFF</option>'}
-                if(value == 1) { setto += '<option value="1" selected>ON</option>' } else { setto += '<option value="1">ON</option>'}
+                if(value == 0) { setto += '<option value="0" selected>0 (Off)</option>' } else {  setto += '<option value="0">0 (Off)</option>'}
+                if(value == 1) { setto += '<option value="1" selected>1 (On)</option>' } else { setto += '<option value="1">1 (On)</option>'}
                 	
                 return setto;
             }
