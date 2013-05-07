@@ -379,10 +379,12 @@
                         	}
                         	for ( var m in json[k].policy.statements[l].data.thenStatements) {
                         		// update each value in the object
-								
+                        		if (json[k].policy.statements[l].data.thenStatements[m].type == "dk.itu.policyengine.domain.IfStatement") {
+                        			// We dont support nested in GUI
+                        		} else {
                         		json[k].policy.statements[l].data.thenStatements[m].data.aValue.floatValue = $('#then-datafloatvalue-' + l + '-' + m).val();
                         		json[k].policy.statements[l].data.thenStatements[m].data.sensorID = $('#then-sensorid-' + l + '-' + m).val();
-                        		
+                        		}
                         	}
                     		for ( var m in json[k].policy.statements[l].data.elseStatements) {
                         		// update each value in the object
