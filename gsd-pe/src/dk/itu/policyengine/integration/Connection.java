@@ -30,13 +30,16 @@ public class Connection {
 	//private static final String SET_SENSOR_VALUE = "api/user/building/entry/set/1/";
 	//private static final String SET_SENSOR_VALUE_LOCAL= "http://127.0.0.1:8000/api/user/building/entry/set/1/";
 	private static final String file = "sensor.json";
-	
+	private String url ="";
 	/**
 	 * Get list of sensors. Return a list of sensors id's
 	 * @return List<String> sensor id's
 	 */
 	public Connection(){
-		
+		if(Configuration.getServer() == null)
+			url = "http://gsd.itu.dk/api/user/building/entry/description/1/?format=json";
+		else
+			url = Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat();
 	}
 	public List<String> getSensorIds(){ 
 		List<String> sensors = new ArrayList<String>();
@@ -229,8 +232,21 @@ public class Connection {
 		}
 		return requestedIds;
 	}
-	public List<String> getSensorListByRoomIdAndType(String roomId,String sensor, String url){
-		List<String> sensors = getSensorIds(url);
+	public List<String> getSensorListByFloor(String floor) throws MalformedURLException, IOException, URISyntaxException{
+		List<String> rooms = getRoomListByFloor(floor);
+		List<String> sensors = getSensorIds();
+		List<String> sensorList = new ArrayList<String>();
+		for(String s : rooms){
+			
+			for(String t : sensors){
+				if(t.contains(s.substring(8)))
+					sensorList.add(t);
+			}
+		}
+		return sensorList;
+	}
+	public List<String> getSensorListByRoomIdAndType(String roomId,String sensor){
+		List<String> sensors = getSensorIds();
 		List<String> sensorList = new ArrayList<String>();
 		for(String id : sensors){
 			if(id.contains(roomId) && id.contains(sensor)){
@@ -241,7 +257,7 @@ public class Connection {
 	}
 	public List<String> getRoomListByFloor(String floor) throws MalformedURLException, IOException, URISyntaxException{
 		List<String> roomList = new ArrayList<String>();
-		String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+		String data = connect(url);
 		JSONObject jsonObject = new JSONObject(data);
 		JSONObject value = jsonObject.getJSONObject("value");
 		JSONObject rooms = value.getJSONObject("rooms");
@@ -257,7 +273,7 @@ public class Connection {
 	public List<String> getFloorIds() throws MalformedURLException, IOException, URISyntaxException{
 		HashSet<String> hashSet = new HashSet<String>();
 		List<String> floors = new ArrayList<String>();
-		String data = connect(Configuration.getServer() + Configuration.getBuilding() + Configuration.getFormat());
+		String data = connect(url);
 		JSONObject jsonObject = new JSONObject(data);
 		JSONObject value = jsonObject.getJSONObject("value");
 		JSONObject rooms = value.getJSONObject("rooms");
@@ -272,4 +288,5 @@ public class Connection {
 		}
 		return floors;
 	}
+	
 }
