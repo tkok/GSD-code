@@ -92,5 +92,8 @@
 		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/NewPolicy</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/GetWildcards</url-pattern>
+	</servlet-mapping>
 </web-app>   
