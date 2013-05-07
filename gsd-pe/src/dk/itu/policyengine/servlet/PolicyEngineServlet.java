@@ -288,6 +288,44 @@ public class PolicyEngineServlet extends HttpServlet {
 				// route back
 				response.sendRedirect("/test/details.jsp?id=" + id);
 				
+			} else if (userPath.equals("/NewPolicy")) {
+				String policyEntityJson = request.getParameter("policy");
+
+				long id = getLongFromParameter("id", request);
+
+				// Format : HH:MM
+				Time fromTime = getTimeFromParameter("fromTime", request);
+
+				// Format : HH:MM
+				Time toTime = getTimeFromParameter("toTime", request);
+				
+				// Name
+				String name = request.getParameter("name");
+				
+				// Description
+				String description = request.getParameter("description");
+				
+				// Format : true | false
+				boolean active = getBooleanFromParameter("active", request);
+
+				Gson gson = GsonFactory.getInstance();
+
+				PolicyEntity policyEntity = new PolicyEntity();
+				Policy policy = gson.fromJson(policyEntityJson, Policy.class);
+
+				policyEntity.setPolicy(policy);
+				policyEntity.setId(id);
+				policyEntity.getInterval().setFromTime(fromTime);
+				policyEntity.getInterval().setToTime(toTime);
+				policyEntity.setName(name);
+				policyEntity.setDescription(description);
+				policyEntity.setActive(active);
+
+				DataAccessLayer.persist(policyEntity);
+				
+				// route back
+				response.sendRedirect("/test/");
+				
 			} else if (userPath.equals("/ChangeValue")) {
 				String sensorId = request.getParameter("sensorId");
 				String value = request.getParameter("value");

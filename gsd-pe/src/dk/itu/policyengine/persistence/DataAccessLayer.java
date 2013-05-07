@@ -278,7 +278,7 @@ public class DataAccessLayer {
 		PolicyEntities policyEntities = new PolicyEntities();
 
 		try {
-			preparedStatement = connection.prepareStatement("SELECT * FROM policy");
+			preparedStatement = connection.prepareStatement("SELECT * FROM policy ORDER BY id DESC");
 
 			ResultSet rs = preparedStatement.executeQuery();
 

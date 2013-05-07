@@ -51,7 +51,7 @@
     <body>
         <div class="header">
             <div class="top">Policy Engine Administration</div>
-            <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="javascript:void(0);">Create new policy</a></div>
+            <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="/test/newpolicy.jsp">Create new policy</a></div>
         </div>
         <div class="policies">
 
