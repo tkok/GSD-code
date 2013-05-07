@@ -46,24 +46,17 @@
 
                 // iterate over each policy
                 for ( var k in json) {
-			
-                	var active = "";
-                    if(json[k].active == true) { var active = '<span style="font-weight: bold; color: lightgreen;">Active</span>'; } else { var active = '<span style="font-weight: bold; color: #8C1700;">Not active</span>'; }
-
-                    var activecheckbox = "";
-                    if(json[k].active == true) { var activecheckbox = '<input type="radio" name="active" id="r_true" value="true" style="float: left;" checked> <label style="float: left;" for="r_true">Yes</label> <input style="float: left;" type="radio" id="r_false" name="active" value="false"> <label style="float: left;" for="r_false">No</label>'; } else { var activecheckbox = '<input type="radio" id="r_true" style="float: left;" name="active" value="true"> <label style="float: left;" for="r_true">Yes</label> <input type="radio" style="float: left;" name="active" id="r_false" value="false" checked> <label style="float: left;" for="r_false">No</label>'; }
                     
                     // Append policy to view
                     $('.policies')
                     .append(
                     '<div class="policy_box">'
                     	+ '<form id="submit" action="NewPolicy" method="post">'
-                    	+ '<div class="inner_section"><span class="headline line">Policy Information</span> (<b>Id: '
-                        	+ json[k].id
-                        	+ '<input type="hidden" id="id" name="id" value="' + json[k].id + '"></b>, ' + active + ')'
+                    	+ '<div class="inner_section"><span class="headline line">Policy Information</span>'
+                        	+ '<input type="hidden" id="id" name="id" value="' + json[k].id + '">'
                         + '</div>'
                         + '<div class="inner_section">'
-                        	+ '<div style="float: left;">Is active: </div>' + activecheckbox
+                        	+ '<div style="float: left;">Is active: </div><input type="radio" id="r_true" style="float: left;" name="active" value="true"> <label style="float: left;" for="r_true">Yes</label> <input type="radio" style="float: left;" name="active" id="r_false" value="false" checked> <label style="float: left;" for="r_false">No</label>'
                         	+ '<br /><br />Name: <input type="text" class="required" name="name" id="name" value="' + json[k].name + '"> '
                         	+ 'From: <input type="text" id="fromTime" name="fromTime" style="width: 50px;" value="' + json[k].interval.fromTime + '"> '
                         	+ 'To: <input type="text" id="toTime" name="toTime" style="width: 50px;" value="' + json[k].interval.toTime + '"><br /><br />'
