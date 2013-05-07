@@ -1,0 +1,415 @@
+Datapoints:
+    1 energy-battery-1-level        get    
+    2 energy-battery-2-level        get    
+    3 energy-battery-3-level        get    
+    4 energy-fuel-1-input           get    
+    5 energy-fuel-1-level           get    
+    6 energy-fuel-2-input           get    
+    7 energy-fuel-2-level           get    
+    8 energy-generator-1-primed     get set
+    9 energy-generator-1-production get    
+   10 energy-generator-1-state      get set
+   11 energy-generator-2-primed     get set
+   12 energy-generator-2-production get    
+   13 energy-generator-2-state      get set
+   14 energy-grid-state             get    
+   15 energy-gridstable-state       get    
+   16 energy-mux-energy             get    
+   17 energy-mux-select             get set
+   18 energy-panel-production       get    
+   19 environment-cloudiness        get    
+   20 environment-light             get    
+   21 environment-occupancy         get    
+   22 environment-rain              get    
+   23 environment-time              get    
+   24 environment.temp              get    
+   25 floor-0-room-0-light          get    
+   26 floor-0-room-0.temp           get    
+   27 floor-0-room-1-light          get    
+   28 floor-0-room-1.temp           get    
+   29 floor-0-room-2-light          get    
+   30 floor-0-room-2.temp           get    
+   31 floor-0-room-3-light          get    
+   32 floor-0-room-3.temp           get    
+   33 floor-0-room-4-light          get    
+   34 floor-0-room-4.temp           get    
+   35 floor-0-room-5-light          get    
+   36 floor-0-room-5.temp           get    
+   37 floor-0-room-6-light          get    
+   38 floor-0-room-6.temp           get    
+   39 floor-1-room-10-light         get    
+   40 floor-1-room-10.temp          get    
+   41 floor-1-room-11-light         get    
+   42 floor-1-room-11.temp          get    
+   43 floor-1-room-12-light         get    
+   44 floor-1-room-12.temp          get    
+   45 floor-1-room-13-light         get    
+   46 floor-1-room-13.temp          get    
+   47 floor-1-room-7-light          get    
+   48 floor-1-room-7.temp           get    
+   49 floor-1-room-8-light          get    
+   50 floor-1-room-8.temp           get    
+   51 floor-1-room-9-light          get    
+   52 floor-1-room-9.temp           get    
+   53 floor-2-room-14-light         get    
+   54 floor-2-room-14.temp          get    
+   55 floor-2-room-15-light         get    
+   56 floor-2-room-15.temp          get    
+   57 floor-2-room-16-light         get    
+   58 floor-2-room-16.temp          get    
+   59 floor-2-room-17-light         get    
+   60 floor-2-room-17.temp          get    
+   61 floor-2-room-18-light         get    
+   62 floor-2-room-18.temp          get    
+   63 floor-2-room-19-light         get    
+   64 floor-2-room-19.temp          get    
+   65 floor-2-room-20-light         get    
+   66 floor-2-room-20.temp          get    
+   67 hydro-bassin-input            get    
+   68 hydro-bassin-level            get    
+   69 hydro-consumption             get    
+   70 hydro-mains-state             get set
+   71 hydro-mux-accepted            get    
+   72 hydro-mux-select              get set
+   73 hydro-rain-production         get    
+   74 hydro-tap-production          get    
+   75 hydro-tap-state               get set
+   76 room-0-ac-0-gain              get set
+   77 room-0-ac-0-production        get    
+   78 room-0-ac-0-state             get    
+   79 room-0-blind-0-setpoint       get set
+   80 room-0-blind-0-value          get set
+   81 room-0-blind-1-setpoint       get set
+   82 room-0-blind-1-value          get set
+   83 room-0-heater-0-gain          get set
+   84 room-0-heater-0-production    get    
+   85 room-0-heater-0-state         get    
+   86 room-0-light-0-gain           get set
+   87 room-0-light-0-production     get    
+   88 room-0-light-0-state          get    
+   89 room-0-light-1-gain           get set
+   90 room-0-light-1-production     get    
+   91 room-0-light-1-state          get    
+   92 room-1-ac-1-gain              get set
+   93 room-1-ac-1-production        get    
+   94 room-1-ac-1-state             get    
+   95 room-1-blind-2-setpoint       get set
+   96 room-1-blind-2-value          get set
+   97 room-1-blind-3-setpoint       get set
+   98 room-1-blind-3-value          get set
+   99 room-1-heater-1-gain          get set
+  100 room-1-heater-1-production    get    
+  101 room-1-heater-1-state         get    
+  102 room-1-light-2-gain           get set
+  103 room-1-light-2-production     get    
+  104 room-1-light-2-state          get    
+  105 room-1-light-3-gain           get set
+  106 room-1-light-3-production     get    
+  107 room-1-light-3-state          get    
+  108 room-10-ac-10-gain            get set
+  109 room-10-ac-10-production      get    
+  110 room-10-ac-10-state           get    
+  111 room-10-blind-16-setpoint     get set
+  112 room-10-blind-16-value        get set
+  113 room-10-blind-17-setpoint     get set
+  114 room-10-blind-17-value        get set
+  115 room-10-heater-10-gain        get set
+  116 room-10-heater-10-production  get    
+  117 room-10-heater-10-state       get    
+  118 room-10-light-23-gain         get set
+  119 room-10-light-23-production   get    
+  120 room-10-light-23-state        get    
+  121 room-10-light-24-gain         get set
+  122 room-10-light-24-production   get    
+  123 room-10-light-24-state        get    
+  124 room-11-ac-11-gain            get set
+  125 room-11-ac-11-production      get    
+  126 room-11-ac-11-state           get    
+  127 room-11-blind-18-setpoint     get set
+  128 room-11-blind-18-value        get set
+  129 room-11-blind-19-setpoint     get set
+  130 room-11-blind-19-value        get set
+  131 room-11-heater-11-gain        get set
+  132 room-11-heater-11-production  get    
+  133 room-11-heater-11-state       get    
+  134 room-11-light-25-gain         get set
+  135 room-11-light-25-production   get    
+  136 room-11-light-25-state        get    
+  137 room-11-light-26-gain         get set
+  138 room-11-light-26-production   get    
+  139 room-11-light-26-state        get    
+  140 room-12-light-27-gain         get set
+  141 room-12-light-27-production   get    
+  142 room-12-light-27-state        get    
+  143 room-12-light-28-gain         get set
+  144 room-12-light-28-production   get    
+  145 room-12-light-28-state        get    
+  146 room-13-ac-12-gain            get set
+  147 room-13-ac-12-production      get    
+  148 room-13-ac-12-state           get    
+  149 room-13-ac-13-gain            get set
+  150 room-13-ac-13-production      get    
+  151 room-13-ac-13-state           get    
+  152 room-13-heater-12-gain        get set
+  153 room-13-heater-12-production  get    
+  154 room-13-heater-12-state       get    
+  155 room-13-heater-13-gain        get set
+  156 room-13-heater-13-production  get    
+  157 room-13-heater-13-state       get    
+  158 room-13-light-29-gain         get set
+  159 room-13-light-29-production   get    
+  160 room-13-light-29-state        get    
+  161 room-13-light-30-gain         get set
+  162 room-13-light-30-production   get    
+  163 room-13-light-30-state        get    
+  164 room-13-light-31-gain         get set
+  165 room-13-light-31-production   get    
+  166 room-13-light-31-state        get    
+  167 room-13-light-32-gain         get set
+  168 room-13-light-32-production   get    
+  169 room-13-light-32-state        get    
+  170 room-13-light-33-gain         get set
+  171 room-13-light-33-production   get    
+  172 room-13-light-33-state        get    
+  173 room-14-ac-14-gain            get set
+  174 room-14-ac-14-production      get    
+  175 room-14-ac-14-state           get    
+  176 room-14-blind-20-setpoint     get set
+  177 room-14-blind-20-value        get set
+  178 room-14-blind-21-setpoint     get set
+  179 room-14-blind-21-value        get set
+  180 room-14-heater-14-gain        get set
+  181 room-14-heater-14-production  get    
+  182 room-14-heater-14-state       get    
+  183 room-14-light-34-gain         get set
+  184 room-14-light-34-production   get    
+  185 room-14-light-34-state        get    
+  186 room-14-light-35-gain         get set
+  187 room-14-light-35-production   get    
+  188 room-14-light-35-state        get    
+  189 room-15-ac-15-gain            get set
+  190 room-15-ac-15-production      get    
+  191 room-15-ac-15-state           get    
+  192 room-15-blind-22-setpoint     get set
+  193 room-15-blind-22-value        get set
+  194 room-15-blind-23-setpoint     get set
+  195 room-15-blind-23-value        get set
+  196 room-15-heater-15-gain        get set
+  197 room-15-heater-15-production  get    
+  198 room-15-heater-15-state       get    
+  199 room-15-light-36-gain         get set
+  200 room-15-light-36-production   get    
+  201 room-15-light-36-state        get    
+  202 room-15-light-37-gain         get set
+  203 room-15-light-37-production   get    
+  204 room-15-light-37-state        get    
+  205 room-16-ac-16-gain            get set
+  206 room-16-ac-16-production      get    
+  207 room-16-ac-16-state           get    
+  208 room-16-blind-24-setpoint     get set
+  209 room-16-blind-24-value        get set
+  210 room-16-blind-25-setpoint     get set
+  211 room-16-blind-25-value        get set
+  212 room-16-heater-16-gain        get set
+  213 room-16-heater-16-production  get    
+  214 room-16-heater-16-state       get    
+  215 room-16-light-38-gain         get set
+  216 room-16-light-38-production   get    
+  217 room-16-light-38-state        get    
+  218 room-16-light-39-gain         get set
+  219 room-16-light-39-production   get    
+  220 room-16-light-39-state        get    
+  221 room-17-ac-17-gain            get set
+  222 room-17-ac-17-production      get    
+  223 room-17-ac-17-state           get    
+  224 room-17-blind-26-setpoint     get set
+  225 room-17-blind-26-value        get set
+  226 room-17-blind-27-setpoint     get set
+  227 room-17-blind-27-value        get set
+  228 room-17-heater-17-gain        get set
+  229 room-17-heater-17-production  get    
+  230 room-17-heater-17-state       get    
+  231 room-17-light-40-gain         get set
+  232 room-17-light-40-production   get    
+  233 room-17-light-40-state        get    
+  234 room-17-light-41-gain         get set
+  235 room-17-light-41-production   get    
+  236 room-17-light-41-state        get    
+  237 room-18-ac-18-gain            get set
+  238 room-18-ac-18-production      get    
+  239 room-18-ac-18-state           get    
+  240 room-18-blind-28-setpoint     get set
+  241 room-18-blind-28-value        get set
+  242 room-18-blind-29-setpoint     get set
+  243 room-18-blind-29-value        get set
+  244 room-18-heater-18-gain        get set
+  245 room-18-heater-18-production  get    
+  246 room-18-heater-18-state       get    
+  247 room-18-light-42-gain         get set
+  248 room-18-light-42-production   get    
+  249 room-18-light-42-state        get    
+  250 room-18-light-43-gain         get set
+  251 room-18-light-43-production   get    
+  252 room-18-light-43-state        get    
+  253 room-19-light-44-gain         get set
+  254 room-19-light-44-production   get    
+  255 room-19-light-44-state        get    
+  256 room-19-light-45-gain         get set
+  257 room-19-light-45-production   get    
+  258 room-19-light-45-state        get    
+  259 room-2-ac-2-gain              get set
+  260 room-2-ac-2-production        get    
+  261 room-2-ac-2-state             get    
+  262 room-2-blind-4-setpoint       get set
+  263 room-2-blind-4-value          get set
+  264 room-2-blind-5-setpoint       get set
+  265 room-2-blind-5-value          get set
+  266 room-2-heater-2-gain          get set
+  267 room-2-heater-2-production    get    
+  268 room-2-heater-2-state         get    
+  269 room-2-light-4-gain           get set
+  270 room-2-light-4-production     get    
+  271 room-2-light-4-state          get    
+  272 room-2-light-5-gain           get set
+  273 room-2-light-5-production     get    
+  274 room-2-light-5-state          get    
+  275 room-20-ac-19-gain            get set
+  276 room-20-ac-19-production      get    
+  277 room-20-ac-19-state           get    
+  278 room-20-ac-20-gain            get set
+  279 room-20-ac-20-production      get    
+  280 room-20-ac-20-state           get    
+  281 room-20-heater-19-gain        get set
+  282 room-20-heater-19-production  get    
+  283 room-20-heater-19-state       get    
+  284 room-20-heater-20-gain        get set
+  285 room-20-heater-20-production  get    
+  286 room-20-heater-20-state       get    
+  287 room-20-light-46-gain         get set
+  288 room-20-light-46-production   get    
+  289 room-20-light-46-state        get    
+  290 room-20-light-47-gain         get set
+  291 room-20-light-47-production   get    
+  292 room-20-light-47-state        get    
+  293 room-20-light-48-gain         get set
+  294 room-20-light-48-production   get    
+  295 room-20-light-48-state        get    
+  296 room-20-light-49-gain         get set
+  297 room-20-light-49-production   get    
+  298 room-20-light-49-state        get    
+  299 room-20-light-50-gain         get set
+  300 room-20-light-50-production   get    
+  301 room-20-light-50-state        get    
+  302 room-3-ac-3-gain              get set
+  303 room-3-ac-3-production        get    
+  304 room-3-ac-3-state             get    
+  305 room-3-blind-6-setpoint       get set
+  306 room-3-blind-6-value          get set
+  307 room-3-blind-7-setpoint       get set
+  308 room-3-blind-7-value          get set
+  309 room-3-heater-3-gain          get set
+  310 room-3-heater-3-production    get    
+  311 room-3-heater-3-state         get    
+  312 room-3-light-6-gain           get set
+  313 room-3-light-6-production     get    
+  314 room-3-light-6-state          get    
+  315 room-3-light-7-gain           get set
+  316 room-3-light-7-production     get    
+  317 room-3-light-7-state          get    
+  318 room-4-ac-4-gain              get set
+  319 room-4-ac-4-production        get    
+  320 room-4-ac-4-state             get    
+  321 room-4-blind-8-setpoint       get set
+  322 room-4-blind-8-value          get set
+  323 room-4-blind-9-setpoint       get set
+  324 room-4-blind-9-value          get set
+  325 room-4-heater-4-gain          get set
+  326 room-4-heater-4-production    get    
+  327 room-4-heater-4-state         get    
+  328 room-4-light-8-gain           get set
+  329 room-4-light-8-production     get    
+  330 room-4-light-8-state          get    
+  331 room-4-light-9-gain           get set
+  332 room-4-light-9-production     get    
+  333 room-4-light-9-state          get    
+  334 room-5-light-10-gain          get set
+  335 room-5-light-10-production    get    
+  336 room-5-light-10-state         get    
+  337 room-5-light-11-gain          get set
+  338 room-5-light-11-production    get    
+  339 room-5-light-11-state         get    
+  340 room-6-ac-5-gain              get set
+  341 room-6-ac-5-production        get    
+  342 room-6-ac-5-state             get    
+  343 room-6-ac-6-gain              get set
+  344 room-6-ac-6-production        get    
+  345 room-6-ac-6-state             get    
+  346 room-6-heater-5-gain          get set
+  347 room-6-heater-5-production    get    
+  348 room-6-heater-5-state         get    
+  349 room-6-heater-6-gain          get set
+  350 room-6-heater-6-production    get    
+  351 room-6-heater-6-state         get    
+  352 room-6-light-12-gain          get set
+  353 room-6-light-12-production    get    
+  354 room-6-light-12-state         get    
+  355 room-6-light-13-gain          get set
+  356 room-6-light-13-production    get    
+  357 room-6-light-13-state         get    
+  358 room-6-light-14-gain          get set
+  359 room-6-light-14-production    get    
+  360 room-6-light-14-state         get    
+  361 room-6-light-15-gain          get set
+  362 room-6-light-15-production    get    
+  363 room-6-light-15-state         get    
+  364 room-6-light-16-gain          get set
+  365 room-6-light-16-production    get    
+  366 room-6-light-16-state         get    
+  367 room-7-ac-7-gain              get set
+  368 room-7-ac-7-production        get    
+  369 room-7-ac-7-state             get    
+  370 room-7-blind-10-setpoint      get set
+  371 room-7-blind-10-value         get set
+  372 room-7-blind-11-setpoint      get set
+  373 room-7-blind-11-value         get set
+  374 room-7-heater-7-gain          get set
+  375 room-7-heater-7-production    get    
+  376 room-7-heater-7-state         get    
+  377 room-7-light-17-gain          get set
+  378 room-7-light-17-production    get    
+  379 room-7-light-17-state         get    
+  380 room-7-light-18-gain          get set
+  381 room-7-light-18-production    get    
+  382 room-7-light-18-state         get    
+  383 room-8-ac-8-gain              get set
+  384 room-8-ac-8-production        get    
+  385 room-8-ac-8-state             get    
+  386 room-8-blind-12-setpoint      get set
+  387 room-8-blind-12-value         get set
+  388 room-8-blind-13-setpoint      get set
+  389 room-8-blind-13-value         get set
+  390 room-8-heater-8-gain          get set
+  391 room-8-heater-8-production    get    
+  392 room-8-heater-8-state         get    
+  393 room-8-light-19-gain          get set
+  394 room-8-light-19-production    get    
+  395 room-8-light-19-state         get    
+  396 room-8-light-20-gain          get set
+  397 room-8-light-20-production    get    
+  398 room-8-light-20-state         get    
+  399 room-9-ac-9-gain              get set
+  400 room-9-ac-9-production        get    
+  401 room-9-ac-9-state             get    
+  402 room-9-blind-14-setpoint      get set
+  403 room-9-blind-14-value         get set
+  404 room-9-blind-15-setpoint      get set
+  405 room-9-blind-15-value         get set
+  406 room-9-heater-9-gain          get set
+  407 room-9-heater-9-production    get    
+  408 room-9-heater-9-state         get    
+  409 room-9-light-21-gain          get set
+  410 room-9-light-21-production    get    
+  411 room-9-light-21-state         get    
+  412 room-9-light-22-gain          get set
+  413 room-9-light-22-production    get    
+  414 room-9-light-22-state         get    
