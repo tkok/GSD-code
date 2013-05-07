@@ -1,8 +1,15 @@
 package dk.itu.policyengine.domain;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
+import dk.itu.policyengine.integration.Connection;
 import dk.itu.policyengine.persistence.SensorValueCache;
+import dk.itu.policyengine.utils.Wildcards;
 
 public class Expression {
 	private transient Logger logger = Logger.getLogger(this.getClass());
@@ -30,8 +37,45 @@ public class Expression {
 	}
 	
 	public boolean evaluate() {
-		FloatValue sensorValue = SensorValueCache.getValue(sensorId);
-		
+		if(getSensorId().contains("floor") && !getSensorId().contains("room")){
+			logger.info("This is a wildcard");
+			try {
+				String [] type = getSensorId().split("-");
+				System.out.println("type is "+type[type.length-1]);
+				List<String> sensorList = new Wildcards().getSensorListByWildcard(getSensorId());
+				//System.out.println(getSensorId()+"-"+ sensorList.size());
+				for(String s : sensorList){
+					String id = s+"-"+type[type.length-1];
+					System.out.println(id);
+					SensorValueCache.setValue(id, new FloatValue(Float.parseFloat(new Connection().getSensorValue(id))));
+					logger.info("Value set in sensor cache");
+					eval(id);
+				}
+				
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			return eval(getSensorId());
+		}
+		return false;
+	}
+	
+	public String getSensorId() {
+		return sensorId;
+	}
+	
+	public boolean eval(String id){
+		FloatValue sensorValue = SensorValueCache.getValue(id);
+		logger.info("Value is " + sensorValue);
 		if (operator == Operator.EQUALS) {
 			float c = sensorValue.compareTo(aValue);
 			
@@ -88,11 +132,6 @@ public class Expression {
 				}
 			}
 		}
-		
 		return false;
-	}
-	
-	public String getSensorId() {
-		return sensorId;
 	}
 }

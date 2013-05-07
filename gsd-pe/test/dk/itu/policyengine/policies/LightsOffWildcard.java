@@ -22,7 +22,7 @@ import dk.itu.policyengine.domain.Statement;
 import dk.itu.policyengine.integration.Connection;
 import dk.itu.policyengine.persistence.DataAccessLayer;
 
-public class PolicyLightsOff {
+public class LightsOffWildcard {
 	
 	
 	long _2300 = 21*60*60*1000;
@@ -30,23 +30,23 @@ public class PolicyLightsOff {
 	List<String> lightIds;
 	@Test
 	public void execute(){
-		lightIds = new Connection().getAllSensorIdsByType("light");
 		Policy lightOff = new Policy();
-		for(String s: lightIds){
-			Expression expression = new Expression(s+"-gain",Operator.EQUALS,new FloatValue(1f));
-			Statement turnOffLight = new SetStatement(s+"-gain", new FloatValue(0f));
-			IfStatement ifLightIsOn = new IfStatement();
-			ifLightIsOn.addExpression(expression);
-			ifLightIsOn.addThenStatement(turnOffLight);
-			lightOff.addStatement(ifLightIsOn);
-		}
+		String wildcard = "floor-0-light";
+		Expression expression = new Expression(wildcard+"-gain",Operator.EQUALS,new FloatValue(1f));
+		Statement turnOffLight = new SetStatement(wildcard+"-gain", new FloatValue(0f));
+		IfStatement ifLightIsOn = new IfStatement();
+		ifLightIsOn.addExpression(expression);
+		ifLightIsOn.addThenStatement(turnOffLight);
+		lightOff.addStatement(ifLightIsOn);
+		
 		PolicyEntity policyEntity = new PolicyEntity();
 		policyEntity.setPolicy(lightOff);
-		policyEntity.getInterval().setFromTime(new Time(_2300));
+		policyEntity.getInterval().setFromTime(new Time(10,0,0));
+		
 		policyEntity.getInterval().setToTime(new Time(_0700));
 		policyEntity.setActive(true);
-		policyEntity.setName("Lights off");
-		policyEntity.setDescription("Turn off the lights during the night");
+		policyEntity.setName("Lights off on floor 0");
+		policyEntity.setDescription("Turn off the lights on floor 0 during the night");
 		DataAccessLayer.persist(policyEntity);
 	}
 }

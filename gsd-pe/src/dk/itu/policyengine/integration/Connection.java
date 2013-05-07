@@ -234,13 +234,16 @@ public class Connection {
 	}
 	public List<String> getSensorListByFloor(String floor) throws MalformedURLException, IOException, URISyntaxException{
 		List<String> rooms = getRoomListByFloor(floor);
+		System.out.println("There are "+rooms.size() + " on "+floor);
 		List<String> sensors = getSensorIds();
 		List<String> sensorList = new ArrayList<String>();
 		for(String s : rooms){
-			
+			System.out.println(s);
 			for(String t : sensors){
-				if(t.contains(s.substring(8)))
+				if(t.contains(s.substring(8)+"-")){
 					sensorList.add(t);
+					//System.out.println(t);
+				}
 			}
 		}
 		return sensorList;

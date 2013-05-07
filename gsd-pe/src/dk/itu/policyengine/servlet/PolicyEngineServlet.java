@@ -63,11 +63,11 @@ public class PolicyEngineServlet extends HttpServlet {
 
 				return calendar.getTime();
 			}
-
+			
 			private void loadServerValues(PolicyEntities activePoliciesEntities) {
 				for (PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()) {
 					Policy policy = policyEntity.getPolicy();
-
+					
 					for (Statement statement : policy.getStatements()) {
 						if (statement instanceof IfStatement) {
 							for (Expression expression : ((IfStatement) statement).getExpressions()) {
@@ -88,7 +88,16 @@ public class PolicyEngineServlet extends HttpServlet {
 					}
 				}
 			}
-
+			/*
+			private void loadServerValues(PolicyEntities activePoliciesEntities) {
+				for (PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()) {
+					if(policyEntity.isWildcard()){
+						Policy policy = policyEntity.getPolicy();
+						policy.getStatements();
+					}
+				}
+			}
+			*/
 			@Override
 			public void run() {
 				while (shouldRun) {
@@ -102,7 +111,7 @@ public class PolicyEngineServlet extends HttpServlet {
 						}
 					}
 
-					PolicyEntities activePoliciesEntities = DataAccessLayer.getTimeActivePolicies();
+					PolicyEntities activePoliciesEntities = DataAccessLayer.getActivePolicies();
 
 					if (activePoliciesEntities.getSize() == 1) {
 						logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
