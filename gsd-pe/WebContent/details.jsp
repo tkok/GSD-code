@@ -225,7 +225,7 @@
                         var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
                         
                         // Alter POLICY OBJECT
-                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'environment.temp'});
+                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '' }}, operator:'LESS_THAN', sensorId : ''});
                         
                         $('#' + alter)
                         .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
@@ -233,7 +233,7 @@
                             + '<input class="autocomplete_get required" id="if-sensorid-' + n[1] + '-' + ce + '" style="width:140px;" type="text" name="sensorid" value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].sensorId + '">'
                             + ', <select id="if-operator-' + n[1] + '-' + ce + '" name="operator">'
                             + operator(json[k].policy.statements[n[1]].data.conditionalExpressions[ce].operator)
-                            + ', </select>, <input id="if-datafloatvalue-' + n[1] + '-' + ce + '" type="text" name="datafloatvalue" style="width:30px;" value="'
+                            + ', </select>, <input id="if-datafloatvalue-' + n[1] + '-' + ce + '" type="text" class="required" name="datafloatvalue" style="width:30px;" value="'
                             + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].aValue.data.floatValue
                             + '">, '
                             + '<select><option value="' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '" selected>' + json[k].policy.statements[n[1]].data.conditionalExpressions[ce].prefixOperator + '</option></select>'
@@ -257,7 +257,7 @@
                         var ts = json[k].policy.statements[n[1]].data.thenStatements.length;
                         
                         // Alter POLICY OBJECT 
-                        json[k].policy.statements[n[1]].data.thenStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : 'room-6-ac-6-gain'}});
+                        json[k].policy.statements[n[1]].data.thenStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : ''}});
                         
                         $('#' + alter)
                         .prepend('<div id="then-' + json[k].id + '-' + n[1] + '-' + ts +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + n[1] + '-' + ts +'</b></div>'
@@ -285,7 +285,7 @@
                         var es = json[k].policy.statements[n[1]].data.elseStatements.length;
                         
                         // Alter POLICY OBJECT 
-                        json[k].policy.statements[n[1]].data.elseStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : 'room-6-ac-6-gain'}});
+                        json[k].policy.statements[n[1]].data.elseStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : ''}});
                         
                         $('#' + alter)
                         .prepend('<div id="else-' + json[k].id + '-' + n[1] + '-' + es +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + n[1] + '-' + es +'</b></div>'
