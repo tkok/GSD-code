@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="/test/css/style.css" rel="stylesheet" type='text/css'>
+        <link href="css/style.css" rel="stylesheet" type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="/test/js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script>
         $(document).ready(function() {
        	
@@ -20,7 +20,7 @@
                     
                     $('.policies')
                     .append(
-                    '<a href="/test/details.jsp?id='+ json[k].id +'"><div class="policy_box"><div class="inner_section"><b>Id: '
+                    '<a href="details.jsp?id='+ json[k].id +'"><div class="policy_box"><div class="inner_section"><b>Id: '
                         + json[k].id
                         + '</b>, '
                         + active
@@ -40,7 +40,7 @@
             }
 
             // Default behavior
-            $.getJSON( "http://localhost:8080/test/GetAllPolicies", function( json ) {
+            $.getJSON( "http://localhost:8080/GetAllPolicies", function( json ) {
 	   
                 doPopulation(json);
 	
@@ -51,7 +51,7 @@
     <body>
         <div class="header">
             <div class="top">Policy Engine Administration</div>
-            <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="/test/newpolicy.jsp">Create new policy</a></div>
+            <div class="menu"><a id="all" href="/">All policies</a> | <a id="new" href="newpolicy.jsp">Create new policy</a></div>
         </div>
         <div class="policies">
 

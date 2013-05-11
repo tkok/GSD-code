@@ -3,15 +3,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="/test/css/style.css" rel="stylesheet" type='text/css'>
-        <link href="/test/js/jquery-ui-1.10.2.custom/css/jquery-ui.min.css" rel="stylesheet" type='text/css'>
-        <link href="/test/js/jquery-ui-1.10.2.custom/css/jquery.ui.theme.css" rel="stylesheet" type='text/css'>
+        <link href="css/style.css" rel="stylesheet" type='text/css'>
+        <link href="js/jquery-ui-1.10.2.custom/css/jquery-ui.min.css" rel="stylesheet" type='text/css'>
+        <link href="js/jquery-ui-1.10.2.custom/css/jquery.ui.theme.css" rel="stylesheet" type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Droid+Sans:400,700' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script type="text/javascript" src="/test/js/jquery.validate.js"></script>
-        <script type="text/javascript" src="/test/js/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js"></script>
-        <script type="text/javascript" src="/test/js/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="/test/js/autocomplete.js"></script>
+        <script type="text/javascript" src="js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.10.2.custom/js/jquery-ui-1.10.2.custom.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="js/autocomplete.js"></script>
         <script>
         $(document).ready(function() {
             function operator(operator) {
@@ -377,7 +377,7 @@
                         if( retVal == true ){
                         	
                         	// delete
-                            window.location = "/test/DeletePolicy?id=" + n[1]
+                            window.location = "DeletePolicy?id=" + n[1]
                         	
                      	  return true;
                         }else{
@@ -548,7 +548,7 @@
 	          %>
           
             // Default behavior
-            $.getJSON( "http://localhost:8080/test/GetPolicy?id=<% out.print(id); %>", function( json ) {
+            $.getJSON( "http://localhost:8080/GetPolicy?id=<% out.print(id); %>", function( json ) {
 	   
                 doPopulation(json);
 	
@@ -559,7 +559,7 @@
     <body>
         <div class="header">
             <div class="top">Policy Engine Administration</div>
-            <div class="menu"><a id="all" href="/test/">All policies</a> | <a id="new" href="/test/newpolicy.jsp">Create new policy</a></div>
+            <div class="menu"><a id="all" href="/">All policies</a> | <a id="new" href="newpolicy.jsp">Create new policy</a></div>
         </div>
         <div class="policies">
 

@@ -265,7 +265,7 @@ public class PolicyEngineServlet extends HttpServlet {
 			DataAccessLayer.deletePolicy(id);
 			
 			// route back
-			response.sendRedirect("/test/");
+			response.sendRedirect("/");
 
 		} else {
 			if (userPath.equals("/PersistPolicy")) {
@@ -304,7 +304,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				DataAccessLayer.persist(policyEntity);
 				
 				// route back
-				response.sendRedirect("/test/details.jsp?id=" + id);
+				response.sendRedirect("/details.jsp?id=" + id);
 				
 			} else if (userPath.equals("/NewPolicy")) {
 				String policyEntityJson = request.getParameter("policy");
@@ -342,7 +342,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				DataAccessLayer.persist(policyEntity);
 				
 				// route back
-				response.sendRedirect("/test/");
+				response.sendRedirect("/");
 				
 			} 
 			else if (userPath.equals("/GetWildcards")){
@@ -369,7 +369,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				}
 			} else if (userPath.equals("/Test")) {
 				try {
-					connection.connect("http://localhost:5050/test/TestTimeout");
+					connection.connect("http://localhost:5050/TestTimeout");
 				} catch (Exception e) {
 					logger.warn("Timeout exception", e);
 					out.println("<br>" + "Timeout exception");
