@@ -427,6 +427,18 @@ var get_sensors = [
 "room-9-light-22-state"
     ];
 var set_sensors = [
+"wildcard-floor-2-heater-gain",
+"wildcard-floor-2-ac-gain",
+"wildcard-floor-2-light-gain",
+"wildcard-floor-2-blind-setpoint",
+"wildcard-floor-0-heater-gain",
+"wildcard-floor-0-ac-gain",
+"wildcard-floor-0-light-gain",
+"wildcard-floor-0-blind-setpoint",
+"wildcard-floor-1-heater-gain",
+"wildcard-floor-1-ac-gain",
+"wildcard-floor-1-light-gain",
+"wildcard-floor-1-blind-setpoint",
 "energy-generator-1-primed",
 "energy-generator-1-state",
 "energy-generator-2-primed",
