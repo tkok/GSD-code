@@ -11,7 +11,7 @@
 		
 		<init-param>
 			<param-name>server</param-name>
-			<param-value>http://localhost:9000/</param-value>
+			<param-value>http://gsd.itu.dk/</param-value>
 			<description>Server address</description>
 		</init-param>
 		<init-param>
