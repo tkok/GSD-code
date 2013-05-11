@@ -259,6 +259,14 @@ public class PolicyEngineServlet extends HttpServlet {
 			String json = policyEntities.toJSON();
 
 			out.print(json);
+		} else if (userPath.equals("/DeletePolicy")) {
+			
+			String id = request.getParameter("id");
+			DataAccessLayer.deletePolicy(id);
+			
+			// route back
+			response.sendRedirect("/test/");
+
 		} else {
 			if (userPath.equals("/PersistPolicy")) {
 				String policyEntityJson = request.getParameter("policy");

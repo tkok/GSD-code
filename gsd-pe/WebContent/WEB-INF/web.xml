@@ -60,6 +60,11 @@
 
 	<servlet-mapping>
 		<servlet-name>PolicyEngineServlet</servlet-name>
+		<url-pattern>/DeletePolicy</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>PolicyEngineServlet</servlet-name>
 		<url-pattern>/ListSensors</url-pattern>
 	</servlet-mapping>
 

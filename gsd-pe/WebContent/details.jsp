@@ -76,6 +76,7 @@
                         + '<div class="inner_section"><span class="headline line">Policy Statements</span> (<a class="newstatement" id="newst-' + json[k].id + '" href="JavaScript:void(0);">+ New</a>)</div>'
                         + '<div class="statements"></div>'
                         + '<div class="inner_section"><input type="submit" value="Update" name="update" class="button"></div><div style="clear:both"></div></form>'
+                        + '<div class="deletebutton deletepolicy" id="deletepolicy-' + json[k].id + '"></div>'
                     + '</div>');
 
                     // iterate over statements 
@@ -361,6 +362,28 @@
                         // Update GUI
                         $('#else-' + n[1] + '-' + n[2] + '-' + n[3]).remove();
 
+
+                	});
+                    
+                 	// Delete else function with delegate events
+                    $(".policy_box").delegate(".deletepolicy", "click", function (){
+                    	
+                    	var contentPanelId = jQuery(this).attr("id");
+
+                        var n = contentPanelId.split("-");
+
+                        // Confirm box
+                        var retVal = confirm("Are you sure you want to delete this policy ?");
+                        if( retVal == true ){
+                        	
+                        	// delete
+                            window.location = "/test/DeletePolicy?id=" + n[1]
+                        	
+                     	  return true;
+                        }else{
+                           
+                     	  return false;
+                        }
 
                 	});
                     

@@ -109,6 +109,24 @@ public class DataAccessLayer {
 		}
 	}
 	/**
+	 * Delete a policy from the database
+	 */
+	public static void deletePolicy(String id) {
+		connection = CreateConn();
+
+		
+		try {
+			preparedStatement = connection.prepareStatement("DELETE FROM policy WHERE id = ?");
+			preparedStatement.setString(1, id);
+			
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e);
+		} finally {
+			CloseConn();
+		}
+	}
+	/**
 	 * Insert a policy into the database. Takes as an argument a PolicyEntity object
 	 * @param policyEntity
 	 * @return
