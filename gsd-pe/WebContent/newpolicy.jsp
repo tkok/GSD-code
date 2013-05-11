@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%
+    response.setHeader("Cache-Control", "no-cache");
+    response.setDateHeader("Expires", 0);
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -217,7 +219,7 @@
                         var ce = json[k].policy.statements[n[1]].data.conditionalExpressions.length;
                         
                         // Alter POLICY OBJECT
-                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '20' }}, operator:'LESS_THAN', sensorId : 'environment.temp'});
+                        json[k].policy.statements[n[1]].data.conditionalExpressions.push({prefixOperator : 'AND', aValue : {type: 'dk.itu.policyengine.domain.FloatValue', data: { floatValue : '' }}, operator:'LESS_THAN', sensorId : ''});
                         
                         $('#' + alter)
                         .prepend('<div id="if-' + json[k].id + '-' + n[1] + '-' + ce +'" class="inner_inner_section if"><div><b>if-' + json[k].id + '-' + n[1] + '-' + ce +'</b></div>'
@@ -249,7 +251,7 @@
                         var ts = json[k].policy.statements[n[1]].data.thenStatements.length;
                         
                         // Alter POLICY OBJECT 
-                        json[k].policy.statements[n[1]].data.thenStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : 'room-6-ac-6-gain'}});
+                        json[k].policy.statements[n[1]].data.thenStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : ''}});
                         
                         $('#' + alter)
                         .prepend('<div id="then-' + json[k].id + '-' + n[1] + '-' + ts +'" class="inner_inner_section then"><div><b>then-' + json[k].id + '-' + n[1] + '-' + ts +'</b></div>'
@@ -277,7 +279,7 @@
                         var es = json[k].policy.statements[n[1]].data.elseStatements.length;
                         
                         // Alter POLICY OBJECT 
-                        json[k].policy.statements[n[1]].data.elseStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : 'room-6-ac-6-gain'}});
+                        json[k].policy.statements[n[1]].data.elseStatements.push({type: 'dk.itu.policyengine.domain.SetStatement', data : {aValue: { floatValue : '0' }, sensorID : ''}});
                         
                         $('#' + alter)
                         .prepend('<div id="else-' + json[k].id + '-' + n[1] + '-' + es +'" class="inner_inner_section else"><div><b>else-' + json[k].id + '-' + n[1] + '-' + es +'</b></div>'
