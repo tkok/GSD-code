@@ -1,7 +1,3 @@
-<%
-    response.setHeader("Cache-Control", "no-cache");
-    response.setDateHeader("Expires", 0);
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +12,8 @@
         <script type="text/javascript" src="js/autocomplete.js"></script>
         <script>
         $(document).ready(function() {
+        	$.ajaxSetup({ cache: false });
+        	
             function operator(operator) {
                 // Construct operator selector 
 				var operatorselect = "";
