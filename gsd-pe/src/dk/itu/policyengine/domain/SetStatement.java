@@ -26,13 +26,17 @@ public class SetStatement implements Statement {
 	}
 	
 	public void execute() {
+		logger.debug("IN SET STATMENT");
+		logger.debug("Sensor Id is " + sensorID);
 		//SensorValueCache.setValue(sensorID, aValue);
-		if(sensorID.contains("floor") && !sensorID.contains("room")){
-			logger.info("It is a wildcard");
+		if(sensorID.contains("wildcard") && !sensorID.contains("room")){
+			logger.info("It is a wildcard"+" - sensor id is "+ sensorID);
 			try {
 				List<String> sensors = new Wildcards().getSensorListByWildcard(sensorID);
+				String [] data = sensorID.split("-");
 				for(String s : sensors){
-					new Connection().setSensorValue(s+"-gain", aValue.getIntValue());
+					System.out.println("SET STATEMNET - "+s);
+					new Connection().setSensorValue(s+"-"+data[data.length-1], aValue.getIntValue());
 				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -51,6 +55,13 @@ public class SetStatement implements Statement {
 			} catch (Exception e) {
 				logger.error(e);
 			}
+		}
+	}
+	public void execute(String sensorId){
+		try{
+			new Connection().setSensorValue(sensorId, aValue.getIntValue());
+		}catch(Exception e){
+			logger.error(e);
 		}
 	}
 }

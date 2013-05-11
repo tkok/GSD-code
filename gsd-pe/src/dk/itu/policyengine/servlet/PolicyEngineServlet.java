@@ -89,16 +89,7 @@ public class PolicyEngineServlet extends HttpServlet {
 					}
 				}
 			}
-			/*
-			private void loadServerValues(PolicyEntities activePoliciesEntities) {
-				for (PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()) {
-					if(policyEntity.isWildcard()){
-						Policy policy = policyEntity.getPolicy();
-						policy.getStatements();
-					}
-				}
-			}
-			*/
+			
 			@Override
 			public void run() {
 				while (shouldRun) {
@@ -113,7 +104,7 @@ public class PolicyEngineServlet extends HttpServlet {
 					}
 
 					PolicyEntities activePoliciesEntities = DataAccessLayer.getActivePolicies();
-
+					logger.debug("POLICY ENTITIES SIZE");
 					if (activePoliciesEntities.getSize() == 1) {
 						logger.info("There are " + activePoliciesEntities.getSize() + " active policy.");
 					} else {
@@ -121,12 +112,13 @@ public class PolicyEngineServlet extends HttpServlet {
 							logger.info("There are " + activePoliciesEntities.getSize() + " active policies.");
 						}
 					}
-
+					logger.info("Loading server values");
 					loadServerValues(activePoliciesEntities);
-
+					logger.debug("EXECUTE POLICIES");
 					for (PolicyEntity policyEntity : activePoliciesEntities.getPolicyEntities()) {
 						for (Statement statement : policyEntity.getPolicy().getStatements()) {
 							try {
+								logger.info("Executing statement");
 								statement.execute();
 							} catch (Exception e) {
 								// Oh oh. Move along, nothing to see here.

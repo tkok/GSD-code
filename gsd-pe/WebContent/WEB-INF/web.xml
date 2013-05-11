@@ -11,7 +11,7 @@
 		
 		<init-param>
 			<param-name>server</param-name>
-			<param-value>http://gsd.itu.dk/</param-value>
+			<param-value>http://localhost:9000/</param-value>
 			<description>Server address</description>
 		</init-param>
 		<init-param>
@@ -31,7 +31,7 @@
 		</init-param>
 		<init-param>
 			<param-name>activationInterval</param-name>
-			<param-value>5</param-value>
+			<param-value>15</param-value>
 			<description>The number of seconds in between policy execution</description>
 		</init-param>
 		<init-param>

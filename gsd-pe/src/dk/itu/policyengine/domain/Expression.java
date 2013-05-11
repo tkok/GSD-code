@@ -13,6 +13,7 @@ import dk.itu.policyengine.utils.Wildcards;
 
 public class Expression {
 	private transient Logger logger = Logger.getLogger(this.getClass());
+	private boolean wildcard = false;
 	
 	// The current expression language supports only AND between expressions inside an IF.
 	LogicalOperator prefixOperator = LogicalOperator.AND;
@@ -35,21 +36,20 @@ public class Expression {
 	public void setPrefixOperator(LogicalOperator prefixOperator) {
 		this.prefixOperator = prefixOperator;
 	}
-	
+	/*
 	public boolean evaluate() {
-		if(getSensorId().contains("floor") && !getSensorId().contains("room")){
+		if(getSensorId().contains("wildcard")){
 			logger.info("This is a wildcard");
+			wildcard = true;
 			try {
 				String [] type = getSensorId().split("-");
-				System.out.println("type is "+type[type.length-1]);
 				List<String> sensorList = new Wildcards().getSensorListByWildcard(getSensorId());
-				//System.out.println(getSensorId()+"-"+ sensorList.size());
 				for(String s : sensorList){
 					String id = s+"-"+type[type.length-1];
 					System.out.println(id);
 					SensorValueCache.setValue(id, new FloatValue(Float.parseFloat(new Connection().getSensorValue(id))));
 					logger.info("Value set in sensor cache");
-					eval(id);
+					return eval(id);
 				}
 				
 			} catch (MalformedURLException e) {
@@ -63,10 +63,16 @@ public class Expression {
 				e.printStackTrace();
 			}
 		}
+		
 		else{
 			return eval(getSensorId());
 		}
+		setWildcard(false);
 		return false;
+	}
+	*/
+	public boolean evaluate(){
+		return eval(sensorId);
 	}
 	
 	public String getSensorId() {
@@ -133,5 +139,16 @@ public class Expression {
 			}
 		}
 		return false;
+	}
+	
+	public boolean isWildcard() {
+		if(getSensorId().contains("wildcard"))
+			return true;
+		else
+			return false;
+	}
+
+	public void setWildcard(boolean wildcard) {
+		this.wildcard = wildcard;
 	}
 }

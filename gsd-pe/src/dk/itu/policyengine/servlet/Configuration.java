@@ -1,6 +1,6 @@
 package dk.itu.policyengine.servlet;
+import javax.servlet.*;
 
-import javax.servlet.ServletConfig;
 
 import org.apache.log4j.Logger;
 
