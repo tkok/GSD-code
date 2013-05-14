@@ -34,8 +34,8 @@ a:active {color: #FFFFFF; text-decoration: none; }
 .inner_inner_section {float: left; color:#FFF;font-size:.95em!important;display:block;padding:10px 10px 10px 10px;text-shadow:1px 1px #49668F;font-weight:normal; }
 
 .if {background: #E55C72; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px; position: relative;}
-.else {background: #29B06F; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px; position: relative;}
-.then {background: #29B06F; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px; position: relative;}
+.else {background: #1C8DFF; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px; position: relative;}
+.then {background: #1C8DFF; margin: 5px 0px 0px 10px; width: 330px !important; float: left; height: 45px; position: relative;}
 
 .deletebutton {background: url(../img/Close_Box_Red.png) no-repeat; height: 20px; width: 20px; position: absolute; top: 0px; right: 0px; cursor: pointer;}
 
