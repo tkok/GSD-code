@@ -257,7 +257,7 @@ public class PolicyEngineServlet extends HttpServlet {
 			DataAccessLayer.deletePolicy(id);
 			
 			// route back
-			response.sendRedirect("/");
+			response.sendRedirect("index.jsp");
 
 		} else {
 			if (userPath.equals("/PersistPolicy")) {
@@ -296,7 +296,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				DataAccessLayer.persist(policyEntity);
 				
 				// route back
-				response.sendRedirect("/details.jsp?id=" + id);
+				response.sendRedirect("details.jsp?id=" + id);
 				
 			} else if (userPath.equals("/NewPolicy")) {
 				String policyEntityJson = request.getParameter("policy");
@@ -334,7 +334,7 @@ public class PolicyEngineServlet extends HttpServlet {
 				DataAccessLayer.persist(policyEntity);
 				
 				// route back
-				response.sendRedirect("/");
+				response.sendRedirect("index.jsp");
 				
 			} 
 			else if (userPath.equals("/GetWildcards")){
