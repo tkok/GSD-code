@@ -39,7 +39,7 @@
             }
 
             // Default behavior
-            $.getJSON( "http://localhost:8080/GetAllPolicies", function( json ) {
+            $.getJSON( "GetAllPolicies", function( json ) {
 	   
                 doPopulation(json);
 	
@@ -50,7 +50,7 @@
     <body>
         <div class="header">
             <div class="top">Policy Engine Administration</div>
-            <div class="menu"><a id="all" href="/">All policies</a> | <a id="new" href="newpolicy.jsp">Create new policy</a></div>
+            <div class="menu"><a id="all" href="index.jsp">All policies</a> | <a id="new" href="newpolicy.jsp">Create new policy</a></div>
         </div>
         <div class="policies">
 
